@@ -1,0 +1,23 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+This work developed a MILP scheduling framework that optimally assigns slow and fast chargers to a BEB bus fleet
+assuming a constant schedule. The BAP was introduced with an example formulation and was then compared to the PAP. The
+PAP constructed on the BAP to allow the time spent on the charger, $p_i$, to be a decision variable. Because the
+original PAP required service time, $p_i$, to be given, linear battery dynamics were introduced to drive charging times.
+Additional constraints were also introduced to provide limits for the battery dynamics.
+
+An example for the MILP PAP formulation was then presented and compared to a heuristic based schedule, referred to as
+Quin-Modified. The MILP PAP optimization was run for \timeran seconds to a non-optimal solution with a gap of
+\gappercent. The Quin-Modified schedule more heavily utilized the fast chargers and used slow chargers more as a
+supplement. In sharp contrast, the MILP PAP schedule heavily leaned on the slow chargers and supplemented fast chargers
+as needed. This can be quantified by the four fast and 3 slow chargers utilized by the Quin-Modified schedule whereas
+the MILP PAP schedule utilized 8 slow chargers and 2 fast chargers. More importantly, the MILP PAP schedule utilized
+approximately $1\cdot10^5$ Kwh more than the Quin-Modified, but the charges remained above the constrained minimum charge of
+\mincharge, and charged all the buses to \fpeval{\bcharge *100}\% at the end of the working day. The Quin-Modified
+schedule, on the other hand, failed to keep all the bus charges above 0\% throughout the time horizon.
+
+Further fields of interest are to utilize the formulation (Eq \eqref{eq:objective} and \eqref{eq:dynconstrs}) with
+nonlinear battery dynamics, calculation and utilization of the demand and consumption cost in the objective function,
+and utilizing this formulation in a metaheuristic solver. Furthermore, ``fuzzifying'' the initial and final charge times
+is of interest to allow flexibility in the arrival and departure times.
