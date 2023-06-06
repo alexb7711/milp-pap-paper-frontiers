@@ -1,0 +1,50 @@
+%%===============================================================================
+% Document configuration
+\include{./tex/preamble}
+
+%% Ignore files while editing
+%\includeonly{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%===============================================================================
+% Title, Authors, Abstract, Keywords
+\onecolumn
+\firstpage{1}
+
+%%-------------------------------------------------------------------------------
+% Title
+\title{A Position Allocation Approach to the Scheduling of Battery Electric Bus Charging}
+
+%%---------------------------------------------------------------------------------
+% Create title
+\maketitle
+
+%%---------------------------------------------------------------------------------
+% Abstract
+\include{./tex/abstract}
+
+%%===============================================================================
+% Paper
+
+\include{./tex/introduction}
+\include{./tex/pap-problem}
+\include{./tex/rectangle-packing}
+\include{./tex/example}
+\include{./tex/conclusion}
+
+%%================================================================================
+% Bibliography
+\bibliographystyle{Frontiers-Harvard}                                            % This was commented out for some reason
+%\bibliographystyle{plain}
+\bibliography{main}
+
+%%================================================================================
+% Figures
+%\newpage                                                                        % test
+\clearpage
+\include{./tex/figures}
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
