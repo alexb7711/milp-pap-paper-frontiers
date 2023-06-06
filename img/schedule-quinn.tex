@@ -1,0 +1,26 @@
+\documentclass[float=false, crop=true]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows.meta}                             % Tikz macros
+
+\begin{document}
+
+\pgfplotstableread[col sep = comma]{fig/data/qm-schedule.csv}\scheduledataquin
+
+\begin{tikzpicture}[scale=0.65]
+\pgfplotstablegetcolsof{\scheduledataquin}
+\pgfmathtruncatemacro\NumCols{\pgfplotsretval/3 - 1}
+\begin{axis}[title={Quin Schedule},
+             xlabel={Time [hr]}, ylabel={Active charge times},
+             xmin=0, xmax=24]
+    \foreach \i in {0, ..., \NumCols}
+    {
+        \pgfmathsetmacro{\v}{\fpeval{3*\i} + 0}
+        \pgfmathsetmacro{\u}{\fpeval{3*\i} + 1}
+        \pgfmathsetmacro{\p}{\fpeval{3*\i} + 2}
+        \addplot +[error bars/.cd, x dir=plus, x explicit] table[x index=\u, x error index=\p, y index =\v]{\scheduledataquin};
+    }
+\end{axis}
+\end{tikzpicture}
+
+\end{document}
