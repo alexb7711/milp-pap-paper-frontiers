@@ -12,7 +12,7 @@
 *.sav
 *converted-to.pdf
 build/
-main.pdf
+*.pdf
 ./
 fig/data/routes.csv
 main.auxlock

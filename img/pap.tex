@@ -1,0 +1,22 @@
+\documentclass[float=false, crop=true]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows.meta}                             % Tikz macros
+
+\begin{document}
+
+\begin{tikzpicture}[scale=0.4]
+  \draw[fill=black] (0,0) rectangle (1,5);
+
+  \draw[rotate=90](1,1) rectangle (2,4);
+  \draw[rotate=90](1,5) rectangle (2,9);
+  \draw[rotate=90](1,10) rectangle (2,11);
+  \draw[rotate=90](3,1) rectangle (4,11);
+
+  \draw[thick,->] (-11,5)--(-1,5);
+
+  \node[rotate=90] at (-12,2.5) {Vehicles};
+  \node[rotate=90] at (1.5,2.5) {Chargers};
+\end{tikzpicture}
+
+\end{document}

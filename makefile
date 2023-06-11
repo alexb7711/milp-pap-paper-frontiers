@@ -1,10 +1,11 @@
 ################################################################################
 # Variables
 ################################################################################
-target   = a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf # Name of file
-doc_src  = main.tex                                                             # Name of main source file
-img_src := $(wildcard img/*.tex)                                                # Image source files
-doc_pdf := $(patsubst %.tex, %.pdf, $(img_src))                                 # Image source pdfs
+target	 = a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf # Name of file
+doc_src	 = main.tex																															# Name of main source file
+tex_src	 = $(wildcard tex/*.tex)																								# LaTeX files
+img_src := $(wildcard img/*.tex)																								# Image source files
+img_pdf := $(patsubst %.tex, %.pdf, $(img_src))																	# Image source pdfs
 
 ###############################################################################
 # Configuration
@@ -20,52 +21,51 @@ doc_pdf := $(patsubst %.tex, %.pdf, $(img_src))                                 
 
 ##-----------------------------------------------------------------------------
 #
-all: precheck img $(target)
+all: precheck images $(target)
 
 ##-----------------------------------------------------------------------------
 #
-img: $(img_src)
+images: $(img_pdf)
 
 ##-----------------------------------------------------------------------------
 #
 clean:
 	@rm -f $(target)
-	@rm img/*.pdf
-	@latexmk -c $(doc_src)
-	@latexmk -c $(img_src)
+	@rm -f img/*.pdf img/*.fls img/*.log img/*.fdb_latexmk img/*.aux
+	@latexmk -silent -c $(doc_src)
 
 ##=============================================================================
 # Helper recipes
 
 ##-----------------------------------------------------------------------------
 # Create the PDF document
-$(target): $(doc_src)
+$(target): $(doc_src) $(tex_src)
+	@echo "============================"
 	@echo "Creating document..."
-	@latexmk -f -interaction=nonstopmode                                  \ # Don't stop
-		 -silent                                                      \ # Shhhh 
-		 -bibtex                                                      \ # Don't stop x2
-		 -e "$latex='latex %O -shell-escape %S'"                      \ # Output PDF
-                 -pdf main.tex
+	@echo "============================"
+
+	@latexmk -f -interaction=nonstopmode \
+           -pdf -pdflatex="pdflatex --shell-escape %O %S" \
+           -silent -bibtex $<
+
 	@[ -f main.pdf ] && mv main.pdf $(target)
 	@echo "Done!"
 
 ##-----------------------------------------------------------------------------
-# Create the images as PDFs
-$(img_src):
-	@echo "Creating images..."
-	@latexmk -f -interaction=nonstopmode                                  \ # Don't stop
-		 -e "$latex='latex %O -shell-escape %S'"                      \ # Don't stop x2
-		 -pdf $<                                                      \ # Ouput PDF
+# Create the LaTeX images as PDFs
+img/%.pdf: img/%.tex
+	@echo "============================"
+	@echo "Creating $@..."
+	@echo "============================"
+
+	@pdflatex -shell-escape -interaction=nonstopmode -output-directory ./img $<
 
 ##-----------------------------------------------------------------------------
 # Check if all the requirements are met to build
 precheck:
-	@if ! command -v latexmk &> /dev/null
-	@then
-		@echo "'latexmk' could not be found"
-		@echo "Installing..."
-		@sudo pacman -Syu latexmk
-	@if
+	@echo "Checking the programs required for the build are installed..."
+	@latexmk --version >/dev/null 2>&1 && (echo "latexmk installed!") || (echo "ERROR: latexmk is required."; exit 1)
+	@pdflatex --version >/dev/null 2>&1 && (echo "pdflatex installed!") || (echo "ERROR: pdflatex is required."; exit 1)
 
 ################################################################################
 # References

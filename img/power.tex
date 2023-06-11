@@ -1,12 +1,17 @@
 \documentclass[float=false, crop=true]{standalone}
 
-\usepackage{tikz}
+\usepackage
+{
+    tikz,                                                                       % Generate figures in LaTeX
+    pgfplots,                                                                   % Plot in LaTeX
+    pgfplotstable,
+}
 \usetikzlibrary{automata, positioning, arrows.meta}                             % Tikz macros
 
 \begin{document}
 
-\pgfplotstableread[col sep = comma]{fig/data/qm-power-usage.csv}\powerdataquin
-\pgfplotstableread[col sep = comma]{fig/data/milp-power-usage.csv}\powerdatamilp
+\pgfplotstableread[col sep = comma]{img/data/qm-power-usage.csv}\powerdataquin
+\pgfplotstableread[col sep = comma]{img/data/milp-power-usage.csv}\powerdatamilp
 
 \begin{tikzpicture}[scale=0.65]
 \begin{axis}[title={Power Usage},

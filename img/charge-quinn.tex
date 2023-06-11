@@ -1,11 +1,17 @@
 \documentclass[float=false, crop=true]{standalone}
 
-\usepackage{tikz}
+\usepackage
+{
+    tikz,                                                                       % Generate figures in LaTeX
+    pgfplots,                                                                   % Plot in LaTeX
+    pgfplotstable,
+}
+\pgfplotsset{compat=1.18}
 \usetikzlibrary{automata, positioning, arrows.meta}                             % Tikz macros
 
 \begin{document}
 
-\pgfplotstableread[col sep = comma]{fig/data/qm-charge.csv}\chargedataquin
+\pgfplotstableread[col sep= comma]{img/data/qm-charge.csv}\chargedataquin
 
 \begin{tikzpicture}[scale=0.65]
 \pgfplotstablegetcolsof{\chargedataquin}
@@ -18,7 +24,7 @@
         {
             \pgfmathsetmacro{\u}{\fpeval{2*\i} + 0}
             \pgfmathsetmacro{\etas}{\fpeval{2*\i} + 1}
-            \addplot +[mark=none] table[x index=\u, y index =\etas]{\chargedataquin};
+            \addplot +[mark=none] table[x index=\u, y index =\etas, unbounded coords=jump]{\chargedataquin};
         }
 \end{axis}
 \end{tikzpicture}
