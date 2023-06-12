@@ -26,23 +26,24 @@ time spent on the charger \cite{Liu2020, Yang2018}, which can be a valid assumpt
 This work builds upon the Position Allocation Problem \cite{Qarebagh2019}, a modification of the well studied Berth
 Allocation Problem (BAP), as a means to schedule the charging of electric vehicles \cite{Buhrkal2010, Frojan2015,
   Imai2001}. The BAP is a continuous time model that solves the problem of allocating space for incoming vessels to be
-berthed. Each arriving vessel requires both time and space to be serviced and is assigned a berthing location
-\cite{Imai2001}. Vessels are lined up parallel to the berth to be serviced and are horizontally queued as shown in Fig
-\ref{subfig:bapexample}. The PAP utilizes this notion of queuing for scheduling vehicles to be charged, as shown in Fig
-\ref{subfig:papexample}. The PAP is formulated as a rectangle packing problem by assuming that vehicle charging will
-take a fixed amount of time, the amount of vehicles that can charge is limited by the physical width of the vehicles,
-and each vehicle visits the charger a single time \cite{Qarebagh2019}.
+berthed. Each arriving vessel requires both time and space to be serviced and thus must be carefully assigned a berthing
+location \cite{Imai2001}. Vessels are lined up parallel to the berth to be serviced and are horizontally queued as shown
+in \autoref{subfig:bapexample}. The PAP utilizes this notion of queuing for scheduling vehicles to be charged, as shown
+in \autoref{subfig:papexample}. The PAP is formulated as a rectangle packing problem by assuming that vehicle charging
+will take a fixed amount of time, the amount of vehicles that can charge is limited by the physical width of the
+vehicles, and each vehicle visits the charger a single time \cite{Qarebagh2019}.
 
-The main contribution of this work is the extension of the PAP novel approach to BEB charger scheduling. This includes
+The main contribution of this work is the extension of the PAP's novel approach to BEB charger scheduling. This includes
 modeling and incorporation of a proportional charging model into the MILP framework, consideration of multiple charger
 types, and inclusion of the route schedule for each bus. The last contribution is of importance because both the BAP and
-PAP consider each arrival to be unique; thus, a method of tracking buses must be implemented. The result is a MILP
-formulation that coordinates charging times and charger type for every visit that each bus makes to the station while
-considering a dynamic charge model and scheduling constraints.
+PAP consider each arrival to be unique; thus, a method of tracking buses must be implemented. Input parameters are
+selected in such a manner as to minimize the number of fast and slow charger utilized as well as minimize the power
+consumption. The result is a MILP formulation that coordinates charging times and charger type for every visit that each
+bus makes to the station while considering a dynamic charge model and scheduling constraints.
 
-\TODO{Double check that this is still accurate}
-The remainder of the paper proceeds as follows: In Section \ref{sec:positionallocationproblem}, the PAP is introduced
-with a formulation of the resulting MILP. Section \ref{sec:problemformulation} constructs the MILP for BEB scheduling,
-including modifications to the PAP queuing constraints and development of a dynamic charging model. Section
-\ref{sec:example} demonstrates an example of using the formulation to coordinate \A buses over \N total visits to the
-station. The paper ends in Section \ref{sec:conclusion} with concluding remarks.
+% TODO: Make sure that this is still correct
+The remainder of the paper proceeds as follows: In \autoref{sec:positionallocationproblem}, the PAP is introduced with a
+formulation of the resulting MILP. \autoref{sec:problemformulation} constructs the MILP for BEB scheduling, including
+modifications to the PAP queuing constraints and development of a dynamic charging model. \autoref{sec:example}
+demonstrates an example of using the formulation to coordinate \A buses over \N total visits to the station. The paper
+ends in \autoref{sec:conclusion} with concluding remarks.
