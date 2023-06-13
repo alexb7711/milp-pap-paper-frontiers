@@ -5,6 +5,7 @@
     tikz,                                                                       % Generate figures in LaTeX
     pgfplots,                                                                   % Plot in LaTeX
     pgfplotstable,
+    xfp,
 }
 \pgfplotsset{compat=1.18}
 \usetikzlibrary{automata, positioning, arrows.meta}                             % Tikz macros
@@ -22,8 +23,8 @@
              ylabel={Charge [kwh]}]
     \foreach \i in {0, ..., \NumCols}
     {
-        \pgfmathsetmacro{\u}{\FPeval{2*\i} + 0}
-        \pgfmathsetmacro{\etas}{\FPeval{2*\i} + 1}
+        \pgfmathsetmacro{\u}{\fpeval{2*\i} + 0}
+        \pgfmathsetmacro{\etas}{\fpeval{2*\i} + 1}
         \addplot +[mark=none] table[x index=\u, y index =\etas, unbounded coords=jump]{\chargedatamilp};
     }
 \end{axis}
