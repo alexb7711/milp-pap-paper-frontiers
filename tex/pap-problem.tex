@@ -18,18 +18,20 @@ space taken by docking vessel $i$, respectively. In the BAP, the vessel characte
 time, handling time, desired departure time) are assumed to be known for all vessels to be serviced. A representation of
 a BAP solution is shown in \autoref{fig:bap}. The x and y-axis represent time and space, respectively. The grey squares,
 labeled A, B, C, and D, represent berthed vessels. The width of the boxes represent the time spent being serviced, and
-the height represents the amount of space the vessel requires on the berth. The ``Arrival Time'' represents the actual
+the height represents the amount of space the vessel requires on the berth. The vertical line adjacent
+ ``Arrival Time'' represents the actual
 time that the vessel arrives and is available to be berthed. ``Berthing Time'' is the time the vessel is berthed and
 begins being serviced. ``Completion time'' represents the time at which the berthing space becomes available again.
 
 \subsection{The PAP Formulation}
-The BAP forms the basis of the PAP; however, there are some differences in the way the variables are perceived. For the
+The BAP forms the basis of the PAP; however, there are some differences in the way the variables are interpreted. For the
 $i^{th}$ visit, starting service time, $u_i$, is now the starting charge time, the berth location, $v_i$, is now the
-charger queue for assignment, and the service time, $p_i$, is now the time to charge. There are also a few key concepts
+charger queue for assignment, and the service time, $p_i$, is now the elapsed charge time. There are also a few clarifying concepts
 about how the system is modeled. The PAP models the set of chargers as one continuous line; that is, the natural
 behavior of the PAP model is to allow vehicles to be queued anywhere along $[0,S]$. Similarly, the charge times are
 continuous and can be placed anywhere on the time horizon, $[0,T]$, as long as the allocated times do not interfere with
-other scheduled charge times. The PAP utilizes a number of parameters. The following parameters are constants.
+other scheduled charge times. The PAP formulation's parameters can be divided into two categories: input parameters and
+decision variables. Each type will now be introduced. The following parameters are constant inputs into the MILP.
 
 \begin{itemize}
 	\item $S$   : Size of the vehicle
@@ -63,14 +65,14 @@ Subject to:
 \label{eq:bapconstrs}
 \begin{align}
     u_j - u_i - p_i - (\sigma_{ij} - 1)T \geq 0                  \label{subeq:baptime}          \\
-    v_j - v_i - s_i - (\delta_{ij} - 1)S \geq 0                \label{subeq:bapspace}         \\
+    v_j - v_i - s_i - (\delta_{ij} - 1)S \geq 0                \label{subeq:bapspace}           \\
     \sigma_{ij} + \sigma_{ji} + \delta_{ij} + \delta_{ji} \geq 1 \label{subeq:bapvalid_pos}     \\
     \sigma_{ij} + \sigma_{ji} \leq 1                              \label{subeq:bapsigma}        \\
     \delta_{ij} + \delta_{ji} \leq 1                              \label{subeq:bapdelta}        \\
     p_i + u_i = c_i                                               \label{subeq:bapdetach}       \\
     a_i \leq u_i \leq (T - p_i)                                   \label{subeq:bapvalid_starts} \\
     \sigma_{ij} \in \{0,1\},\;\delta_{ij} \in \{0,1\}\;           \label{subeq:bapsdspace}      \\
-    v_i \in [0 \mbox{ } S ]                                       \label{subeq:bapvspace}
+    v_i \in [0, S ]                                               \label{subeq:bapvspace}
 \end{align}
 \end{subequations}
 
