@@ -3,13 +3,12 @@ name: Basic LaTeX action
 on:
   push:
     branches: [ "main" ]
-  workflow_call:
 
 jobs:
-  checkout-latest:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
+#  checkout-latest:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v3
     
   call-workflow-in-local-repo:
     uses: ./.github/workflows/build-pdf.yml
