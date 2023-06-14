@@ -9,9 +9,8 @@ jobs:
     name: "Build"
     runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v3
-    - uses: ./.github/workflows/build-pdf.yml
+  call-workflow-in-local-repo:
+    uses: ./.github/workflows/build-pdf.yml
 
   download:
     name: "Download latest"
