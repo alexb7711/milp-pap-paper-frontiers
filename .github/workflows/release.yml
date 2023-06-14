@@ -5,17 +5,17 @@ on:
     branches: [ "main" ]
 
 jobs:
-  checkout-latest:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
+#  checkout-latest:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v3
     
   call-workflow-in-local-repo:
-    uses: .github/workflows/build-pdf.yml
+    uses: ./.github/workflows/build-pdf.yml
 
   download:
     name: "Download latest"
-    needs: checkout-latest
+    #needs: checkout-latest
     runs-on: ubuntu-latest
     
     steps:
