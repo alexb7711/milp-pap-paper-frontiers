@@ -15,4 +15,5 @@ build/
 *.pdf
 ./
 fig/data/routes.csv
-main.auxlock
+*.auxlock
+*.out
