@@ -1,0 +1,26 @@
+name: Basic LaTeX action
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  pre-release:
+    name: "Pre Release"
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: ./.github/workflows/build-pdf
+    
+    - uses: actions/download@v3
+      with:
+        name: a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
+
+    - uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Early Release Draft"
+          files: a-position-allocation-approach-to-the-scheduling-of-beb-charging.p
+            
