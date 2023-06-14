@@ -5,17 +5,29 @@ on:
     branches: [ "main" ]
 
 jobs:
-  pre-release:
-    name: "Pre Release"
+  build:
+    name: "Build"
     runs-on: ubuntu-latest
 
     steps:
     - uses: ./.github/workflows/build-pdf
+
+  download:
+    name: "Download latest"
+    needs: build
+    runs-on: ubuntu-latest
     
+    steps:
     - uses: actions/download@v3
       with:
         name: a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
 
+  pre-release:
+    name: "Pre Release"
+    needs: download
+    runs-on: ubuntu-latest
+    
+    steps:
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
