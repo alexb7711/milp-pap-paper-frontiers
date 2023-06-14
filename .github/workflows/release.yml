@@ -5,16 +5,11 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-    name: "Build"
-    runs-on: ubuntu-latest
-
   call-workflow-in-local-repo:
     uses: ./.github/workflows/build-pdf.yml
 
   download:
     name: "Download latest"
-    needs: build
     runs-on: ubuntu-latest
     
     steps:
