@@ -8,25 +8,19 @@ jobs:
   call-workflow-in-local-repo:
     uses: ./.github/workflows/build-pdf.yml
 
-  download:
-    name: "Download latest"
+  pre-release:
+    name: "Pre Release"
     needs: call-workflow-in-local-repo
     runs-on: ubuntu-latest
     steps:
     - uses: actions/download-artifact@v3
       with:
         name: artifact
-
-  pre-release:
-    name: "Pre Release"
-    needs: download
-    runs-on: ubuntu-latest
-    steps:
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: true
           title: "Early Release Draft"
-          files: a-position-allocation-approach-to-the-scheduling-of-beb-charging.p
+          files: ./a-position-allocation-approach-to-the-scheduling-of-beb-charging.p
             
