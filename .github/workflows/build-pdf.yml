@@ -28,6 +28,6 @@ jobs:
     name: "Upload PDF artifact"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/upload-artifacts@v3
+    - uses: actions/upload-artifact@v3
       with:
         path: ./*.pdf
