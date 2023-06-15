@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/download-artifact@v3
       with:
-        name: a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
+        name: artifact
 
   pre-release:
     name: "Pre Release"
