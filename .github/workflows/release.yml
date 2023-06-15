@@ -16,11 +16,13 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: artifact
-    - uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: "Early Release Draft"
+        uses: softprops/action-gh-release@v1
+        with:
           files: ./a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
-            
+    # - uses: "marvinpinto/action-automatic-releases@latest"
+    #   with:
+    #       repo_token: "${{ secrets.GITHUB_TOKEN }}"
+    #       automatic_release_tag: "latest"
+    #       prerelease: true
+    #       title: "Early Release Draft"
+    #       files: ./a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
