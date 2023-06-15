@@ -12,7 +12,6 @@ jobs:
     name: "Download latest"
     needs: call-workflow-in-local-repo
     runs-on: ubuntu-latest
-    
     steps:
     - uses: actions/download-artifact@v3
       with:
@@ -22,7 +21,6 @@ jobs:
     name: "Pre Release"
     needs: download
     runs-on: ubuntu-latest
-    
     steps:
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
