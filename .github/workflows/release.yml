@@ -16,7 +16,7 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: artifact
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            ./a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
+    - uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          ./a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
