@@ -1,4 +1,4 @@
-name: Basic LaTeX action
+name: LaTeX Buid
 
 on:
   pull_request:
