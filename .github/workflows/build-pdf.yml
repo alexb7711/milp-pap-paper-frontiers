@@ -15,18 +15,21 @@ jobs:
   dependencies:
    name: "Install dependencies"
    runs-on: ubuntu-latest
+   needs: checkout-latest
    steps:
    - run: sudo apt-get update && sudo apt-get install -y texlive-full latexmk
 
   build:
     name: "Build PDF"
     runs-on: ubuntu-latest
+    needs: dependencies
     steps:
     - run: make
       
   upload:
     name: "Upload PDF artifact"
     runs-on: ubuntu-latest
+    needs: build
     steps:
     - uses: actions/upload-artifact@v3
       with:
