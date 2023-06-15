@@ -22,5 +22,5 @@ jobs:
           automatic_release_tag: "latest"
           prerelease: true
           title: "Early Release Draft"
-          files: ./a-position-allocation-approach-to-the-scheduling-of-beb-charging.p
+          files: ./a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
             
