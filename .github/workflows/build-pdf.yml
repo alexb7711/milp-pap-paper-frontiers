@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: dependencies
     steps:
-    - run: pwd && ls && make
+    - run: pwd && ls
       
   upload:
     name: "Upload PDF artifact"
