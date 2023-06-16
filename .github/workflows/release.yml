@@ -3,17 +3,16 @@ name: LaTeX Release
 on:
   push:
     branches: [ "main" ]
-    
+
 jobs:
   pre-release:
-    name: "Pre Release"
+    name: "Release"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - run: sudo apt-get update && sudo apt-get install -y texlive-full latexmk
     - run: make
-    - uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
+    - uses: ncipollo/release-action@v1
       with:
-        files: |
-          ./a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
+        artifacts: "a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf"
+        bodyFile: "README.org"
