@@ -15,4 +15,4 @@ jobs:
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf"
-        bodyFile: "README.org"
+        # bodyFile: "README.org"
