@@ -3,7 +3,8 @@ name: LaTeX Release
 on:
   push:
     branches: [ "main" ]
-
+    
+jobs:
   pre-release:
     name: "Pre Release"
     runs-on: ubuntu-latest
