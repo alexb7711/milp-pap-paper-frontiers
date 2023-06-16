@@ -1,4 +1,4 @@
-name: LaTeX Buid
+name: LaTeX Build
 
 on:
   pull_request:
