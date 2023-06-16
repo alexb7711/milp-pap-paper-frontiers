@@ -4,18 +4,13 @@ on:
   push:
     branches: [ "main" ]
 
-jobs:
-  call-workflow-in-local-repo:
-    uses: ./.github/workflows/build-pdf.yml
-
   pre-release:
     name: "Pre Release"
-    needs: call-workflow-in-local-repo
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/download-artifact@v3
-      with:
-        name: artifact
+    - uses: actions/checkout@v3
+    - run: sudo apt-get update && sudo apt-get install -y texlive-full latexmk
+    - run: make
     - uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
