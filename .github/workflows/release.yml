@@ -2,7 +2,7 @@ name: LaTeX Release
 
 on:
   push:
-    branches: [ "main" ]
+    tags: 'v*.**'
 
 jobs:
   pre-release:
