@@ -1,0 +1,31 @@
+version: 3
+
+env:
+  TARGET: a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf # Name of file
+  DOCSRC: main.tex																															# Name of main source file
+  TEXSRC: $(wildcard tex/*.tex)																								# LaTeX files
+  IMGPDF: $(patsubst %.tex, %.pdf, $(img_src))																	# Image source pdfs
+
+tasks:
+  build:
+    cmds: 
+      - task: precheck
+      - task: images
+      - task: $(TARGET)
+
+  precheck:
+    cmds:
+      - echo "Checking the programs required for the build are installed..."
+      - latexmk --version >/dev/null 2>&1 && (echo "latexmk installed!") || (echo "ERROR: latexmk is required."; exit 1)
+      - pdflatex --version >/dev/null 2>&1 && (echo "pdflatex installed!") || (echo "ERROR: pdflatex is required."; exit 1)
+    silent: true
+
+  images:
+    desc: Creates a PDF of all the files in `$(IMGDIR)`
+    cmds: pdflatex -shell-escape -interaction=nonstopmode -output-directory {{.IMGDIR}} .{{IMGSRC}}
+    vars:
+      IMGDIR: ./img/
+      IMGSRC:
+        sh: find {{.IMGDIR}} -name "*.tex"
+
+  $(TARGET):
