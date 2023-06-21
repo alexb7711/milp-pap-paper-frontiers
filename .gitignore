@@ -17,3 +17,4 @@ build/
 fig/data/routes.csv
 *.auxlock
 *.out
+.task
