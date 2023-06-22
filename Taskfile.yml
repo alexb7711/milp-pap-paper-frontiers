@@ -63,7 +63,7 @@ tasks:
                    -pdf -pdflatex="pdflatex --shell-escape %O %S" \
                    -bibtex {{.DOC}}.tex
         [ -f {{.DOC}}.pdf ] && mv main.pdf {{.TARGET}}
-    silent: false
+    silent: true
 
 ##==============================================================================
 #
