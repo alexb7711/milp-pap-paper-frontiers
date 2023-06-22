@@ -1,4 +1,4 @@
-name: LaTeX Buid
+name: LaTeX Build
 
 on:
   pull_request:
@@ -12,7 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: sudo apt-get update && sudo apt-get install -y texlive-full latexmk
-    - run: make
+    - uses: arduino/setup-task@v1
+    - run: task clean && task
     - uses: actions/upload-artifact@v3
       with:
         path: ./a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf

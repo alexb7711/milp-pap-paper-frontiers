@@ -1,0 +1,82 @@
+version: '3'
+
+################################################################################
+# ENVIRONTMENT
+################################################################################
+env:
+  TARGET : a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
+  IMG_DIR: ./img
+  DOC    : main    																															# Name of main source file
+
+################################################################################
+# RECIPES
+################################################################################
+
+tasks:
+  default:
+    cmds:
+      - task: precheck
+      - task: images
+      - task: pdf
+
+##==============================================================================
+#
+  precheck:
+    desc: "Make sure that all the dependencies are installed."
+    cmds:
+      - |
+        echo "Checking the programs required for the build are installed..."
+        latexmk --version >/dev/null 2>&1 && (echo "latexmk installed!") || (echo "ERROR: latexmk is required."; exit 1)
+        pdflatex --version >/dev/null 2>&1 && (echo "pdflatex installed!") || (echo "ERROR: pdflatex is required."; exit 1)
+    silent: true
+
+##==============================================================================
+#
+  images:
+    desc: "Creates a PDF of all the files in {{.IMGDIR}}."
+    sources:
+      - ./img/*.tex
+    generates:
+      - ./img/*.pdf
+    vars:
+      IMG_SRC:
+        sh: ls {{.IMG_DIR}} | grep ".tex$"
+    cmds:
+      - |
+        for i in {{.IMG_SRC | catLines}}
+        do
+          pdflatex -shell-escape -interaction=nonstopmode -output-directory {{.IMG_DIR}} ${i}
+        done
+    silent: true
+
+##==============================================================================
+#
+  pdf:
+    desc: "Output {{.TARGET}} PDF."
+    sources:
+      - ./*.tex
+    generates:
+      - ./a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
+    cmds:
+      - |
+        latexmk -f -interaction=nonstopmode \
+                   -pdf -pdflatex="pdflatex --shell-escape %O %S" \
+                   -bibtex {{.DOC}}.tex
+        [ -f {{.DOC}}.pdf ] && mv main.pdf {{.TARGET}}
+    silent: true
+
+##==============================================================================
+#
+  clean:
+    desc: "Clean up the project."
+    vars:
+      DOC_SRC: main.tex
+    cmds:
+      - |
+        for f in $(find {{.IMG_DIR}} -maxdepth 1 -type f)
+        do
+          [ ${f##*.} != "tex" ] && rm ${f}
+        done
+        rm -f {{.TARGET}}
+        latexmk -silent -c {{.DOC_SRC}}
+    silent: true

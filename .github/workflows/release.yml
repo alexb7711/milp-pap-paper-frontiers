@@ -2,24 +2,18 @@ name: LaTeX Release
 
 on:
   push:
-    branches: [ "main" ]
+    tags: 'v*.**'
 
 jobs:
-  call-workflow-in-local-repo:
-    uses: ./.github/workflows/build-pdf.yml
-
   pre-release:
-    name: "Pre Release"
-    needs: call-workflow-in-local-repo
+    name: "Release"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/download-artifact@v3
+    - uses: actions/checkout@v3
+    - run: sudo apt-get update && sudo apt-get install -y texlive-full latexmk
+    - uses: arduino/setup-task@v1
+    - run: task clean && task
+    - uses: ncipollo/release-action@v1
       with:
-        name: artifact
-    - uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        prerelease: true
-        files: |
-          ./README.org
-          ./a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
+        artifacts: "a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf"
+        # bodyFile: "README.org"
