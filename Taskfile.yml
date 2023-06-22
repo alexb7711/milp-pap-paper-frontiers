@@ -40,7 +40,7 @@ tasks:
       - ./img/*.pdf
     vars:
       IMG_SRC:
-        sh: find {{.IMG_DIR}} -name "*.tex"
+        sh: ls {{.IMG_DIR}} | grep ".tex$"
     cmds:
       - |
         for i in {{.IMG_SRC | catLines}}
@@ -61,7 +61,7 @@ tasks:
       - |
         latexmk -f -interaction=nonstopmode \
                    -pdf -pdflatex="pdflatex --shell-escape %O %S" \
-                   -silent -bibtex {{.DOC}}.tex
+                   -bibtex {{.DOC}}.tex
         [ -f {{.DOC}}.pdf ] && mv main.pdf {{.TARGET}}
     silent: true
 
@@ -73,7 +73,10 @@ tasks:
       DOC_SRC: main.tex
     cmds:
       - |
-        rm -f $(target)
-        rm -f {{.IMG_DIR}}/*.pdf {{.IMG_DIR}}/*.fls {{.IMG_DIR}}/*.log {{.IMG_DIR}}/*.fdb_latexmk {{.IMG_DIR}}/*.aux
+        for f in $(find {{.IMG_DIR}} -maxdepth 1 -type f)
+        do
+          [ ${f##*.} != "tex" ] && rm ${f}
+        done
+        rm -f {{.TARGET}}
         latexmk -silent -c {{.DOC_SRC}}
     silent: true
