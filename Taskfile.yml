@@ -53,10 +53,6 @@ tasks:
 #
   pdf:
     desc: "Output {{.TARGET}} PDF."
-    sources:
-      - ./*.tex
-    generates:
-      - ./a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
     cmds:
       - |
         latexmk -f -interaction=nonstopmode \
