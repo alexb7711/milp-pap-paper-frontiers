@@ -1,4 +1,4 @@
-* MILP PA Frontiers Paper
+* MILP PAP Frontiers Paper
 This paper discusses the research behind the Mixed Integer Linear Program (MILP) solution to the Position Allocation
 Problem (PAP). The paper, as the name suggests, is configured to be submitted for the [[https://www.frontiersin.org/][Frontiers journal]]. It also 
 contains some significant improvements, as well as vital corrections, to its [[https://github.com/alexb7711/milp-pap][predecessor]].
