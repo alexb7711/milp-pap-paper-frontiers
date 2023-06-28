@@ -13,7 +13,8 @@
 \pgfplotstableread[col sep = comma]{img/data/qm-power-usage.csv}\powerdataquin
 \pgfplotstableread[col sep = comma]{img/data/milp-power-usage.csv}\powerdatamilp
 
-\begin{tikzpicture}[scale=0.65]
+\resizebox{\columnwidth}{4in}{%
+\begin{tikzpicture}
 \begin{axis}[title={Power Usage},
              xlabel={Time [hr]}, ylabel={Power Usage [kw]},
              xmin=4, xmax=24, ymin=0]
@@ -27,6 +28,7 @@
              table[x=time, y=power] {\powerdatamilp};
     \addlegendentry{MILP}
 \end{axis}
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 
 \end{document}
