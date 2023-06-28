@@ -11,6 +11,7 @@
 
 \begin{document}
 
+\resizebox{0.5\columnwidth}{!}{%
 \begin{tikzpicture}[scale=0.25]
 \draw [thick, -] (0,0) rectangle (12,12) node[right]{$O$};
 \draw[fill=gray] (1,1) rectangle (6,4);
@@ -22,6 +23,7 @@
 \draw [thick,<->] (0,15) node[above]{$Y$}              --
                   (0,0)node[above right]{$\mathbb{O}$} --
                   (15,0) node[right]{$X$};
-\end{tikzpicture}
+\end{tikzpicture}%
+}
 
 \end{document}

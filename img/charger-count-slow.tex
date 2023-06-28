@@ -1,4 +1,4 @@
-\documentclass[tikz, border=1pt]{standalone}
+\documentclass[float=false, crop=true]{standalone}
 
 \usepackage
 {
@@ -15,7 +15,8 @@
 \pgfplotstableread[col sep = comma]{img/data/qm-charge-cnt.csv}\usagedataquin
 \pgfplotstableread[col sep = comma]{img/data/milp-charge-cnt.csv}\usagedatamilp
 
-\begin{tikzpicture}[scale=0.65]
+\resizebox{\columnwidth}{4in}{%
+\begin{tikzpicture}
 \begin{axis}[title={Slow Charge Usage},
              xlabel={Time [hr]},ylabel={Count},
              xmin=4, xmax=24,
@@ -25,6 +26,7 @@
     \addplot[red!80!black, fill=red, fill opacity=0.15, no markers] table[x=visit, y=slow] {\usagedatamilp};
     \addlegendentry{MILP}
 \end{axis}
-\end{tikzpicture}
+\end{tikzpicture}%\
+}
 
 \end{document}

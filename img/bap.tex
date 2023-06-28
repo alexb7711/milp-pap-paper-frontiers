@@ -1,4 +1,4 @@
-\documentclass[multi=figure, margin=10pt]{standalone}
+\documentclass[multi=figure, crop=true]{standalone}
 
 \usepackage{tikz}
 \usepackage{graphicx}
@@ -7,6 +7,7 @@
 
 \begin{document}
 
+\resizebox{0.45\columnwidth}{!}{%
 \begin{tikzpicture}[scale=0.35]
   \draw[rotate=90,fill=black] (0,0) rectangle (1,10);
   \draw[rotate=90](2,0) rectangle (3,3);
@@ -18,7 +19,8 @@
   \draw[thick,->] (-10,6)--(0,6);
 
   \node at (1.5,0.5) {Berth};
-  \node at (1.5,3.5) {Vessels};
-\end{tikzpicture}
+  \node at (2.0,3.5) {Vessels};
+\end{tikzpicture}%
+}
 
 \end{document}
