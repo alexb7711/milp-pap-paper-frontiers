@@ -10,6 +10,7 @@
 *.gz
 *.bak
 *.sav
+*.el
 *converted-to.pdf
 build/
 *.pdf
