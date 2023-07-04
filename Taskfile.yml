@@ -12,6 +12,8 @@ env:
 # RECIPES
 ################################################################################
 
+##==============================================================================
+#
 tasks:
   default:
     cmds:
@@ -19,6 +21,14 @@ tasks:
       - task: images
       - task: pdf
 
+##==============================================================================
+#
+  pipeline:
+    cmds:
+      - task: precheck
+      - task: images
+      - task: set-version
+      - task: pdf
 ##==============================================================================
 #
   precheck:
@@ -47,6 +57,19 @@ tasks:
         do
           pdflatex -shell-escape -interaction=nonstopmode -output-directory {{.IMG_DIR}} ${i}
         done
+    silent: true
+
+##==============================================================================
+#
+  set-version:
+    desc: "Dynamically sets the version of the document."
+    vars:
+      ABSTRACT: tex/abstract.tex
+      VERSION:
+        sh: git describe --tags
+    cmds:
+      - |
+        sed -i 's/{VERSION}/{{.VERSION}}/' {{.ABSTRACT}}
     silent: true
 
 ##==============================================================================
