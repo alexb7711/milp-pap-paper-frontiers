@@ -71,7 +71,8 @@ tasks:
         sh: git describe --tags
     cmds:
       - |
-        sed -i 's/\\begin{abstract}/a \today:{{.VERSION}}/' {{.ABSTRACT}}
+        grep {{.VERSION}} {{.ABSTRACT}} > /dev/null || \
+        sed -i 's/\\begin{abstract}/\\begin{abstract}\nVERSION: \\today:{{.VERSION}}\n/' {{.ABSTRACT}}
     silent: true
 
 ##==============================================================================
