@@ -60,6 +60,8 @@ tasks:
     silent: true
 
 ##==============================================================================
+# Resources:
+# - https://stackoverflow.com/questions/15559359/insert-line-after-match-using-sed
 #
   set-version:
     desc: "Dynamically sets the version of the document."
@@ -69,7 +71,8 @@ tasks:
         sh: git describe --tags
     cmds:
       - |
-        sed -i 's/{VERSION}/{{.VERSION}}/' {{.ABSTRACT}}
+        grep {{.VERSION}} {{.ABSTRACT}} > /dev/null || \
+        sed -i 's/\\begin{abstract}/\\begin{abstract}\nVERSION: \\today:{{.VERSION}}\n/' {{.ABSTRACT}}
     silent: true
 
 ##==============================================================================
