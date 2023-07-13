@@ -1,0 +1,3 @@
+[submodule "citation-database"]
+	path = citation-database
+	url = git@github.com:alexb7711/citation-database.git
