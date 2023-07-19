@@ -26,7 +26,7 @@
         \pgfmathsetmacro{\u}{\fpeval{3*\i} + 1}
         \pgfmathsetmacro{\p}{\fpeval{3*\i} + 2}
         \addplot +[error bars/.cd, x dir=plus, x explicit]
-                  table[x index=\u, x error index=\p, y index =\v, unbounded coords=jump]{\scheduledataquin};
+                  table[x index=\u, x error index=\p, y index =\v, unbounded coords=discard]{\scheduledataquin};
     }
 \end{axis}
 \end{tikzpicture}%

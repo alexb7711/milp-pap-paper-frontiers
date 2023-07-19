@@ -11,7 +11,6 @@
   booktabs,                                                                   % Extend tables
   cite,                                                                       % Improved citation mechanics
   graphicx,                                                                   % Enhance graphics
-  hyperref,                                                                   % Better references
   lineno,                                                                     % Add line numbers to page
   microtype,                                                                  % Uses different techniques for spacing
   multicol,                                                                   % Create tables spanning multiple columns
@@ -23,7 +22,8 @@
   tikz,                                                                       % Generate figures in LaTeX
   xcolor,                                                                     % Colors
   xfp,                                                                        % No trailing zeros
-  standalone                                                                  % Include standalone documents
+  standalone,                                                                 % Include standalone documents
+  hyperref,                                                                   % Better references (keep last)
 }
 
 %% Plot configurations
@@ -34,7 +34,16 @@
 %% Paper configuration
 \linenumbers                                                                    % Put line numbers
 \setlength{\columnsep}{2cm}                                                     % Column separation
-\let\cite\citep                                                                 % Redefine `\cite` as `\citep` because lazy
+\let\ref\autoref                                                                % Redifine `\ref` as `\autoref` because lazy
+\let\cite\citep                                                                 % Redefine `\cite` as `\citep` because
+% lazy
+
+% =========================================================================================================================
+% `autoref' formatting
+\renewcommand*{\sectionautorefname}{Section}
+\renewcommand*{\subsectionautorefname}{Subsection}
+\renewcommand*{\subsubsectionautorefname}{Subsubsection}
+\renewcommand*{\paragraphautorefname}{Paragraph}
 
 %%===============================================================================
 % Custom Commands
@@ -43,6 +52,7 @@
 
 %%-------------------------------------------------------------------------------
 % Experiment parameters
+% TODO: Ensure these are accurate
 \newcommand{\A}{35 }                                                            % Number of buses
 \newcommand{\N}{338 }                                                           % Number of visits
 \newcommand{\acharge}{0.9}                                                      % BOD charge percentage
@@ -55,11 +65,14 @@
 \newcommand{\slow}{15 }                                                         % Number of slow chargers
 \newcommand{\fasts}{911 }                                                       % Speed of fast charger
 \newcommand{\slows}{30 }                                                        % Speed of slow charger
+\newcommand{\contvars}{7,511 }
+\newcommand{\intvars}{328,282 }
 
 %%-------------------------------------------------------------------------------
 %% Solve output
-\newcommand{\timeran}{14400 }                                                   % Time ran for MILP
-\newcommand{\gappercent}{52.5\% }                                               % Gap percent after runtime
+\newcommand{\timeran}{1800 }                                                    % Time ran for MILP [s]
+%TODO: Update gap
+\newcommand{\gappercent}{65.2\% }                                               % Gap percent after runtime
 \newcommand{\processor}{Ryzen 9 }                                               % Processor type
 
 %%===============================================================================
