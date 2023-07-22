@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-      submodules: 'true'
+      with:
+        submodules: true
     - run: sudo apt-get update && sudo apt-get install -y texlive-full latexmk
     - uses: arduino/setup-task@v1
     - run: task clean && task
