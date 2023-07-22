@@ -29,19 +29,20 @@ $\epsilon_q = r_q$ to create a consumption cost term, $g_{iq}\epsilon_q$. This i
 active charger times, particuarly for the fast chargers.
 
 Another heuristic-based optimization strategy, referred to as Quin-Modified, is also employed as a means of comparison
-with the results of the MILP PAP. The Quin-Modified strategies is a based on the threshold strategy of \cite{Qin2016}.
-The strategy has been modified slightly to accommodate the case of multiple charger types and without exhaustive search
-for the best charger type. The heuristic is based on a set of rules that revolve around the initial charge of the bus at
-visit $i$. There are three different thresholds, low (60\%), medium (75\%), and high (90\%). Buses below the low
-threshold are prioritized to fast chargers then are allowed to utilize slow chargers if no fast chargers are available.
-Buses between the low and medium threshold prioritize slow chargers first and utilize fast chargers only if no slow
-chargers are available. Buses above the medium threshold and below high will only be assigned to slow chargers. Buses
-above the high threshold will not be charged. Once a bus has been assigned to a charger, it remains on the charger for
-the duration of the time it is at the station, or it reaches 90\% charge, whichever comes first.
+with the results of the MILP PAP. The Quin-Modified strategies is a based on the threshold strategy of
+\cite{qin-2016-numer-analy}. The strategy has been modified slightly to accommodate the case of multiple charger types
+and without exhaustive search for the best charger type. The heuristic is based on a set of rules that revolve around
+the initial charge of the bus at visit $i$. There are three different thresholds, low (60\%), medium (75\%), and high
+(90\%). Buses below the low threshold are prioritized to fast chargers then are allowed to utilize slow chargers if no
+fast chargers are available. Buses between the low and medium threshold prioritize slow chargers first and utilize fast
+chargers only if no slow chargers are available. Buses above the medium threshold and below high will only be assigned
+to slow chargers. Buses above the high threshold will not be charged. Once a bus has been assigned to a charger, it
+remains on the charger for the duration of the time it is at the station, or it reaches 90\% charge, whichever comes
+first.
 
 UTA) bus routing data that occurs over a 24-hour time period. The total number of constraints resulted in \contvars
 continuous and \intvars integer/binary constraints. The optimization was performed using the Gurobi MILP solver
-\cite{GurobiOptimization2021} on a machine running an AMD Ryzen 9 5900X 12 - Processor (24 core) at 4.95GHz. The solver
+\cite{gurobi-2021-gurob-optim} on a machine running an AMD Ryzen 9 5900X 12 - Processor (24 core) at 4.95GHz. The solver
 was allowed to run for \timeran seconds and did not converge to the optimal result with a gap \gappercent.
 
 %--------------------------------------------------------------------------------
