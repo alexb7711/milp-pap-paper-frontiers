@@ -49,7 +49,7 @@ formulation.
 \begin{itemize}
     \item $u_i$    : starting charge time for vehicle $i;\; 1 \leq i \leq n_N$
     \item $v_i$    : assigned charge queue for vehicle $i;\; 1 \leq i \leq n_N$
-    \item $e_i$    : departure time for vehicle $i;\; 1 \leq i \leq n_N$
+    \item $d_i$    : departure time for vehicle $i;\; 1 \leq i \leq n_N$
     \item $\sigma_{ij}$ : binary variable that determines ordering of vehicles $i$ and $j$ in time
     \item $\psi_{ij}$ : binary variable that determines relative position of vehicles $i$ and $j$ when charging simultaneously
 \end{itemize}
@@ -59,7 +59,7 @@ and shown here for completeness.
 
 \begin{equation}
 	\label{eq:bapobjective}
-	\min\; \sum_{i=1}^N (e_i - a_i)
+	\min\; \sum_{i=1}^N (d_i - a_i)
 \end{equation}
 Subject to:
 \begin{subequations}
@@ -70,7 +70,7 @@ Subject to:
     \sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1 \label{subeq:bapvalid_pos}     \\
     \sigma_{ij} + \sigma_{ji} \leq 1                              \label{subeq:bapsigma}        \\
     \psi_{ij} + \psi_{ji} \leq 1                              \label{subeq:bapdelta}        \\
-    s_i + u_i = e_i                                               \label{subeq:bapdetach}       \\
+    s_i + u_i = d_i                                               \label{subeq:bapdetach}       \\
     a_i \leq u_i \leq (T - s_i)                                   \label{subeq:bapvalid_starts} \\
     \sigma_{ij} \in \{0,1\},\;\psi_{ij} \in \{0,1\}\;           \label{subeq:bapsdspace}      \\
     v_i \in [0, S ]                                               \label{subeq:bapvspace}
@@ -80,7 +80,7 @@ Subject to:
 \noindent
 
 The objective function, \autoref{eq:bapobjective}, minimizes the time spent to service each vehicle by minimizing over
-the sum of differences between the departure time, $e_i$, and arrival time, $a_i$. i.e., It seeks to get each vehicle
+the sum of differences between the departure time, $d_i$, and arrival time, $a_i$. i.e., It seeks to get each vehicle
 charged and on its way as quickly as possible.
 
 \autoref{subeq:baptime}-\autoref{subeq:bapdelta} are used to ensure that individual rectangles do not overlap. For the
@@ -94,7 +94,7 @@ $j$ simultaneously come before vehicle $i$.
 
 The last constraints force relationships between arrival time, charge start time, and departure time.
 \autoref{subeq:bapdetach} states that the service start time, $u_i$, plus the time to service vehicle $i$, $s_i$, must
-equal the departure time, $e_i$. \autoref{subeq:bapvalid_starts} enforces the arrival time, $a_i$, to be less than or
+equal the departure time, $d_i$. \autoref{subeq:bapvalid_starts} enforces the arrival time, $a_i$, to be less than or
 equal to the service start time, $u_i$, which in turn must be less than or equal to the latest time the vehicle may
 begin to be serviced to stay within the time horizon. \autoref{subeq:bapsdspace} ensures that $\sigma_{ij}$ and
 $\psi_{ij}$ are binary. \autoref{subeq:bapvspace} ensures that the assigned value of $v_i$ is a valid charging position.

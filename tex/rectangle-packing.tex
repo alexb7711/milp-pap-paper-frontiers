@@ -38,7 +38,7 @@ modified queuing constraints can be written as shown in \autoref{eq:packconstrs}
 \label{eq:packconstrs}
 \begin{align}
     v_i - v_j - (\psi_{ij} - 1)n_Q \geq 1       \label{subeq:space}        \\
-    e_i \leq \tau_i                             \label{subeq:valid_depart} \\
+    d_i \leq \tau_i                             \label{subeq:valid_depart} \\
     s_i \geq 0                               \label{subeq:pos_charge} \\
     v_i \in \mathbb{Q}                       \label{subeq:vspace}
 \end{align}
@@ -47,7 +47,7 @@ modified queuing constraints can be written as shown in \autoref{eq:packconstrs}
 The constraint in \autoref{subeq:space} is nearly identical to \autoref{subeq:bapspace}, but rather than viewing the
 charger as a continuous strip of length $S$, it is discretized into $n_Q$ queues a width of unit length one. A BEB is
 also assigned a unit length of one which is reflected in \autoref{subeq:space} by $\cdot \geq 1$. \autoref{subeq:valid_depart}
-ensures that the time the BEB is detatched from the charger, $e_i$, is before its departure time, $\tau_i$.
+ensures that the time the BEB is detatched from the charger, $d_i$, is before its departure time, $\tau_i$.
 \autoref{subeq:vspace} defines the integer set of indices for queues for $v_i$.
 
 \subsection{Battery Charge Dynamic Constraints}
@@ -173,7 +173,7 @@ Subject to the constraints
     \psi_{ij} + \psi_{ji} \leq 1                              \label{subeq:m_delta}        \\
 \end{equation}
 \begin{equation}
-    s_i + u_i = e_i                                  \label{subeq:m_detach}       \\
+    s_i + u_i = d_i                                  \label{subeq:m_detach}       \\
 \end{equation}
 \begin{equation}
     \eta_{\Gamma^0_i} = \alpha \kappa_{\Gamma^0_i}                           \label{subeq:init_charge}    \\
@@ -182,7 +182,7 @@ Subject to the constraints
     a_i \leq u_i \leq (T - s_i)                            \label{subeq:m_valid_starts} \\
 \end{equation}
 \begin{equation}
-    e_i \leq \tau_i                                        \label{subeq:m_valid_depart} \\
+    d_i \leq \tau_i                                        \label{subeq:m_valid_depart} \\
 \end{equation}
 \begin{equation}
     \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i = \eta_{\gamma_i}   \label{subeq:next_charge}    \\
