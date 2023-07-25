@@ -1,4 +1,3 @@
 [submodule "citation-database"]
 	path = citation-database
-	url = https://github.com/alexb7711/citation-database.git
         branch = main
