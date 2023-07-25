@@ -10,7 +10,6 @@ jobs:
     name: "Build PDF"
     runs-on: ubuntu-latest
     steps:
-    - run: git submodule foreach --recursive git reset --hard
     - uses: actions/checkout@v3
       with:
         submodules: true
