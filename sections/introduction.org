@@ -1,7 +1,8 @@
-\section{Introduction}
-
-\label{sec:introduction}
-
+* Introduction
+:PROPERTIES:
+:custom_id: sec:introduction
+:END:
+#+begin_src latex
 The public transportation system is crucial in any urban area; however, the increased awareness and concern of
 environmental impacts of petroleum based public transportation has driven an effort to reduce the pollutant footprint
 \cite{de-2014-simul-elect, xylia-2018-role-charg, guida-2017-zeeus-repor-europ, li-2016-batter-elect}. Particularly, the
@@ -52,3 +53,4 @@ formulation of the resulting MILP. \autoref{sec:problemformulation} constructs t
 modifications to the PAP queuing constraints and development of a dynamic charging model. \autoref{sec:example}
 demonstrates an example of using the formulation to coordinate \A buses over \N total visits to the station. The paper
 ends in \autoref{sec:conclusion} with concluding remarks.
+#+end_src

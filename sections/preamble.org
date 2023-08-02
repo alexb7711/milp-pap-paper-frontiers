@@ -1,3 +1,6 @@
+#+options: toc:nil author:nil date:nil
+#+latex_class: FrontiersinHarvard
+
 #+latex_header:%%==============================================================================
 #+latex_header:% Package configuration
 #+latex_header:\usepackage{amsmath}                                  % Miscellaneous enhancements for mathematics
@@ -19,13 +22,18 @@
 #+latex_header:\usepackage{standalone}                               % Include standalone documents
 #+latex_header:\usepackage{hyperref}                                 % Better references (keep last)
 
-#+latex_header:%%==============================================================================
-#+latex_header:% Plot configurations
-#+latex_header:\usetikzlibrary{automata, positioning, arrows.meta}                             % Tikz macros
+#+latex_header:%% Plot configurations
+#+latex_header:\usetikzlibrary{automata, positioning, arrows.meta}   % Tikz macros
 #+latex_header:\pgfplotsset{compat=1.3, width=\textwidth}
-#+latex_header:\graphicspath{ {img} }                                                        % Paths to find images
+#+latex_header:\graphicspath{ {img} }                                % Paths to find images
 
-#+latex_header:%%=========================================================================================================================
+#+latex_header:%% Paper configuration
+#+latex_header:\linenumbers                                          % Put line numbers
+#+latex_header:\setlength{\columnsep}{2cm}                           % Column separation
+#+latex_header:\let\ref\autoref                                      % Redifine `\ref` as `\autoref` because lazy
+#+latex_header:\let\cite\citep                                       % Redefine `\cite` as `\citep` because lazy
+
+#+latex_header:%%==============================================================================
 #+latex_header:% `autoref' formatting
 #+latex_header:\renewcommand*{\sectionautorefname}{Section}
 #+latex_header:\renewcommand*{\subsectionautorefname}{Subsection}
@@ -84,9 +92,3 @@
 #+latex_header:\address{} %This field will be automatically populated
 #+latex_header:\correspondance{} %This field will be automatically populated
 #+latex_header:\extraAuth{}
-
-#+latex_header:%% Paper configuration
-#+latex_header:\linenumbers                                                                % Put line numbers
-#+latex_header:\setlength{\columnsep}{2cm}                                                 % Column separation
-#+latex_header:\let\ref\autoref                                                            % Redifine `\ref` as `\autoref` because lazy
-#+latex_header:\let\cite\citep                                                             % Redefine `\cite` as `\citep` because lazy

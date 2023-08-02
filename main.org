@@ -1,5 +1,3 @@
-#+LATEX_CLASS: FrontiersinHarvard
-
 # ===============================================================================
 # Document configuration
 #+include: sections/preamble.org
@@ -14,21 +12,18 @@
 #+title: A Position Allocation Approach to the Scheduling of Battery Electric Bus Charging
 
 # ---------------------------------------------------------------------------------
-# Create title
-\maketitle
-
-# ---------------------------------------------------------------------------------
 # Abstract
+
 #+include: sections/abstract.tex
 
 # ===============================================================================
 # Paper
 
-#+include: sections/introduction.tex
-#+include: sections/pap-problem.tex
-#+include: sections/rectangle-packing.tex
-#+include: sections/example.tex
-#+include: sections/conclusion.tex
+#+include: sections/introduction.org
+# +include: sections/pap-problem.tex
+# +include: sections/rectangle-packing.tex
+# +include: sections/example.tex
+# +include: sections/conclusion.tex
 
 # ================================================================================
 # Bibliography
@@ -40,4 +35,4 @@
 
 \nolinenumbers
 \clearpage
-#+include: sections/figures.tex
+# +include: sections/figures.tex
