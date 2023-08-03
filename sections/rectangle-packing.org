@@ -1,4 +1,7 @@
-\section{A Rectangle Packing Formulation for BEB Charging}  \label{sec:problemformulation}
+* A Rectangle Packing Formulation for BEB Charging
+:PROPERTIES:
+:custom_id: sec:problemformulation
+:END:
 
 Applying the PAP to BEB charging requires four fundamental changes. The first is that the time that a BEB spends
 charging is allowed to vary. Thus, $s_i$ becomes a variable of optimization. Second, in the PAP each charging visit is
@@ -16,7 +19,10 @@ addition of the bus charge management. This section ends with a brief discussion
 the statement of the full problem in \autoref{sec:BEB_MILP}. The notation is explained throughout and summarized in
 \autoref{tab:variables}.
 
-\subsection{Queuing Constraints} \label{sec:queuing}
+** Queuing Constraints
+:PROPERTIES:
+:custom_id: sec:queuing
+:END:
 
 \noindent
 The queuing constraints ensure that the busses entering the queues for charging are assigned in a feasible manner as
@@ -34,6 +40,7 @@ $n_Q = n_B + n_C$, where $n_B$ is the number of busses and $n_C$ is the number o
 more queues than chargers is to allow buses to sit idle instead of requiring the bus to charge at each visit. The
 modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
 
+#+begin_src latex
 \begin{subequations}
 \label{eq:packconstrs}
 \begin{align}
@@ -43,6 +50,7 @@ modified queuing constraints can be written as shown in \autoref{eq:packconstrs}
     v_i \in \mathbb{Q}                       \label{subeq:vspace}
 \end{align}
 \end{subequations}
+#+end_src
 
 The constraint in \autoref{subeq:space} is nearly identical to \autoref{subeq:bapspace}, but rather than viewing the
 charger as a continuous strip of length $S$, it is discretized into $n_Q$ queues a width of unit length one. A BEB is
@@ -50,8 +58,11 @@ also assigned a unit length of one which is reflected in \autoref{subeq:space} b
 ensures that the time the BEB is detatched from the charger, $d_i$, is before its departure time, $\tau_i$.
 \autoref{subeq:vspace} defines the integer set of indices for queues for $v_i$.
 
-\subsection{Battery Charge Dynamic Constraints}
-\label{sec:batt_dynamics}
+** Battery Charge Dynamic Constraints
+:PROPERTIES:
+:custom_id: sec:batt_dynamics
+:END:
+
 Battery dynamic constraints are now introduced to relate busses to visits and guarantee that buses have sufficient time
 to charge. Two constraints are enforced on the bus charge: busses must always have sufficient charge to execute their
 respective routes and each bus must end the day with a specific charge threshold, preparatory for the next day.
@@ -80,6 +91,7 @@ the bus coming into visit $\Upsilon_i$ would be $\eta_{\Upsilon_i} = \eta_i + s_
 The binary decision variable $w_{iq}$ is introduced to determine whether visit $i$ uses charger $q$. This allows the
 charge of the bus coming into visit $\Upsilon_i$ to be written in summation form as
 
+#+begin_src latex
 \begin{subequations}
     \label{subeq:pre_next_charge}
 \begin{align}
@@ -88,18 +100,22 @@ charge of the bus coming into visit $\Upsilon_i$ to be written in summation form
     w_{iq} \in \{0,1\}
 \end{align}
 \end{subequations}
+#+end_src
 
 The choice of queue for visit $i$, becomes a slack variable and is defined in terms of $w_{iq}$ as
 
+#+begin_src latex
 \begin{equation}
     v_i = \sum_{q=1}^{n_Q} qw_{iq}
 \end{equation}
+#+end_src
 
 Maximum and minimum values for the charges are included to ensure that the battery is not overcharged and to guarantee
 sufficient charge for subsequent visits. The upper and lower battery charge bounds for bus $b$ are $\kappa_b$ and $\nu_b \kappa_b$,
 respectively0 $\kappa_b$ is the battery capacity and $\nu_b$ is a percent value. As $\eta_i$ corresponds to the charge at the
 beginning of the visit, the upper bound constraint must also include the charge received during the visit as follows.
 
+#+begin_src latex
 \begin{subequations}
     \label{subeq:pre_min_max}
 \begin{align}
@@ -107,12 +123,14 @@ beginning of the visit, the upper bound constraint must also include the charge 
     \eta_i \geq \nu_{\Gamma_i} \kappa_{\Gamma_i}
 \end{align}
 \end{subequations}
+#+end_src
 
 Note that the term $s_i w_{iq}$ is a bilinear term. A standard way of linearizing a bilinear term that contains an
 integer variable is by introducing a slack variable with an either/or constraint
 \cite{chen-2010-applied,rodriguez-2013-compar-asses}. Allowing the slack variable $g_{iq}$ to be equal to $s_i w_{iq}$,
 $g_{iq}$ can be defined as
 
+#+begin_src latex
 \begin{equation}
     \label{eq:giq_cases}
     g_{iq} =
@@ -121,10 +139,12 @@ $g_{iq}$ can be defined as
         0 & w_{iq} = 0
     \end{cases}.
 \end{equation}
+#+end_src
 
 \autoref{eq:giq_cases} can be expressed as a mixed integer constraint using big-M notation with the following four
 constraints.
 
+#+begin_src latex
 \begin{subequations}
     \label{eq:slack_gain}
 \begin{align}
@@ -134,26 +154,33 @@ constraints.
     0 \leq g_{iq}                   \label{subeq:repgwles}
 \end{align}
 \end{subequations}
+#+end_src
 
 \noindent
 where $M$ is a large value. If $w_{iq} = 1$ then \autoref{subeq:repgpgret} and \autoref{subeq:repgples} become $s_i \leq
 g_{iq}$ and $s_i \geq g_{iq}$, forcing $s_i = g_{iq}$ with \autoref{subeq:repgwgret} being inactive. If $w_{iq} = 0$,
 \autoref{subeq:repgpgret} is inactive and \autoref{subeq:repgwgret} and \autoref{subeq:repgwles} force $g_{iq} = 0$.
 
-\subsection{The BEB Charging Problem} \label{sec:BEB_MILP}
+** The BEB Charging Problem
+:PROPERTIES:
+:custom_id: sec:BEB_MILP
+:END:
 The goal of the MILP is to utilize chargers as little as possible to reduce energy costs with the fast charging being
 penalized more to reduce battery damage. Thus, an assignment cost $m_q$ and usage cost $\epsilon_q$ are associated with each
 charger, $q$. These weights can be adjusted based on charger type or time of day that the visit occurs. The assignment
 term takes the form $w_{iq}m_q$, and the usage term takes the form $g_{iq} \epsilon_q$. The resulting BEB charging problem is
 defined in \autoref{eq:objective}.
 
+#+begin_src latex
 \begin{equation}
 \label{eq:objective}
 	\min \sum_{i=1}^N \sum_{q=1}^{n_Q} \Big( w_{iq} m_q + g_{iq} \epsilon_q \Big) \\
 \end{equation}
+#+end_src
 
 Subject to the constraints
 
+#+begin_src latex
 \begin{multicols}{2}
 \begin{subequations}
                                                      \label{eq:dynconstrs}
@@ -225,6 +252,7 @@ Subject to the constraints
 \end{equation}
 \end{subequations}
 \end{multicols}
+#+end_src
 
 \autoref{subeq:m_time}-\autoref{subeq:m_valid_depart} are reiterations of the queuing constraints in
 \autoref{eq:packconstrs}. \autoref{subeq:init_charge}-\autoref{subeq:final_charge} provide the battery charge
