@@ -1,7 +1,8 @@
-\section{Introduction}
-
-\label{sec:introduction}
-
+* Introduction
+:PROPERTIES:
+:custom_id: sec:introduction
+:END:
+#+begin_src latex
 The public transportation system is crucial in any urban area; however, the increased awareness and concern of
 environmental impacts of petroleum based public transportation has driven an effort to reduce the pollutant footprint
 \cite{de-2014-simul-elect, xylia-2018-role-charg, guida-2017-zeeus-repor-europ, li-2016-batter-elect}. Particularly, the
@@ -47,8 +48,9 @@ selected in such a manner as to minimize the number of fast and slow charger uti
 consumption. The result is a MILP formulation that coordinates charging times and charger type for every visit that each
 bus makes to the station while considering a dynamic charge model and scheduling constraints.
 
-The remainder of the paper proceeds as follows: In \autoref{sec:positionallocationproblem}, the PAP is introduced with a
+The remainder of the paper proceeds as follows: In \autoref{sec:the-position-allocation-problem}, the PAP is introduced with a
 formulation of the resulting MILP. \autoref{sec:problemformulation} constructs the MILP for BEB scheduling, including
 modifications to the PAP queuing constraints and development of a dynamic charging model. \autoref{sec:example}
 demonstrates an example of using the formulation to coordinate \A buses over \N total visits to the station. The paper
 ends in \autoref{sec:conclusion} with concluding remarks.
+#+end_src

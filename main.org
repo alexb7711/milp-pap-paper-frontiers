@@ -1,0 +1,46 @@
+# ===============================================================================
+# Document configuration
+#+include: sections/preamble.org
+
+# ===============================================================================
+# Title, Authors, Abstract, Keywords
+
+# -------------------------------------------------------------------------------
+# Title
+#+begin_src latex
+\title{A Position Allocation Approach to the Scheduling of Battery Electric Bus Charging}
+
+\onecolumn
+\firstpage{1}
+#+end_src
+
+# ---------------------------------------------------------------------------------
+# Create title
+#+begin_src latex
+\maketitle
+#+end_src
+
+# ---------------------------------------------------------------------------------
+# Abstract
+#+include: sections/abstract.org
+
+# ===============================================================================
+# Paper
+#+include: sections/introduction.org
+#+include: sections/pap-problem.org
+#+include: sections/rectangle-packing.org
+#+include: sections/example.org
+#+include: sections/conclusion.org
+
+# ================================================================================
+# Bibliography
+#+include: sections/references.org
+
+# ================================================================================
+# Figures
+#+begin_src latex
+\nolinenumbers
+\clearpage
+#+end_src
+
+#+include: sections/figures.org

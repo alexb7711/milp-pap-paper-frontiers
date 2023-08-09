@@ -1,14 +1,15 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% LINKS:
-%
-% https://github.com/maxbw117/DevelopmentPerSecond/blob/master/Tikz-pgfplots-and-latex/Tutorial%202-%20Figures%20and%20Large%20File%20Organization/Figures%20Chapter%201/01%20Ocean%20and%20Model%20Scale.tex
-% https://www.overleaf.com/learn/latex/Questions/I_have_a_lot_of_tikz%2C_matlab2tikz_or_pgfplots_figures%2C_so_I%27m_getting_a_compilation_timeout._Can_I_externalise_my_figures%3F
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# ################################################################################
+# LINKS:
+#
+# https://github.com/maxbw117/DevelopmentPerSecond/blob/master/Tikz-pgfplots-and-latex/Tutorial#202-#20Figures#20and#20Large#20File#20Organization/Figures#20Chapter#201/01#20Ocean#20and#20Model#20Scale.tex
+# https://www.overleaf.com/learn/latex/Questions/I_have_a_lot_of_tikz#2C_matlab2tikz_or_pgfplots_figures#2C_so_I#27m_getting_a_compilation_timeout._Can_I_externalise_my_figures#3F
+# ################################################################################
 
-\section*{Figure Captions}
+* Figure Captions
 
-%%--------------------------------------------------------------------------------
-% BAP and PAP comparison
+# --------------------------------------------------------------------------------
+# BAP and PAP comparison
+#+begin_src latex
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     % BAP
@@ -32,32 +33,38 @@
         \label{subfig:papexample}
     \end{figure}
 \end{subfigures}
+#+end_src
 
 
-%%--------------------------------------------------------------------------------
-% Variable table
-\input{tex/vartab}
+# --------------------------------------------------------------------------------
+# Variable table
+\input{sections/vartab}
 
-%%--------------------------------------------------------------------------------
-% Berth spatio-temporal graph
+# --------------------------------------------------------------------------------
+# Berth spatio-temporal graph
+#+begin_src latex
 \begin{figure}[htpb]
 \centering
     \includegraphics{img/spatiotemporal-packing}
     \caption{Example of rectangle packing problem.}
     \label{fig:packexample}
 \end{figure}
+#+end_src
 
-%%--------------------------------------------------------------------------------
-% Spatial temporal graph representation
+# --------------------------------------------------------------------------------
+# Spatial temporal graph representation
+#+begin_src latex
 \begin{figure}[ht]
 \centering
     \includegraphics{img/baprep}
     \caption{The representation of the berth-time space}
     \label{fig:bap}
 \end{figure}
+#+end_src
 
-%%--------------------------------------------------------------------------------
-% Spatio-temporal overlap visualization
+# --------------------------------------------------------------------------------
+# Spatio-temporal overlap visualization
+#+begin_src latex
 \begin{figure}[htpb]
 \centering
     \includegraphics{img/overlap}
@@ -66,9 +73,11 @@
              $\psi_{k_{3}j} = 0$.}
     \label{fig:multipleassign}
 \end{figure}
+#+end_src
 
-%%--------------------------------------------------------------------------------
-% Charge schedule
+# --------------------------------------------------------------------------------
+# Charge schedule
+#+begin_src latex
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     % Quinn
@@ -90,9 +99,11 @@
         \label{subfig:milp-schedule}
     \end{figure}
 \end{subfigures}
+#+end_src
 
-%%--------------------------------------------------------------------------------
-% Bus charges
+# --------------------------------------------------------------------------------
+# Bus charges
+#+begin_src latex
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     % Quinn
@@ -114,27 +125,33 @@
         \label{subfig:milp-charge}
     \end{figure}
 \end{subfigures}
+#+end_src
 
-%%--------------------------------------------------------------------------------
-% Power consumption
+# --------------------------------------------------------------------------------
+# Power consumption
+#+begin_src latex
 \begin{figure}[htpb]
 \centering
     \includegraphics{img/power}
     \caption{Total accumulated energy consumed by the Quin-Modified and MILP schedule throughout the time horizon.}
     \label{fig:power-usage}
 \end{figure}
+#+end_src
 
-%%--------------------------------------------------------------------------------
-% Energy use
+# --------------------------------------------------------------------------------
+# Energy use
+#+begin_src latex
 \begin{figure}[htpb]
 \centering
     \includegraphics{img/energy}
     \caption{Amount of power consumed by Quin-Modified and MILP schedule over the time horizon.}
     \label{fig:energy-usage}
 \end{figure}
+#+end_src
 
-%%--------------------------------------------------------------------------------
-% Charger usage count
+# --------------------------------------------------------------------------------
+# Charger usage count
+#+begin_src latex
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     % Fast
@@ -156,3 +173,4 @@
         \label{subfig:slow-charger-usage}
     \end{figure}
 \end{subfigures}
+#+end_src

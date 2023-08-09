@@ -1,9 +1,16 @@
-\section{The Position Allocation Problem}
-\label{sec:positionallocationproblem}
+* The Position Allocation Problem
+:PROPERTIES:
+:custom_id: sec:the-position-allocation-problem
+:END:
+
 This section provides a brief overview of the BAP and a detailed formulation of PAP as presented in
 \cite{qarebagh-2019-optim-sched}.
 
-\subsection{Overview of BAP}
+** Overview of BAP
+:PROPERTIES:
+:custom_id: sec:overview-of-bap
+:END:
+
 The BAP is a rectangle packing problem where a set of rectangles, $\mathbb{O}$, are attempted to be optimally placed in
 a larger rectangle, $O$, as shown in \autoref{fig:packexample}. The rectangle packing problem is an NP-hard problem that
 can be used to describe many real life problems \cite{bruin-2013-rectan-packin,murata-1995-rectan}. In some of these
@@ -24,7 +31,11 @@ the height represents the amount of space the vessel requires on the berth. The 
 time that the vessel arrives and is available to be berthed. ``Berthing Time'' is the time the vessel is berthed and
 begins being serviced. ``Completion time'' represents the time at which the berthing space becomes available again.
 
-\subsection{The PAP Formulation}
+** The PAP Formulation
+:PROPERTIES:
+:custom_id: sec:the-pap-formulation
+:END:
+
 The BAP forms the basis of the PAP; however, there are some differences in the way the variables are interpreted. For the
 $i^{th}$ visit, starting service time, $u_i$, is now the starting charge time, the berth location, $v_i$, is now the
 charger queue for assignment, and the service time, $s_i$, is now the elapsed charge time. There are also a few clarifying concepts
@@ -34,6 +45,7 @@ continuous and can be placed anywhere on the time horizon, $[0,T]$, as long as t
 other scheduled charge times. The PAP formulation's parameters can be divided into two categories: input parameters and
 decision variables. Each type will now be introduced. The following parameters are constant inputs into the MILP.
 
+#+begin_src latex
 \begin{itemize}
 	\item $S$   : Size of the vehicle
 	\item $T$   : time horizon
@@ -42,10 +54,12 @@ decision variables. Each type will now be introduced. The following parameters a
 	\item $s_i$ : width of vehicle $i;\; 1 \leq i \leq n_N$
 	\item $a_i$ : arrival time of vehicle $i;\; 1 \leq i \leq n_N$
 \end{itemize}
+#+end_src
 
 These constants define the problem bounds. The following list provides a series of decision variables used in the
 formulation.
 
+#+begin_src latex
 \begin{itemize}
     \item $u_i$    : starting charge time for vehicle $i;\; 1 \leq i \leq n_N$
     \item $v_i$    : assigned charge queue for vehicle $i;\; 1 \leq i \leq n_N$
@@ -53,15 +67,19 @@ formulation.
     \item $\sigma_{ij}$ : binary variable that determines ordering of vehicles $i$ and $j$ in time
     \item $\psi_{ij}$ : binary variable that determines relative position of vehicles $i$ and $j$ when charging simultaneously
 \end{itemize}
+#+end_src
 
 To determine the values for each of these decision variables, a MILP is formulated in \cite{qarebagh-2019-optim-sched}
 and shown here for completeness.
 
+#+begin_src latex
 \begin{equation}
 	\label{eq:bapobjective}
 	\min\; \sum_{i=1}^N (d_i - a_i)
 \end{equation}
+#+end_src
 Subject to:
+#+begin_src latex
 \begin{subequations}
 \label{eq:bapconstrs}
 \begin{align}
@@ -76,6 +94,7 @@ Subject to:
     v_i \in [0, S ]                                               \label{subeq:bapvspace}
 \end{align}
 \end{subequations}
+#+end_src
 
 \noindent
 

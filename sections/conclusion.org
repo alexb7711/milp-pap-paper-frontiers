@@ -1,5 +1,7 @@
-\section{Conclusion}
-\label{sec:conclusion}
+* Conclusion
+:PROPERTIES:
+:custom_id: sec:conclusion
+:END:
 
 This work developed a MILP scheduling framework that optimally assigns slow and fast chargers to a BEB bus fleet
 assuming a constant schedule. The BAP was introduced with an example formulation and was then compared to the PAP. The

@@ -1,0 +1,94 @@
+#+options: toc:nil author:nil date:nil title:nil
+#+latex_class: FrontiersinHarvard
+
+#+latex_header:%%==============================================================================
+#+latex_header:% Package configuration
+#+latex_header:\usepackage{amsmath}                                  % Miscellaneous enhancements for mathematics
+#+latex_header:\usepackage{amssymb}                                  % Math symbols
+#+latex_header:\usepackage{booktabs}                                 % Extend tables
+#+latex_header:\usepackage{cite}                                     % Improved citation mechanics
+#+latex_header:\usepackage{graphicx}                                 % Enhance graphics
+#+latex_header:\usepackage{lineno}                                   % Add line numbers to page
+#+latex_header:\usepackage{microtype}                                % Uses different techniques for spacing
+#+latex_header:\usepackage{multicol}                                 % Create tables spanning multiple columns
+#+latex_header:\usepackage{multirow}                                 % Create tables spanning multiple rows
+#+latex_header:\usepackage{pgfplots}                                 % Plot in LaTeX
+#+latex_header:\usepackage{subcaption}                               % Subfigures (Get rid of this)
+#+latex_header:\usepackage{subfloat}                                 % Subfigures
+#+latex_header:\usepackage{tabularx}                                 % Add more contol to tables
+#+latex_header:\usepackage{tikz}                                     % Generate figures in LaTeX
+#+latex_header:\usepackage{xcolor}                                   % Colors
+#+latex_header:\usepackage{xfp}                                      % No trailing zeros
+#+latex_header:\usepackage{standalone}                               % Include standalone documents
+#+latex_header:\usepackage{hyperref}                                 % Better references (keep last)
+
+#+latex_header:%% Plot configurations
+#+latex_header:\usetikzlibrary{automata, positioning, arrows.meta}   % Tikz macros
+#+latex_header:\pgfplotsset{compat=1.3, width=\textwidth}
+#+latex_header:\graphicspath{ {img} }                                % Paths to find images
+
+#+latex_header:%% Paper configuration
+#+latex_header:\linenumbers                                          % Put line numbers
+#+latex_header:\setlength{\columnsep}{2cm}                           % Column separation
+#+latex_header:\let\ref\autoref                                      % Redifine `\ref` as `\autoref` because lazy
+#+latex_header:\let\cite\citep                                       % Redefine `\cite` as `\citep` because lazy
+
+#+latex_header:%%==============================================================================
+#+latex_header:% `autoref' formatting
+#+latex_header:\renewcommand*{\sectionautorefname}{Section}
+#+latex_header:\renewcommand*{\subsectionautorefname}{Subsection}
+#+latex_header:\renewcommand*{\subsubsectionautorefname}{Subsubsection}
+#+latex_header:\renewcommand*{\paragraphautorefname}{Paragraph}
+
+#+latex_header:%%===============================================================================
+#+latex_header:% Custom Commands
+#+latex_header:\newcommand{\TODO}[1]{{\color{green} To do: #1}}                                % For adding notes to paper
+#+latex_header:\def\keyFont{\fontsize{8}{11}\helveticabold }
+
+#+latex_header:%%-------------------------------------------------------------------------------
+#+latex_header:% Experiment parameters
+#+latex_header:% TODO: Ensure these are accurate
+#+latex_header:\newcommand{\A}{35 }                                                            % Number of buses
+#+latex_header:\newcommand{\N}{338 }                                                           % Number of visits
+#+latex_header:\newcommand{\acharge}{0.9}                                                      % BOD charge percentage
+#+latex_header:\newcommand{\bcharge}{0.7 }                                                     % EOD charge percentage
+#+latex_header:\newcommand{\mincharge}{25\% }                                                  % Min visit charge percent
+#+latex_header:\newcommand{\minchargeD}{0.25 }                                                 % Min visit charge decimal
+#+latex_header:\newcommand{\maxcharge}{100\% }                                                 % Max visit charge percent
+#+latex_header:\newcommand{\batsize}{388 }                                                     % Battery capacity
+#+latex_header:\newcommand{\fast}{15 }                                                         % Number of fast chargers
+#+latex_header:\newcommand{\slow}{15 }                                                         % Number of slow chargers
+#+latex_header:\newcommand{\fasts}{911 }                                                       % Speed of fast charger
+#+latex_header:\newcommand{\slows}{30 }                                                        % Speed of slow charger
+#+latex_header:\newcommand{\contvars}{7,511 }
+#+latex_header:\newcommand{\intvars}{328,282 }
+
+#+latex_header:%%-------------------------------------------------------------------------------
+#+latex_header:%% Solve output
+#+latex_header:\newcommand{\timeran}{1800 }                                                    % Time ran for MILP [s]
+#+latex_header:%TODO: Update gap
+#+latex_header:\newcommand{\gappercent}{65.2\% }                                               % Gap percent after runtime
+#+latex_header:\newcommand{\processor}{Ryzen 9 }                                               % Processor type
+
+#+latex_header:%%===============================================================================
+#+latex_header:% Authors
+#+latex_header:\def\keyFont{\fontsize{8}{11}\helveticabold }
+#+latex_header:\def\firstAuthorLast{Brown {et~al.}} %use et al only if is more than 1 author
+#+latex_header:\def\Authors{Alexander Brown\,$^{1,*}$, Greg Droge\,$^{1}$, Jacob Gunther\,$^{1}$}
+
+#+latex_header:% Affiliations should be keyed to the author's name with superscript numbers and be listed as follows: Laboratory,
+#+latex_header:% Institute, Department, Organization, City, State abbreviation (USA, Canada, Australia), and Country (without detailed
+#+latex_header:% address information such as city zip codes or street names). If one of the authors has a change of address, list the
+#+latex_header:% new address below the correspondence details using a superscript symbol and use the same symbol to indicate the author
+#+latex_header:% in the author list.
+#+latex_header:\def\Address{$^{1}$Department of Electrical and Computer Engineering, Logan, UT, USA}
+
+#+latex_header:% The Corresponding Author should be marked with an asterisk Provide the exact contact address (this time including
+#+latex_header:% street name and city zip code) and email of the corresponding author
+#+latex_header:\def\corrAuthor{Alexander Brown}
+#+latex_header:\def\corrEmail{A01704744@usu.edu}
+
+#+latex_header:\author[\firstAuthorLast ]{\Authors} %This field will be automatically populated
+#+latex_header:\address{} %This field will be automatically populated
+#+latex_header:\correspondance{} %This field will be automatically populated
+#+latex_header:\extraAuth{}

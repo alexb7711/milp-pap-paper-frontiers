@@ -1,0 +1,12 @@
+# * References
+# TODO: Get Frontiers-Harvard working
+# +bibliographystyle:Frontiers-Harvard
+#+bibliographystyle:plain
+#+bibliography:citation-database/lit-ref.bib
+#+bibliography:citation-database/lib-ref.bib
+# +print_bibliography:
+\bibliographystyle{Frontiers-Harvard}
+\bibliography{citation-database/lit-ref.bib, citation-database/lib-ref.bib}
+#+bibliography:citation-database/lit-ref.bib
+#+bibliography:citation-database/lib-ref.bib
+#+print_bibliography:
