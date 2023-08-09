@@ -1,4 +1,4 @@
-% Created 2023-08-04 Fri 07:25
+% Created 2023-08-09 Wed 05:57
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -99,7 +99,7 @@
  pdftitle={},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 28.2 (Org mode 9.6.7)}, 
+ pdfcreator={Emacs 28.2 (Org mode 9.6.7)},
  pdflang={English}}
 \begin{document}
 
@@ -125,8 +125,8 @@
   considering the battery dynamics, minimizing the charger count, and consumption cost.
 
   \tiny \keyFont{ \section{Keywords:} Berth Allocation Problem (BAP), Position Allocation Problem (PAP), Mixed Integer
-    Linear Program (MILP), Battery Electric Bus (BEB), Scheduling} %All article types: you may provide up to 8 keywords;
-  at least 5 are mandatory.
+    Linear Program (MILP), Battery Electric Bus (BEB), Scheduling}
+  % All article types: you may provide up to 8 keywords; at least 5 are mandatory.
 \end{abstract}
 \section{Introduction}
 \label{sec:introduction}
@@ -641,7 +641,7 @@ is of interest to allow flexibility in the arrival and departure times.
 \clearpage
 
 \section{Figure Captions}
-\label{sec:orgcf42cb2}
+\label{sec:orgd866b70}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -668,7 +668,57 @@ is of interest to allow flexibility in the arrival and departure times.
 \end{subfigures}
 
 
-\input{sections/vartab}
+\begin{table}[!htpb]
+  \caption{Notation used throughout the paper}
+  \label{tab:variables}
+  \centering
+  \begin{tabularx}{\textwidth}{l l}
+    \toprule
+    \textbf{Variable} & \textbf{Description}                                                                               \\
+    \toprule
+    \multicolumn{2}{l}{Input values}                                                                                       \\
+    $n_B$        & Number of buses                                                                                         \\
+    $M$          & An arbitrary very large upper bound value                                                               \\
+    $n_V$        & Number of total visits                                                                                  \\
+    $n_Q$        & Number of queues                                                                                        \\
+    $n_C$ 	 & Number of chargers                                                                                      \\
+    $\mathbb{V}$ & Set of visit indices, $\mathbb{V} = \{1, ..., n_V\}$                                                    \\
+    $\mathbb{B}$ & Set of bus indices, $\mathbb{B} = \{1, ..., n_B\}$                                                      \\
+    $\mathbb{Q}$          & Set of queue indices, $\mathbb{Q} = \{1, ..., n_Q\}$                                                             \\
+    $i,j$        & Indices used to refer to visits                                                                         \\
+    $b$ 	 & Index used to refer to a bus                                                                            \\
+    $q$ 	 & Index used to refer to a queue                                                                          \\
+    \hline
+    \multicolumn{2}{l}{Problem definition parameters}                                                                      \\
+    $\Gamma$   & $\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ with $\Gamma_i$ used to denote the bus for visit $i$                                   \\
+    $\alpha_i$ & Initial charge percentage time for visit $i$                                                                   \\
+    $\beta_i$ & Final charge percentage for bus $i$ at the end of the time horizon                                             \\
+    $\epsilon_q$ & Cost of using charger $q$ per unit time                                                                        \\
+    $\Upsilon$   & $\Upsilon: \mathbb{V} \rightarrow \mathbb{V}$ mapping a visit to the next visit by the same bus with $\Upsilon_i$ being the shorthand. \\
+    $\kappa_b$ & Battery capacity for bus $b$                                                                                   \\
+    $\Delta_i$ & Discharge of visit over route $i$                                                                              \\
+    $\nu_b$ & Minimum charge allowed for bus $b$                                                                             \\
+    $\tau_i$ & Time visit $i$ must depart the station                                                                         \\
+    $\zeta_b$ & Discharge rate for bus $b$                                                                                     \\
+    $a_i$ & Arrival time of visit  $i$                                                                                     \\
+    $i_0$ & Indices associated with the initial arrival for every bus in $A$                                               \\
+    $i_f$ & Indices associated with the final arrival for every bus in $A$                                                 \\
+    $m_q$ & Cost of a visit being assigned to charger $q$                                                                  \\
+    $r_q$ & Charge rate of charger $q$ per unit time                                                                       \\
+    \hline
+    \multicolumn{2}{l}{Decision Variables}                                                                                 \\
+    $\psi_{ij}$ & Binary variable determining spatial ordering of vehicles $i$ and $j$                                       \\
+    $\eta_i$    & Initial charge for visit $i$                                                                                \\
+    $\sigma{ij}$ & Binary variable determining temporal ordering of vehicles $i$ and $j$                                       \\
+    $d_i$    & Ending charge time for visit $i$                                                                            \\
+    $g_{iq}$ & The charge gain for visit $i$ from charger $q$                                                              \\
+    $s_i$    & Amount of time spent on charger for visit $i$                                                               \\
+    $u_i$    & Starting charge time of visit $i$                                                                           \\
+    $v_i$    & Assigned queue for visit $i$                                                                                \\
+    $w_{iq}$ & Binary assignment variable for visit $i$ to queue $q$                                                       \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
 
 \begin{figure}[htpb]
 \centering

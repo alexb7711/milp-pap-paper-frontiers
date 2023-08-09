@@ -1,3 +1,4 @@
+#+begin_src latex
 \begin{table}[!htpb]
   \caption{Notation used throughout the paper}
   \label{tab:variables}
@@ -49,3 +50,4 @@
     \bottomrule
   \end{tabularx}
 \end{table}
+#+end_src
