@@ -4,7 +4,7 @@
 :END:
 
 This section provides a brief overview of the BAP and a detailed formulation of PAP as presented in
-\cite{qarebagh-2019-optim-sched}.
+[cite:@qarebagh-2019-optim-sched].
 
 ** Overview of BAP
 :PROPERTIES:
@@ -13,11 +13,11 @@ This section provides a brief overview of the BAP and a detailed formulation of 
 
 The BAP is a rectangle packing problem where a set of rectangles, $\mathbb{O}$, are attempted to be optimally placed in
 a larger rectangle, $O$, as shown in \autoref{fig:packexample}. The rectangle packing problem is an NP-hard problem that
-can be used to describe many real life problems \cite{bruin-2013-rectan-packin,murata-1995-rectan}. In some of these
+can be used to describe many real life problems [cite:@bruin-2013-rectan-packin;@murata-1995-rectan]. In some of these
 problems, the dimensions of $\mathbb{O}$ are held constant such as in the problem of packing modules on a chip, where
 the widths and height of the rectangles represent the physical width and heights of the modules
 \cite{murata-1995-rectan}. Other problems, such as the BAP can allow one side of the rectangle to vary depending on its
-assigned position (e.g. the varying lengths of the vessels) \cite{buhrkal-2011-model-discr}.
+assigned position (e.g. the varying lengths of the vessels) [cite:@buhrkal-2011-model-discr].
 
 The BAP solves the problem of optimally assigning incoming vessels to berth positions to be serviced
 (\autoref{subfig:bapexample}). The width and height of $O$ time horizon $T$ and represent the berth length $S$,
@@ -69,7 +69,7 @@ formulation.
 \end{itemize}
 #+end_src
 
-To determine the values for each of these decision variables, a MILP is formulated in \cite{qarebagh-2019-optim-sched}
+To determine the values for each of these decision variables, a MILP is formulated in [cite:@qarebagh-2019-optim-sched]
 and shown here for completeness.
 
 #+begin_src latex
