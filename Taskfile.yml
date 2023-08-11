@@ -87,7 +87,7 @@ tasks:
   pdf:
     desc: "Output {{.TARGET}} PDF."
     cmds:
-      - task: relative-path-bibtex
+      - task: relative-path-bibtex {{.DOC}}.tex
       - |
         ! [ -x "$(epspdf -v)" ] && epspdf logo1.eps || eps2pdf logo1.eps
         mv logo1.pdf logo1-eps-converted-to.pdf
