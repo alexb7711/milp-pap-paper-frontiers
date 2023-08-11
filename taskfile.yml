@@ -80,14 +80,14 @@ tasks:
   relative-path-bibtex:
     desc: "Update the paths in the 'bibtex' command to be relative."
     cmds:
-      - sh scripts/relative-path-bibtex
+      - sh scripts/relative-path-bibtex {{.DOC}}.tex
 
 ##==============================================================================
 #
   pdf:
     desc: "Output {{.TARGET}} PDF."
     cmds:
-      - task: relative-path-bibtex {{.DOC}}.tex
+      - task: relative-path-bibtex
       - |
         ! [ -x "$(epspdf -v)" ] && epspdf logo1.eps || eps2pdf logo1.eps
         mv logo1.pdf logo1-eps-converted-to.pdf
