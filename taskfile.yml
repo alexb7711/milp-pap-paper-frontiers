@@ -80,7 +80,7 @@ tasks:
   relative-path-bibtex:
     desc: "Update the paths in the 'bibtex' command to be relative."
     cmds:
-      - sh scripts/relative-path-bibtex {{.DOC}}.tex
+      - sh scripts/relative-path-bibtex
 
 ##==============================================================================
 #
