@@ -89,7 +89,7 @@ tasks:
     cmds:
       - task: relative-path-bibtex
       - |
-        ! [ -x "$(epspdf -v)" ] && epspdf logo1.eps || eps2pdf logo1.eps
+        epspdf -v>/dev/null 2>&1 && epspdf logo1.eps || eps2pdf logo1.eps
         mv logo1.pdf logo1-eps-converted-to.pdf
         latexmk -f -interaction=nonstopmode \
                    -pdf -pdflatex="pdflatex --shell-escape %O %S" \

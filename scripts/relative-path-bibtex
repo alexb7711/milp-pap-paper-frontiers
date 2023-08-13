@@ -16,5 +16,8 @@ do
     nbib="citation-database/$(basename $s).bib,${nbib}"
 done
 
+# Remove last comma from $nbib
+nbib=${nbib%?}
+
 # Replace the paths
 sed -i "s|bibliography{.*|bibliography{ $nbib }|" $f
