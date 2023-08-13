@@ -8,6 +8,7 @@ env:
   IMG_DIR: ./img
   DOC    : '{{.DOC | default "main"}}'
 
+
 ################################################################################
 # RECIPES
 ################################################################################
@@ -78,11 +79,20 @@ tasks:
 
 ##==============================================================================
 #
+
+  relative-path-bibtex:
+    desc: "Update the paths in the 'bibtex' command to be relative."
+    cmds:
+      - sh scripts/relative-path-bibtex {{.DOC}}.tex
+
+##==============================================================================
+#
   pdf:
     desc: "Output {{.TARGET}} PDF."
     cmds:
+      - task: relative-path-bibtex
       - |
-        ! [ -x "$(epspdf -v)" ] && epspdf logo1.eps || eps2pdf logo1.eps
+        epspdf -v>/dev/null 2>&1 && epspdf logo1.eps || eps2pdf logo1.eps
         mv logo1.pdf logo1-eps-converted-to.pdf
         latexmk -f -interaction=nonstopmode \
                    -pdf -pdflatex="pdflatex --shell-escape %O %S" \
