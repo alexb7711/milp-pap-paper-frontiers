@@ -47,7 +47,6 @@
 
 #+latex_header:%%-------------------------------------------------------------------------------
 #+latex_header:% Experiment parameters
-#+latex_header:% TODO: Ensure these are accurate
 #+latex_header:\newcommand{\A}{35 }                                                            % Number of buses
 #+latex_header:\newcommand{\N}{338 }                                                           % Number of visits
 #+latex_header:\newcommand{\acharge}{0.9}                                                      % BOD charge percentage
@@ -66,8 +65,7 @@
 #+latex_header:%%-------------------------------------------------------------------------------
 #+latex_header:%% Solve output
 #+latex_header:\newcommand{\timeran}{1800 }                                                    % Time ran for MILP [s]
-#+latex_header:%TODO: Update gap
-#+latex_header:\newcommand{\gappercent}{65.2\% }                                               % Gap percent after runtime
+#+latex_header:\newcommand{\gappercent}{65.1058\% }                                            % Gap percent after runtime
 #+latex_header:\newcommand{\processor}{Ryzen 9 }                                               % Processor type
 
 #+latex_header:%%===============================================================================
