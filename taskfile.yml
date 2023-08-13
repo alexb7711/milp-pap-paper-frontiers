@@ -4,9 +4,9 @@ version: '3'
 # ENVIRONTMENT
 ################################################################################
 env:
-  TARGET : a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
+  TARGET : '{{.TARGET | default "a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf"}}'
   IMG_DIR: ./img
-  DOC    : main    																															# Name of main source file
+  DOC    : '{{.DOC | default "main"}}'
 
 ################################################################################
 # RECIPES
@@ -29,6 +29,7 @@ tasks:
       - task: images
       - task: set-version
       - task: pdf
+
 ##==============================================================================
 #
   precheck:
