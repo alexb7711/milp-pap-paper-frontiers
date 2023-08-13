@@ -2,43 +2,42 @@
 :PROPERTIES:
 :custom_id: sec:introduction
 :END:
-#+begin_src latex
 The public transportation system is crucial in any urban area; however, the increased awareness and concern of
 environmental impacts of petroleum based public transportation has driven an effort to reduce the pollutant footprint
-\cite{de-2014-simul-elect, xylia-2018-role-charg, guida-2017-zeeus-repor-europ, li-2016-batter-elect}. Particularly, the
-electrification of public bus transportation via battery power, i.e., battery electric buses (BEBs), has received
-significant attention \cite{li-2016-batter-elect}. Although the technology provides benefits beyond reduction in
+[cite:@de-2014-simul-elect;@xylia-2018-role-charg;@guida-2017-zeeus-repor-europ;@li-2016-batter-elect]. Particularly,
+the electrification of public bus transportation via battery power, i.e., battery electric buses (BEBs), has received
+significant attention [cite:@li-2016-batter-elect]. Although the technology provides benefits beyond reduction in
 emissions, such as lower driving costs, lower maintenance costs, and reduced vehicle noise, battery powered systems
 introduce new challenges such as larger upfront costs, and potentially several hours long ``refueling'' periods
-\cite{xylia-2018-role-charg, li-2016-batter-elect}. Furthermore, the problem is exacerbated by the constraints of the
+[cite:@xylia-2018-role-charg;@li-2016-batter-elect]. Furthermore, the problem is exacerbated by the constraints of the
 transit schedule to which the fleet must adhere, the limited amount of chargers available, and the adverse affects in
-the health of the battery due to fast charging \cite{lutsey-2019-updat-elect}. This paper presents a continuous
+the health of the battery due to fast charging [cite:@lutsey-2019-updat-elect]. This paper presents a continuous
 scheduling framework for a BEB fleet that shares limited fast and slow chargers. This framework takes into consideration
 linear charging dynamics and a fixed bus schedule while meeting a certain battery charge threshold throughout the day.
 
 Many recent efforts have been made to simultaneously solve the problems of route scheduling, and charging fleets and
-determining the infrastructure upon which they rely, e.g., \cite{wei-2018-optim-spatio, sebastiani-2016-evaluat-elect,
-  hoke-2014-accoun-lithium, wang-2017-elect-vehic}. Several simplifications are made to make these problems
+determining the infrastructure upon which they rely, e.g., [cite:@wei-2018-optim-spatio;@sebastiani-2016-evaluat-elect;
+@hoke-2014-accoun-lithium;@wang-2017-elect-vehic]. Several simplifications are made to make these problems
 computationally feasible. These simplifications to the charge scheduling model include utilizing only fast chargers
-while planning \cite{wei-2018-optim-spatio, sebastiani-2016-evaluat-elect, wang-2017-optim-rechar, zhou-2020-bi-objec,
-  yang-2018-charg-sched, wang-2017-elect-vehic, qin-2016-numer-analy,liu-2020-batter-elect}. If slow chargers are used,
-they are only employed at the depot and not the station \cite{he-2020-optim-charg,tang-2019-robus-sched}. Some
+while planning [cite:@wei-2018-optim-spatio;@sebastiani-2016-evaluat-elect;@wang-2017-optim-rechar;@zhou-2020-bi-objec;
+@yang-2018-charg-sched;@wang-2017-elect-vehic;@qin-2016-numer-analy;@liu-2020-batter-elect]. If slow chargers are used,
+they are only employed at the depot and not the station [cite:@he-2020-optim-charg;@tang-2019-robus-sched]. Some
 approaches also simplify by assuming a full charge is always achieved
-\cite{wei-2018-optim-spatio,wang-2017-elect-vehic,zhou-2020-bi-objec,wang-2017-optim-rechar}. Others have assumed that
-the charge received is proportional to the time spent on the charger \cite{liu-2020-batter-elect,yang-2018-charg-sched},
-which can be a valid assumption when the battery state-of-charge (SOC) is below 80\% charge
-\cite{liu-2020-batter-elect}.
+[cite:@wei-2018-optim-spatio;@wang-2017-elect-vehic;@zhou-2020-bi-objec;@wang-2017-optim-rechar]. Others have assumed
+that the charge received is proportional to the time spent on the charger
+[cite:@liu-2020-batter-elect;@yang-2018-charg-sched], which can be a valid assumption when the battery state-of-charge
+(SOC) is below 80% charge [cite:@liu-2020-batter-elect].
 
-This work builds upon the Position Allocation Problem \cite{qarebagh-2019-optim-sched}, a modification of the well
+This work builds upon the Position Allocation Problem [cite:@qarebagh-2019-optim-sched], a modification of the well
 studied Berth Allocation Problem (BAP), as a means to schedule the charging of electric vehicles
-\cite{buhrkal-2011-model-discr,frojan-2015-contin-berth,imai-2001-dynam-berth}. The BAP is a continuous time model that
-solves the problem of allocating space for incoming vessels to be berthed. Each arriving vessel requires both time and
-space to be serviced and thus must be carefully assigned a berthing location \cite{imai-2001-dynam-berth}. Vessels are
-lined up parallel to the berth to be serviced and are horizontally queued as shown in \autoref{subfig:bapexample}. The
-PAP utilizes this notion of queuing for scheduling vehicles to be charged, as shown in \autoref{subfig:papexample}. The
-PAP is formulated as a rectangle packing problem by assuming that vehicle charging will take a fixed amount of time, the
-amount of vehicles that can charge is limited by the physical width of the vehicles, and each vehicle visits the charger
-a single time \cite{qarebagh-2019-optim-sched}.
+[cite:@buhrkal-2011-model-discr;@frojan-2015-contin-berth;@imai-2001-dynam-berth]. The BAP is a continuous time model
+that solves the problem of allocating space for incoming vessels to be berthed. Each arriving vessel requires both time
+and space to be serviced and thus must be carefully assigned a berthing location [cite:@imai-2001-dynam-berth]. Vessels
+are lined up parallel to the berth to be serviced and are horizontally queued as shown in \autoref{subfig:bapexample}.
+The PAP utilizes this notion of queuing for scheduling vehicles to be charged, as shown in \autoref{subfig:papexample}.
+The PAP is formulated as a rectangle packing problem by assuming that vehicle charging will take a fixed amount of time,
+the amount of vehicles that can charge is limited by the physical width of the vehicles, and each vehicle visits the
+charger a single time [cite:@qarebagh-2019-optim-sched].
 
 The main contribution of this work is the extension of the PAP's novel approach to BEB charger scheduling. This includes
 modeling and incorporation of a proportional charging model into the MILP framework, consideration of multiple charger
@@ -48,9 +47,8 @@ selected in such a manner as to minimize the number of fast and slow charger uti
 consumption. The result is a MILP formulation that coordinates charging times and charger type for every visit that each
 bus makes to the station while considering a dynamic charge model and scheduling constraints.
 
-The remainder of the paper proceeds as follows: In \autoref{sec:the-position-allocation-problem}, the PAP is introduced with a
-formulation of the resulting MILP. \autoref{sec:problemformulation} constructs the MILP for BEB scheduling, including
-modifications to the PAP queuing constraints and development of a dynamic charging model. \autoref{sec:example}
-demonstrates an example of using the formulation to coordinate \A buses over \N total visits to the station. The paper
-ends in \autoref{sec:conclusion} with concluding remarks.
-#+end_src
+The remainder of the paper proceeds as follows: In \autoref{sec:the-position-allocation-problem}, the PAP is introduced
+with a formulation of the resulting MILP. \autoref{sec:problemformulation} constructs the MILP for BEB scheduling,
+including modifications to the PAP queuing constraints and development of a dynamic charging model.
+\autoref{sec:example} demonstrates an example of using the formulation to coordinate \A buses over \N total visits to
+the station. The paper ends in \autoref{sec:conclusion} with concluding remarks.

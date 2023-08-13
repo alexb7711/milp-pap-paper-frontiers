@@ -31,7 +31,7 @@ active charger times, particuarly for the fast chargers.
 
 Another heuristic-based optimization strategy, referred to as Quin-Modified, is also employed as a means of comparison
 with the results of the MILP PAP. The Quin-Modified strategies is a based on the threshold strategy of
-\cite{qin-2016-numer-analy}. The strategy has been modified slightly to accommodate the case of multiple charger types
+[cite:@qin-2016-numer-analy]. The strategy has been modified slightly to accommodate the case of multiple charger types
 and without exhaustive search for the best charger type. The heuristic is based on a set of rules that revolve around
 the initial charge of the bus at visit $i$. There are three different thresholds, low (60\%), medium (75\%), and high
 (90\%). Buses below the low threshold are prioritized to fast chargers then are allowed to utilize slow chargers if no
@@ -43,7 +43,7 @@ first.
 
 UTA) bus routing data that occurs over a 24-hour time period. The total number of constraints resulted in \contvars
 continuous and \intvars integer/binary constraints. The optimization was performed using the Gurobi MILP solver
-\cite{gurobi-2021-gurob-optim} on a machine running an AMD Ryzen 9 5900X 12 - Processor (24 core) at 4.95GHz. The solver
+[cite:@gurobi-2021-gurob-optim] on a machine running an AMD Ryzen 9 5900X 12 - Processor (24 core) at 4.95GHz. The solver
 was allowed to run for \timeran seconds and did not converge to the optimal result with a gap \gappercent.
 
 ** Results
