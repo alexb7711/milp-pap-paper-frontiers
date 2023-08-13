@@ -3,7 +3,7 @@ version: '3'
 ################################################################################
 # ENVIRONTMENT
 ################################################################################
-env:
+vars:
   TARGET : '{{.TARGET | default "a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf"}}'
   IMG_DIR: ./img
   DOC    : '{{.DOC | default "main"}}'
