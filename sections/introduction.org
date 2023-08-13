@@ -26,7 +26,7 @@ approaches also simplify by assuming a full charge is always achieved
 [cite:@wei-2018-optim-spatio;@wang-2017-elect-vehic;@zhou-2020-bi-objec;@wang-2017-optim-rechar]. Others have assumed
 that the charge received is proportional to the time spent on the charger
 [cite:@liu-2020-batter-elect;@yang-2018-charg-sched], which can be a valid assumption when the battery state-of-charge
-(SOC) is below 80\% charge [cite:@liu-2020-batter-elect].
+(SOC) is below 80% charge [cite:@liu-2020-batter-elect].
 
 This work builds upon the Position Allocation Problem [cite:@qarebagh-2019-optim-sched], a modification of the well
 studied Berth Allocation Problem (BAP), as a means to schedule the charging of electric vehicles
