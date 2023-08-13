@@ -13,7 +13,7 @@ bib=$(echo $bib | awk -F ',' '{for( i=1; i<=NF; i++ ) print $i}')
 nbib=""
 for s in $bib
 do
-    nbib="citation-database/$(basename $s),${nbib}"
+    nbib="citation-database/$(basename $s).bib,${nbib}"
 done
 
 # Replace the paths
