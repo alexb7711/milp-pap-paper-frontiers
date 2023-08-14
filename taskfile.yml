@@ -4,9 +4,9 @@ version: '3'
 # ENVIRONTMENT
 ################################################################################
 vars:
-  TARGET : '{{.TARGET | default "a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf"}}'
+  TARGET : a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
   IMG_DIR: ./img
-  DOC    : '{{.DOC | default "main"}}'
+  DOC    : main
   SCRIPTS: org-doc-scripts
 
 
@@ -45,6 +45,9 @@ tasks:
     desc: "Make sure that all the dependencies are installed."
     cmds:
       - sh {{.SCRIPTS}}/check-packages
+      - |
+          epspdf -v>/dev/null 2>&1 || ep2pdf -v>/dev/null 2>&1 && \
+          echo "EPS converter installed!" || echo "Warning: no EPS converter installed"
     silent: true
 
 ##==============================================================================
