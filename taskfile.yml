@@ -3,10 +3,11 @@ version: '3'
 ################################################################################
 # ENVIRONTMENT
 ################################################################################
-env:
-  TARGET : a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
+vars:
+  TARGET : '{{.TARGET | default "a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf"}}'
   IMG_DIR: ./img
-  DOC    : main    																															# Name of main source file
+  DOC    : '{{.DOC | default "main"}}'
+
 
 ################################################################################
 # RECIPES
@@ -29,6 +30,7 @@ tasks:
       - task: images
       - task: set-version
       - task: pdf
+
 ##==============================================================================
 #
   precheck:
@@ -60,25 +62,37 @@ tasks:
     silent: true
 
 ##==============================================================================
+# Resources:
+# - https://stackoverflow.com/questions/15559359/insert-line-after-match-using-sed
 #
   set-version:
     desc: "Dynamically sets the version of the document."
     vars:
-      ABSTRACT: tex/abstract.tex
+      ABSTRACT: sections/abstract.tex
       VERSION:
         sh: git describe --tags
     cmds:
       - |
-        sed -i 's/{VERSION}/{{.VERSION}}/' {{.ABSTRACT}}
+        grep {{.VERSION}} {{.ABSTRACT}} > /dev/null || \
+        sed -i 's/\\begin{abstract}/\\begin{abstract}\nVERSION: \\today:{{.VERSION}}\n/' {{.ABSTRACT}}
     silent: true
+
+##==============================================================================
+#
+
+  relative-path-bibtex:
+    desc: "Update the paths in the 'bibtex' command to be relative."
+    cmds:
+      - sh scripts/relative-path-bibtex {{.DOC}}.tex
 
 ##==============================================================================
 #
   pdf:
     desc: "Output {{.TARGET}} PDF."
     cmds:
+      - task: relative-path-bibtex
       - |
-        ! [ -x "$(epspdf -v)" ] && epspdf logo1.eps || eps2pdf logo1.eps
+        epspdf -v>/dev/null 2>&1 && epspdf logo1.eps || eps2pdf logo1.eps
         mv logo1.pdf logo1-eps-converted-to.pdf
         latexmk -f -interaction=nonstopmode \
                    -pdf -pdflatex="pdflatex --shell-escape %O %S" \
@@ -99,5 +113,5 @@ tasks:
           [ ${f##*.} != "tex" ] && rm ${f}
         done
         rm -f {{.TARGET}}
-        latexmk -silent -c {{.DOC_SRC}}
+        latexmk -silent -C {{.DOC_SRC}}
     silent: true
