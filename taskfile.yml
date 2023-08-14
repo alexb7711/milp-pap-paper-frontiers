@@ -76,7 +76,7 @@ tasks:
   set-version:
     desc: "Dynamically sets the version of the document."
     vars:
-      ABSTRACT: sections/abstract.org
+      ABSTRACT: main.tex
       VERSION:
         sh: git describe --tags
     cmds:
