@@ -125,5 +125,5 @@ tasks:
           [ ${f##*.} != "tex" ] && rm -f ${f}
         done
         rm -f {{.TARGET}}
-        latexmk -silent -C {{.DOC_SRC}} {{.TARGET}}
+        latexmk -silent -C {{.DOC_SRC}}
     silent: true
