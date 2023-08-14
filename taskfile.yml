@@ -7,6 +7,7 @@ vars:
   TARGET : '{{.TARGET | default "a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf"}}'
   IMG_DIR: ./img
   DOC    : '{{.DOC | default "main"}}'
+  SCRIPTS: org-doc-scripts
 
 
 ################################################################################
@@ -33,13 +34,17 @@ tasks:
 
 ##==============================================================================
 #
+  min:
+    cmds:
+      - task: images
+      - task: eps-to-pdf
+
+##==============================================================================
+#
   precheck:
     desc: "Make sure that all the dependencies are installed."
     cmds:
-      - |
-        echo "Checking the programs required for the build are installed..."
-        latexmk --version >/dev/null 2>&1 && (echo "latexmk installed!") || (echo "ERROR: latexmk is required."; exit 1)
-        pdflatex --version >/dev/null 2>&1 && (echo "pdflatex installed!") || (echo "ERROR: pdflatex is required."; exit 1)
+      - sh {{.SCRIPTS}}/check-packages
     silent: true
 
 ##==============================================================================
@@ -79,11 +84,20 @@ tasks:
 
 ##==============================================================================
 #
-
   relative-path-bibtex:
     desc: "Update the paths in the 'bibtex' command to be relative."
     cmds:
-      - sh scripts/relative-path-bibtex {{.DOC}}.tex
+      - sh {{.SCRIPTS}}/relative-path-bibtex {{.DOC}}.tex
+
+##==============================================================================
+#
+  eps-to-pdf:
+    desc: "Convert EPS to PDF files required for this paper."
+    cmds:
+      - |
+        epspdf -v>/dev/null 2>&1 && epspdf logo1.eps || eps2pdf logo1.eps
+        mv logo1.pdf logo1-eps-converted-to.pdf
+    silent: true
 
 ##==============================================================================
 #
@@ -91,13 +105,8 @@ tasks:
     desc: "Output {{.TARGET}} PDF."
     cmds:
       - task: relative-path-bibtex
-      - |
-        epspdf -v>/dev/null 2>&1 && epspdf logo1.eps || eps2pdf logo1.eps
-        mv logo1.pdf logo1-eps-converted-to.pdf
-        latexmk -f -interaction=nonstopmode \
-                   -pdf -pdflatex="pdflatex --shell-escape %O %S" \
-                   -bibtex {{.DOC}}.tex
-        [ -f {{.DOC}}.pdf ] && mv main.pdf {{.TARGET}}
+      - task: eps-to-pdf
+      - sh {{.SCRIPTS}}/build-pdf {{.DOC}} {{.TARGET}}
     silent: true
 
 ##==============================================================================
@@ -113,5 +122,5 @@ tasks:
           [ ${f##*.} != "tex" ] && rm ${f}
         done
         rm -f {{.TARGET}}
-        latexmk -silent -C {{.DOC_SRC}}
+        latexmk -silent -C {{.DOC_SRC}} {{.TARGET}}
     silent: true
