@@ -10,12 +10,12 @@ jobs:
     name: "Build PDF"
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: https://github.com/actions/checkout@v3
       with:
         submodules: true
     - run: sudo apt-get update && sudo apt-get install -y texlive-full latexmk
-    - uses: arduino/setup-task@v1
+    - uses: https://github.com/arduino/setup-task@v1
     - run: task clean && task
-    - uses: actions/upload-artifact@v3
+    - uses: https://github.com/actions/upload-artifact@v3
       with:
         path: ./a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
