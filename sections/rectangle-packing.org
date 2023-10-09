@@ -69,9 +69,9 @@ respective routes and each bus must end the day with a specific charge threshold
 
 The charge at the beginning of visit $i$ is denoted as $\eta_i$. As a charge on the bus is dependent upon the visits that
 bus makes to the station, the mapping $\Upsilon: \mathbb{V} \rightarrow \mathbb{V} \bigcup \{\varnothing\}$ is used to determine the next visit
-that corresponds to the same bus, with $\Upsilon_i$ being shorthand notation. Thus, $\Gamma_i$ and $\Gamma_{\Upsilon_i}$ would both map to the
-same bus index as long as $\Upsilon_i$ is not the null element, $\varnothing$. That is, $\Gamma_{\Upsilon_i}$ where $\Upsilon_i = 0$ indicates
-that there are no future visits for bus $i$.
+that corresponds to the same bus, with $\Upsilon_i$ being shorthand notation. Thus, $\Gamma_j$ and $\Gamma_{\Upsilon_i}$, for $\Upsilon_i = j$, would
+both map to the same bus index as long as $\Upsilon_i$ is not the null element, $\varnothing$. That is, $\Gamma_{\Upsilon_i}$ where $\Upsilon_i =
+0$ indicates that there are no future visits for bus $i$.
 
 To drive time spent on the charger, $s_i$, as well as define initial, final, and intermediate bus charges for each visit
 $i$, the sets for initial and final visits must be defined. Let the mapping of the first visit by each bus be denoted as
