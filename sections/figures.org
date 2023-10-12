@@ -46,7 +46,7 @@
 \begin{figure}[htpb]
 \centering
     \includegraphics{img/spatiotemporal-packing}
-    \caption{Example of rectangle packing problem.}
+    \caption{Example of rectangle packing problem. The large square represented by $O$ indicates the canstrained area that the set of shaded rectangles $\mathbb{O}$ must be placed within.}
     \label{fig:packexample}
 \end{figure}
 #+end_src
@@ -57,7 +57,7 @@
 \begin{figure}[ht]
 \centering
     \includegraphics{img/baprep}
-    \caption{The representation of the berth-time space}
+    \caption{The representation of the berth-time space. The x and y-axis represent time and space, respectively. Along the y-axis, the dashed lines represent discrete berthing locations. These locations may be chosen to be continuous. The shaded rectangles represent schedules vessels to serviced. The height of each shaded rectangle represents the space taken on the berth and the width being the time to service said vessel. The vertical dasched lines are associated with vessel D and represent the arrival time, berthing time, sercivce completion time, and departure time. Note that the arrival time may be before the berthing time and the completion time may before the departure time.}
     \label{fig:bap}
 \end{figure}
 #+end_src

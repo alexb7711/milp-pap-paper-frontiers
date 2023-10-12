@@ -7,11 +7,11 @@ Applying the PAP to BEB charging requires four fundamental changes. The first is
 charging is allowed to vary. Thus, $s_i$ becomes a variable of optimization. Second, in the PAP each charging visit is
 assumed to be a different vehicle. For the BEB charging problem, each bus may make multiple visits to the station
 throughout the day and the resulting charge for a bus at a given time is dependent upon each of the prior visits made.
-The third fundamental change is related to the first two. The charge of each bus must be tracked in
-the optimization to ensure that charging across multiple visits is sufficient to allow each bus to execute its route throughout the day.
-The final change in the PAP, the charger is one continuous bar with vehicle width effectively restricting the number of vehicles
-charging simultaneously. For the BEB, it is assumed that a discrete number of chargers exist. Moreover, it is assumed
-that these chargers have different charge rates.
+The third fundamental change is related to the first two. The charge of each bus must be tracked in the optimization to
+ensure that charging across multiple visits is sufficient to allow each bus to execute its route throughout the day. The
+final change in the PAP is associated with the fact that the charger is modeled as one continuous bar. For the BEB, it
+will be assumed that a discrete number of chargers exist. Moreover, it is assumed that these chargers may have different
+charge rates.
 
 The discussion of the four changes are separated into two sections. \autoref{sec:queuing} discusses the changes in the
 spatial-temporal constraint formulation to form a queuing constraint. \autoref{sec:batt_dynamics} then discusses the
@@ -69,9 +69,9 @@ respective routes and each bus must end the day with a specific charge threshold
 
 The charge at the beginning of visit $i$ is denoted as $\eta_i$. As a charge on the bus is dependent upon the visits that
 bus makes to the station, the mapping $\Upsilon: \mathbb{V} \rightarrow \mathbb{V} \bigcup \{\varnothing\}$ is used to determine the next visit
-that corresponds to the same bus, with $\Upsilon_i$ being shorthand notation. Thus, $\Gamma_i$ and $\Gamma_{\Upsilon_i}$ would both map to the
-same bus index as long as $\Upsilon_i$ is not the null element, $\varnothing$. That is, $\Gamma_{\Upsilon_i}$ where $\Upsilon_i = 0$ indicates
-that there are no future visits for bus $i$.
+that corresponds to the same bus, with $\Upsilon_i$ being shorthand notation. Thus, $\Gamma_j$ and $\Gamma_{\Upsilon_i}$, for $\Upsilon_i = j$, would
+both map to the same bus index as long as $\Upsilon_i$ is not the null element, $\varnothing$. That is, $\Gamma_{\Upsilon_i}$ where $\Upsilon_i =
+0$ indicates that there are no future visits for bus $i$.
 
 To drive time spent on the charger, $s_i$, as well as define initial, final, and intermediate bus charges for each visit
 $i$, the sets for initial and final visits must be defined. Let the mapping of the first visit by each bus be denoted as
