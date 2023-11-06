@@ -46,11 +46,11 @@ decision variables. Each type will now be introduced. The following parameters a
 
 #+begin_src latex
 \begin{itemize}
-	\item $S$   : Size of the vehicle
+	\item $L$   : Size of the vehicle
 	\item $T$   : time horizon
 	\item $n_V$ : total number of incoming vehicles
 	\item $s_i$ : charging time for vehicle $i;\; 1 \leq i \leq n_N$
-	\item $s_i$ : width of vehicle $i;\; 1 \leq i \leq n_N$
+	\item $l_i$ : width of vehicle $i;\; 1 \leq i \leq n_N$
 	\item $a_i$ : arrival time of vehicle $i;\; 1 \leq i \leq n_N$
 \end{itemize}
 #+end_src
@@ -83,14 +83,14 @@ Subject to:
 \label{eq:bapconstrs}
 \begin{align}
     u_j - u_i - s_i - (\sigma_{ij} - 1)T \geq 0                  \label{subeq:baptime}          \\
-    v_j - v_i - s_i - (\psi_{ij} - 1)S \geq 0                \label{subeq:bapspace}           \\
+    v_j - v_i - l_i - (\psi_{ij} - 1)L \geq 0                \label{subeq:bapspace}           \\
     \sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1 \label{subeq:bapvalid_pos}     \\
     \sigma_{ij} + \sigma_{ji} \leq 1                              \label{subeq:bapsigma}        \\
     \psi_{ij} + \psi_{ji} \leq 1                              \label{subeq:bapdelta}        \\
     s_i + u_i = d_i                                               \label{subeq:bapdetach}       \\
     a_i \leq u_i \leq (T - s_i)                                   \label{subeq:bapvalid_starts} \\
     \sigma_{ij} \in \{0,1\},\;\psi_{ij} \in \{0,1\}\;           \label{subeq:bapsdspace}      \\
-    v_i \in [0, S ]                                               \label{subeq:bapvspace}
+    v_i \in [0, L ]                                               \label{subeq:bapvspace}
 \end{align}
 \end{subequations}
 #+end_src
