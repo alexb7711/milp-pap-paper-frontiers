@@ -1,0 +1,32 @@
+# Disable table of contents, date, and title create by Org
+#+options: toc:nil author:nil date:nil title:nil
+
+# Enable =FrontiersinHarvard= file class
+#+latex_class: FrontiersinHarvard
+
+# Enable line number
+#+latex_header:\linenumbers                                          % Put line numbers
+
+# Header configuration
+#+latex_header:%%===============================================================================
+#+latex_header:% Authors
+#+latex_header:\def\keyFont{\fontsize{8}{11}\helveticabold }
+#+latex_header:\def\firstAuthorLast{Brown {et~al.}} %use et al only if is more than 1 author
+#+latex_header:\def\Authors{Alexander Brown\,$^{1,*}$, Greg Droge\,$^{1}$, Jacob Gunther\,$^{1}$}
+
+#+latex_header:% Affiliations should be keyed to the author's name with superscript numbers and be listed as follows: Laboratory,
+#+latex_header:% Institute, Department, Organization, City, State abbreviation (USA, Canada, Australia), and Country (without detailed
+#+latex_header:% address information such as city zip codes or street names). If one of the authors has a change of address, list the
+#+latex_header:% new address below the correspondence details using a superscript symbol and use the same symbol to indicate the author
+#+latex_header:% in the author list.
+#+latex_header:\def\Address{$^{1}$Department of Electrical and Computer Engineering, Logan, UT, USA}
+
+#+latex_header:% The Corresponding Author should be marked with an asterisk Provide the exact contact address (this time including
+#+latex_header:% street name and city zip code) and email of the corresponding author
+#+latex_header:\def\corrAuthor{Alexander Brown}
+#+latex_header:\def\corrEmail{A01704744@usu.edu}
+
+#+latex_header:\author[\firstAuthorLast ]{\Authors} %This field will be automatically populated
+#+latex_header:\address{} %This field will be automatically populated
+#+latex_header:\correspondance{} %This field will be automatically populated
+#+latex_header:\extraAuth{}
