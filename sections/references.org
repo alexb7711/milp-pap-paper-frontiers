@@ -1,8 +1,3 @@
 # * References
 #+cite_export: bibtex Frontiers-Harvard
-#+bibliography:citation-database/lit-ref.bib
-#+bibliography:citation-database/lib-ref.bib
 #+print_bibliography:
-
-# \bibliographystyle{Frontiers-Harvard}
-# \bibliography{citation-database/lit-ref.bib, citation-database/lib-ref.bib}

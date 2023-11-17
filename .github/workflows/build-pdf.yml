@@ -13,9 +13,11 @@ jobs:
     - uses: actions/checkout@v3
       with:
         submodules: true
-    - run: sudo apt-get update && sudo apt-get install -y texlive-full latexmk
-    - uses: arduino/setup-task@v1
-    - run: task clean && task
-    - uses: actions/upload-artifact@v3
+    - name: "Update Packages"
+      run: sudo apt-get update && sudo apt-get install -y texlive-full latexmk
+    - name: "Build PDF"
+      run: make clean && make
+    - name: "Upload Artifact"
+      uses: actions/upload-artifact@v3
       with:
         path: ./a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf

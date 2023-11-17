@@ -12,10 +12,12 @@ jobs:
     - uses: actions/checkout@v3
       with:
         submodules: true
-    - run: sudo apt-get update && sudo apt-get install -y texlive-full latexmk
-    - uses: arduino/setup-task@v1
-    - run: task clean && task pipeline
-    - uses: ncipollo/release-action@v1
+    - name: "Update Packages"
+      run: sudo apt-get update && sudo apt-get install -y texlive-full latexmk
+    - name: "Build Release PDF"
+      run: make clean && make pipeline
+    - name: "Create Release"
+      uses: ncipollo/release-action@v1
       with:
         artifacts: "a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf"
         bodyFile: "README.org"
