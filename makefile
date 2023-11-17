@@ -82,8 +82,8 @@ watch:	## Recompile on any update of LaTeX or SVG sources
 		done
 
 ##------------------------------------------------------------------------------
-#
-help:  # http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
+# http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
+help:  ## Auto-generated help menu
 	@grep -P '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 	sort |                                                \
 	awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
@@ -109,6 +109,6 @@ precheck: ## Ensures all the required software is installed
 
 ##------------------------------------------------------------------------------
 #
-%.eps: %.pdf # Convert eps file to PDF
+%.eps: %.pdf ## Convert eps file to PDF
 	@epspdf -v>/dev/null 2>&1 && epspdf $< || eps2pdf $<
 	@mv $< logo1-eps-converted-to.pdf
