@@ -30,7 +30,7 @@ FIGURES_PDF     = $(patsubst %.tex, %.pdf, $(FIGURES_TEX))
 #
 all: precheck images ## Build full thesis (LaTeX + figures)
 	@printf "Generating $(TARGET)...\n"
-	@$(SCRIPTS)/relative-path-bibtex $(DOC_SRC)
+	@bash -e $(SCRIPTS)/relative-path-bibtex $(DOC_SRC)
 	@bash -e $(SCRIPTS)/build-pdf $(basename $(DOC_SRC)) $(TARGET) | \
 	grep "^!" -A20 --color=always || true
 
@@ -38,7 +38,7 @@ all: precheck images ## Build full thesis (LaTeX + figures)
 #
 pipeline: precheck images set-version ## Recipe to be ran when executed from a pipeline
 	@printf "Generating $(TARGET)...\n"
-	@$(SCRIPTS)/relative-path-bibtex $(DOC_SRC)
+	@bash -e $(SCRIPTS)/relative-path-bibtex $(DOC_SRC)
 	@bash -e $(SCRIPTS)/build-pdf $(basename $(DOC_SRC)) $(TARGET) | \
 	grep "^!" -A20 --color=always || true
 
