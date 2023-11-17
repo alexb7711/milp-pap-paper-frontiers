@@ -4,9 +4,9 @@ Problem (PAP). The paper, as the name suggests, is configured to be submitted fo
 contains some significant improvements, as well as vital corrections, to its [[https://github.com/alexb7711/milp-pap][predecessor]].
 
 * Building the Document
-To build the document, it is recommended to have a full \LaTeX implementation. It is also recommended that [[https://taskfile.dev/installation/][go-task]] in
-installed. The user must also have [[https://mg.readthedocs.io/latexmk.html][=latexmk=]] installed. Note that =Taskfile.yml= has checks for dependencies. After the
-dependencies have been installed, the PDF can be built by typing =task= (or =go-task=) in a terminal. The first time the
+To build the document, it is recommended to have a full \LaTeX implementation. It is also recommended that [[https://www.gnu.org/software/make/][make]] is
+installed. The user must also have [[https://mg.readthedocs.io/latexmk.html][=latexmk=]] installed. Note that the makefile has checks for dependencies. After the
+dependencies have been installed, the PDF can be built by typing =make= in a terminal. The first time the
 project is built it will:
 
 - ensure all dependencies have been installed
