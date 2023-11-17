@@ -37,8 +37,6 @@
 \pgfplotsset{compat=1.3, width=\textwidth}
 \graphicspath{ {img} }                                % Paths to find images
 %% Paper configuration
-\linenumbers                                          % Put line numbers
-\setlength{\columnsep}{2cm}                           % Column separation
 \let\ref\autoref                                      % Redifine `\ref` as `\autoref` because lazy
 \let\cite\citep                                       % Redefine `\cite` as `\citep` because lazy
 %%==============================================================================
@@ -50,7 +48,6 @@
 %%===============================================================================
 % Custom Commands
 \newcommand{\TODO}[1]{{\color{green} To do: #1}}                                % For adding notes to paper
-\def\keyFont{\fontsize{8}{11}\helveticabold }
 %%-------------------------------------------------------------------------------
 % Experiment parameters
 \newcommand{\A}{35 }                                                            % Number of buses
@@ -72,6 +69,8 @@
 \newcommand{\timeran}{1800 }                                                    % Time ran for MILP [s]
 \newcommand{\gappercent}{65.1058\% }                                            % Gap percent after runtime
 \newcommand{\processor}{Ryzen 9 }                                               % Processor type
+\linenumbers                                          % Put line numbers
+\setlength{\columnsep}{2cm}                           % Column separation
 %%===============================================================================
 % Authors
 \def\keyFont{\fontsize{8}{11}\helveticabold }
@@ -98,7 +97,7 @@
  pdftitle={},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 29.1 (Org mode 9.6.6)}, 
+ pdfcreator={Emacs 29.1 (Org mode 9.6.6)},
  pdflang={English}}
 \begin{document}
 
