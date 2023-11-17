@@ -17,7 +17,7 @@ IMG     = img
 # FILES
 ##==============================================================================
 DOC_SRC         = main.tex
-TARGET          = $(shell find . -type f -name $(DOC_SRC))
+TARGET          = a-position-allocation-approach-to-the-scheduling-of-beb-charging.pdf
 ALL             = $(shell find . -type f -name "*.org")
 FIGURES_TEX     = $(wildcard img/*tex)
 FIGURES_PDF     = $(patsubst %.tex, %.pdf, $(FIGURES_TEX))
@@ -28,7 +28,10 @@ FIGURES_PDF     = $(patsubst %.tex, %.pdf, $(FIGURES_TEX))
 
 ##------------------------------------------------------------------------------
 #
-all: precheck $(FIGURES_PDF) ## Build full thesis (LaTeX + figures)
+all: precheck $(FIGURES_PDF) logo1.eps ## Build full thesis (LaTeX + figures)
+	@printf "Generating $(TARGET)\n"
+	@bash -e $(SCRIPTS)/build-pdf $(basename $(DOC_SRC)) $(TARGET) | \
+	grep "^!" -A20 --color=always || true
 
 ##------------------------------------------------------------------------------
 #
@@ -75,3 +78,9 @@ precheck: ## Ensures all the required software is installed
 	@epspdf -v>/dev/null 2>&1 || ep2pdf -v>/dev/null 2>&1 && \
 	echo "EPS converter installed!" ||                       \
 	(echo "Warning: no EPS converter installed"; exit 1)
+
+##------------------------------------------------------------------------------
+#
+%.eps: %.pdf # Convert eps file to PDF
+	@epspdf -v>/dev/null 2>&1 && epspdf $< || eps2pdf $<
+	@mv $< logo1-eps-converted-to.pdf
