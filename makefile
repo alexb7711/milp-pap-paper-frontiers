@@ -45,7 +45,7 @@ pipeline: precheck images set-version ## Recipe to be ran when executed from a p
 ##------------------------------------------------------------------------------
 #
 emacs: $(ALL)
-	echo "Hi Emacs, I'm dad."
+	@emacs $(basename $(DOC_SRC)).org --script $(SCRIPTS)/emacs-build-doc.el
 
 ##------------------------------------------------------------------------------
 #
@@ -73,13 +73,11 @@ clean:	## Clean LaTeX and output figure files
 ##------------------------------------------------------------------------------
 #
 watch:	## Recompile on any update of LaTeX or SVG sources
-	@while [ 1 ]; do;                                                                       \
-		printf "=========================  WATCHING =========================\r";       \
-		find . -mmin 0.25 -type f \( -name \*.org -o -name \*.tex\) -exec make emacs\;; \
-		sleep 0.01;                                                                     \
-		make all;                                                                       \
-		echo "\n----------\n";                                                          \
-		done
+	@while [ 1 ]; do                                                                          \
+		printf "=========================  WATCHING =========================\r";         \
+		find . -mmin 0.15 -type f \( -name \*.org -o -name \*.tex \) -exec make -j1 emacs \;; \
+		sleep 5;                                                                          \
+	done
 
 ##------------------------------------------------------------------------------
 # http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
