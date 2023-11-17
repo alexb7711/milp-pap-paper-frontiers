@@ -7,6 +7,9 @@
 # Enable line number
 #+latex_header:\linenumbers                                          % Put line numbers
 
+# Set column separation
+#+latex_header:\setlength{\columnsep}{2cm}                           % Column separation
+
 # Header configuration
 #+latex_header:%%===============================================================================
 #+latex_header:% Authors

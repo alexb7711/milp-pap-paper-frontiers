@@ -25,7 +25,6 @@
 #+latex_header:\graphicspath{ {img} }                                % Paths to find images
 
 #+latex_header:%% Paper configuration
-#+latex_header:\setlength{\columnsep}{2cm}                           % Column separation
 #+latex_header:\let\ref\autoref                                      % Redifine `\ref` as `\autoref` because lazy
 #+latex_header:\let\cite\citep                                       % Redefine `\cite` as `\citep` because lazy
 
