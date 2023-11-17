@@ -3,7 +3,7 @@
 ##==============================================================================
 # CONFIGURATION
 ##==============================================================================
-.PHONY = clean help
+.PHONY = clean help images set-version
 MAKEFLAGS := --jobs=4
 SHELL  = /bin/bash
 
@@ -28,10 +28,35 @@ FIGURES_PDF     = $(patsubst %.tex, %.pdf, $(FIGURES_TEX))
 
 ##------------------------------------------------------------------------------
 #
-all: precheck $(FIGURES_PDF) logo1.eps ## Build full thesis (LaTeX + figures)
-	@printf "Generating $(TARGET)\n"
+all: precheck images ## Build full thesis (LaTeX + figures)
+	@printf "Generating $(TARGET)...\n"
 	@bash -e $(SCRIPTS)/build-pdf $(basename $(DOC_SRC)) $(TARGET) | \
 	grep "^!" -A20 --color=always || true
+
+##------------------------------------------------------------------------------
+#
+pipeline: precheck images set-version ## Recipe to be ran when executed from a pipeline
+	@printf "Generating $(TARGET)...\n"
+	@bash -e $(SCRIPTS)/build-pdf $(basename $(DOC_SRC)) $(TARGET) | \
+	grep "^!" -A20 --color=always || true
+
+##------------------------------------------------------------------------------
+#
+emacs: $(ALL)
+	echo "Hi Emacs, I'm dad."
+
+##------------------------------------------------------------------------------
+#
+images: $(FIGURES_PDF) logo1.eps ## Generate all the images for the project
+
+##------------------------------------------------------------------------------
+# Resources:
+# - https://stackoverflow.com/questions/15559359/insert-line-after-match-using-sed
+#
+set-version: ## Stamp the document with date and git commit hash
+	@$(eval VERSION=$(shell git describe --tags))
+	@grep "$(VERSION)" $(DOC_SRC) > /dev/null || \
+	sed -i 's/\\begin{abstract}/\\begin{abstract}\nVERSION: \\today-$(VERSION)\n/' $(DOC_SRC)
 
 ##------------------------------------------------------------------------------
 #
@@ -46,11 +71,12 @@ clean:	## Clean LaTeX and output figure files
 ##------------------------------------------------------------------------------
 #
 watch:	## Recompile on any update of LaTeX or SVG sources
-	@while [ 1 ]; do;	       \
-		inotifywait $(ALL);    \
-		sleep 0.01;	       \
-		make all;	       \
-		echo "\n----------\n"; \
+	@while [ 1 ]; do;                                                                       \
+		printf "=========================  WATCHING =========================\r";       \
+		find . -mmin 0.25 -type f \( -name \*.org -o -name \*.tex\) -exec make emacs\;; \
+		sleep 0.01;                                                                     \
+		make all;                                                                       \
+		echo "\n----------\n";                                                          \
 		done
 
 ##------------------------------------------------------------------------------
