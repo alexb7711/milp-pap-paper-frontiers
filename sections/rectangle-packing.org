@@ -8,10 +8,9 @@ charging is allowed to vary. Thus, $s_i$ becomes a variable of optimization. Sec
 assumed to be a different vehicle. For the BEB charging problem, each bus may make multiple visits to the station
 throughout the day and the resulting charge for a bus at a given time is dependent upon each of the prior visits made.
 The third fundamental change is related to the first two. The charge of each bus must be tracked in the optimization to
-ensure that charging across multiple visits is sufficient to allow each bus to execute its route throughout the day. The
-final change in the PAP is associated with the fact that the charger is modeled as one continuous bar. For the BEB, it
-will be assumed that a discrete number of chargers exist. Moreover, it is assumed that these chargers may have different
-charge rates.
+ensure that charging across multiple visits is sufficient to allow each bus to execute its route throughout the day.
+Finally, the PAP models the chargers as one continuous bar. For the BEB, it will be assumed that a discrete number of
+chargers exist. Moreover, it is assumed that these chargers may have different charge rates.
 
 The discussion of the four changes are separated into two sections. \autoref{sec:queuing} discusses the changes in the
 spatial-temporal constraint formulation to form a queuing constraint. \autoref{sec:batt_dynamics} then discusses the
@@ -25,7 +24,7 @@ the statement of the full problem in \autoref{sec:BEB_MILP}. The notation is exp
 :END:
 
 \noindent
-The queuing constraints ensure that the busses entering the queues for charging are assigned in a feasible manner as
+The queuing constraints ensure that the buses entering the queues for charging are assigned in a feasible manner as
 they come into the station. There are three sets to differentiate between different entities. $\mathbb{B} = \{1, ...,
 n_B\}$ is the set of bus indices with index $b$ used to denote an individual bus, $\mathbb{Q} = \{1, ..., n_Q\}$ is the set of
 queues with index $q$ used to denote an individual queue, and $\mathbb{V} = \{1, ..., n_V\}$ is a set of visits to the
@@ -34,10 +33,10 @@ index to a bus index with the shorthand $\Gamma_i$ used to refer to the bus inde
 
 Most variables are now defined in terms of a visit. Two separate visits could correspond to different buses or visits by
 the same bus. The PAP spatial variable, $s_i$, is removed and $v_i$ is made to be an integer corresponding to which
-queue visit $i$ will be using. Thus, when $\psi_{ij} = 1$, vehicle $i$ is queued to a charger that has a larger index than
-the charger that vehicle $j$ is queued, i.e., $v_i-v_j \geq 1$. The variable $S$ is likewise replaced with $n_Q$. Note that
-$n_Q = n_B + n_C$, where $n_B$ is the number of busses and $n_C$ is the number of chargers. The rationale for having
-more queues than chargers is to allow buses to sit idle instead of requiring the bus to charge at each visit. The
+queue visit $i$ will be using. Thus, when $\psi_{ij} = 1$, vehicle $i$ is queued to a charger that has a larger index in
+which the charger that vehicle $j$ is queued, i.e., $v_i-v_j \geq 1$. The variable $S$ is likewise replaced with $n_Q$.
+Note that $n_Q = n_B + n_C$, where $n_B$ is the number of buses and $n_C$ is the number of chargers. The rationale for
+having more queues than chargers is to allow buses to sit idle instead of requiring the bus to charge at each visit. The
 modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
 
 #+begin_src latex
@@ -63,30 +62,29 @@ time, $\tau_i$. \autoref{subeq:vspace} defines the integer set of indices for qu
 :custom_id: sec:batt_dynamics
 :END:
 
-Battery dynamic constraints are now introduced to relate busses to visits and guarantee that buses have sufficient time
-to charge. Two constraints are enforced on the bus charge: busses must always have sufficient charge to execute their
+Battery dynamic constraints are now introduced to relate buses to visits and guarantee that buses have sufficient time
+to charge. Two constraints are enforced on the bus charge: buses must always have sufficient charge to execute their
 respective routes and each bus must end the day with a specific charge threshold, preparatory for the next day.
 
 The charge at the beginning of visit $i$ is denoted as $\eta_i$. As a charge on the bus is dependent upon the visits that
 bus makes to the station, the mapping $\Upsilon: \mathbb{V} \rightarrow \mathbb{V} \bigcup \{\varnothing\}$ is used to determine the next visit
 that corresponds to the same bus, with $\Upsilon_i$ being shorthand notation. Thus, $\Gamma_j$ and $\Gamma_{\Upsilon_i}$, for $\Upsilon_i = j$, would
 both map to the same bus index as long as $\Upsilon_i$ is not the null element, $\varnothing$. That is, $\Gamma_{\Upsilon_i}$ where $\Upsilon_i =
-0$ indicates that there are no future visits for bus $i$.
+\varnothing$ indicates that there are no future visits for bus $i$.
 
 To drive time spent on the charger, $s_i$, as well as define initial, final, and intermediate bus charges for each visit
 $i$, the sets for initial and final visits must be defined. Let the mapping of the first visit by each bus be denoted as
-$\Gamma^0_i : \mathbb{B} \rightarrow \mathbb{V}$. The indexed value of $\Gamma^0_i$ represents the index for the first visit of bus $b$ or
-the null element, $\varnothing$. Similarly, let $\Gamma^f_i : \mathbb{B} \rightarrow \mathbb{B}$ contain the indexes for the final
-visit of each bus $b$ or the null element. The initial and final bus charge percentages, $\alpha$ and $\beta$, can then be
-represented by the constraint equations $\eta_{\Gamma^0_i} = \alpha \kappa_{\Gamma^0_i}$ and \(\eta_{\Gamma^f_i} = \beta \kappa_{\Gamma^f_i}\), respectively. The
-intermediate charges must be determined at solve time.
+$\Gamma^0 : \mathbb{B} \rightarrow \Gamma^0_b$. The indexed value of $\Gamma^0_b$ represents the index for the first visit of bus $b$. Similarly,
+let $\Gamma^f : \mathbb{B} \rightarrow \Gamma_b^f$ contain the indexes for the final visit of each bus $b$. The initial and final bus charge
+percentages, $\alpha$ and $\beta$, can then be represented by the constraint equations $\eta_{\Gamma^0} = \alpha \kappa_{\Gamma^0_b}$ and \(\eta_{\Gamma^f} = \beta
+\kappa_{\Gamma^f_b}\), respectively. The intermediate charges must be determined at solve time.
 
 It is assumed that the charge received is proportional to the time spent charging. The charge rate for charger $q$ is
 denoted as $r_q$. Note that a value of $r_q = 0$ corresponds to a queue where no charging occurs. A bus in such a queue
-is simply waiting for the departure time. The queue indices are ordered such that the final $n_B$ queues have $r_q = 0$
-to allow an arbitrary number of buses to sit idle at any given moment in time. The amount of discharge between visits
-$i$ and $\Upsilon_i$, the next visit of the same bus, is denoted as $\Delta_i$. If visit $i$ occurred at charger $q$, the charge of
-the bus coming into visit $\Upsilon_i$ would be $\eta_{\Upsilon_i} = \eta_i + s_i r_q - \Delta_i$.
+is simply waiting at the station for the departure time. The queue indices are ordered such that the final $n_B$ queues
+have $r_q = 0$ to allow an arbitrary number of buses to sit idle at any given moment in time. The amount of discharge
+between visits $i$ and $\Upsilon_i$, the next visit of the same bus, is denoted as $\Delta_i$. If visit $i$ occurred at charger $q$,
+the charge of the bus coming into visit $\Upsilon_i$ would be $\eta_{\Upsilon_i} = \eta_i + s_i r_q - \Delta_i$.
 
 The binary decision variable $w_{iq}$ is introduced to determine whether visit $i$ uses charger $q$. This allows the
 charge of the bus coming into visit $\Upsilon_i$ to be written in summation form as
@@ -95,9 +93,9 @@ charge of the bus coming into visit $\Upsilon_i$ to be written in summation form
 \begin{subequations}
     \label{subeq:pre_next_charge}
 \begin{align}
-    \eta_{\Upsilon_i} = \eta_i + \sum_{q=1}^{n_Q} s_i w_{iq} r_q - \Delta_i  \\
-    \sum_{q=1}^{n_Q} w_{iq} = 1 \\
-    w_{iq} \in \{0,1\}
+    \eta_{\Upsilon_i} = \eta_i + \sum_{q=1}^{n_Q} s_i w_{iq} r_q - \Delta_i \\
+    \sum_{q=1}^{n_Q} w_{iq} = 1                           \\
+    w_{iq} \in \{0,1\}.
 \end{align}
 \end{subequations}
 #+end_src
@@ -106,20 +104,20 @@ The choice of queue for visit $i$, becomes a slack variable and is defined in te
 
 #+begin_src latex
 \begin{equation}
-    v_i = \sum_{q=1}^{n_Q} qw_{iq}
+    v_i = \sum_{q=1}^{n_Q} qw_{iq}.
 \end{equation}
 #+end_src
 
 Maximum and minimum values for the charges are included to ensure that the battery is not overcharged and to guarantee
 sufficient charge for subsequent visits. The upper and lower battery charge bounds for bus $b$ are $\kappa_b$ and $\nu_b \kappa_b$,
-respectively0 $\kappa_b$ is the battery capacity and $\nu_b$ is a percent value. As $\eta_i$ corresponds to the charge at the
+respectively $\kappa_b$ is the battery capacity and $\nu_b$ is a percent value. As $\eta_i$ corresponds to the charge at the
 beginning of the visit, the upper bound constraint must also include the charge received during the visit as follows.
 
 #+begin_src latex
 \begin{subequations}
     \label{subeq:pre_min_max}
 \begin{align}
-    \eta_i + \sum_{q=1}^{n_Q} s_i w_{iq} r_q \leq \kappa_{\Gamma_i}                 \\
+    \eta_i + \sum_{q=1}^{n_Q} s_i w_{iq} r_q \leq \kappa_{\Gamma_i} \\
     \eta_i \geq \nu_{\Gamma_i} \kappa_{\Gamma_i}
 \end{align}
 \end{subequations}
@@ -185,10 +183,10 @@ Subject to the constraints
 \begin{subequations}
                                                      \label{eq:dynconstrs}
 \begin{equation}
-    u_i - u_j - s_j - (\sigma_{ij} - 1)T \geq 0              \label{subeq:m_time}         \\
+    u_j - u_i - s_i - (\sigma_{ij} - 1)T \geq 0              \label{subeq:m_time}         \\
 \end{equation}
 \begin{equation}
-    v_i - v_j - (\psi_{ij} - 1)n_Q \geq 1                  \label{subeq:m_space}        \\
+    v_j - v_i - (\psi_{ij} - 1)n_Q \geq 1                  \label{subeq:m_space}        \\
 \end{equation}
 \begin{equation}
     \sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1            \label{subeq:m_valid_pos}    \\

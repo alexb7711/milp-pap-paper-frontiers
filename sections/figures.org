@@ -102,6 +102,32 @@
 #+end_src
 
 # --------------------------------------------------------------------------------
+# Charger usage count
+#+begin_src latex
+\begin{subfigures}
+    %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    % Fast
+    \begin{figure}[htpb]
+    \centering
+        \includegraphics{img/charger-count-fast}
+        \caption{Number of fast chargers for Quin and MILP PAP.}
+        \label{subfig:fast-charger-usage}
+    \end{figure}
+
+    \hfill
+
+    %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    % Slow
+    \begin{figure}[!ht]
+    \centering
+        \includegraphics{img/charger-count-slow}
+        \caption{Number of slow chargers for Quin and MILP PAP.}
+        \label{subfig:slow-charger-usage}
+    \end{figure}
+\end{subfigures}
+#+end_src
+
+# --------------------------------------------------------------------------------
 # Bus charges
 #+begin_src latex
 \begin{subfigures}
@@ -147,30 +173,4 @@
     \caption{Amount of power consumed by Quin-Modified and MILP schedule over the time horizon.}
     \label{fig:energy-usage}
 \end{figure}
-#+end_src
-
-# --------------------------------------------------------------------------------
-# Charger usage count
-#+begin_src latex
-\begin{subfigures}
-    %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    % Fast
-    \begin{figure}[htpb]
-    \centering
-        \includegraphics{img/charger-count-fast}
-        \caption{Number of fast chargers for Quin and MILP PAP.}
-        \label{subfig:fast-charger-usage}
-    \end{figure}
-
-    \hfill
-
-    %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    % Slow
-    \begin{figure}[!ht]
-    \centering
-        \includegraphics{img/charger-count-slow}
-        \caption{Number of slow chargers for Quin and MILP PAP.}
-        \label{subfig:slow-charger-usage}
-    \end{figure}
-\end{subfigures}
 #+end_src

@@ -75,7 +75,7 @@ clean:	## Clean LaTeX and output figure files
 watch:	## Recompile on any update of LaTeX or SVG sources
 	@while [ 1 ]; do                                                                          \
 		printf "=========================  WATCHING =========================\r";         \
-		find . -mmin 0.15 -type f \( -name \*.org -o -name \*.tex \) -exec make -j1 emacs \;; \
+		find . -mmin 0.10 -type f \( -name \*.org -o -name \*.tex \) -exec make -j1 emacs \;; \
 		sleep 5;                                                                          \
 	done
 
