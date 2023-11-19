@@ -159,7 +159,7 @@
 \begin{figure}[htpb]
 \centering
     \includegraphics{img/power}
-    \caption{Total accumulated energy consumed by the Quin-Modified and MILP schedule throughout the time horizon.}
+    \caption{Amount of power consumed by Quin-Modified and MILP schedule over the time horizon.}
     \label{fig:power-usage}
 \end{figure}
 #+end_src
@@ -170,7 +170,7 @@
 \begin{figure}[htpb]
 \centering
     \includegraphics{img/energy}
-    \caption{Amount of power consumed by Quin-Modified and MILP schedule over the time horizon.}
+    \caption{Total accumulated energy consumed by the Quin-Modified and MILP schedule throughout the time horizon.}
     \label{fig:energy-usage}
 \end{figure}
 #+end_src
