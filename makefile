@@ -80,7 +80,7 @@ watch:	## Recompile on any update of LaTeX or SVG sources
 	done
 
 ##------------------------------------------------------------------------------
-# http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
+# https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 help:  ## Auto-generated help menu
 	@grep -P '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 	sort |                                                \
