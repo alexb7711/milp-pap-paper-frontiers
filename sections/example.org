@@ -6,7 +6,7 @@
 An example will now be presented to demonstrate the utility of the developed MILP charge scheduling technique. A
 description of the scenario is first presented followed a description of an alternative heuristic based planning
 strategy called Quin-Modified which is used as a comparison to the MILP PAP. Results are then presented for each of
-planning strategies are presented, analyzed, and ussed.
+planning strategies are presented, analyzed, and discussed.
 
 ** BEB Scenario
 :PROPERTIES:
@@ -25,9 +25,9 @@ simplicity an average rate is used. $n_C = \fpeval{\fast + \slow}$ chargers are 
 slow charging (\slows KW) and \fast are fast charging (\fasts KW). A technique to minimize chargers will be employed.
 
 To encourage the MILP PAP problem to utilize the fewest number of chargers, the value of $m_q$ in the objective
-function, \autoref{eq:objective}, is $\forall q \in n_Q; m_q = 1000q$. The charge duration scalar, $\epsilon_q$, is defined as
-$\epsilon_q = r_q$ to create a consumption cost term, $g_{iq}\epsilon_q$. This is utilized to also encourage the model to minimize
-active charger times, particularly for the fast chargers.
+function, \autoref{eq:objective}, is $\forall q \in \{1,2,..., n_B \}; m_q = 0$ and $\forall q \in \{n_b + 1, n_b + 2,..., n_Q \}; m_q =
+1000q$. The charge duration scalar, $\epsilon_q$, is defined as $\epsilon_q = r_q$ to create a consumption cost term, $g_{iq}\epsilon_q$.
+This is utilized to also encourage the model to minimize active charger times, particularly for the fast chargers.
 
 Another heuristic-based optimization strategy, referred to as Quin-Modified, is also employed as a means of comparison
 with the results of the MILP PAP. The Quin-Modified strategies is a based on the threshold strategy of
