@@ -1,4 +1,4 @@
-% Created 2023-11-19 Sun 10:21
+% Created 2023-11-20 Mon 10:59
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -526,8 +526,8 @@ To display the capabilities of the model, an example scenario is presented. The 
 \(T=24\) hours, utilizes \(n_B = \A\) buses with \(n_V = \N\) visits to the station divided between the \(n_B\) buses. As stated
 before, the route times are sampled from a set of routes from the UTA. Each bus has \batsize KWh battery that is
 required to stay above \mincharge charge (\fpeval{\batsize * \minchargeD} KWh) to maintain battery health. Each bus is
-assumed to begin the working day with \fpeval{\acharge*100}$\backslash$% charge (\fpeval{\acharge * \batsize} KWh). Additionally,
-each bus is required to end the day with a minimum charge of \fpeval{\bcharge * 100}$\backslash$% (\fpeval{\bcharge * \batsize}
+assumed to begin the working day with \fpeval{\acharge*100}\% charge (\fpeval{\acharge * \batsize} KWh). Additionally,
+each bus is required to end the day with a minimum charge of \fpeval{\bcharge * 100}\% (\fpeval{\bcharge * \batsize}
 KWh). This assumes that overnight charging can account for at least 20\% of the charge. Each bus is assumed to discharge
 at a rate of 30 KW. Note that there are many factors that play a role in the rate of discharge; however, for the sake of
 simplicity an average rate is used. \(n_C = \fpeval{\fast + \slow}\) chargers are utilized where \slow of the chargers are
@@ -542,12 +542,12 @@ Another heuristic-based optimization strategy, referred to as Quin-Modified, is 
 with the results of the MILP PAP. The Quin-Modified strategies is a based on the threshold strategy of
 \cite{qin-2016-numer-analy}. The strategy has been modified slightly to accommodate the case of multiple charger types
 and without exhaustive search for the best charger type. The heuristic is based on a set of rules that revolve around
-the initial charge of the bus at visit \(i\). There are three different thresholds, low (60$\backslash$%), medium (75$\backslash$%), and high
-(90$\backslash$%). Buses below the low threshold are prioritized to fast chargers then are allowed to utilize slow chargers if no
+the initial charge of the bus at visit \(i\). There are three different thresholds, low (85\%), medium (90\%), and high
+(95\%). Buses below the low threshold are prioritized to fast chargers then are allowed to utilize slow chargers if no
 fast chargers are available. Buses between the low and medium threshold prioritize slow chargers first and utilize fast
 chargers only if no slow chargers are available. Buses above the medium threshold and below high will only be assigned
 to slow chargers. Buses above the high threshold will not be charged. Once a bus has been assigned to a charger, it
-remains on the charger for the duration of the time it is at the station, or it reaches 90$\backslash$% charge, whichever comes
+remains on the charger for the duration of the time it is at the station, or it reaches 95\% charge, whichever comes
 first.
 
 UTA bus routing data that occurs over a 24-hour time period. The total number of constraints resulted in \contvars
@@ -566,27 +566,27 @@ time the charger is active. The line connecting points represent the charge sequ
 
 The first observation is in the choice of preferred chargers between the Quin-Modified and MILP scheduler. Looking at
 \autoref{subfig:slow-charger-usage} and \autoref{subfig:fast-charger-usage}, the Quin-Modified schedule uses at most
-four fast chargers and three slow at the same time, whereas the MILP schedule uses at most two fast chargers and four
-slow at the same time. \autoref{subfig:milp-schedule} shows a few outliers for the selected fast chargers. Both the
-Quin-Modified and MILP schedule used the fast chargers in short bursts (\textasciitilde{}0.2-0.5 hours). The main difference lies in the
-utilization strategy of the slow chargers. The Quin-Modified, for the most part, opted for shorter bursts for the slow
-chargers (\textasciitilde{}0.3-0.7 hour), most heavily placed on the first slow charger. The MILP also used these shorter charge times
-on the first slow charger; however, the schedule was able to recognize the bus routes that had longer a duration at the
-station and could choose the lower cost option, slow charging, when available and of lower cost. Although one the MILP's
-objectives is to minimize the amount of chargers used, the Quin-Modified schedule ended up using the same amount of
-total chargers as the MILP. Note the MILP schedule packed the first queue for the fast and slow chargers more
-effectively than the Quin schedule. Although both schedules generated are valid, no comparison of the quality the
-schedule can be made directly from \autoref{subfig:milp-schedule} and \autoref{subfig:quin-schedule}.
+four fast chargers and three slow at the same time, whereas the MILP schedule uses at most one fast charger and seven
+slow at the same time. Both the Quin-Modified and MILP schedule used the fast chargers in short bursts (\textasciitilde{}0.2-0.5 hours).
+The main difference lies in the utilization strategy of the slow chargers. The Quin-Modified, for the most part, opted
+for shorter bursts for the slow chargers (\textasciitilde{}0.3-0.7 hour), most heavily placed on the first slow charger. The MILP also
+used these shorter charge times on the first slow charger; however, the schedule was able to recognize the bus routes
+that had longer a duration at the station and could choose the lower cost option, slow charging, when available and of
+lower cost. Although one the MILP's objectives is to minimize the amount of chargers used, the Quin-Modified schedule
+ended up using the same amount of total chargers as the MILP. Note the MILP schedule packed the first queue for the fast
+and slow chargers more effectively than the Quin schedule. Although both schedules generated are valid, no comparison of
+the quality the schedule can be made directly from \autoref{subfig:milp-schedule} and \autoref{subfig:quin-schedule}.
 
 \autoref{subfig:quin-charge} and \autoref{subfig:milp-charge} depicts the charge for every bus over the time horizon.
 Every vehicle begins at 90\% charge, finishes at \fpeval{\bcharge *100}\% charge in the MILP PAP schedule, and never goes
 below \mincharge in the intermediate arrivals as stated in the constraints \autoref{eq:dynconstrs}. There is no
 guarantee for this in the Quin-Modified strategy which can be seen by some of the bus charges reaching a charge of 0\% as
-well as the distribution of final charges. The only sense of guarantee that the Quin-Modified supplies is its
-predictability within the intermediate visits because of the heuristic nature (i.e. if the BEB charge is within the low
-threshold, a fast charger will be prioritized) whereas MILP places a bus in the queue that ``makes sense'' in respect to
-the larger picture. The MILP PAP does not have an obvious sense of decision-making due to its weighted decisions that
-are affected by the accumulation of decisions made prior.
+well as the distribution of final charges, the minimum being 0\% and the maximum  \fpeval{ trunc(\fpeval{368 /
+\batsize * 100}, 3) }\%. The only sense of guarantee that the Quin-Modified supplies is its predictability within the
+intermediate visits because of the heuristic nature (i.e. if the BEB charge is within the low threshold, a fast charger
+will be prioritized) whereas MILP places a bus in the queue that ``makes sense'' in respect to the larger picture. The
+MILP PAP does not have an obvious sense of decision-making due to its weighted decisions that are affected by the
+accumulation of decisions made prior.
 
 Another important measure for the chargers is to compare the amount of power and energy consumed.
 \autoref{fig:power-usage} depicts the power consumption throughout the time horizon. It can be seen that the
@@ -625,13 +625,13 @@ and utilizing this formulation in a metaheuristic solver. Furthermore, ``fuzzify
 is of interest to allow flexibility in the arrival and departure times.
 
 \bibliographystyle{Frontiers-Harvard}
-\bibliography{/home/alex/Documents/citation-database/lit-ref,/home/alex/Documents/citation-database/lib-ref}
+\bibliography{c:/msys64/home/1556048963C/Documents/citation-database/lit-ref,c:/msys64/home/1556048963C/Documents/citation-database/lib-ref}
 
 \nolinenumbers
 \clearpage
 
 \section{Figure Captions}
-\label{sec:orgb1f3054}
+\label{sec:org0221954}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
