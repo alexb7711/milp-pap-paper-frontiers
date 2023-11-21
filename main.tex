@@ -1,4 +1,4 @@
-% Created 2023-11-20 Mon 10:59
+% Created 2023-11-20 Mon 19:25
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -566,16 +566,16 @@ time the charger is active. The line connecting points represent the charge sequ
 
 The first observation is in the choice of preferred chargers between the Quin-Modified and MILP scheduler. Looking at
 \autoref{subfig:slow-charger-usage} and \autoref{subfig:fast-charger-usage}, the Quin-Modified schedule uses at most
-four fast chargers and three slow at the same time, whereas the MILP schedule uses at most one fast charger and seven
-slow at the same time. Both the Quin-Modified and MILP schedule used the fast chargers in short bursts (\textasciitilde{}0.2-0.5 hours).
-The main difference lies in the utilization strategy of the slow chargers. The Quin-Modified, for the most part, opted
-for shorter bursts for the slow chargers (\textasciitilde{}0.3-0.7 hour), most heavily placed on the first slow charger. The MILP also
-used these shorter charge times on the first slow charger; however, the schedule was able to recognize the bus routes
-that had longer a duration at the station and could choose the lower cost option, slow charging, when available and of
-lower cost. Although one the MILP's objectives is to minimize the amount of chargers used, the Quin-Modified schedule
-ended up using the same amount of total chargers as the MILP. Note the MILP schedule packed the first queue for the fast
-and slow chargers more effectively than the Quin schedule. Although both schedules generated are valid, no comparison of
-the quality the schedule can be made directly from \autoref{subfig:milp-schedule} and \autoref{subfig:quin-schedule}.
+four fast chargers and three slow at the same time, whereas the MILP schedule uses at most one fast charger and six slow
+at the same time. Both the Quin-Modified and MILP schedule used the fast chargers in short bursts (\textasciitilde{}0.2-0.5 hours). The
+main difference lies in the utilization strategy of the slow chargers. The Quin-Modified, for the most part, opted for
+shorter bursts for the slow chargers (\textasciitilde{}0.3-0.7 hour), most heavily placed on the first slow charger. The MILP also used
+these shorter charge times on the first slow charger; however, the schedule was able to recognize the bus routes that
+had longer a duration at the station and could choose the lower cost option, slow charging, when available and of lower
+cost. Although one the MILP's objectives is to minimize the amount of chargers used, the Quin-Modified schedule ended up
+using the same amount of total chargers as the MILP. Note the MILP schedule packed the first queue for the fast and slow
+chargers more effectively than the Quin schedule. Although both schedules generated are valid, no comparison of the
+quality the schedule can be made directly from \autoref{subfig:milp-schedule} and \autoref{subfig:quin-schedule}.
 
 \autoref{subfig:quin-charge} and \autoref{subfig:milp-charge} depicts the charge for every bus over the time horizon.
 Every vehicle begins at 90\% charge, finishes at \fpeval{\bcharge *100}\% charge in the MILP PAP schedule, and never goes
@@ -625,13 +625,13 @@ and utilizing this formulation in a metaheuristic solver. Furthermore, ``fuzzify
 is of interest to allow flexibility in the arrival and departure times.
 
 \bibliographystyle{Frontiers-Harvard}
-\bibliography{c:/msys64/home/1556048963C/Documents/citation-database/lit-ref,c:/msys64/home/1556048963C/Documents/citation-database/lib-ref}
+\bibliography{/home/alex/Documents/citation-database/lit-ref,/home/alex/Documents/citation-database/lib-ref}
 
 \nolinenumbers
 \clearpage
 
 \section{Figure Captions}
-\label{sec:org0221954}
+\label{sec:org6a28a77}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
