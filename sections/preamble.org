@@ -58,7 +58,7 @@
 
 #+latex_header:%%-------------------------------------------------------------------------------
 #+latex_header:%% Solve output
-#+latex_header:\newcommand{\timeran}{3600 }                                                    % Time ran for MILP [s]
+#+latex_header:\newcommand{\timeran}{7200 }                                                    % Time ran for MILP [s]
 #+latex_header:\newcommand{\gappercent}{65.1058\% }                                            % Gap percent after runtime
 #+latex_header:\newcommand{\processor}{Ryzen 9 }                                               % Processor type
 
