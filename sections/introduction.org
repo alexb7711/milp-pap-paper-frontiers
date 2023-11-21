@@ -18,8 +18,8 @@ linear charging dynamics and a fixed bus schedule while meeting a certain batter
 Many recent efforts have been made to simultaneously solve the problems of route scheduling, and charging fleets and
 determining the infrastructure upon which they rely, e.g., [cite:@wei-2018-optim-spatio;@sebastiani-2016-evaluat-elect;
 @hoke-2014-accoun-lithium;@wang-2017-elect-vehic]. Several simplifications are made to make these problems
-computationally feasible. These simplifications to the charge scheduling model include utilizing only fast chargers
-while planning [cite:@wei-2018-optim-spatio;@sebastiani-2016-evaluat-elect;@wang-2017-optim-rechar;@zhou-2020-bi-objec;
+computationally feasible. Simplifications to the charge scheduling model include utilizing only fast chargers while
+planning [cite:@wei-2018-optim-spatio;@sebastiani-2016-evaluat-elect;@wang-2017-optim-rechar;@zhou-2020-bi-objec;
 @yang-2018-charg-sched;@wang-2017-elect-vehic;@qin-2016-numer-analy;@liu-2020-batter-elect]. If slow chargers are used,
 they are only employed at the depot and not the station [cite:@he-2020-optim-charg;@tang-2019-robus-sched]. Some
 approaches also simplify by assuming a full charge is always achieved
@@ -28,8 +28,8 @@ that the charge received is proportional to the time spent on the charger
 [cite:@liu-2020-batter-elect;@yang-2018-charg-sched], which can be a valid assumption when the battery state-of-charge
 (SOC) is below 80% charge [cite:@liu-2020-batter-elect].
 
-This work builds upon the Position Allocation Problem [cite:@qarebagh-2019-optim-sched], a modification of the well
-studied Berth Allocation Problem (BAP), as a means to schedule the charging of electric vehicles
+This work builds upon the Position Allocation Problem (PAP) [cite:@qarebagh-2019-optim-sched], a modification of the
+well studied Berth Allocation Problem (BAP), as a means to schedule the charging of electric vehicles
 [cite:@buhrkal-2011-model-discr;@frojan-2015-contin-berth;@imai-2001-dynam-berth]. The BAP is a continuous time model
 that solves the problem of allocating space for incoming vessels to be berthed. Each arriving vessel requires both time
 and space to be serviced and thus must be carefully assigned a berthing location [cite:@imai-2001-dynam-berth]. Vessels
@@ -40,15 +40,19 @@ the amount of vehicles that can charge is limited by the physical width of the v
 charger a single time [cite:@qarebagh-2019-optim-sched].
 
 The main contribution of this work is the extension of the PAP's novel approach to BEB charger scheduling. This includes
-modeling and incorporation of a proportional charging model into the MILP framework, consideration of multiple charger
-types, and inclusion of the route schedule for each bus. The last contribution is of importance because both the BAP and
-PAP consider each arrival to be unique; thus, a method of tracking buses must be implemented. Input parameters are
-selected in such a manner as to minimize the number of fast and slow charger utilized as well as minimize the power
-consumption. The result is a MILP formulation that coordinates charging times and charger type for every visit that each
-bus makes to the station while considering a dynamic charge model and scheduling constraints.
+the modeling and incorporation of a proportional charging model into the MILP framework, consideration of multiple
+charger types, and inclusion of the route schedule for each bus. The last contribution is of importance because both the
+BAP and PAP consider each arrival to be unique; thus, the tracking of battery charge from one visit to the next must be
+considered. Furthermore, the input parameters for the model can be predefined in such a manner as to minimize the number
+of fast and slow charger utilized as well as minimize the energy consumption. That is, the model will simultaneously
+minimize the number of chargers as well as the total consumed energy. The result is a MILP formulation that coordinates
+charging times and charger type for every visit that each bus makes to the station while considering a dynamic charge
+model and scheduling constraints.
 
 The remainder of the paper proceeds as follows: In \autoref{sec:the-position-allocation-problem}, the PAP is introduced
 with a formulation of the resulting MILP. \autoref{sec:problemformulation} constructs the MILP for BEB scheduling,
 including modifications to the PAP queuing constraints and development of a dynamic charging model.
 \autoref{sec:example} demonstrates an example of using the formulation to coordinate \A buses over \N total visits to
 the station. The paper ends in \autoref{sec:conclusion} with concluding remarks.
+
+#  LocalWords:  MILP PAP's BEB BEBs
