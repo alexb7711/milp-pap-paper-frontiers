@@ -36,7 +36,9 @@ all: precheck images ## Build full thesis (LaTeX + figures)
 
 ##------------------------------------------------------------------------------
 #
-pipeline: precheck images set-version ## Recipe to be ran when executed from a pipeline
+pipeline: precheck images ## Recipe to be ran when executed from a pipeline
+	@printf "Stamping the document...\n"
+	@make set-version
 	@printf "Generating $(TARGET)...\n"
 	@bash -e $(SCRIPTS)/relative-path-bibtex $(DOC_SRC)
 	@bash -e $(SCRIPTS)/build-pdf $(basename $(DOC_SRC)) $(TARGET) | \
