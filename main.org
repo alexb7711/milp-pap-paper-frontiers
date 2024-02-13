@@ -8,10 +8,9 @@
 # ------------------------------------------------------------------------------
 # Title
 #+begin_src latex
-\title{A Position Allocation Approach to the Scheduling of Battery Electric Bus Charging}
-
-\onecolumn
-\firstpage{1}
+  \title{A Position Allocation Approach to the Scheduling of Battery-Electric Bus Charging}
+  \onecolumn
+  \firstpage{1}
 #+end_src
 
 # ------------------------------------------------------------------------------

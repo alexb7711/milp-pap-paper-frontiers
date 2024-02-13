@@ -1,6 +1,6 @@
 #+begin_src latex
   \begin{abstract}
-    Robust charging schedules in a growing market of battery electric bus (BEB) fleets is a critical component to
+    Robust charging schedules in a growing market of battery electric bus (BEB) fleets are a critical component to
     successful adoption. In this paper, a BEB charging scheduling framework that considers spatiotemporal schedule
     constraints, route schedules, fast and slow charging, and battery dynamics is modeled as a mixed integer linear
     program (MILP). The MILP is modeled after the Berth Allocation Problem (BAP) in a modified form known as the Position
