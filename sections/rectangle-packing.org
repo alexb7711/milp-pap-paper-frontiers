@@ -12,10 +12,10 @@ ensure that charging across multiple visits is sufficient to allow each bus to e
 Finally, the PAP models the chargers as one continuous bar. For the BEB, it will be assumed that a discrete number of
 chargers exist. Moreover, it is assumed that these chargers may have different charge rates.
 
-The discussion of the four changes are separated into two sections. \autoref{sec:queuing} discusses the changes in the
+The discussion of the four changes is separated into two sections. \autoref{sec:queuing} discusses the changes in the
 spatial-temporal constraint formulation to form a queuing constraint. \autoref{sec:batt_dynamics} then discusses the
-addition of the bus charge management. This section ends with a brief discussion of a modified objective function and
-the statement of the full problem in \autoref{sec:BEB_MILP}. The notation is explained throughout and summarized in
+addition of bus charge management. This section ends with a brief discussion of a modified objective function and the
+statement of the full problem in \autoref{sec:BEB_MILP}. The notation is explained throughout and summarized in
 \autoref{tab:variables}.
 
 ** Queuing Constraints
@@ -24,7 +24,7 @@ the statement of the full problem in \autoref{sec:BEB_MILP}. The notation is exp
 :END:
 
 \noindent
-The queuing constraints ensure that the buses entering the queues for charging are assigned in a feasible manner as
+The queuing constraints ensure that the buses entering the queues for charging are assigned feasibly as
 they come into the station. There are three sets to differentiate between different entities. $\mathbb{B} = \{1, ...,
 n_B\}$ is the set of bus indices with index $b$ used to denote an individual bus, $\mathbb{Q} = \{1, ..., n_Q\}$ is the set of
 queues with index $q$ used to denote an individual queue, and $\mathbb{V} = \{1, ..., n_V\}$ is a set of visits to the
@@ -67,17 +67,17 @@ to charge. Two constraints are enforced on the bus SOC: buses must always have s
 respective routes and each bus must end the day with a specific charge threshold, preparatory for the next day.
 
 The charge at the beginning of visit $i$ is denoted as $\eta_i$. As a charge on the bus is dependent upon the visits that
-bus makes to the station, the mapping $\Upsilon: \mathbb{V} \rightarrow \mathbb{V} \bigcup \{\varnothing\}$ is used to determine the next visit
-that corresponds to the same bus, with $\Upsilon_i$ being shorthand notation. Thus, $\Gamma_j$ and $\Gamma_{\Upsilon_i}$, for $\Upsilon_i = j$, would
-both map to the same bus index as long as $\Upsilon_i$ is not the null element, $\varnothing$. That is, $\Gamma_{\Upsilon_i}$ where $\Upsilon_i =
-\varnothing$ indicates that there are no future visits for bus $i$.
+the bus makes to the station, the mapping $\Upsilon: \mathbb{V} \rightarrow \mathbb{V} \bigcup \{\varnothing\}$ is used to determine the next
+visit that corresponds to the same bus, with $\Upsilon_i$ being shorthand notation. Thus, $\Gamma_j$ and $\Gamma_{\Upsilon_i}$, for $\Upsilon_i = j$,
+would both map to the same bus index as long as $\Upsilon_i$ is not the null element, $\varnothing$. That is, $\Gamma_{\Upsilon_i}$ where
+$\Upsilon_i = \varnothing$ indicates that there are no future visits for bus $i$.
 
 To drive time spent on the charger, $s_i$, as well as define initial, final, and intermediate bus charges for each visit
 $i$, the sets for initial and final visits must be defined. Let the mapping of the first visit by each bus be denoted as
 $\Gamma^0 : \mathbb{B} \rightarrow \Gamma^0_b$. The indexed value of $\Gamma^0_b$ represents the index for the first visit of bus $b$. Similarly,
 let $\Gamma^f : \mathbb{B} \rightarrow \Gamma_b^f$ contain the indexes for the final visit of each bus $b$. The initial and final bus charge
 percentages, $\alpha$ and $\beta$, can then be represented by the constraint equations $\eta_{\Gamma^0} = \alpha \kappa_{\Gamma^0_b}$ and \(\eta_{\Gamma^f} = \beta
-\kappa_{\Gamma^f_b}\), respectively. The intermediate charges must be determined at solve time.
+\kappa_{\Gamma^f_b}\), respectively. The intermediate charges must be determined during runtime.
 
 It is assumed that the charge received is proportional to the time spent charging. The charge rate for charger $q$ is
 denoted as $r_q$. Note that a value of $r_q = 0$ corresponds to a queue where no charging occurs. A bus in such a queue
