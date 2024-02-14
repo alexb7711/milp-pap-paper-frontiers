@@ -1,0 +1,34 @@
+\documentclass[float=false, crop=true]{standalone}
+
+\usepackage
+{
+    pgfplots,                                                                   % Plot in LaTeX
+    pgfplotstable,
+    xfp,
+}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{automata, positioning, arrows.meta}                             % Tikz macros
+
+\begin{document}
+
+\pgfplotstableread[col sep= comma]{img/data/qm-charge.csv}\chargedataquin
+
+\resizebox{\columnwidth}{4in}{%
+\begin{tikzpicture}
+\pgfplotstablegetcolsof{\chargedataquin}
+\pgfmathtruncatemacro\NumCols{\pgfplotsretval/2-1}
+\begin{axis}[title={Quin Charges},
+             xlabel={Time [hr]},
+             xmin=0, xmax=24,
+             ylabel={Charge [kwh]}]
+        \foreach \i in {0, ..., \NumCols}
+        {
+            \pgfmathsetmacro{\u}{\fpeval{2*\i} + 0}
+            \pgfmathsetmacro{\etas}{\fpeval{2*\i} + 1}
+            \addplot +[mark=none] table[x index=\u, y index =\etas, unbounded coords=jump]{\chargedataquin};
+        }
+\end{axis}
+\end{tikzpicture}%
+}
+
+\end{document}
