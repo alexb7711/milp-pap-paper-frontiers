@@ -47,7 +47,7 @@ decision variables. Each type will now be introduced. The following parameters a
 
 - $L$   : Size of the vehicle
 - $T$   : time horizon
-- $n_V$ : total number of incoming vehicles
+- $n_N$ : total number of incoming vehicles
 - $s_i$ : charging time for vehicle $i;\; 1 \leq i \leq n_N$
 - $l_i$ : width of vehicle $i;\; 1 \leq i \leq n_N$
 - $a_i$ : arrival time of vehicle $i;\; 1 \leq i \leq n_N$
