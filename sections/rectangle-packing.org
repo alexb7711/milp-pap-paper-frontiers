@@ -34,21 +34,20 @@ index to a bus index with the shorthand $\Gamma_i$ used to refer to the bus inde
 Most variables are now defined in terms of a visit. Two separate visits could correspond to different buses or visits by
 the same bus. The PAP spatial variable, $s_i$, is removed and $v_i$ is made to be an integer corresponding to which
 queue visit $i$ will be using. Thus, when $\psi_{ij} = 1$, vehicle $i$ is queued to a charger that has a larger index in
-which the charger that vehicle $j$ is queued, i.e., $v_i-v_j \geq 1$. The variable $S$ is likewise replaced with $n_Q$.
+which the charger that vehicle $j$ is queued, i.e., $v_i-v_j \geq 1$. The variable $L$ is likewise replaced with $n_Q$.
 Note that $n_Q = n_B + n_C$, where $n_B$ is the number of buses and $n_C$ is the number of chargers. The rationale for
-having more queues than chargers is to allow buses to sit idle instead of requiring the bus to charge at each visit. The
-modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
+adding additional idle queues is to allow BEBs to be "set aside" if no additional charge is required. Adding one idle
+queue for each BEB ensures that the constraints will be satisfied if multiple buses sharing overlapping times at the
+station are placed in idle queues. The modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
 
 #+begin_src latex
-\begin{subequations}
-\label{eq:packconstrs}
-\begin{align}
-    v_i - v_j - (\psi_{ij} - 1)n_Q \geq 1       \label{subeq:space}        \\
-    d_i \leq \tau_i                             \label{subeq:valid_depart} \\
-    s_i \geq 0                               \label{subeq:pos_charge} \\
-    v_i \in \mathbb{Q}                       \label{subeq:vspace}
-\end{align}
-\end{subequations}
+  \begin{subequations}
+  \label{eq:packconstrs}
+  \begin{align}
+      v_i - v_j - (\psi_{ij} - 1)n_Q \geq 1 \label{subeq:space} \\ d_i \leq \tau_i \label{subeq:valid_depart} \\ s_i \geq
+      0 \label{subeq:pos_charge} \\ v_i \in \mathbb{Q} \label{subeq:vspace}
+  \end{align}
+  \end{subequations}
 #+end_src
 
 The constraint in \autoref{subeq:space} is nearly identical to \autoref{subeq:bapspace}, but rather than viewing the
