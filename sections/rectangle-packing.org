@@ -163,7 +163,7 @@ g_{iq}$ and $s_i \geq g_{iq}$, forcing $s_i = g_{iq}$ with \autoref{subeq:repgwg
 :PROPERTIES:
 :custom_id: sec:BEB_MILP
 :END:
-The goal of the MILP is to utilize chargers as little as possible to reduce energy costs with the fast charging being
+The goal of the MILP is to utilize chargers as little as possible to reduce energy costs with fast charging being
 penalized more to reduce battery damage. Thus, an assignment cost $m_q$ and usage cost $\epsilon_q$ are associated with each
 charger, $q$. These weights can be adjusted based on charger type or time of day that the visit occurs. The assignment
 term takes the form $w_{iq}m_q$, and the usage term takes the form $g_{iq} \epsilon_q$. The resulting BEB charging problem is

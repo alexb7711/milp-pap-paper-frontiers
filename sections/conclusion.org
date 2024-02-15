@@ -9,7 +9,7 @@ PAP constructed on the BAP to allow the time spent on the charger, $s_i$, to be 
 original PAP required service time, $s_i$, to be given, linear battery dynamics were introduced to drive charging times.
 Additional constraints were also introduced to provide limits for the battery dynamics.
 
-An example for the MILP PAP formulation was then presented and compared to a heuristic based schedule, referred to as
+An example for the MILP PAP formulation was then presented and compared to a heuristic-based schedule, referred to as
 Qin-Modified. The MILP PAP optimization was run for \timeran seconds to a non-optimal solution. The Qin-Modified and
 MILP schedule utilized a similar amount of fast chargers; however, the MILP schedule more heavily used the slow chargers
 to its advantage when the time was available to do so. More importantly, the MILP PAP schedule utilized approximately

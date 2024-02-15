@@ -9,7 +9,7 @@
       \toprule
       \multicolumn{2}{l}{Input values}                                                                                       \\
       $n_B$        & Number of buses                                                                                         \\
-      $M$          & An arbitrary large number                                                               \\
+      $M$          & An arbitrarily large number                                                               \\
       $n_V$        & Number of total visits                                                                                  \\
       $n_Q$        & Number of queues                                                                                        \\
       $n_C$ 	 & Number of chargers                                                                                      \\

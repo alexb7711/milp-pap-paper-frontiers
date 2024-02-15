@@ -7,7 +7,7 @@
     Allocation Problem (PAP). Linear battery dynamics are included to model the charging and discharging of buses while at
     the station and during their routes, respectively. The optimization coordinates BEB charging to ensure that each
     vehicle has sufficient charge. The model also minimizes the total number of chargers utilized and prioritizes slow
-    chargers for battery health. The model validity is demonstrated with a set of routes sampled from Utah Transit
+    chargers for battery health. The model validity is demonstrated with a set of routes sampled from the Utah Transit
     Authority (UTA) for \A buses and \N visits to the charging station. The model is also compared to a heuristic
     algorithm based on charge thresholds referred to as the Qin-Modified method. The results presented show that the slow
     chargers are more readily selected and the charging and spatiotemporal constraints are met while considering the

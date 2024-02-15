@@ -5,9 +5,9 @@
 The public transportation system is crucial in any urban area; however, the increased awareness and concern of the
 environmental impacts of petroleum-based public transportation has driven an effort to reduce the pollutant footprint
 [cite:@de-2014-simul-elect;@xylia-2018-role-charg;@guida-2017-zeeus-repor-europ;@li-2016-batter-elect]. Particularly,
-the electrification of public bus transportation via battery power, i.e., battery electric buses (BEBs), have received
+the electrification of public bus transportation via battery power, i.e., battery-electric buses (BEBs), have received
 significant attention [cite:@li-2016-batter-elect]. Although the technology provides benefits beyond a reduction in
-emissions, such as lower driving costs, lower maintenance costs, and reduced vehicle noise, battery powered systems
+emissions, such as lower driving costs, lower maintenance costs, and reduced vehicle noise, battery-powered systems
 introduce new challenges such as larger upfront costs, and potentially several hours long ``refueling'' periods
 [cite:@xylia-2018-role-charg;@li-2016-batter-elect]. Furthermore, the problem is exacerbated by the constraints of the
 transit schedule to which the fleet must adhere, the limited amount of chargers available, and the adverse effects on
@@ -51,7 +51,7 @@ model and scheduling constraints.
 
 The remainder of the paper proceeds as follows: In \autoref{sec:the-position-allocation-problem}, the PAP is introduced
 with a formulation of the resulting MILP. \autoref{sec:problemformulation} constructs the MILP for BEB scheduling,
-including modifications to the PAP queuing constraints and development of a dynamic charging model.
+including modifications to the PAP queuing constraints and the development of a dynamic charging model.
 \autoref{sec:example} demonstrates an example of using the formulation to coordinate \A buses over \N total visits to
 the station. The paper ends in \autoref{sec:conclusion} with concluding remarks.
 

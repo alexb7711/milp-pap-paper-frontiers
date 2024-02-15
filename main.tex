@@ -1,4 +1,4 @@
-% Created 2024-02-13 Tue 17:48
+% Created 2024-02-14 Wed 19:56
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -115,7 +115,7 @@
   Allocation Problem (PAP). Linear battery dynamics are included to model the charging and discharging of buses while at
   the station and during their routes, respectively. The optimization coordinates BEB charging to ensure that each
   vehicle has sufficient charge. The model also minimizes the total number of chargers utilized and prioritizes slow
-  chargers for battery health. The model validity is demonstrated with a set of routes sampled from Utah Transit
+  chargers for battery health. The model validity is demonstrated with a set of routes sampled from the Utah Transit
   Authority (UTA) for \A buses and \N visits to the charging station. The model is also compared to a heuristic
   algorithm based on charge thresholds referred to as the Qin-Modified method. The results presented show that the slow
   chargers are more readily selected and the charging and spatiotemporal constraints are met while considering the
@@ -130,9 +130,9 @@
 The public transportation system is crucial in any urban area; however, the increased awareness and concern of the
 environmental impacts of petroleum-based public transportation has driven an effort to reduce the pollutant footprint
 \cite{de-2014-simul-elect,xylia-2018-role-charg,guida-2017-zeeus-repor-europ,li-2016-batter-elect}. Particularly,
-the electrification of public bus transportation via battery power, i.e., battery electric buses (BEBs), have received
+the electrification of public bus transportation via battery power, i.e., battery-electric buses (BEBs), have received
 significant attention \cite{li-2016-batter-elect}. Although the technology provides benefits beyond a reduction in
-emissions, such as lower driving costs, lower maintenance costs, and reduced vehicle noise, battery powered systems
+emissions, such as lower driving costs, lower maintenance costs, and reduced vehicle noise, battery-powered systems
 introduce new challenges such as larger upfront costs, and potentially several hours long ``refueling'' periods
 \cite{xylia-2018-role-charg,li-2016-batter-elect}. Furthermore, the problem is exacerbated by the constraints of the
 transit schedule to which the fleet must adhere, the limited amount of chargers available, and the adverse effects on
@@ -174,7 +174,7 @@ model and scheduling constraints.
 
 The remainder of the paper proceeds as follows: In \autoref{sec:the-position-allocation-problem}, the PAP is introduced
 with a formulation of the resulting MILP. \autoref{sec:problemformulation} constructs the MILP for BEB scheduling,
-including modifications to the PAP queuing constraints and development of a dynamic charging model.
+including modifications to the PAP queuing constraints and the development of a dynamic charging model.
 \autoref{sec:example} demonstrates an example of using the formulation to coordinate \A buses over \N total visits to
 the station. The paper ends in \autoref{sec:conclusion} with concluding remarks.
 \section{The Position Allocation Problem}
@@ -423,7 +423,7 @@ g_{iq}\) and \(s_i \geq g_{iq}\), forcing \(s_i = g_{iq}\) with \autoref{subeq:r
 
 \subsection{The BEB Charging Problem}
 \label{sec:BEB_MILP}
-The goal of the MILP is to utilize chargers as little as possible to reduce energy costs with the fast charging being
+The goal of the MILP is to utilize chargers as little as possible to reduce energy costs with fast charging being
 penalized more to reduce battery damage. Thus, an assignment cost \(m_q\) and usage cost \(\epsilon_q\) are associated with each
 charger, \(q\). These weights can be adjusted based on charger type or time of day that the visit occurs. The assignment
 term takes the form \(w_{iq}m_q\), and the usage term takes the form \(g_{iq} \epsilon_q\). The resulting BEB charging problem is
@@ -529,9 +529,9 @@ required to stay above \mincharge charge (\fpeval{\batsize * \minchargeD} KWh) t
 assumed to begin the working day with a \fpeval{\acharge*100}\% charge (\fpeval{\acharge * \batsize} KWh). Additionally,
 each bus is required to end the day with a minimum charge of \fpeval{\bcharge * 100}\% (\fpeval{\bcharge * \batsize}
 KWh). This assumes that overnight charging can account for at least 20\% of the charge. Each bus is assumed to discharge
-at a rate of 30 KW. Note that many factors play a role in the rate of discharge; however, for the sake of
-simplicity an average rate is used. \(n_C = \fpeval{\fast + \slow}\) chargers are utilized where \slow of the chargers are
-slow charging (\slows KW) and \fast are fast charging (\fasts KW). A technique to minimize chargers will be employed.
+at a rate of 30 KW. Note that many factors play a role in the rate of discharge; however, for the sake of simplicity, an
+average rate is used. \(n_C = \fpeval{\fast + \slow}\) chargers are utilized where \slow of the chargers are slow charging
+(\slows KW) and \fast are fast charging (\fasts KW). A technique to minimize chargers will be employed.
 
 To encourage the MILP PAP problem to utilize the fewest number of chargers, the value of \(m_q\) in the objective
 function, \autoref{eq:objective}, is \(\forall q \in \{1,2,..., n_B \}; m_q = 0\) and \(\forall q \in \{n_b + 1, n_b + 2,..., n_Q \}; m_q =
@@ -539,7 +539,7 @@ function, \autoref{eq:objective}, is \(\forall q \in \{1,2,..., n_B \}; m_q = 0\
 This is utilized to also encourage the model to minimize active charger times, particularly for the fast chargers.
 
 Another heuristic-based optimization strategy, referred to as Qin-Modified, is also employed as a means of comparison
-with the results of the MILP PAP. The Qin-Modified strategy is a based on the threshold strategy of
+with the results of the MILP PAP. The Qin-Modified strategy is based on the threshold strategy of
 \cite{qin-2016-numer-analy}. The strategy has been modified slightly to accommodate the case of multiple charger types
 without an exhaustive search for the best charger type. The heuristic is based on a set of rules that revolve around the
 initial charge of the bus at visit \(i\). There are three different thresholds, low (85\%), medium (90\%), and high (95\%).
@@ -560,9 +560,9 @@ solver was allowed to run for \timeran seconds.
 The schedule generated by the Qin-Modified strategy and the MILP PAP is shown in \autoref{subfig:qin-schedule} and
 \autoref{subfig:milp-schedule}, respectively. The x-axis represents the time in hours. The y-axis represents the
 assigned charging queue. Rows between 0 and \fpeval{\slow - 1} are active times for slow chargers, and rows in the range
-of \fpeval{\slow - 1} and \fpeval{\fast + \slow - 1} are active times for fast chargers. The unique color/symbol styled
+of \fpeval{\slow - 1} and \fpeval{\fast + \slow - 1} are active times for fast chargers. The unique color/symbol-styled
 vertices represent the starting charge time for a bus \(b\) with the line to the vertical tick signifying the region of
-time the charger is active. The line connecting points represent the charge sequence for a bus.
+time the charger is active. The lines connecting points represents the charge sequence for each BEB.
 
 The first observation is in the choice of preferred chargers between the Qin-Modified and MILP scheduler. Looking at
 \autoref{subfig:slow-charger-usage} and \autoref{subfig:fast-charger-usage}, the Qin-Modified schedule uses at most four
@@ -571,8 +571,8 @@ the same time. Both the Qin-Modified and MILP schedule used the fast chargers in
 difference lies in the utilization strategy of the slow chargers. The Qin-Modified, for the most part, opted for shorter
 bursts for the slow chargers (\textasciitilde{}0.3-0.7 hours), most heavily placed on the first slow charger. The MILP also used these
 shorter charge times on the first slow charger; however, the schedule was able to recognize the bus routes that had a
-longer a duration at the station and could choose the lower cost option, slow charging, when available and of lower
-cost. Although one the MILP's objectives is to minimize the amount of chargers used, the Qin-Modified schedule ended up
+longer duration at the station and could choose the lower cost option, slow charging, when available and of lower cost.
+Although one of the MILP's objectives is to minimize the amount of chargers used, the Qin-Modified schedule ended up
 using the same amount of total chargers as the MILP. Note the MILP schedule packed the first queue for the fast and slow
 chargers more effectively than the Qin schedule. Although both schedules generated are valid, no comparison of the
 quality of the schedule can be made directly from \autoref{subfig:milp-schedule} and \autoref{subfig:qin-schedule}.
@@ -610,7 +610,7 @@ PAP constructed on the BAP to allow the time spent on the charger, \(s_i\), to b
 original PAP required service time, \(s_i\), to be given, linear battery dynamics were introduced to drive charging times.
 Additional constraints were also introduced to provide limits for the battery dynamics.
 
-An example for the MILP PAP formulation was then presented and compared to a heuristic based schedule, referred to as
+An example for the MILP PAP formulation was then presented and compared to a heuristic-based schedule, referred to as
 Qin-Modified. The MILP PAP optimization was run for \timeran seconds to a non-optimal solution. The Qin-Modified and
 MILP schedule utilized a similar amount of fast chargers; however, the MILP schedule more heavily used the slow chargers
 to its advantage when the time was available to do so. More importantly, the MILP PAP schedule utilized approximately
@@ -624,13 +624,13 @@ and utilizing this formulation in a metaheuristic solver. Furthermore, ``fuzzify
 is of interest to allow flexibility in the arrival and departure times.
 
 \bibliographystyle{Frontiers-Harvard}
-\bibliography{/home/alex/Documents/citation-database/lit-ref,/home/alex/Documents/citation-database/lib-ref}
+\bibliography{ citation-database/lib-ref,citation-database/lit-ref }
 
 \nolinenumbers
 \clearpage
 
 \section{Figure Captions}
-\label{sec:orgec2fc8a}
+\label{sec:org72c42ee}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -667,7 +667,7 @@ is of interest to allow flexibility in the arrival and departure times.
     \toprule
     \multicolumn{2}{l}{Input values}                                                                                       \\
     $n_B$        & Number of buses                                                                                         \\
-    $M$          & An arbitrary large number                                                               \\
+    $M$          & An arbitrarily large number                                                               \\
     $n_V$        & Number of total visits                                                                                  \\
     $n_Q$        & Number of queues                                                                                        \\
     $n_C$ 	 & Number of chargers                                                                                      \\
