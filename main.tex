@@ -1,4 +1,4 @@
-% Created 2024-02-14 Wed 19:56
+% Created 2024-02-14 Wed 20:35
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -194,7 +194,7 @@ assigned position (e.g. the varying lengths of the vessels) \cite{buhrkal-2011-m
 
 The BAP solves the problem of optimally assigning incoming vessels to berth positions to be serviced as shown in
  \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of \(O\) represent the time
- horizon \(T\) and the berth length \(S\), respectively. Similarly, the width and height for \(\mathbb{O}\) represent the time
+ horizon \(T\) and the berth length \(L\), respectively. Similarly, the width and height for \(\mathbb{O}\) represent the time
  spent to service vessel \(i\) and the space taken by docking vessel \(i\), respectively. In the BAP, the vessel
  characteristics (length of the vessel, arrival time, handling time, desired departure time) are assumed to be known for
  all vessels to be serviced. A representation of a BAP solution is shown in \autoref{fig:bap}. The x and y-axis
@@ -210,15 +210,15 @@ The BAP forms the basis of the PAP; however, there are some differences in the w
 the \(i^{th}\) visit, starting service time, \(u_i\), is the starting charge time, the berth location, \(v_i\), is the charger
 queue for assignment, and the service time, \(s_i\), is the elapsed charge time. There are also a few clarifying concepts
 about how the system is modeled. The PAP models the set of chargers as one continuous line; that is, the natural
-behavior of the PAP model is to allow vehicles to be queued anywhere along \([0,S]\). Similarly, the charge times are
+behavior of the PAP model is to allow vehicles to be queued anywhere along \([0,L]\). Similarly, the charge times are
 continuous and can be placed anywhere on the time horizon, \([0,T]\), as long as the allocated times do not interfere with
 other scheduled charge times. The PAP formulation's parameters can be divided into two categories: input parameters and
 decision variables. Each type will now be introduced. The following parameters are constant inputs into the MILP.
 
 \begin{itemize}
-\item \(L\)   : Size of the vehicle
+\item \(L\) : Length of the charger
 \item \(T\)   : time horizon
-\item \(n_V\) : total number of incoming vehicles
+\item \(n_N\) : total number of incoming vehicles
 \item \(s_i\) : charging time for vehicle \(i;\; 1 \leq i \leq n_N\)
 \item \(l_i\) : width of vehicle \(i;\; 1 \leq i \leq n_N\)
 \item \(a_i\) : arrival time of vehicle \(i;\; 1 \leq i \leq n_N\)
@@ -311,18 +311,17 @@ index to a bus index with the shorthand \(\Gamma_i\) used to refer to the bus in
 Most variables are now defined in terms of a visit. Two separate visits could correspond to different buses or visits by
 the same bus. The PAP spatial variable, \(s_i\), is removed and \(v_i\) is made to be an integer corresponding to which
 queue visit \(i\) will be using. Thus, when \(\psi_{ij} = 1\), vehicle \(i\) is queued to a charger that has a larger index in
-which the charger that vehicle \(j\) is queued, i.e., \(v_i-v_j \geq 1\). The variable \(S\) is likewise replaced with \(n_Q\).
+which the charger that vehicle \(j\) is queued, i.e., \(v_i-v_j \geq 1\). The variable \(L\) is likewise replaced with \(n_Q\).
 Note that \(n_Q = n_B + n_C\), where \(n_B\) is the number of buses and \(n_C\) is the number of chargers. The rationale for
-having more queues than chargers is to allow buses to sit idle instead of requiring the bus to charge at each visit. The
-modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
+adding additional idle queues is to allow BEBs to be ``set aside'' if no additional charge is required. Adding one idle
+queue for each BEB ensures that the constraints will be satisfied if multiple buses sharing overlapping times at the
+station are placed in idle queues. The modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
 
 \begin{subequations}
 \label{eq:packconstrs}
 \begin{align}
-    v_i - v_j - (\psi_{ij} - 1)n_Q \geq 1       \label{subeq:space}        \\
-    d_i \leq \tau_i                             \label{subeq:valid_depart} \\
-    s_i \geq 0                               \label{subeq:pos_charge} \\
-    v_i \in \mathbb{Q}                       \label{subeq:vspace}
+    v_i - v_j - (\psi_{ij} - 1)n_Q \geq 1 \label{subeq:space} \\ d_i \leq \tau_i \label{subeq:valid_depart} \\ s_i \geq
+    0 \label{subeq:pos_charge} \\ v_i \in \mathbb{Q} \label{subeq:vspace}
 \end{align}
 \end{subequations}
 
@@ -353,7 +352,7 @@ percentages, \(\alpha\) and \(\beta\), can then be represented by the constraint
 
 It is assumed that the charge received is proportional to the time spent charging. The charge rate for charger \(q\) is
 denoted as \(r_q\). Note that a value of \(r_q = 0\) corresponds to a queue where no charging occurs. A bus in such a queue
-is simply waiting at the station for the departure time. The queue indices are ordered such that the final \(n_B\) queues
+is simply waiting at the station for the departure time. The queue indices are ordered such that the first \(n_B\) queues
 have \(r_q = 0\) to allow an arbitrary number of buses to sit idle at any given moment in time. The amount of discharge
 between visits \(i\) and \(\Upsilon_i\), the next visit of the same bus, is denoted as \(\Delta_i\). If visit \(i\) occurred at charger \(q\),
 the charge of the bus coming into visit \(\Upsilon_i\) would be \(\eta_{\Upsilon_i} = \eta_i + s_i r_q - \Delta_i\).
@@ -534,9 +533,10 @@ average rate is used. \(n_C = \fpeval{\fast + \slow}\) chargers are utilized whe
 (\slows KW) and \fast are fast charging (\fasts KW). A technique to minimize chargers will be employed.
 
 To encourage the MILP PAP problem to utilize the fewest number of chargers, the value of \(m_q\) in the objective
-function, \autoref{eq:objective}, is \(\forall q \in \{1,2,..., n_B \}; m_q = 0\) and \(\forall q \in \{n_b + 1, n_b + 2,..., n_Q \}; m_q =
-1000q\). The charge duration scalar, \(\epsilon_q\), is defined as \(\epsilon_q = r_q\) to create a consumption cost term, \(g_{iq}\epsilon_q\).
-This is utilized to also encourage the model to minimize active charger times, particularly for the fast chargers.
+function, \autoref{eq:objective}, is \(\forall q \in \{1,2,..., n_B \}; m_q = 0\) and \(\forall q \in \{n_B + 1, n_B + 2,..., n_B + n_C \};
+m_q = 1000q\). The charge duration scalar, \(\epsilon_q\), is defined as \(\epsilon_q = r_q\) to create a consumption cost term,
+\(g_{iq}\epsilon_q\). This is utilized to also encourage the model to minimize active charger times, particularly for the fast
+chargers.
 
 Another heuristic-based optimization strategy, referred to as Qin-Modified, is also employed as a means of comparison
 with the results of the MILP PAP. The Qin-Modified strategy is based on the threshold strategy of
@@ -624,13 +624,13 @@ and utilizing this formulation in a metaheuristic solver. Furthermore, ``fuzzify
 is of interest to allow flexibility in the arrival and departure times.
 
 \bibliographystyle{Frontiers-Harvard}
-\bibliography{ citation-database/lib-ref,citation-database/lit-ref }
+\bibliography{/home/alex/Documents/citation-database/lit-ref,/home/alex/Documents/citation-database/lib-ref}
 
 \nolinenumbers
 \clearpage
 
 \section{Figure Captions}
-\label{sec:org72c42ee}
+\label{sec:orgdf94959}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -668,7 +668,7 @@ is of interest to allow flexibility in the arrival and departure times.
     \multicolumn{2}{l}{Input values}                                                                                       \\
     $n_B$        & Number of buses                                                                                         \\
     $M$          & An arbitrarily large number                                                               \\
-    $n_V$        & Number of total visits                                                                                  \\
+    $n_N$        & Number of total visits                                                                                  \\
     $n_Q$        & Number of queues                                                                                        \\
     $n_C$ 	 & Number of chargers                                                                                      \\
     $\mathbb{V}$ & Set of visit indices, $\mathbb{V} = \{1, ..., n_V\}$                                                    \\

@@ -80,7 +80,7 @@ percentages, $\alpha$ and $\beta$, can then be represented by the constraint equ
 
 It is assumed that the charge received is proportional to the time spent charging. The charge rate for charger $q$ is
 denoted as $r_q$. Note that a value of $r_q = 0$ corresponds to a queue where no charging occurs. A bus in such a queue
-is simply waiting at the station for the departure time. The queue indices are ordered such that the final $n_B$ queues
+is simply waiting at the station for the departure time. The queue indices are ordered such that the first $n_B$ queues
 have $r_q = 0$ to allow an arbitrary number of buses to sit idle at any given moment in time. The amount of discharge
 between visits $i$ and $\Upsilon_i$, the next visit of the same bus, is denoted as $\Delta_i$. If visit $i$ occurred at charger $q$,
 the charge of the bus coming into visit $\Upsilon_i$ would be $\eta_{\Upsilon_i} = \eta_i + s_i r_q - \Delta_i$.

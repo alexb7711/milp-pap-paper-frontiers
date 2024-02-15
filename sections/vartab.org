@@ -10,7 +10,7 @@
       \multicolumn{2}{l}{Input values}                                                                                       \\
       $n_B$        & Number of buses                                                                                         \\
       $M$          & An arbitrarily large number                                                               \\
-      $n_V$        & Number of total visits                                                                                  \\
+      $n_N$        & Number of total visits                                                                                  \\
       $n_Q$        & Number of queues                                                                                        \\
       $n_C$ 	 & Number of chargers                                                                                      \\
       $\mathbb{V}$ & Set of visit indices, $\mathbb{V} = \{1, ..., n_V\}$                                                    \\
