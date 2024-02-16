@@ -20,16 +20,16 @@ the widths and height of the rectangles represent the physical width and heights
 assigned position (e.g. the varying lengths of the vessels) [cite:@buhrkal-2011-model-discr].
 
 The BAP solves the problem of optimally assigning incoming vessels to berth positions to be serviced as shown in
- \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of $O$ represent the time
- horizon $T$ and the berth length $L$, respectively. Similarly, the width and height for $\mathbb{O}$ represent the time
- spent to service vessel $i$ and the space taken by docking vessel $i$, respectively. In the BAP, the vessel
- characteristics (length of the vessel, arrival time, handling time, desired departure time) are assumed to be known for
- all vessels to be serviced. A representation of a BAP solution is shown in \autoref{fig:bap}. The x and y-axis
- represent time and space, respectively. The gray squares, labeled A, B, C, and D, represent berthed vessels. The width
- of the boxes represents the time spent being serviced, and the height represents the amount of space the vessel
- requires on the berth. The vertical line adjacent to ``Arrival Time'' represents the actual time that the vessel
- arrives and is available to be berthed. ``Berthing Time'' is the time the vessel is berthed and begins being serviced.
- ``Completion time'' represents the time at which the berthing space becomes available again.
+\autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of $O$ represent the time
+horizon $T$ \hl{[s]} and the berth length \hl{$L$ [m]}, respectively. Similarly, the width and height for $\mathbb{O}$
+represent the time spent to service vessel $i$ and the space taken by docking vessel $i$, respectively. In the BAP, the
+vessel characteristics (length of the vessel, arrival time, handling time, desired departure time) are assumed to be
+known for all vessels. A representation of a BAP solution is shown in \autoref{fig:bap}. The x and y-axis represent
+\hl{time horizon and berthing space}, respectively. The gray squares, labeled A, B, C, and D, represent berthed vessels.
+The width of the boxes represents the time spent being serviced, and the height represents the amount of space the
+vessel requires on the berth. The vertical line adjacent to ``Arrival Time'' represents the actual time that the vessel
+arrives and is available to be berthed. ``Berthing Time'' is the time the vessel is berthed and begins being serviced.
+``Completion time'' represents the time at which the berthing space becomes available again.
 
 ** The PAP Formulation
 :PROPERTIES:
@@ -37,33 +37,45 @@ The BAP solves the problem of optimally assigning incoming vessels to berth posi
 :END:
 
 The BAP forms the basis of the PAP; however, there are some differences in the way the variables are interpreted. For
-the $i^{th}$ visit, starting service time, $u_i$, is the starting charge time, the berth location, $v_i$, is the charger
-queue for assignment, and the service time, $s_i$, is the elapsed charge time. There are also a few clarifying concepts
-about how the system is modeled. The PAP models the set of chargers as one continuous line; that is, the natural
-behavior of the PAP model is to allow vehicles to be queued anywhere along $[0,L]$. Similarly, the charge times are
-continuous and can be placed anywhere on the time horizon, $[0,T]$, as long as the allocated times do not interfere with
-other scheduled charge times. The PAP formulation's parameters can be divided into two categories: input parameters and
-decision variables. Each type will now be introduced. The following parameters are constant inputs into the MILP.
+the $i^{th}$ visit, starting service time, $u_i$ \hl{[s]}, is the starting charge time, the berth location,
+src_latex{\hl{$v_i \in \mathbb{B}$}}, is the charger queue for assignment, and the service time, $s_i$ \hl{[s]}, is the
+elapsed charge time. There are also a few clarifying concepts about how the system is modeled. The PAP models the set of
+chargers as one continuous line; that is, the natural behavior of the PAP model is to allow vehicles to be queued
+anywhere along \hl{$[0,L]$}. Similarly, the charge times are continuous and can be placed anywhere on the time horizon,
+$[0,T]$, as long as the allocated times do not interfere with other scheduled charge times.
 
-- $L$ : Length of the charger
-- $T$   : time horizon
-- $n_N$ : total number of incoming vehicles
-- $s_i$ : charging time for vehicle $i;\; 1 \leq i \leq n_N$
-- $l_i$ : width of vehicle $i;\; 1 \leq i \leq n_N$
-- $a_i$ : arrival time of vehicle $i;\; 1 \leq i \leq n_N$
+The PAP formulation's parameters can be divided into two categories: input parameters and decision variables. Each type
+will now be introduced. The following parameters are constant inputs into the MILP. src_latex{\hl{$L$ [m] defines the
+length of the charger. $T$ [s] is the time horizon. $n_V$ represents the total number of vists to the station over the
+time horizon $T$. $s_i$ [s] is the charging time for vehicle $i$. $l_i$ [m] represents the width of vehicle $i$. $a_i$
+[s] is the arrival time for the for vehicle $i$.}}
 
-These constants define the problem bounds. The following list provides a series of decision variables used in the
-formulation.
+src_latex{\hl{The decision variables provide the means by which the solver may optimize the problem. $u_i$ [s] and $d_i$
+[s] are the initial and final charge times for vehicle $i$, respectively. $v_i$ [m] is the starting position on the
+charger for visit $i$, $[0,L]$. The temporal ordering of vehicles $i$ and $j$ is determined by $\sigma_{ij} \in \{0, 1\}$; i.e.
+$\sigma_{ij} = 1 \implies$ $i$ arrives before $j$, $1 \le i,j \le n_V$. Similarly, $\psi_{ij} \in \{0, 1\}$ determines the relative
+position of vehicles $i$ and $j$ when charging simultaneously; i.e. $\psi_{ij} = 1 \implies v_i < v_j$, where $1 \le i,j \le
+n_V$.}}
 
-- $u_i$    : starting charge time for vehicle $i;\; 1 \leq i \leq n_N$
-- $v_i$    : assigned charge queue for vehicle $i;\; 1 \leq i \leq n_N$
-- $d_i$    : departure time for vehicle $i;\; 1 \leq i \leq n_N$
-- $\sigma_{ij}$ : determines the ordering of vehicles $i$ and $j$ in time; i.e. $\sigma_{ij} = 1 \implies$ $i$ arrives before $j$
-- $\psi_{ij}$ : determines the relative position of vehicles $i$ and $j$ when charging simultaneously; i.e. $\psi_{ij} = 1
-  \implies$ $i$ to the left of $j$
+#+begin_comment
+- \hl{$L$ [m] : Length of the charger} - $T$ \hl{[s]} : time horizon
+- \hl{$n_V$ : total number of incoming vehicles}
+- $s_i$ \hl{[s]} : charging time for vehicle $i;\; 1 \leq i \leq n_V$
+- $l_i$ \hl{[m]} : width of vehicle $i;\; 1 \leq i \leq n_V$
+- $a_i$ \hl{[s]} : arrival time of vehicle $i;\; 1 \leq i \leq n_V$
 
-To determine the values for each of these decision variables, a MILP is formulated in [cite:@qarebagh-2019-optim-sched]
-and shown here for completeness.
+
+- $u_i$ \hl{[s]} : starting charge time for vehicle $i;\; 1 \leq i \leq n_V$
+- src_latex{\hl{$v_i \in \mathbb{B}$}} : assigned charge queue for vehicle $i;\; 1 \leq i \leq n_V$
+- $d_i$ \hl{[s]} : departure time for vehicle $i;\; 1 \leq i \leq n_V$
+- src_latex{\hl{ $\sigma_{ij} \in \{0, 1\}$ }}: determines the ordering of vehicles $i$ and $j$ in time; i.e. $\sigma_{ij} = 1
+  \implies$ $i$ arrives before $j$, \hl{where $1 \le i,j \le n_V$ }
+- src_latex{\hl{ $\psi_{ij} \in \{0, 1\}$ }} : determines the relative position of vehicles $i$ and $j$ when charging
+  simultaneously; i.e. $\psi_{ij} = 1 \implies$ $i$ to the left of $j$, \hl{where $1 \le i,j \le n_V$ }
+#+end_comment
+
+To determine the values for each of these decision variables, a MILP \hl{was} formulated in
+[cite:@qarebagh-2019-optim-sched]. \hl{The formulation is shown in its entirety for completeness.}
 
 #+begin_src latex
 \begin{equation}
@@ -90,19 +102,19 @@ Subject to:
 #+end_src
 
 \noindent
-
-The objective function, \autoref{eq:bapobjective}, minimizes the time spent to service each vehicle by minimizing the
-sum of differences between the departure time, $d_i$, and arrival time, $a_i$. i.e., It seeks to get each vehicle
-charged and on its way as quickly as possible.
+The objective function, \autoref{eq:bapobjective}, \hl{minimizes the idle and service time for each vehicle} by
+minimizing the sum of differences between the departure time, $d_i$, and arrival time, $a_i$. src_latex{\hl{In other
+words, the objective function is searching for the schedule that removes each vehicle from the service queue as quickly
+as possible.}}
 
 \autoref{subeq:baptime}-\autoref{subeq:bapdelta} are used to ensure that individual rectangles do not overlap. For the
-PAP, they ensure that two vehicles charging simultaneously are at different positions and, similarly, two vehicles that
-have overlapping positions that do not overlap temporally. \autoref{subeq:baptime} establishes temporal ordering when
-active ($\sigma_{ij}=1$). Similarly, \autoref{subeq:bapspace} establishes spatial ordering when active ($\psi_{ij} =1$).
-Constraints \autoref{subeq:bapvalid_pos}-\autoref{subeq:bapdelta} enforces that spatial and/or temporal ordering is
-established between each possible queue/vehicle pair. Constraints \autoref{subeq:bapsigma} and \autoref{subeq:bapdelta}
-enforce consistency. For example, \autoref{subeq:bapsigma} enforces that vehicle $i$ cannot come before vehicle $j$ and
-vehicle $j$ simultaneously come before vehicle $i$.
+PAP, \hl{that enforces} that two vehicles charging simultaneously are at different positions. src_latex{\hl{Similarly,
+it also ensures that}} two vehicles that have overlapping positions do not overlap temporally. \autoref{subeq:baptime}
+establishes temporal ordering when active ($\sigma_{ij}=1$). Similarly, \autoref{subeq:bapspace} establishes spatial ordering
+when active ($\psi_{ij} =1$). Constraints \autoref{subeq:bapvalid_pos}-\autoref{subeq:bapdelta} enforces that spatial
+and/or temporal ordering is established between each possible queue/vehicle pair. Constraints \autoref{subeq:bapsigma}
+and \autoref{subeq:bapdelta} enforce consistency. For example, \autoref{subeq:bapsigma} enforces that vehicle $i$ cannot
+come before vehicle $j$ and vehicle $j$ simultaneously come before vehicle $i$.
 
 The last constraints force relationships between arrival time, charge start time, and departure time.
 \autoref{subeq:bapdetach} states that the service start time, $u_i$, plus the time to service vehicle $i$, $s_i$, must
@@ -111,4 +123,4 @@ equal to the service start time, $u_i$, which in turn must be less than or equal
 begin to be serviced to stay within the time horizon. \autoref{subeq:bapsdspace} ensures that $\sigma_{ij}$ and
 $\psi_{ij}$ are binary. \autoref{subeq:bapvspace} ensures that the assigned value of $v_i$ is a valid charging position.
 
-#  LocalWords:  MILP
+#  LocalWords: MILP

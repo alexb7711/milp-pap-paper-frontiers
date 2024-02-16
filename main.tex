@@ -1,4 +1,4 @@
-% Created 2024-02-14 Wed 20:35
+% Created 2024-02-15 Thu 19:16
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -26,6 +26,7 @@
 \usepackage{pgfplots}                                 % Plot in LaTeX
 \usepackage{subcaption}                               % Subfigures (Get rid of this)
 \usepackage{subfloat}                                 % Subfigures
+\usepackage{soul}                                     % Text highlighting
 \usepackage{tabularx}                                 % Add more contol to tables
 \usepackage{tikz}                                     % Generate figures in LaTeX
 \usepackage{xcolor}                                   % Colors
@@ -193,51 +194,34 @@ the widths and height of the rectangles represent the physical width and heights
 assigned position (e.g. the varying lengths of the vessels) \cite{buhrkal-2011-model-discr}.
 
 The BAP solves the problem of optimally assigning incoming vessels to berth positions to be serviced as shown in
- \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of \(O\) represent the time
- horizon \(T\) and the berth length \(L\), respectively. Similarly, the width and height for \(\mathbb{O}\) represent the time
- spent to service vessel \(i\) and the space taken by docking vessel \(i\), respectively. In the BAP, the vessel
- characteristics (length of the vessel, arrival time, handling time, desired departure time) are assumed to be known for
- all vessels to be serviced. A representation of a BAP solution is shown in \autoref{fig:bap}. The x and y-axis
- represent time and space, respectively. The gray squares, labeled A, B, C, and D, represent berthed vessels. The width
- of the boxes represents the time spent being serviced, and the height represents the amount of space the vessel
- requires on the berth. The vertical line adjacent to ``Arrival Time'' represents the actual time that the vessel
- arrives and is available to be berthed. ``Berthing Time'' is the time the vessel is berthed and begins being serviced.
- ``Completion time'' represents the time at which the berthing space becomes available again.
+\autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of \(O\) represent the time
+horizon \(T\) \hl{[s]} and the berth length \hl{$L$ [m]}, respectively. Similarly, the width and height for \(\mathbb{O}\)
+represent the time spent to service vessel \(i\) and the space taken by docking vessel \(i\), respectively. In the BAP, the
+vessel characteristics (length of the vessel, arrival time, handling time, desired departure time) are assumed to be
+known for all vessels. A representation of a BAP solution is shown in \autoref{fig:bap}. The x and y-axis represent
+\hl{time horizon and berthing space}, respectively. The gray squares, labeled A, B, C, and D, represent berthed vessels.
+The width of the boxes represents the time spent being serviced, and the height represents the amount of space the
+vessel requires on the berth. The vertical line adjacent to ``Arrival Time'' represents the actual time that the vessel
+arrives and is available to be berthed. ``Berthing Time'' is the time the vessel is berthed and begins being serviced.
+``Completion time'' represents the time at which the berthing space becomes available again.
 
 \subsection{The PAP Formulation}
 \label{sec:the-pap-formulation}
 The BAP forms the basis of the PAP; however, there are some differences in the way the variables are interpreted. For
-the \(i^{th}\) visit, starting service time, \(u_i\), is the starting charge time, the berth location, \(v_i\), is the charger
-queue for assignment, and the service time, \(s_i\), is the elapsed charge time. There are also a few clarifying concepts
-about how the system is modeled. The PAP models the set of chargers as one continuous line; that is, the natural
-behavior of the PAP model is to allow vehicles to be queued anywhere along \([0,L]\). Similarly, the charge times are
-continuous and can be placed anywhere on the time horizon, \([0,T]\), as long as the allocated times do not interfere with
-other scheduled charge times. The PAP formulation's parameters can be divided into two categories: input parameters and
-decision variables. Each type will now be introduced. The following parameters are constant inputs into the MILP.
+the \(i^{th}\) visit, starting service time, \(u_i\) \hl{[s]}, is the starting charge time, the berth location,
+\hl{$v_i \in \mathbb{B}$}, is the charger queue for assignment, and the service time, \(s_i\) \hl{[s]}, is the
+elapsed charge time. There are also a few clarifying concepts about how the system is modeled. The PAP models the set of
+chargers as one continuous line; that is, the natural behavior of the PAP model is to allow vehicles to be queued
+anywhere along \hl{$[0,L]$}. Similarly, the charge times are continuous and can be placed anywhere on the time horizon,
+\([0,T]\), as long as the allocated times do not interfere with other scheduled charge times.
 
-\begin{itemize}
-\item \(L\) : Length of the charger
-\item \(T\)   : time horizon
-\item \(n_N\) : total number of incoming vehicles
-\item \(s_i\) : charging time for vehicle \(i;\; 1 \leq i \leq n_N\)
-\item \(l_i\) : width of vehicle \(i;\; 1 \leq i \leq n_N\)
-\item \(a_i\) : arrival time of vehicle \(i;\; 1 \leq i \leq n_N\)
-\end{itemize}
+The PAP formulation's parameters can be divided into two categories: input parameters and decision variables. Each type
+will now be introduced. The following parameters are constant inputs into the MILP. \hl{$L$ [m] defines the length of the charger. $T$ [s] is the time horizon. $n_V$ represents the total number of vists to the station over the time horizon $T$. $s_i$ [s] is the charging time for vehicle $i$. $l_i$ [m] represents the width of vehicle $i$. $a_i$ [s] is the arrival time for the for vehicle $i$.}
 
-These constants define the problem bounds. The following list provides a series of decision variables used in the
-formulation.
+\hl{The decision variables provide the means by which the solver may optimize the problem. $u_i$ [s] and $d_i$ [s] are the initial and final charge times for vehicle $i$, respectively. $v_i$ [m] is the starting position on the charger for visit $i$, $[0,L]$. The temporal ordering of vehicles $i$ and $j$ is determined by $\sigma_{ij} \in \{0, 1\}$; i.e. $\sigma_{ij} = 1 \implies$ $i$ arrives before $j$, $1 \le i,j \le n_V$. Similarly, $\psi_{ij} \in \{0, 1\}$ determines the relative position of vehicles $i$ and $j$ when charging simultaneously; i.e. $\psi_{ij} = 1 \implies v_i < v_j$, where $1 \le i,j \le n_V$.}
 
-\begin{itemize}
-\item \(u_i\)    : starting charge time for vehicle \(i;\; 1 \leq i \leq n_N\)
-\item \(v_i\)    : assigned charge queue for vehicle \(i;\; 1 \leq i \leq n_N\)
-\item \(d_i\)    : departure time for vehicle \(i;\; 1 \leq i \leq n_N\)
-\item \(\sigma_{ij}\) : determines the ordering of vehicles \(i\) and \(j\) in time; i.e. \(\sigma_{ij} = 1 \implies\) \(i\) arrives before \(j\)
-\item \(\psi_{ij}\) : determines the relative position of vehicles \(i\) and \(j\) when charging simultaneously; i.e. \(\psi_{ij} = 1
-  \implies\) \(i\) to the left of \(j\)
-\end{itemize}
-
-To determine the values for each of these decision variables, a MILP is formulated in \cite{qarebagh-2019-optim-sched}
-and shown here for completeness.
+To determine the values for each of these decision variables, a MILP \hl{was} formulated in
+\cite{qarebagh-2019-optim-sched}. \hl{The formulation is shown in its entirety for completeness.}
 
 \begin{equation}
 	\label{eq:bapobjective}
@@ -261,19 +245,16 @@ Subject to:
 \end{subequations}
 
 \noindent
-
-The objective function, \autoref{eq:bapobjective}, minimizes the time spent to service each vehicle by minimizing the
-sum of differences between the departure time, \(d_i\), and arrival time, \(a_i\). i.e., It seeks to get each vehicle
-charged and on its way as quickly as possible.
+The objective function, \autoref{eq:bapobjective}, \hl{minimizes the idle and service time for each vehicle} by
+minimizing the sum of differences between the departure time, \(d_i\), and arrival time, \(a_i\). \hl{In other words, the objective function is searching for the schedule that removes each vehicle from the service queue as quickly as possible.}
 
 \autoref{subeq:baptime}-\autoref{subeq:bapdelta} are used to ensure that individual rectangles do not overlap. For the
-PAP, they ensure that two vehicles charging simultaneously are at different positions and, similarly, two vehicles that
-have overlapping positions that do not overlap temporally. \autoref{subeq:baptime} establishes temporal ordering when
-active (\(\sigma_{ij}=1\)). Similarly, \autoref{subeq:bapspace} establishes spatial ordering when active (\(\psi_{ij} =1\)).
-Constraints \autoref{subeq:bapvalid_pos}-\autoref{subeq:bapdelta} enforces that spatial and/or temporal ordering is
-established between each possible queue/vehicle pair. Constraints \autoref{subeq:bapsigma} and \autoref{subeq:bapdelta}
-enforce consistency. For example, \autoref{subeq:bapsigma} enforces that vehicle \(i\) cannot come before vehicle \(j\) and
-vehicle \(j\) simultaneously come before vehicle \(i\).
+PAP, \hl{that enforces} that two vehicles charging simultaneously are at different positions. \hl{Similarly, it also ensures that} two vehicles that have overlapping positions do not overlap temporally. \autoref{subeq:baptime}
+establishes temporal ordering when active (\(\sigma_{ij}=1\)). Similarly, \autoref{subeq:bapspace} establishes spatial ordering
+when active (\(\psi_{ij} =1\)). Constraints \autoref{subeq:bapvalid_pos}-\autoref{subeq:bapdelta} enforces that spatial
+and/or temporal ordering is established between each possible queue/vehicle pair. Constraints \autoref{subeq:bapsigma}
+and \autoref{subeq:bapdelta} enforce consistency. For example, \autoref{subeq:bapsigma} enforces that vehicle \(i\) cannot
+come before vehicle \(j\) and vehicle \(j\) simultaneously come before vehicle \(i\).
 
 The last constraints force relationships between arrival time, charge start time, and departure time.
 \autoref{subeq:bapdetach} states that the service start time, \(u_i\), plus the time to service vehicle \(i\), \(s_i\), must
@@ -300,22 +281,25 @@ statement of the full problem in \autoref{sec:BEB_MILP}. The notation is explain
 
 \subsection{Queuing Constraints}
 \label{sec:queuing}
-\noindent
-The queuing constraints ensure that the buses entering the queues for charging are assigned feasibly as
-they come into the station. There are three sets to differentiate between different entities. \(\mathbb{B} = \{1, ...,
-n_B\}\) is the set of bus indices with index \(b\) used to denote an individual bus, \(\mathbb{Q} = \{1, ..., n_Q\}\) is the set of
-queues with index \(q\) used to denote an individual queue, and \(\mathbb{V} = \{1, ..., n_V\}\) is a set of visits to the
-station with \(i,j\) used to refer to individual visits. The mapping \(\Gamma: \mathbb{V} \rightarrow \mathbb{B}\) is used to map a visit
-index to a bus index with the shorthand \(\Gamma_i\) used to refer to the bus index for visit \(i\).
+\noindent The queuing constraints ensure that the buses entering the queues for charging are assigned feasibly as they
+arrive at the station. There are three sets to differentiate between different entities. \(\mathbb{B} = \{1, ..., n_B\}\)
+is the set of bus indices with index \(b\) used to denote an individual bus, \(\mathbb{Q} = \{1, ..., n_Q\}\) is the set of queues
+with index \(q\) used to denote an individual queue, and \(\mathbb{V} = \{1, ..., n_V\}\) is a set of visits to the station
+with \(i\) and \(j\) used to refer to individual visits. \hl{The mapping $\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ is used to map a visit index to a bus index with the shorthand $\Gamma_i$ used to refer to the bus index $b$ for visit $i$.}
 
-Most variables are now defined in terms of a visit. Two separate visits could correspond to different buses or visits by
-the same bus. The PAP spatial variable, \(s_i\), is removed and \(v_i\) is made to be an integer corresponding to which
-queue visit \(i\) will be using. Thus, when \(\psi_{ij} = 1\), vehicle \(i\) is queued to a charger that has a larger index in
-which the charger that vehicle \(j\) is queued, i.e., \(v_i-v_j \geq 1\). The variable \(L\) is likewise replaced with \(n_Q\).
-Note that \(n_Q = n_B + n_C\), where \(n_B\) is the number of buses and \(n_C\) is the number of chargers. The rationale for
-adding additional idle queues is to allow BEBs to be ``set aside'' if no additional charge is required. Adding one idle
-queue for each BEB ensures that the constraints will be satisfied if multiple buses sharing overlapping times at the
-station are placed in idle queues. The modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
+\hl{A few assumptions are made in the derivation of the algorithm. The primary focus of this work is not estimating the
+  discharge of a BEB during its route. Thus, for simplicity, the discharge for each route will be pre-calculated by
+  assuming a fixed discharge rate (Kw) multiplied by route duration (hr). That is, the route durations are assumed to be
+  know. Secondly, it is assumed that the initial charge, $\alpha$, is of a higher percentage than the final charge,
+  $\beta$. Therefore, it must be assumed that the difference in the SOC can reach $\alpha$ by the beginning of the next
+  working day.}
+
+Most variables are now defined in terms of a visit. \hl{A singular visit is defined by the following steps: the BEB arrives at the station, is assigned a queue with a specified duration, then departs for its next route.} Two
+separate visits could correspond to different buses or visits by the same bus, \hl{but for a different visit index}. The
+PAP spatial variable, \hl{$l_i$}, is removed and \(v_i\) is made to be an integer corresponding to which queue visit \(i\)
+will be using. Thus, when \(\psi_{ij} = 1\), vehicle \(j\) is queued to a charger that has a larger index in which the charger
+that vehicle \(i\) is queued, i.e., \(v_j - v_i \geq 1\). The \hl{charger length $L$} is likewise replaced with \(n_Q\). Note
+that \(n_Q = n_B + n_C\), where \(n_B\) is the number of buses and \(n_C\) is the number of chargers. \hl{The rationale for adding additional idle queues is to allow BEBs to be "set aside" if no additional charge is required. Adding one idle queue for each BEB ensures that the constraints will be satisfied if multiple buses sharing overlapping times at the station are placed in idle queues. This method will be applied when defining the parameters in {\autoref{sec:example}}}. The modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
 
 \begin{subequations}
 \label{eq:packconstrs}
@@ -532,11 +516,9 @@ at a rate of 30 KW. Note that many factors play a role in the rate of discharge;
 average rate is used. \(n_C = \fpeval{\fast + \slow}\) chargers are utilized where \slow of the chargers are slow charging
 (\slows KW) and \fast are fast charging (\fasts KW). A technique to minimize chargers will be employed.
 
-To encourage the MILP PAP problem to utilize the fewest number of chargers, the value of \(m_q\) in the objective
-function, \autoref{eq:objective}, is \(\forall q \in \{1,2,..., n_B \}; m_q = 0\) and \(\forall q \in \{n_B + 1, n_B + 2,..., n_B + n_C \};
-m_q = 1000q\). The charge duration scalar, \(\epsilon_q\), is defined as \(\epsilon_q = r_q\) to create a consumption cost term,
-\(g_{iq}\epsilon_q\). This is utilized to also encourage the model to minimize active charger times, particularly for the fast
-chargers.
+\hl{To encourage the MILP PAP problem to utilize the fewest number of chargers, the value of $m_q$ in the objective function, {\autoref{eq:objective}}, is $\forall q \in \{1,2,..., n_B \}; m_q = 0$ and $\forall q \in \{n_B + 1, n_B + 2,..., n_B + n_C \}; m_q = 1000q$.} The charge duration scalar, \(\epsilon_q\), is defined as \(\epsilon_q = r_q\) to create a consumption cost
+term, \(g_{iq}\epsilon_q\). This is utilized to also encourage the model to minimize active charger times, particularly for the
+fast chargers.
 
 Another heuristic-based optimization strategy, referred to as Qin-Modified, is also employed as a means of comparison
 with the results of the MILP PAP. The Qin-Modified strategy is based on the threshold strategy of
@@ -630,7 +612,7 @@ is of interest to allow flexibility in the arrival and departure times.
 \clearpage
 
 \section{Figure Captions}
-\label{sec:orgdf94959}
+\label{sec:org22fe1e3}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -658,54 +640,57 @@ is of interest to allow flexibility in the arrival and departure times.
 
 
 \begin{table}[!htpb]
-  \caption{Notation used throughout the paper}
+  \caption{Notation used throughout the paper. Units are provided when available.}
   \label{tab:variables}
   \centering
-  \begin{tabularx}{\textwidth}{l l}
+  \begin{tabularx}{\textwidth}{l l l}
     \toprule
-    \textbf{Variable} & \textbf{Description}                                                                               \\
+    \textbf{Variable} & \textbf{Units} & \textbf{Description}                                                                               \\
     \toprule
-    \multicolumn{2}{l}{Input values}                                                                                       \\
-    $n_B$        & Number of buses                                                                                         \\
-    $M$          & An arbitrarily large number                                                               \\
-    $n_N$        & Number of total visits                                                                                  \\
-    $n_Q$        & Number of queues                                                                                        \\
-    $n_C$ 	 & Number of chargers                                                                                      \\
-    $\mathbb{V}$ & Set of visit indices, $\mathbb{V} = \{1, ..., n_V\}$                                                    \\
-    $\mathbb{B}$ & Set of bus indices, $\mathbb{B} = \{1, ..., n_B\}$                                                      \\
-    $\mathbb{Q}$          & Set of queue indices, $\mathbb{Q} = \{1, ..., n_Q\}$                                                             \\
-    $i,j$        & Indices used to refer to visits                                                                         \\
-    $b$ 	 & Index used to refer to a bus                                                                            \\
-    $q$ 	 & Index used to refer to a queue                                                                          \\
+    \multicolumn{3}{l}{Input values}                                                                                       \\
     \hline
-    \multicolumn{2}{l}{Problem definition parameters}                                                                      \\
-    $\Gamma$   & $\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ with $\Gamma_i$ used to denote the bus for visit $i$                                   \\
-    $\alpha_i$ & Initial charge percentage time for visit $i$                                                                   \\
-    $\beta_i$ & Final charge percentage for bus $i$ at the end of the time horizon                                             \\
-    $\epsilon_q$ & Cost of using charger $q$ per unit time                                                                        \\
-    $\Upsilon$   & $\Upsilon: \mathbb{V} \rightarrow \mathbb{V}$ mapping a visit to the next visit by the same bus with $\Upsilon_i$ being the shorthand. \\
-    $\kappa_b$ & Battery capacity for bus $b$                                                                                   \\
-    $\Delta_i$ & Discharge of visit over route $i$                                                                              \\
-    $\nu_b$ & Minimum charge allowed for bus $b$                                                                             \\
-    $\tau_i$ & Time visit $i$ must depart the station                                                                         \\
-    $\zeta_b$ & Discharge rate for bus $b$                                                                                     \\
-    $a_i$ & Arrival time of visit  $i$                                                                                     \\
-    $i_0$ & Indices associated with the initial arrival for every bus in $A$                                               \\
-    $i_f$ & Indices associated with the final arrival for every bus in $A$                                                 \\
-    $m_q$ & Cost of a visit being assigned to charger $q$                                                                  \\
-    $r_q$ & Charge rate of charger $q$ per unit time                                                                       \\
+    $n_B$        & & Number of buses                                                                                                \\
+    $M$          & & An arbitrarily large number                                                                                    \\
+    $n_V$        & & Number of total visits                                                                                         \\
+    $n_Q$        & & Number of queues                                                                                               \\
+    $n_C$        & & Number of chargers                                                                                             \\
+    $\mathbb{V}$ & & Set of visit indices, $\mathbb{V} = \{1, ..., n_V\}$                                                           \\
+    $\mathbb{B}$ & & Set of bus indices, $\mathbb{B} = \{1, ..., n_B\}$                                                             \\
+    $\mathbb{Q}$          & & Set of queue indices, $\mathbb{Q} = \{1, ..., n_Q\}$                                                                    \\
+    $i,j$        & & Indices used to refer to visits                                                                                \\
+    $b$          & & Index used to refer to a bus                                                                                   \\
+    $q$          & & Index used to refer to a queue                                                                                 \\
     \hline
-    \multicolumn{2}{l}{Decision Variables}                                                                                 \\
-    $\psi_{ij}$ & Binary variable determining spatial ordering of vehicles $i$ and $j$                                       \\
-    $\eta_i$    & Initial charge for visit $i$                                                                                \\
-    $\sigma_{ij}$ & Binary variable determining temporal ordering of vehicles $i$ and $j$                                       \\
-    $d_i$    & Ending charge time for visit $i$                                                                            \\
-    $g_{iq}$ & The charge gain for visit $i$ from charger $q$                                                              \\
-    $s_i$    & Amount of time spent on charger for visit $i$                                                               \\
-    $u_i$    & Starting charge time of visit $i$                                                                           \\
-    $v_i$    & Assigned queue for visit $i$                                                                                \\
-    $w_{iq}$ & Binary assignment variable for visit $i$ to queue $q$                                                       \\
-    \bottomrule
+    \multicolumn{3}{l}{Problem definition parameters}                                                                               \\
+    \hline
+    $\Gamma$          & & \hl{$\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ with $\Gamma_i$ used as a shorthand to denote the bus $b$ for visit $i$}           \\
+    $\alpha_i$        & $\%$ & Initial charge percentage time for visit $i$                                                              \\
+    $\beta_i$        & $\%$ & Final charge percentage for bus $i$ at the end of the time horizon                                        \\
+    $\epsilon_q$        & & Cost of using charger $q$ per unit time                                                                        \\
+    $\Upsilon$          & & $\Upsilon: \mathbb{V} \rightarrow \mathbb{V}$ mapping a visit to the next visit by the same bus with $\Upsilon_i$ being the shorthand. \\
+    $\kappa_b$        & \hl{KWh} & Battery capacity for bus $b$                                                                          \\
+    $\Delta_i$        & \hl{KWh} & Discharge of visit over route $i$                                                                     \\
+    $\nu_b$        & & Minimum charge allowed for bus $b$                                                                             \\
+    $\tau_i$        & \hl{s} & Time visit $i$ must depart the station                                                                  \\
+    $\zeta_b$        & \hl{Kw} & Discharge rate for bus $b$                                                                             \\
+    $a_i$        & \hl{s} & Arrival time of visit  $i$                                                                              \\
+    $i_0$        & & Indices associated with the initial arrival for every bus in \hl{$\mathbb{B}$}                                 \\
+    $i_f$        & & Indices associated with the final arrival for every bus in \hl{$\mathbb{B}$}                                   \\
+    $m_q$        & & Cost of a visit being assigned to charger $q$                                                                  \\
+    $r_q$        & \hl{Kw} & Charge rate of charger $q$ per unit time                                                               \\
+    \hline
+    \multicolumn{3}{l}{Decision Variables}                                                                                          \\
+    \hline
+    $\psi_{ij}$     & & Binary variable determining spatial ordering of vehicles $i$ and $j$                                           \\
+    $\eta_i$        & \hl{KWh} & Initial charge for visit $i$                                                                          \\
+    $\sigma_{ij}$     & & Binary variable determining temporal ordering of vehicles $i$ and $j$                                          \\
+    $d_i$        & \hl{s} & Ending charge time for visit $i$                                                                        \\
+    $g_{iq}$     & \hl{s} & \hl{Linearization term, represents the multiplication of $s_i w_{iq}$}                                  \\
+    $s_i$        & \hl{s} & Amount of time spent on charger for visit $i$                                                           \\
+    $u_i$        & \hl{s} & Starting charge time of visit $i$                                                                       \\
+    $v_i$        & & Assigned queue for visit $i$                                                                                   \\
+    $w_{iq}$     & & Binary assignment variable for visit $i$ to queue $q$                                                          \\
+   \bottomrule
   \end{tabularx}
 \end{table}
 

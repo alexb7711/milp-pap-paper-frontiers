@@ -12,6 +12,7 @@
 #+latex_header:\usepackage{pgfplots}                                 % Plot in LaTeX
 #+latex_header:\usepackage{subcaption}                               % Subfigures (Get rid of this)
 #+latex_header:\usepackage{subfloat}                                 % Subfigures
+#+latex_header:\usepackage{soul}                                     % Text highlighting
 #+latex_header:\usepackage{tabularx}                                 % Add more contol to tables
 #+latex_header:\usepackage{tikz}                                     % Generate figures in LaTeX
 #+latex_header:\usepackage{xcolor}                                   % Colors

@@ -23,22 +23,33 @@ statement of the full problem in \autoref{sec:BEB_MILP}. The notation is explain
 :custom_id: sec:queuing
 :END:
 
-\noindent
-The queuing constraints ensure that the buses entering the queues for charging are assigned feasibly as
-they come into the station. There are three sets to differentiate between different entities. $\mathbb{B} = \{1, ...,
-n_B\}$ is the set of bus indices with index $b$ used to denote an individual bus, $\mathbb{Q} = \{1, ..., n_Q\}$ is the set of
-queues with index $q$ used to denote an individual queue, and $\mathbb{V} = \{1, ..., n_V\}$ is a set of visits to the
-station with $i,j$ used to refer to individual visits. The mapping $\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ is used to map a visit
-index to a bus index with the shorthand $\Gamma_i$ used to refer to the bus index for visit $i$.
+\noindent The queuing constraints ensure that the buses entering the queues for charging are assigned feasibly as they
+arrive at the station. There are three sets to differentiate between different entities. $\mathbb{B} = \{1, ..., n_B\}$
+is the set of bus indices with index $b$ used to denote an individual bus, $\mathbb{Q} = \{1, ..., n_Q\}$ is the set of queues
+with index $q$ used to denote an individual queue, and $\mathbb{V} = \{1, ..., n_V\}$ is a set of visits to the station
+with $i$ and $j$ used to refer to individual visits. src_latex{\hl{The mapping $\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ is used to
+map a visit index to a bus index with the shorthand $\Gamma_i$ used to refer to the bus index $b$ for visit $i$.}}
 
-Most variables are now defined in terms of a visit. Two separate visits could correspond to different buses or visits by
-the same bus. The PAP spatial variable, $s_i$, is removed and $v_i$ is made to be an integer corresponding to which
-queue visit $i$ will be using. Thus, when $\psi_{ij} = 1$, vehicle $i$ is queued to a charger that has a larger index in
-which the charger that vehicle $j$ is queued, i.e., $v_i-v_j \geq 1$. The variable $L$ is likewise replaced with $n_Q$.
-Note that $n_Q = n_B + n_C$, where $n_B$ is the number of buses and $n_C$ is the number of chargers. The rationale for
-adding additional idle queues is to allow BEBs to be "set aside" if no additional charge is required. Adding one idle
-queue for each BEB ensures that the constraints will be satisfied if multiple buses sharing overlapping times at the
-station are placed in idle queues. The modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
+#+begin_src latex
+  \hl{A few assumptions are made in the derivation of the algorithm. The primary focus of this work is not estimating the
+    discharge of a BEB during its route. Thus, for simplicity, the discharge for each route will be pre-calculated by
+    assuming a fixed discharge rate (Kw) multiplied by route duration (hr). That is, the route durations are assumed to be
+    know. Secondly, it is assumed that the initial charge, $\alpha$, is of a higher percentage than the final charge,
+    $\beta$. Therefore, it must be assumed that the difference in the SOC can reach $\alpha$ by the beginning of the next
+    working day.}
+#+end_src
+
+Most variables are now defined in terms of a visit. src_latex{\hl{A singular visit is defined by the following steps:
+the BEB arrives at the station, is assigned a queue with a specified duration, then departs for its next route.}} Two
+separate visits could correspond to different buses or visits by the same bus, \hl{but for a different visit index}. The
+PAP spatial variable, \hl{$l_i$}, is removed and $v_i$ is made to be an integer corresponding to which queue visit $i$
+will be using. Thus, when $\psi_{ij} = 1$, vehicle $j$ is queued to a charger that has a larger index in which the charger
+that vehicle $i$ is queued, i.e., $v_j - v_i \geq 1$. The \hl{charger length $L$} is likewise replaced with $n_Q$. Note
+that $n_Q = n_B + n_C$, where $n_B$ is the number of buses and $n_C$ is the number of chargers. src_latex{\hl{The
+rationale for adding additional idle queues is to allow BEBs to be "set aside" if no additional charge is required.
+Adding one idle queue for each BEB ensures that the constraints will be satisfied if multiple buses sharing overlapping
+times at the station are placed in idle queues. This method will be applied when defining the parameters in
+{\autoref{sec:example}}}}. The modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
 
 #+begin_src latex
   \begin{subequations}
