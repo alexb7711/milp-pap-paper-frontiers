@@ -1,4 +1,4 @@
-% Created 2024-02-16 Fri 15:38
+% Created 2024-02-16 Fri 17:53
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -262,13 +262,15 @@ simply states that \(\sigma_{ij}\) and \(\psi_{ij}\) are binary terms. \autoref{
 \section{A Rectangle Packing Formulation for BEB Charging}
 \label{sec:problemformulation}
 Applying the PAP to BEB charging requires four fundamental changes. The first is that the time that a BEB spends
-charging is allowed to vary. Thus, \(s_i\) becomes a variable of optimization. Second, in the PAP each charging visit is
-assumed to be a different vehicle. For the BEB charging problem, each bus may make multiple visits to the station
-throughout the day and the resulting charge for a bus at a given time is dependent upon each of the prior visits made.
-The third fundamental change is related to the first two. The charge of each bus must be tracked in the optimization to
-ensure that charging across multiple visits is sufficient to allow each bus to execute its route throughout the day.
-Finally, the PAP models the chargers as one continuous bar. For the BEB, it will be assumed that a discrete number of
-chargers exist. Moreover, it is assumed that these chargers may have different charge rates.
+charging \hl{must be} allowed to vary. \hl{That is}, \(s_i\) becomes a variable of optimization.
+\hl{This is done primarily because chargers of various speeds are to be introduced, and allowing the charge time to be variable allows the MILP to decide what type of charger should be utilized.} Second, in the PAP each visit
+is assumed to be a different vehicle. For the BEB charging problem, each bus may make multiple visits to the station
+throughout the day and the resulting \hl{SOC} for a bus at a given \hl{visit} is dependent upon
+each of the prior visits. The third fundamental change is related to the first two. The \hl{SOC} of each bus
+must be tracked to ensure that charging across multiple visits is sufficient to allow each bus to execute its route
+throughout the day. Finally, \hl{as previously stated}, the PAP models the charger as one continuous bar. For
+the BEB, it will be assumed that a discrete number of chargers exist. Moreover, it is assumed that these chargers may
+have different charge rates.
 
 The discussion of the four changes is separated into two sections. \autoref{sec:queuing} discusses the changes in the
 spatial-temporal constraint formulation to form a queuing constraint. \autoref{sec:batt_dynamics} then discusses the
@@ -282,7 +284,7 @@ statement of the full problem in \autoref{sec:BEB_MILP}. The notation is explain
 arrive at the station. There are three sets to differentiate between different entities. \(\mathbb{B} = \{1, ..., n_B\}\)
 is the set of bus indices with index \(b\) used to denote an individual bus, \(\mathbb{Q} = \{1, ..., n_Q\}\) is the set of queues
 with index \(q\) used to denote an individual queue, and \(\mathbb{V} = \{1, ..., n_V\}\) is a set of visits to the station
-with \(i\) and \(j\) used to refer to individual visits. \hl{The mapping $\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ is used to map a visit index to a bus index with the shorthand $\Gamma_i$ used to refer to the bus index $b$ for visit $i$.}
+with \(i\) and \(j\) used to refer to individual visits. \hl{The mapping $\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ is used to map a visit index, $i$, to a bus index, $b$. The notation $\Gamma_i$ is used as a shorthand to refer to the bus index $b$ for visit $i$.}
 
 \hl{A few assumptions are made in the derivation of the algorithm. The primary focus of this work is not estimating the
   discharge of a BEB during its route. Thus, for simplicity, the discharge for each route will be pre-calculated by
@@ -291,12 +293,9 @@ with \(i\) and \(j\) used to refer to individual visits. \hl{The mapping $\Gamma
   $\beta$. Therefore, it must be assumed that the difference in the SOC can reach $\alpha$ by the beginning of the next
   working day.}
 
-Most variables are now defined in terms of a visit. \hl{A singular visit is defined by the following steps: the BEB arrives at the station, is assigned a queue with a specified duration, then departs for its next route.} Two
-separate visits could correspond to different buses or visits by the same bus, \hl{but for a different visit index}. The
-PAP spatial variable, \hl{$l_i$}, is removed and \(v_i\) is made to be an integer corresponding to which queue visit \(i\)
-will be using. Thus, when \(\psi_{ij} = 1\), vehicle \(j\) is queued to a charger that has a larger index in which the charger
-that vehicle \(i\) is queued, i.e., \(v_j - v_i \geq 1\). The \hl{charger length $L$} is likewise replaced with \(n_Q\). Note
-that \(n_Q = n_B + n_C\), where \(n_B\) is the number of buses and \(n_C\) is the number of chargers. \hl{The rationale for adding additional idle queues is to allow BEBs to be "set aside" if no additional charge is required. Adding one idle queue for each BEB ensures that the constraints will be satisfied if multiple buses sharing overlapping times at the station are placed in idle queues. This method will be applied when defining the parameters in {\autoref{sec:example}}}. The modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
+It is assumed that each BEB have the same physical dimensions; thus, the PAP spatial variable, \hl{$l_i$}, is removed
+and \(v_i\) is made to be an integer corresponding to which queue visit \(i\) will be using. \hl{That is, the queue position is now discretized over $n_Q$ chargers. Thus, when $\psi_{ij} = 1$, vehicle $j$ is placed in a charging queue with a larger index than vehicle $i$, $v_j > v_i$.} The \hl{charger length $L$} is likewise replaced with \(n_Q\).
+Note that \(n_Q = n_B + n_C\), where \(n_B\) is the number of buses and \(n_C\) is the number of chargers. \hl{The rationale for adding additional idle queues is to allow BEBs to be "set aside" if no additional charge is required. Adding one idle queue for each BEB ensures that the constraints will be satisfied if multiple buses sharing overlapping times at the station are placed in idle queues. This method will be applied when defining the parameters in {\autoref{sec:example}}}. The modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
 
 \begin{subequations}
 \label{eq:packconstrs}
@@ -310,13 +309,14 @@ The constraint in \autoref{subeq:space} is nearly identical to \autoref{subeq:ba
 charger as a continuous strip of length \(S\), it is discretized into \(n_Q\) queues each with a width of unit length one. A
 BEB is also assigned a unit length of one which is reflected in \autoref{subeq:space} by \(\cdot \geq 1\).
 \autoref{subeq:valid_depart} ensures that the time the BEB is detached from the charger, \(d_i\), is before its departure
-time, \(\tau_i\). \autoref{subeq:vspace} defines the integer set of indices for queues for \(v_i\).
+time, \(\tau_i\) \hl{[s]. Note the introduction of the new variable $\tau_i$ exists to allow the final charge time to be independent in the similar manner that the inital charge time need not coincide with the arrival time, $a_i \le u_i \le d_i \le \tau_i$.} \autoref{subeq:vspace} defines the \hl{of integers that $v_i$ that represent the $n_Q$ chargers}.
 
 \subsection{Battery Charge Dynamic Constraints}
 \label{sec:batt_dynamics}
 Battery dynamic constraints are now introduced to relate buses to visits and guarantee that buses have sufficient time
 to charge. Two constraints are enforced on the bus SOC: buses must always have sufficient charge to execute their
-respective routes and each bus must end the day with a specific charge threshold, preparatory for the next day.
+respective routes and each bus must end the day \hl{above a specified} threshold, preparatory for the next
+day.
 
 The charge at the beginning of visit \(i\) is denoted as \(\eta_i\). As a charge on the bus is dependent upon the visits that
 the bus makes to the station, the mapping \(\Upsilon: \mathbb{V} \rightarrow \mathbb{V} \bigcup \{\varnothing\}\) is used to determine the next
@@ -609,7 +609,7 @@ is of interest to allow flexibility in the arrival and departure times.
 \clearpage
 
 \section{Figure Captions}
-\label{sec:orgf981b40}
+\label{sec:orgbd3528a}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
