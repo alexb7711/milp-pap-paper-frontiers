@@ -1,11 +1,11 @@
 #+begin_src latex
   \begin{table}[!htpb]
-    \caption{Notation used throughout the paper. Units are provided when available.}
+    \caption{Notation used throughout the paper. \hl{Units are provided when available.}}
     \label{tab:variables}
     \centering
     \begin{tabularx}{\textwidth}{l l l}
       \toprule
-      \textbf{Variable} & \textbf{Units} & \textbf{Description}                                                                               \\
+      \textbf{Variable} & \hl{\textbf{Units}} & \textbf{Description}                                                                               \\
       \toprule
       \multicolumn{3}{l}{Input values}                                                                                       \\
       \hline
@@ -24,13 +24,13 @@
       \multicolumn{3}{l}{Problem definition parameters}                                                                               \\
       \hline
       $\Gamma$          & & \hl{$\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ with $\Gamma_i$ used as a shorthand to denote the bus $b$ for visit $i$}           \\
-      $\alpha_i$        & $\%$ & Initial charge percentage time for visit $i$                                                              \\
-      $\beta_i$        & $\%$ & Final charge percentage for bus $i$ at the end of the time horizon                                        \\
+      $\alpha_i$        & \hl{$\%$} & Initial charge percentage time for visit $i$                                                              \\
+      $\beta_i$        & \hl{$\%$} & Final charge percentage for bus $i$ at the end of the time horizon                                        \\
       $\epsilon_q$        & & Cost of using charger $q$ per unit time                                                                        \\
       $\Upsilon$          & & $\Upsilon: \mathbb{V} \rightarrow \mathbb{V}$ mapping a visit to the next visit by the same bus with $\Upsilon_i$ being the shorthand. \\
       $\kappa_b$        & \hl{KWh} & Battery capacity for bus $b$                                                                          \\
       $\Delta_i$        & \hl{KWh} & Discharge of visit over route $i$                                                                     \\
-      $\nu_b$        & & Minimum charge allowed for bus $b$                                                                             \\
+      $\nu_b$        & \hl{$\%$} & Minimum charge allowed for bus $b$                                                                             \\
       $\tau_i$        & \hl{s} & Time visit $i$ must depart the station                                                                  \\
       $\zeta_b$        & \hl{Kw} & Discharge rate for bus $b$                                                                             \\
       $a_i$        & \hl{s} & Arrival time of visit  $i$                                                                              \\

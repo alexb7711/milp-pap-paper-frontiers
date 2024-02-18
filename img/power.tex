@@ -5,6 +5,7 @@
     pgfplots,                                                                   % Plot in LaTeX
     pgfplotstable,
     xfp,
+    soul,
 }
 \usetikzlibrary{automata, positioning, arrows.meta}                             % Tikz macros
 
@@ -16,7 +17,7 @@
 \resizebox{\columnwidth}{4in}{%
 \begin{tikzpicture}
 \begin{axis}[title={Power Usage},
-             xlabel={Time [hr]}, ylabel={Power Usage [kw]},
+             xlabel={Time [hr]}, ylabel={Power Usage [\hl{KW}]},
              xmin=4, xmax=24, ymin=0]
     % Quin ----------
     \addplot[blue!80!black, fill=blue, fill opacity=0.25, no markers]
