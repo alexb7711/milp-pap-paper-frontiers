@@ -44,6 +44,8 @@ CLOSED: [2024-02-15 Thu 13:46]
 * COMPLETED Some notations are not clear. For example, i is a parameter defined as discharge but only the discharge rate was assumed to be fixed and the duration is a variable.
 CLOSED: [2024-02-15 Thu 19:02]
 
+Went through and added units and clarifying sentences to make things more clear.
+
 - $i$ is an indexing variable
 - The variables associated with charge are
   - $\alpha$: Initial charge percentage
