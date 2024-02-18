@@ -40,13 +40,13 @@ at which the berthing space becomes available again.
 :END:
 
 The BAP forms the basis of the PAP; however, there are some differences in the way the variables are interpreted. The
-starting service time, $u_i$, is src_latex{\hl{viewed as the initial}} charge time, and the service time, $s_i$, is now
-the src_latex{\hl{total elapsed time spent on the charger}}. src_latex{\hl{Similarly, for the spatial term, $v_i \in
-[0,L]$, the berth location is now interpreted as the initial}} position on the charger. There are also a few clarifying
-concepts about how the system is modeled. The PAP models the set of chargers as one continuous line; that is, the
-natural behavior of the PAP model is to allow vehicles to be queued anywhere along \hl{$[0,L]$}. Similarly, the charge
-times are continuous and can be placed anywhere on the time horizon, $[0,T]$, as long as the allocated times do not
-interfere with other scheduled charge times.
+starting service time, $u_i$ src_latex{\hl{[s]}}, is src_latex{\hl{viewed as the initial}} charge time, and the service
+time, $s_i$ src_latex{\hl{[s]}}, is now the src_latex{\hl{total elapsed time spent on the charger}}.
+src_latex{\hl{Similarly, for the spatial term, $v_i \in [0,L]$, the berth location is now interpreted as the initial}}
+position on the charger. There are also a few clarifying concepts about how the system is modeled. The PAP models the
+set of chargers as one continuous line; that is, the natural behavior of the PAP model is to allow vehicles to be queued
+anywhere along \hl{$[0,L]$}. Similarly, the charge times are continuous and can be placed anywhere on the time horizon,
+$[0,T]$, as long as the allocated times do not interfere with other scheduled charge times.
 
 The PAP formulation's parameters can be divided into two categories: input parameters and decision variables. Each type
 will now be introduced src_latex{\hl{in turn}}. The following parameters are src_latex{\hl{assumed to be known inputs
@@ -107,10 +107,10 @@ Subject to:
   \end{subequations}
 #+end_src
 
-\noindent The objective function, \autoref{eq:bapobjective}, src_latex{\hl{minimizes the idle and service time for each
-vehicle by}} summing over the differences between the departure time, $d_i$, and arrival time, $a_i$ src_latex{\hl{for
-all visits}}. src_latex{\hl{In other words, the objective function is searching for the schedule that removes each
-vehicle from the service queue as quickly as possible.}}
+\noindent The objective function, \autoref{eq:bapobjective}, src_latex{\hl{minimizes the idle and service time by}}
+summing over the differences between the departure time, $d_i$, and arrival time, $a_i$ src_latex{\hl{for all visits}}.
+src_latex{\hl{In other words, the objective function is searching for the schedule that removes each vehicle from the
+service queue as quickly as possible.}}
 
 \autoref{subeq:baptime}-\autoref{subeq:bapdelta} are used to ensure that individual rectangles do not overlap. In terms
 of the PAP, that implies that there are no conflicts in the schedule spatially or temporally. \autoref{subeq:baptime}
@@ -123,7 +123,7 @@ both vehicle $i$ and $j$ are scheduled before and after each other temporally, w
 {\autoref{subeq:bapdelta}} being equal to two, that would mean that vehicles $i$ and $j$ are scheduled both before and
 after one another on the charging strip, which is again impossible.}}
 
-The last constraints force relationships between arrival time, charge start time, and departure time.
+The last constraints force relationships between arrival time, src_latex{\hl{inital charge time}}, and departure time.
 \autoref{subeq:bapdetach} states that the src_latex{\hl{ initial charge}} time, $u_i$, plus the src_latex{\hl{total
 charge time for}}, $s_i$, must equal the departure time, $d_i$. \autoref{subeq:bapvalid_starts} enforces the arrival
 time, $a_i$, to be less than or equal to the service start time, $u_i$, which in turn must be less than or equal to the

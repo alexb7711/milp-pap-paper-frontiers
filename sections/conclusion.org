@@ -14,7 +14,7 @@ An example for the MILP PAP formulation was then presented and compared to a heu
 Qin-Modified. The MILP PAP optimization was run for \timeran seconds to a non-optimal solution. The Qin-Modified and
 MILP schedule utilized a similar amount of fast chargers; however, the MILP schedule more src_latex{\hl{readily}} used
 the slow chargers to its advantage when the src_latex{\hl{objective function saw fit}}. More importantly, the MILP PAP
-schedule utilized approximately $1\cdot10^5$ KWh more than the Qin-Modified\hl{; however,} the charges src_latex{\hl{for the
+schedule utilized approximately $1\cdot10^5$ kWh more than the Qin-Modified\hl{; however,} the charges src_latex{\hl{for the
 MILP schedule}} remained above the constrained minimum src_latex{\hl{SOC}} of \mincharge, and charged all the buses to
 \fpeval{\bcharge *100}% at the end of the working day. The Qin-Modified schedule, on the other hand,
 src_latex{\hl{allowed the SOC of certain BEBs to drop to 0\%}}.

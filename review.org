@@ -1,8 +1,17 @@
 The article is on an interesting topic of scheduling charging visits by battery electric busses. A modified formulation based on berth allocation problem is proposed for allocating busses to chargers. While the topic is interesting the description of the formulation is not coherrent. It may be of great help to the reader if the following points are addressed before the article is published.
 
-* TODO Mathematical notations should be properly denoted and introduced coherently in the discussion for the ease of understanding. For example, authors could follow the standard definitions sets, parameters, and variables using mathematical notation to describe the formulation.
+* COMPLETED Mathematical notations should be properly denoted and introduced coherently in the discussion for the ease of understanding. For example, authors could follow the standard definitions sets, parameters, and variables using mathematical notation to describe the formulation.
+CLOSED: [2024-02-18 Sun 16:10]
 
-* TODO Consider adding the reference model to the appendix. This will allow the authors to describe the proposed model is more detail by explaining the underlying notations and assumptions.
+Revisited the introduction of each variable. Attempted to clarify sentences, add examples, and include units where
+applicable.
+
+* COMPLETED Consider adding the reference model to the appendix. This will allow the authors to describe the proposed model is more detail by explaining the underlying notations and assumptions.
+CLOSED: [2024-02-18 Sun 16:13]
+
+I don't agree with this, I think that the form that its in is better. Because the formulations are so similar between
+the BAP, PAP, and the newly derived work, I think the gradual derivation of the problem is a more natural approach for
+this work.
 
 * COMPLETED TYPO: Section 2.2, list of parameters, both nV and nN are used to denote the same thing, which appears to be a typographical error.
 CLOSED: [2024-02-15 Thu 11:31]
