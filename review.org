@@ -1,3 +1,8 @@
+[Droge] This document needs to be formatted into a pdf form (use latex) and formatted nicely.
+
+[Droge] Need to start with a note stating your gratitude for the work of the editing staff and the reviewers. You believe that the manuscript is much better due to their efforts. Mention that changes have been highlighted.
+[Droge] You need to acknowledge the editor's comments and give a brief response
+
 The article is on an interesting topic of scheduling charging visits by battery electric busses. A modified formulation based on berth allocation problem is proposed for allocating busses to chargers. While the topic is interesting the description of the formulation is not coherrent. It may be of great help to the reader if the following points are addressed before the article is published.
 
 * COMPLETED Mathematical notations should be properly denoted and introduced coherently in the discussion for the ease of understanding. For example, authors could follow the standard definitions sets, parameters, and variables using mathematical notation to describe the formulation.
@@ -6,6 +11,10 @@ CLOSED: [2024-02-18 Sun 16:10]
 Revisited the introduction of each variable. Attempted to clarify sentences, add examples, and include units where
 applicable.
 
+[Droge - Here is a better response] Thank you very much for your thorough review. We have revisited the introduction of each variable. We have also clarified the discussions, provided examples, and stated units where applicable.
+
+
+
 * COMPLETED Consider adding the reference model to the appendix. This will allow the authors to describe the proposed model is more detail by explaining the underlying notations and assumptions.
 CLOSED: [2024-02-18 Sun 16:13]
 
@@ -13,19 +22,27 @@ I don't agree with this, I think that the form that its in is better. Because th
 the BAP, PAP, and the newly derived work, I think the gradual derivation of the problem is a more natural approach for
 this work.
 
+[Droge - Here is a better response. No need to come off sounding confrontational.] Thank you for this suggestion. In the end, we decided to keep the manuscript development as is. The rationale being that the formulations are similar between the BAP, PAP, and the newly derived work. We decided that the developments of this work are more clearly represented when they are posed as changes to the previous work. We have made a significant effort to clarify notation to make the underlying explanation and assumptions more clear.
+
 * COMPLETED TYPO: Section 2.2, list of parameters, both nV and nN are used to denote the same thing, which appears to be a typographical error.
 CLOSED: [2024-02-15 Thu 11:31]
 
 Update everything to use $n_V$. There was a migration of variable notation and not everything was caught. Comment (5) is
 a similar situation.
 
+[Droge - Better response:] Thank you for noticing this mistake. There was a migration of variable notation in the previous manuscript and we did not catch all of the changes prior to submission. We have now updated everything to use $n_V$.
+
 * COMPLETED Section 3.1, nC is introduced as number of chargers without explaining the need for it and then it doesn’t appear anywhere else in the formulation.
+
+[Droge: You need an explanation here of what you have done to clarify nC]
 
 CLOSED: [2024-02-15 Thu 11:32]
 * COMPLETED Section 3.1, “The variable S is likewise replaced with …” there is no variable S in the referred formulation.
 CLOSED: [2024-02-15 Thu 11:33]
 
 Updated notation to use $L$ and $l_i$ for all instances of the BAP.
+
+[Droge - You need to tell the reviewer thank you as well as tell them what you did with the variable "S" (i.e., did you remove it and replace all instances with something else)]
 
 * COMPLETED Rationale for additional queues is not evident, further explanation would be useful for the readers. E.g., why the proposed methodology is chosen over having one additional charger with charge rate = 0.
 CLOSED: [2024-02-15 Thu 11:36]
@@ -35,19 +52,22 @@ overlapping times at the station are scheduled to a waiting queue, it is guarant
 scheduling. If only one additional waiting queue is provided, then that implies that only one BEB may be scheduled to
 "wait" over the specified time period.
 
+[Droge - Updated response] - Thank you for pointing out that this concept is not clear. We have added more explanation to Section ??? about the rationale for multiple waiting queues. The reason for multiple waiting queues is that multiple buses could be waiting at the same exact time. The mathematical formulation does not allow them to be in a single queue with an overlapping time window. We have created a waiting queue for each bus as the extreme condition where all busses are in the station, but do not need to charge.
+
 * COMPLETED Certain critical assumptions like fixed charge and discharge rates is only stated in the results (section 4.1). This is should be stated before the formulation itself.
 CLOSED: [2024-02-15 Thu 13:46]
 
 - [X] Fixed discharge calculations
 - [X] Difference in $\alpha$ and $\beta$ is able to be overcome overnight
 
+[Droge - You need to describe where it is that you changed things so that the assumptions are more clear]
+
 * COMPLETED Some notations are not clear. For example, i is a parameter defined as discharge but only the discharge rate was assumed to be fixed and the duration is a variable.
 CLOSED: [2024-02-15 Thu 19:02]
 
 Went through and added units and clarifying sentences to make things more clear.
 
-- $i$ is an indexing variable
-- The variables associated with charge are
+[Droge] Thank you for pointing this out. We have performed a thorough review of the manuscript to ensure that variables and units are clear. Note that $i$ is an indexing variable. The variables associated with charge are
   - $\alpha$: Initial charge percentage
   - $\beta$: Final charge percentage
   - $\nu$: Minimum intermediate charge percentage allowed
