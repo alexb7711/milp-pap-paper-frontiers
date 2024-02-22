@@ -3,21 +3,22 @@
 :custom_id: sec:conclusion
 :END:
 
-This work developed a MILP scheduling framework that optimally assigns src_latex{\hl{fast and slow}} chargers to a BEB
-bus fleet assuming a constant schedule. src_latex{\hl{The BAP was briefly introduced followed by a description and
-formulation of the PAP.}} src_latex{\hl{The PAP was modified to allow charge time to be variable}}. Because the
-src_latex{\hl{modified}} PAP src_latex{\hl{no longer}} requires the charge time to be given, linear battery dynamics
-were introduced src_latex{\hl{to propagate each BEBs' SOC.}} Additional constraints were also introduced to provide
-src_latex{\hl{upper and lower}} limits for the battery dynamics.
+This work developed a MILP scheduling framework that optimally assigns src_latex{\textcolor{blue}{fast and slow}} chargers to a BEB
+bus fleet assuming a constant schedule. src_latex{\textcolor{blue}{The BAP was briefly introduced followed by a description and
+formulation of the PAP.}} src_latex{\textcolor{blue}{The PAP was modified to allow charge time to be variable}}. Because the
+src_latex{\textcolor{blue}{modified}} PAP src_latex{\textcolor{blue}{no longer}} requires the charge time to be given, linear battery dynamics
+were introduced src_latex{\textcolor{blue}{to propagate each BEBs' SOC.}} Additional constraints were also introduced to provide
+src_latex{\textcolor{blue}{upper and lower}} limits for the battery dynamics.
 
 An example for the MILP PAP formulation was then presented and compared to a heuristic-based schedule, referred to as
 Qin-Modified. The MILP PAP optimization was run for \timeran seconds to a non-optimal solution. The Qin-Modified and
-MILP schedule utilized a similar amount of fast chargers; however, the MILP schedule more src_latex{\hl{readily}} used
-the slow chargers to its advantage when the src_latex{\hl{objective function saw fit}}. More importantly, the MILP PAP
-schedule utilized approximately $1\cdot10^5$ kWh more than the Qin-Modified\hl{; however,} the charges src_latex{\hl{for the
-MILP schedule}} remained above the constrained minimum src_latex{\hl{SOC}} of \mincharge, and charged all the buses to
-\fpeval{\bcharge *100}% at the end of the working day. The Qin-Modified schedule, on the other hand,
-src_latex{\hl{allowed the SOC of certain BEBs to drop to 0\%}}.
+MILP schedule utilized a similar amount of fast chargers; however, the MILP schedule more
+src_latex{\textcolor{blue}{readily}} used the slow chargers to its advantage when the
+src_latex{\textcolor{blue}{objective function saw fit}}. More importantly, the MILP PAP schedule utilized approximately
+$1\cdot10^5$ kWh more than the Qin-Modified\textcolor{blue}{; however,} the charges src_latex{\textcolor{blue}{for the MILP
+schedule}} remained above the constrained minimum src_latex{\textcolor{blue}{SOC}} of \mincharge, and charged all the
+buses to \fpeval{\bcharge *100}% at the end of the working day. The Qin-Modified schedule, on the other hand,
+src_latex{\textcolor{blue}{allowed the SOC of certain BEBs to drop to 0\%}}.
 
 Further fields of interest are to utilize the formulation (\autoref{eq:objective} and \autoref{eq:dynconstrs}) with
 nonlinear battery dynamics, calculation and utilization of the demand and consumption cost in the objective function,
