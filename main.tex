@@ -1,4 +1,4 @@
-% Created 2024-02-22 Thu 13:11
+% Created 2024-02-22 Thu 18:24
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -98,7 +98,7 @@
  pdftitle={},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 29.1 (Org mode 9.6.6)}, 
+ pdfcreator={Emacs 29.2 (Org mode 9.6.15)}, 
  pdflang={English}}
 \begin{document}
 
@@ -193,37 +193,38 @@ the widths and height of the rectangles represent the physical width and heights
 \cite{murata-1995-rectan}. \textcolor{blue}{Other problems, such as the one presented in this work, allow either the horizontal or vertical edge of each rectangle in $\mathbb{O}$ to vary. As an example, suppose the vessel lengths are predefined (vertical edges are static), but the service time is allowed to vary (horizontal edges are dynamic).}
 \cite{buhrkal-2011-model-discr}.
 
-The BAP solves the problem of optimally assigning incoming vessels to berth positions \textcolor{blue}{in order} to be
-serviced as shown in \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of
-\(O\) represent the time horizon \(T\) \textcolor{blue}{[s]} and the berth length \textcolor{blue}{$L$ [m]}, respectively. Similarly, the
-\textcolor{blue}{widths and heights of each element in} \(\mathbb{O}\) represent the time spent to service vessel \(i\) and
-the space taken by docking vessel \(i\), respectively. In the BAP, the vessel characteristics (length of the vessel,
-arrival time, handling time, desired departure time) are assumed to be known for all vessels. A representation of a BAP
-solution is shown in \autoref{fig:bap}. The x and y-axis represent \textcolor{blue}{time horizon and berthing space}, respectively.
-The gray squares, labeled A, B, C, and D, represent berthed vessels. The width of the boxes represents the time spent
-being serviced, and the height represents the amount of space the vessel requires on the berth. The vertical line
-adjacent to ``Arrival Time'' represents the actual time that the vessel arrives and is available to be berthed.
-``Berthing Time'' is the time the vessel is berthed and begins being serviced. ``Completion time'' represents the time
-at which the berthing space becomes available again.
+The BAP solves the problem of optimally assigning incoming vessels to berth positions to be serviced as shown in
+\autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of \(O\) represent the time
+horizon \(T\) \textcolor{blue}{seconds} and the berth length \textcolor{blue}{$L$ meters}, respectively. Similarly, the
+\textcolor{blue}{widths and heights of each element in} \(\mathbb{O}\) represent the time spent to service
+vessel \(i\) and the space taken by docking vessel \(i\), respectively. In the BAP, the vessel characteristics (length of
+the vessel, arrival time, handling time, desired departure time) are assumed to be known for all vessels. A
+representation of a BAP solution is shown in \autoref{fig:bap}. The x and y-axis represent
+\textcolor{blue}{time horizon and berthing space}, respectively. The gray squares, labeled A, B, C, and D,
+represent berthed vessels. The width of the boxes represents the time spent being serviced, and the height represents
+the amount of space the vessel requires on the berth. The vertical line adjacent to ``Arrival Time'' represents the
+actual time that the vessel arrives and is available to be berthed. ``Berthing Time'' is the time the vessel is berthed
+and begins being serviced. ``Completion time'' represents the time at which the berthing space becomes available again.
 
 \subsection{The PAP Formulation}
 \label{sec:the-pap-formulation}
 The BAP forms the basis of the PAP; however, there are some differences in the way the variables are interpreted. The
-starting service time, \(u_i\) \textcolor{blue}{[s]}, is \textcolor{blue}{viewed as the initial} charge time, and the service
-time, \(s_i\) \textcolor{blue}{[s]}, is now the \textcolor{blue}{total elapsed time spent on the charger}.
-\textcolor{blue}{Similarly, for the spatial term, $v_i \in [0,L]$, the berth location is now interpreted as the initial}
-position on the charger. There are also a few clarifying concepts about how the system is modeled. The PAP models the
-set of chargers as one continuous line; that is, the natural behavior of the PAP model is to allow vehicles to be queued
-anywhere along \textcolor{blue}{$[0,L]$}. Similarly, the charge times are continuous and can be placed anywhere on the time horizon,
+starting service time, \(u_i\) \textcolor{blue}{seconds}, is \textcolor{blue}{viewed as the initial}
+charge time, and the service time, \(s_i\) \textcolor{blue}{seconds}, is \textcolor{blue}{instead}
+the \textcolor{blue}{total elapsed time spent on the charger}. \textcolor{blue}{Similarly, for the spatial term, $v_i \in [0,L]$, the berth location is instead interpreted as the initial} position on the charger. There
+are also a few clarifying concepts about how the system is modeled. The PAP models the set of chargers as one continuous
+line; that is, the natural behavior of the PAP model is to allow vehicles to be queued anywhere along
+\textcolor{blue}{$[0,L]$}. Similarly, the charge times are continuous and can be placed anywhere on the time horizon,
 \([0,T]\), as long as the allocated times do not interfere with other scheduled charge times.
 
 The PAP formulation's parameters can be divided into two categories: input parameters and decision variables. Each type
-will now be introduced \textcolor{blue}{in turn}. The following parameters are \textcolor{blue}{assumed to be known inputs for} the MILP. \textcolor{blue}{$L$ [m] defines the length of the charger. As stated previously, it is modeled as a continuous bar meaninng that a vehicle can be placed anywhere in the range $[0,L]$. It is assumed that the time horizon, $T$ [s], is known so that vehicles may be placed in the range $[0,T]$. The total number of visits to the station over the time horizon is represented by $n_V$. The arrival time for each visit is represented by $a_i$ [s], and the required charge time is represented by $s_i$ [s]. The width of vehicle $i$ is represented by $l_i$ [m].}
+will now be introduced \textcolor{blue}{in turn}. The following parameters are
+\textcolor{blue}{assumed to be known inputs for} the MILP. \textcolor{blue}{$L$ defines the length of the charger in meters. As stated previously, it is modeled as a continuous bar meaninng that a vehicle can be placed anywhere in the range $[0,L]$. It is assumed that the time horizon, $T$ seconds, is known so that vehicles may be placed in the range $[0,T]$. The total number of visits to the station over the time horizon is represented by $n_V$. The arrival time for each visit is represented by $a_i$ seconds, and the required charge time is represented by $s_i$ seconds. The width of vehicle $i$ is represented by $l_i$ meters.}
 
-\textcolor{blue}{The decision variables provide the means by which the solver may optimize the problem. The initial and final charge times for vehicle $i$ are $u_i$ [s] and $d_i$ [s], respectively. The starting position on the charger is denoted as $v_i \in [0,L]$ [m]. The temporal ordering of vehicles $i$ and $j$ is determined by $\sigma_{ij} \in \{0, 1\}$; i.e. $\sigma_{ij} = 1 \implies$ $i$ arrives before $j$ for all $1 \le i,j \le n_V$. Similarly, $\psi_{ij} \in \{0, 1\}$ determines the relative position of vehicles $i$ and $j$ on the charger; i.e. $\psi_{ij} = 1 \implies v_i < v_j$ for all $1 \le i,j \le n_V$.}
+\textcolor{blue}{The decision variables provide the means by which the solver may optimize the problem. The initial and final charge times for vehicle $i$ are $u_i$ and $d_i$ seconds, respectively. The starting position on the charger is denoted as $v_i \in [0,L]$ meters. The temporal ordering of vehicles $i$ and $j$ is determined by $\sigma_{ij} \in \{0, 1\}$; i.e. $\sigma_{ij} = 1 \implies$ $i$ arrives before $j$ for all $1 \le i,j \le n_V$. Similarly, $\psi_{ij} \in \{0, 1\}$ determines the relative position of vehicles $i$ and $j$ on the charger; i.e. $\psi_{ij} = 1 \implies v_i < v_j$ for all $1 \le i,j \le n_V$.}
 
 To determine the values for each of these decision variables, a MILP \textcolor{blue}{was} formulated in
-\cite{qarebagh-2019-optim-sched}. \textcolor{blue}{The formulation is shown in its entirety for completeness.}
+\cite{qarebagh-2019-optim-sched}. \textcolor{blue}{The formulation is shown in its entirety for completeness. The problem to be solved is}
 
 \begin{equation}
 	\label{eq:bapobjective}
@@ -316,7 +317,7 @@ The constraint in \autoref{subeq:space} is nearly identical to \autoref{subeq:ba
 charger as a continuous strip of length \(S\), it is discretized into \(n_Q\) queues each with a width of unit length one. A
 BEB is also assigned a unit length of one which is reflected in \autoref{subeq:space} by \(\cdot \geq 1\).
 \autoref{subeq:valid_depart} ensures that the time the BEB is detached from the charger, \(d_i\), is before its departure
-time, \(\tau_i\) \textcolor{blue}{[s]. Note the introduction of the new variable $\tau_i$ exists to allow the final charge time to be independent a similar manner that the inital charge time need not coincide with the arrival time, $a_i \le u_i \le d_i \le \tau_i$.} \autoref{subeq:vspace} defines the \textcolor{blue}{of integers that $v_i$ that represent the $n_Q$ chargers}.
+time, \(\tau_i\) \textcolor{blue}{seconds. Note the introduction of the new variable $\tau_i$ exists to allow the final charge time to be independent a similar manner that the inital charge time need not coincide with the arrival time, $a_i \le u_i \le d_i \le \tau_i$.} \autoref{subeq:vspace} defines the \textcolor{blue}{of integers that $v_i$ that represent the $n_Q$ chargers}.
 
 \subsection{Battery Charge Dynamic Constraints}
 \label{sec:batt_dynamics}
@@ -324,10 +325,11 @@ time, \(\tau_i\) \textcolor{blue}{[s]. Note the introduction of the new variable
 the SOC \textcolor{blue}{for each BEB}: \textcolor{blue}{the SOC must} always \textcolor{blue}{remain above a specified percentage to guarantee} sufficient charge to execute their respective routes and each bus must end the day
 \textcolor{blue}{with an SOC above a specified} threshold, preparatory for the next day.
 
-The SOC \textcolor{blue}{upon arrival for} visit \(i\) is denoted as \(\eta_i\) \textcolor{blue}{[kWh]}. \textcolor{blue}{Because the SOC for a visit $i$ is dependent on its previous visits}, the mapping \(\Upsilon: \mathbb{V} \rightarrow \mathbb{V} \bigcup \{\varnothing\}\) is
-used to determine the next visit that corresponds to the same bus, with \(\Upsilon_i\) being shorthand notation. Thus, \(\Gamma_j\) and
-\(\Gamma_{\Upsilon_i}\), for \(\Upsilon_i = j\), would both map to the same bus index as long as \(\Upsilon_i\) is not the null element, \(\varnothing\).
-\textcolor{blue}{The null element is reserved for BEBs that have no future visits.}
+The SOC \textcolor{blue}{upon arrival for} visit \(i\) is denoted as \(\eta_i\) \textcolor{blue}{kWh}.
+\textcolor{blue}{Because the SOC for a visit $i$ is dependent on its previous visits}, the mapping \(\Upsilon:
+\mathbb{V} \rightarrow \mathbb{V} \bigcup \{\varnothing\}\) is used to determine the next visit that corresponds to the same bus, with
+\(\Upsilon_i\) being shorthand notation. Thus, \(\Gamma_j\) and \(\Gamma_{\Upsilon_i}\), for \(\Upsilon_i = j\), would both map to the same bus index as long
+as \(\Upsilon_i\) is not the null element, \(\varnothing\). \textcolor{blue}{The null element is reserved for BEBs that have no future visits.}
 
 \textcolor{blue}{To drive time spent on the charger, $s_i$, as well as define initial, final, and intermediate bus charges for each
   visit $i$, the sets for initial and final visits must be defined. Let the mapping of the first visit by each bus be
@@ -339,13 +341,13 @@ used to determine the next visit that corresponds to the same bus, with \(\Upsil
   \kappa_{b}$, respectively. The intermediate charges must be determined during runtime.}
 
 It is assumed that the charge received is proportional to the time spent charging. The rate for charger \(q\) is denoted
-as \(r_q\) \textcolor{blue}{[kW]}. Note that a value of \(r_q = 0\) corresponds to a queue where no charging occurs. A bus in
-such a queue is simply waiting at the station for the departure time. The queue indices are ordered such that the first
-\(n_B\) queues have \(r_q = 0\) to allow an arbitrary number of buses to sit idle at any given moment in time.
-\textcolor{blue}{The next $n_C$ queues are reserved for the slow and fast chargers.} The amount of discharge between
-visits \(i\) and \(\Upsilon_i\), the next visit of the same bus, is denoted as \(\Delta_i\) \textcolor{blue}{[kWh]}. If visit \(i\) occurred
-at charger \(q\), the \textcolor{blue}{SOC} of the \textcolor{blue}{BEB's next arrival}, \(\Upsilon_i\), would be \(\eta_{\Upsilon_i} = \eta_i + s_i
-r_q - \Delta_i\).
+as \(r_q\) \textcolor{blue}{kW}. Note that a value of \(r_q = 0\) corresponds to a queue where no charging
+occurs. A bus in such a queue is simply waiting at the station for the departure time. The queue indices are ordered
+such that the first \(n_B\) queues have \(r_q = 0\) to allow an arbitrary number of buses to sit idle at any given moment in
+time. \textcolor{blue}{The next $n_C$ queues are reserved for the slow and fast chargers.} The amount of
+discharge between visits \(i\) and \(\Upsilon_i\), the next visit of the same bus, is denoted as \(\Delta_i\)
+\textcolor{blue}{kWh}. If visit \(i\) occurred at charger \(q\), the \textcolor{blue}{SOC} of the
+\textcolor{blue}{BEB's next arrival}, \(\Upsilon_i\), would be \(\eta_{\Upsilon_i} = \eta_i + s_i r_q - \Delta_i\).
 
 The binary decision variable \(w_{iq} \in \{0,1\}\) is introduced to \textcolor{blue}{indicate the active charger for visit $i$ in vector form. The form of the SOC for the next visit, $\Upsilon_i$, can be written using the following constraints.}
 
@@ -376,11 +378,11 @@ respectively \textcolor{blue}{, where} \(\kappa_b\) is the battery capacity and 
 \end{align}
 \end{subequations}
 
-\textcolor{blue}{{\autoref{eq:maxcharge}} ensures that the BEB SOC does not exceed the battery capacity, and {\autoref{eq:mincharge}} enforces that the inital SOC for each visit is above the threshold of $\nu_{\Gamma_i}\kappa$}. Note that
-the term \(s_i w_{iq}\) is a bilinear term. A standard way of linearizing a bilinear term that contains an integer
+\textcolor{blue}{{\autoref{eq:maxcharge}} ensures that the BEB SOC does not exceed the battery capacity, and {\autoref{eq:mincharge}} enforces that the inital SOC for each visit is above the threshold of $\nu_{\Gamma_i}\kappa_{\Gamma_i}$}. Note
+that the term \(s_i w_{iq}\) is a bilinear term. A standard way of linearizing a bilinear term that contains an integer
 variable is by introducing a slack variable with an either/or constraint
-\cite{chen-2010-applied,rodriguez-2013-compar-asses}. Allowing the slack variable \(g_{iq}\) \textcolor{blue}{[s]} to be
-equal to \(s_i w_{iq}\), \(g_{iq}\) can be defined as
+\cite{chen-2010-applied,rodriguez-2013-compar-asses}. Allowing the slack variable \(g_{iq}\)
+\textcolor{blue}{seconds} to be equal to \(s_i w_{iq}\), \(g_{iq}\) can be defined as
 
 \begin{equation}
     \label{eq:giq_cases}
@@ -523,9 +525,10 @@ simplicity \textcolor{blue}{since the discharge calculation is out of the scope 
 \textcolor{blue}{A total of} \(n_C = \fpeval{\fast + \slow}\) chargers are utilized where \slow of the chargers are slow
 charging (\slows kW) and \fast are fast charging (\fasts kW). \textcolor{blue}{The technique to minimize the total charger count will now be employed}.
 
-\textcolor{blue}{To encourage the MILP PAP problem to utilize the fewest number of chargers, the value of $m_q$ in the objective function, {\autoref{eq:objective}}, is $\forall q \in \{1,2,..., n_B \}; m_q = 0$ and $\forall q \in \{n_B + 1, n_B + 2,..., n_B + n_C \}; m_q = 1000q$.} The charge duration scalar, \(\epsilon_q\), is defined as \(\epsilon_q = r_q\) to create a consumption cost
-term, \(g_{iq}\epsilon_q\) \textcolor{blue}{[kWh]. By consumption cost, it is meant that the total energy consumed by the charge schedule will be accounted for in the objective function.} This \textcolor{blue}{method encourages} the model to minimize
-active charger times, particularly for the fast chargers.
+\textcolor{blue}{To encourage the MILP PAP problem to utilize the fewest number of chargers, the value of $m_q$ in the objective function, {\autoref{eq:objective}}, is $\forall q \in \{1,2,..., n_B \}; m_q = 0$ and $\forall q \in \{n_B + 1, n_B + 2,..., n_B + n_C \}; m_q = 1000q$.} The charge duration scalar, \(\epsilon_q\), is defined as \(\epsilon_q = r_q\) to create a
+consumption cost term, \(g_{iq}\epsilon_q\) \textcolor{blue}{kWh. By consumption cost, it is meant that the total energy consumed by the charge schedule will be accounted for in the objective function.} This
+\textcolor{blue}{method encourages} the model to minimize active charger times, particularly for the fast
+chargers.
 
 Another heuristic-based optimization strategy, referred to as Qin-Modified, is also employed as a means of comparison
 with the results of the MILP PAP. The Qin-Modified strategy is based on the threshold strategy of
@@ -612,13 +615,13 @@ and utilizing this formulation in a metaheuristic solver. Furthermore, ``fuzzify
 is of interest to allow flexibility in the arrival and departure times.
 
 \bibliographystyle{Frontiers-Harvard}
-\bibliography{c:/msys64/home/1556048963C/Documents/citation-database/lit-ref,c:/msys64/home/1556048963C/Documents/citation-database/lib-ref}
+\bibliography{/home/alex/Documents/citation-database/lit-ref,/home/alex/Documents/citation-database/lib-ref}
 
 \nolinenumbers
 \clearpage
 
 \section{Figure Captions}
-\label{sec:org3ccea79}
+\label{sec:orgd5d51d9}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

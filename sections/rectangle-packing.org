@@ -73,9 +73,10 @@ The constraint in \autoref{subeq:space} is nearly identical to \autoref{subeq:ba
 charger as a continuous strip of length $S$, it is discretized into $n_Q$ queues each with a width of unit length one. A
 BEB is also assigned a unit length of one which is reflected in \autoref{subeq:space} by $\cdot \geq 1$.
 \autoref{subeq:valid_depart} ensures that the time the BEB is detached from the charger, $d_i$, is before its departure
-time, $\tau_i$ src_latex{\textcolor{blue}{[s]. Note the introduction of the new variable $\tau_i$ exists to allow the final charge time to
-be independent a similar manner that the inital charge time need not coincide with the arrival time, $a_i \le u_i \le d_i \le
-\tau_i$.}} \autoref{subeq:vspace} defines the src_latex{\textcolor{blue}{of integers that $v_i$ that represent the $n_Q$ chargers}}.
+time, $\tau_i$ src_latex{\textcolor{blue}{seconds. Note the introduction of the new variable $\tau_i$ exists to allow the
+final charge time to be independent a similar manner that the inital charge time need not coincide with the arrival
+time, $a_i \le u_i \le d_i \le \tau_i$.}} \autoref{subeq:vspace} defines the src_latex{\textcolor{blue}{of integers that $v_i$
+that represent the $n_Q$ chargers}}.
 
 ** Battery Charge Dynamic Constraints
 :PROPERTIES:
@@ -87,11 +88,12 @@ the SOC src_latex{\textcolor{blue}{for each BEB}}: src_latex{\textcolor{blue}{th
 percentage to guarantee}} sufficient charge to execute their respective routes and each bus must end the day
 src_latex{\textcolor{blue}{with an SOC above a specified}} threshold, preparatory for the next day.
 
-The SOC src_latex{\textcolor{blue}{upon arrival for}} visit $i$ is denoted as $\eta_i$ src_latex{\textcolor{blue}{[kWh]}}. src_latex{\textcolor{blue}{Because the
-SOC for a visit $i$ is dependent on its previous visits}}, the mapping $\Upsilon: \mathbb{V} \rightarrow \mathbb{V} \bigcup \{\varnothing\}$ is
-used to determine the next visit that corresponds to the same bus, with $\Upsilon_i$ being shorthand notation. Thus, $\Gamma_j$ and
-$\Gamma_{\Upsilon_i}$, for $\Upsilon_i = j$, would both map to the same bus index as long as $\Upsilon_i$ is not the null element, $\varnothing$.
-src_latex{\textcolor{blue}{The null element is reserved for BEBs that have no future visits.}}
+The SOC src_latex{\textcolor{blue}{upon arrival for}} visit $i$ is denoted as $\eta_i$ src_latex{\textcolor{blue}{kWh}}.
+src_latex{\textcolor{blue}{Because the SOC for a visit $i$ is dependent on its previous visits}}, the mapping $\Upsilon:
+\mathbb{V} \rightarrow \mathbb{V} \bigcup \{\varnothing\}$ is used to determine the next visit that corresponds to the same bus, with
+$\Upsilon_i$ being shorthand notation. Thus, $\Gamma_j$ and $\Gamma_{\Upsilon_i}$, for $\Upsilon_i = j$, would both map to the same bus index as long
+as $\Upsilon_i$ is not the null element, $\varnothing$. src_latex{\textcolor{blue}{The null element is reserved for BEBs that
+have no future visits.}}
 
 #+begin_src latex
   \textcolor{blue}{To drive time spent on the charger, $s_i$, as well as define initial, final, and intermediate bus charges for each
@@ -105,13 +107,13 @@ src_latex{\textcolor{blue}{The null element is reserved for BEBs that have no fu
 #+end_src
 
 It is assumed that the charge received is proportional to the time spent charging. The rate for charger $q$ is denoted
-as $r_q$ src_latex{\textcolor{blue}{[kW]}}. Note that a value of $r_q = 0$ corresponds to a queue where no charging occurs. A bus in
-such a queue is simply waiting at the station for the departure time. The queue indices are ordered such that the first
-$n_B$ queues have $r_q = 0$ to allow an arbitrary number of buses to sit idle at any given moment in time.
-src_latex{\textcolor{blue}{The next $n_C$ queues are reserved for the slow and fast chargers.}} The amount of discharge between
-visits $i$ and $\Upsilon_i$, the next visit of the same bus, is denoted as $\Delta_i$ src_latex{\textcolor{blue}{[kWh]}}. If visit $i$ occurred
-at charger $q$, the src_latex{\textcolor{blue}{SOC}} of the src_latex{\textcolor{blue}{BEB's next arrival}}, $\Upsilon_i$, would be $\eta_{\Upsilon_i} = \eta_i + s_i
-r_q - \Delta_i$.
+as $r_q$ src_latex{\textcolor{blue}{kW}}. Note that a value of $r_q = 0$ corresponds to a queue where no charging
+occurs. A bus in such a queue is simply waiting at the station for the departure time. The queue indices are ordered
+such that the first $n_B$ queues have $r_q = 0$ to allow an arbitrary number of buses to sit idle at any given moment in
+time. src_latex{\textcolor{blue}{The next $n_C$ queues are reserved for the slow and fast chargers.}} The amount of
+discharge between visits $i$ and $\Upsilon_i$, the next visit of the same bus, is denoted as $\Delta_i$
+src_latex{\textcolor{blue}{kWh}}. If visit $i$ occurred at charger $q$, the src_latex{\textcolor{blue}{SOC}} of the
+src_latex{\textcolor{blue}{BEB's next arrival}}, $\Upsilon_i$, would be $\eta_{\Upsilon_i} = \eta_i + s_i r_q - \Delta_i$.
 
 The binary decision variable $w_{iq} \in \{0,1\}$ is introduced to src_latex{\textcolor{blue}{indicate the active charger for visit $i$
 in vector form. The form of the SOC for the next visit, $\Upsilon_i$, can be written using the following constraints.}}
@@ -151,11 +153,11 @@ and lower bounds for the current SOC are written as follows.}}
 #+end_src
 
 src_latex{\textcolor{blue}{{\autoref{eq:maxcharge}} ensures that the BEB SOC does not exceed the battery capacity, and
-{\autoref{eq:mincharge}} enforces that the inital SOC for each visit is above the threshold of $\nu_{\Gamma_i}\kappa$}}. Note that
-the term $s_i w_{iq}$ is a bilinear term. A standard way of linearizing a bilinear term that contains an integer
+{\autoref{eq:mincharge}} enforces that the inital SOC for each visit is above the threshold of $\nu_{\Gamma_i}\kappa_{\Gamma_i}$}}. Note
+that the term $s_i w_{iq}$ is a bilinear term. A standard way of linearizing a bilinear term that contains an integer
 variable is by introducing a slack variable with an either/or constraint
-[cite:@chen-2010-applied;@rodriguez-2013-compar-asses]. Allowing the slack variable $g_{iq}$ src_latex{\textcolor{blue}{[s]}} to be
-equal to $s_i w_{iq}$, $g_{iq}$ can be defined as
+[cite:@chen-2010-applied;@rodriguez-2013-compar-asses]. Allowing the slack variable $g_{iq}$
+src_latex{\textcolor{blue}{seconds}} to be equal to $s_i w_{iq}$, $g_{iq}$ can be defined as
 
 #+begin_src latex
 \begin{equation}

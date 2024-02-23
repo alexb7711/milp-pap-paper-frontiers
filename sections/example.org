@@ -29,12 +29,13 @@ src_latex{\textcolor{blue}{A total of}} $n_C = \fpeval{\fast + \slow}$ chargers 
 charging (\slows kW) and \fast are fast charging (\fasts kW). src_latex{\textcolor{blue}{The technique to minimize the total charger
 count will now be employed}}.
 
-src_latex{\textcolor{blue}{To encourage the MILP PAP problem to utilize the fewest number of chargers, the value of $m_q$ in the
-objective function, {\autoref{eq:objective}}, is $\forall q \in \{1,2,..., n_B \}; m_q = 0$ and $\forall q \in \{n_B + 1, n_B + 2,...,
-n_B + n_C \}; m_q = 1000q$.}} The charge duration scalar, $\epsilon_q$, is defined as $\epsilon_q = r_q$ to create a consumption cost
-term, $g_{iq}\epsilon_q$ src_latex{\textcolor{blue}{[kWh]. By consumption cost, it is meant that the total energy consumed by the charge
-schedule will be accounted for in the objective function.}} This src_latex{\textcolor{blue}{method encourages}} the model to minimize
-active charger times, particularly for the fast chargers.
+src_latex{\textcolor{blue}{To encourage the MILP PAP problem to utilize the fewest number of chargers, the value of
+$m_q$ in the objective function, {\autoref{eq:objective}}, is $\forall q \in \{1,2,..., n_B \}; m_q = 0$ and $\forall q \in \{n_B + 1,
+n_B + 2,..., n_B + n_C \}; m_q = 1000q$.}} The charge duration scalar, $\epsilon_q$, is defined as $\epsilon_q = r_q$ to create a
+consumption cost term, $g_{iq}\epsilon_q$ src_latex{\textcolor{blue}{kWh. By consumption cost, it is meant that the total
+energy consumed by the charge schedule will be accounted for in the objective function.}} This
+src_latex{\textcolor{blue}{method encourages}} the model to minimize active charger times, particularly for the fast
+chargers.
 
 Another heuristic-based optimization strategy, referred to as Qin-Modified, is also employed as a means of comparison
 with the results of the MILP PAP. The Qin-Modified strategy is based on the threshold strategy of
