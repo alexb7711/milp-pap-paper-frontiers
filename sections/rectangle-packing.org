@@ -4,23 +4,24 @@
 :END:
 
 Applying the PAP to BEB charging requires four fundamental changes. The first is that the time that a BEB spends
-charging src_latex{\textcolor{blue}{must be}} allowed to vary. src_latex{\textcolor{blue}{That is, $u_i$, $d_i$, and $s_i$ become variables}} of
-optimization. src_latex{\textcolor{blue}{This is done primarily because chargers of various speeds are to be introduced, and allowing
-the charge time to be variable allows the MILP to decide what type of charger should be utilized.}} Second, in the PAP
-each visit is assumed to be a different vehicle. For the BEB charging problem, each bus may make multiple visits to the
-station throughout the day\textcolor{blue}{. Thus, the} resulting src_latex{\textcolor{blue}{SOC}} for a bus at a given src_latex{\textcolor{blue}{visit}} is
-dependent upon each of the prior visits. The third fundamental change is related to the first two. The
-src_latex{\textcolor{blue}{SOC}} of each bus must be tracked to ensure that charging across multiple visits is sufficient to allow
-each bus to execute its route throughout the day. Finally, src_latex{\textcolor{blue}{as previously stated}}, the PAP models the
-charger as one continuous bar. For the BEB, it will be assumed that a discrete number of chargers exist. Moreover, it is
-assumed that these chargers may have different charge rates.
+charging src_latex{\textcolor{blue}{must be}} allowed to vary. src_latex{\textcolor{blue}{That is, $u_i$, $d_i$, and
+$s_i$ become variables}} of optimization. src_latex{\textcolor{blue}{This is done primarily because chargers of various
+speeds are to be introduced, and allowing the charge time to be variable allows the MILP to decide what type of charger
+should be utilized.}} Second, in the PAP each visit is assumed to be a different vehicle. For the BEB charging problem,
+each bus may make multiple visits to the station throughout the day\textcolor{blue}{. Thus, the} resulting
+src_latex{\textcolor{blue}{SOC}} for a bus at a given src_latex{\textcolor{blue}{visit}} is dependent upon each of the
+prior visits. The third fundamental change is related to the first two. The src_latex{\textcolor{blue}{SOC}} of each bus
+must be tracked to ensure that charging across multiple visits is sufficient to allow each bus to execute its route
+throughout the day. Finally, src_latex{\textcolor{blue}{as previously stated}}, the PAP models the charger as one
+continuous bar. For the BEB, it will be assumed that a discrete number of chargers exist. Moreover, it is assumed that
+these chargers may have different charge rates.
 
 #+begin_src latex
-  \textcolor{blue}{A few assumptions are made in the derivation of the algorithm. The primary focus of this work is not estimating the
-    discharge of a BEB during its route. Thus, for simplicity, the discharge for each route will be pre-calculated by
-    assuming a fixed discharge rate (Kw) multiplied by r know. Secondly, it is assumed that the initial charge, $\alpha$,
-    is of a higher percentage than the final charge, $\beta$. Therefore, it must be assumed that the difference in the SOC
-    can reach $\alpha$ by the beginning of the next working day.}
+  \textcolor{blue}{A few assumptions are made in the derivation of the algorithm. The primary focus of this work is not
+    estimating the discharge of a BEB during its route. Thus, for simplicity, the discharge for each route will be
+    pre-calculated by assuming a fixed discharge rate (Kw) multiplied by r know. Secondly, it is assumed that the initial
+    charge, $\alpha$, is of a higher percentage than the final charge, $\beta$. Therefore, it must be assumed that the
+    difference in the SOC can reach $\alpha$ by the beginning of the next working day.}
 #+end_src
 
 The discussion of the four changes is separated into two sections. \autoref{sec:queuing} discusses the changes in the
@@ -83,10 +84,11 @@ that represent the $n_Q$ chargers}}.
 :custom_id: sec:batt_dynamics
 :END:
 
-src_latex{\textcolor{blue}{Battery dynamic constraints are now to be introduced.}} Two constraints are enforced src_latex{\textcolor{blue}{on}}
-the SOC src_latex{\textcolor{blue}{for each BEB}}: src_latex{\textcolor{blue}{the SOC must}} always src_latex{\textcolor{blue}{remain above a specified
-percentage to guarantee}} sufficient charge to execute their respective routes and each bus must end the day
-src_latex{\textcolor{blue}{with an SOC above a specified}} threshold, preparatory for the next day.
+src_latex{\textcolor{blue}{Battery dynamic constraints are now to be introduced.}} Two constraints are enforced
+src_latex{\textcolor{blue}{on}} the SOC src_latex{\textcolor{blue}{for each BEB}}: src_latex{\textcolor{blue}{the SOC
+must}} always src_latex{\textcolor{blue}{remain above a specified percentage to guarantee}} sufficient charge to execute
+their respective routes and each bus must end the day src_latex{\textcolor{blue}{with an SOC above a specified}}
+threshold, preparatory for the next day.
 
 The SOC src_latex{\textcolor{blue}{upon arrival for}} visit $i$ is denoted as $\eta_i$ src_latex{\textcolor{blue}{kWh}}.
 src_latex{\textcolor{blue}{Because the SOC for a visit $i$ is dependent on its previous visits}}, the mapping $\Upsilon:
@@ -96,14 +98,14 @@ as $\Upsilon_i$ is not the null element, $\varnothing$. src_latex{\textcolor{blu
 have no future visits.}}
 
 #+begin_src latex
-  \textcolor{blue}{To drive time spent on the charger, $s_i$, as well as define initial, final, and intermediate bus charges for each
-    visit $i$, the sets for initial and final visits must be defined. Let the mapping of the first visit by each bus be
-    denoted as $\Gamma^0 : \mathbb{B} \rightarrow \mathbb{V}$. The resulting value of the mapping $\Gamma^0$ represents
-    the index for the first visit of bus $b$. Similarly, let $\Gamma^f : \mathbb{B} \rightarrow \mathbb{V}$ maps the
-    indices for the final visits for each bus $b \in \mathbb{B}$. Let the storthand for each mapping be denoted as
-    $\Gamma^0_b$ and $\Gamma^f_b$, respectively. The initial and final bus charge percentages, $\alpha$ and $\beta$, can
-    then be represented by the constraint equations $\eta_{\Gamma^0_b} = \alpha \kappa_{b}$ and $\eta_{\Gamma^f_b} = \beta
-    \kappa_{b}$, respectively. The intermediate charges must be determined during runtime.}
+  \textcolor{blue}{To drive time spent on the charger, $s_i$, as well as define initial, final, and intermediate bus
+    charges for each visit $i$, the sets for initial and final visits must be defined. Let the mapping of the first visit
+    by each bus be denoted as $\Gamma^0 : \mathbb{B} \rightarrow \mathbb{V}$. The resulting value of the mapping
+    $\Gamma^0$ represents the index for the first visit of bus $b$. Similarly, let $\Gamma^f : \mathbb{B} \rightarrow
+    \mathbb{V}$ maps the indices for the final visits for each bus $b \in \mathbb{B}$. Let the storthand for each mapping
+    be denoted as $\Gamma^0_b$ and $\Gamma^f_b$, respectively. The initial and final bus charge percentages, $\alpha$ and
+    $\beta$, can then be represented by the constraint equations $\eta_{\Gamma^0_b} = \alpha \kappa_{b}$ and
+    $\eta_{\Gamma^f_b} = \beta \kappa_{b}$, respectively. The intermediate charges must be determined during runtime.}
 #+end_src
 
 It is assumed that the charge received is proportional to the time spent charging. The rate for charger $q$ is denoted
