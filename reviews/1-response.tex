@@ -1,0 +1,138 @@
+% Created 2024-02-24 Sat 13:07
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt,a4paper,final]{article}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+\usepackage{algorithm2e}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Alexander Brown}
+\date{\today}
+\title{Response To Reviewers}
+\hypersetup{
+ pdfauthor={Alexander Brown},
+ pdftitle={Response To Reviewers},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.2 (Org mode 9.6.15)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+Thank you for taking the time to thoroughly review our manuscript and provide us the chance to submit a revised version
+of the document. We appreciate the effort and dedication in providing feedback to our document and are grateful for the
+insightful comments on improving our paper. We have incorporated most of the suggestions made by the reviewer. Said
+changes are represented by the blue text in the manuscript. Below, a point-by-point response to the reviewers comments
+are presented.
+
+\section{Reviewer's Comments to the Authors}
+\label{sec:org10c8947}
+
+The article is on an interesting topic of scheduling charging visits by battery electric busses. A modified formulation
+based on berth allocation problem is proposed for allocating busses to chargers. While the topic is interesting the
+description of the formulation is not coherrent. It may be of great help to the reader if the following points are
+addressed before the article is published.
+
+\begin{quote}
+  \textcolor{blue}{Thank you! The points given were of great help in improving our document.}
+\end{quote}
+
+\begin{itemize}
+\item Mathematical notations should be properly denoted and introduced coherently in the discussion for the ease of understanding. For example, authors could follow the standard definitions sets, parameters, and variables using mathematical notation to describe the formulation.
+\end{itemize}
+
+\begin{quote}
+  \textcolor{blue}{[Droge - Here is a better response] Thank you very much for your thorough review. We have revisited the introduction of each variable. We have also clarified the discussions, provided examples, and stated units where applicable.}
+\end{quote}
+
+\begin{itemize}
+\item Consider adding the reference model to the appendix. This will allow the authors to describe the proposed model is more detail by explaining the underlying notations and assumptions.
+\end{itemize}
+
+\begin{quote}
+\textcolor{blue}{[Droge - Here is a better response. No need to come off sounding confrontational.] Thank you for this suggestion. In the end, we decided to keep the manuscript development as is. The rationale being that the formulations are similar between the BAP, PAP, and the newly derived work. We decided that the developments of this work are more clearly represented when they are posed as changes to the previous work. We have made a significant effort to clarify notation to make the underlying explanation and assumptions more clear.}
+\end{quote}
+
+\begin{itemize}
+\item TYPO: Section 2.2, list of parameters, both nV and nN are used to denote the same thing, which appears to be a typographical error.
+\end{itemize}
+
+\begin{quote}
+\textcolor{blue}{[Droge - Better response:] Thank you for noticing this mistake. There was a migration of variable notation in the previous manuscript and we did not catch all of the changes prior to submission. We have now updated everything to use $n_V$.}
+\end{quote}
+
+\begin{itemize}
+\item Section 3.1, nC is introduced as number of chargers without explaining the need for it and then it doesn’t appear anywhere else in the formulation.
+\end{itemize}
+
+\begin{quote}
+\textcolor{blue}{[Droge: You need an explanation here of what you have done to clarify nC]}
+\end{quote}
+
+\begin{itemize}
+\item Section 3.1, “The variable S is likewise replaced with …” there is no variable S in the referred formulation.
+\end{itemize}
+
+\begin{quote}
+\textcolor{blue}{[Droge - You need to tell the reviewer thank you as well as tell them what you did with the variable "S" (i.e., did you remove it and replace all instances with something else)]}
+\end{quote}
+
+\begin{itemize}
+\item Rationale for additional queues is not evident, further explanation would be useful for the readers. E.g., why the proposed methodology is chosen over having one additional charger with charge rate = 0.
+\end{itemize}
+
+
+\begin{quote}
+\textcolor{blue}{[Droge - Updated response] - Thank you for pointing out that this concept is not clear. We have added more explanation to Section ??? about the rationale for multiple waiting queues. The reason for multiple waiting queues is that multiple buses could be waiting at the same exact time. The mathematical formulation does not allow them to be in a single queue with an overlapping time window. We have created a waiting queue for each bus as the extreme condition where all busses are in the station, but do not need to charge.}
+\end{quote}
+
+\begin{itemize}
+\item Certain critical assumptions like fixed charge and discharge rates is only stated in the results (section 4.1). This is should be stated before the formulation itself.
+
+\item[{$\boxtimes$}] Fixed discharge calculations
+\item[{$\boxtimes$}] Difference in \(\alpha\) and \(\beta\) is able to be overcome overnight
+\end{itemize}
+
+\begin{quote}
+\textcolor{blue}{[Droge - You need to describe where it is that you changed things so that the assumptions are more clear]}
+\end{quote}
+
+\begin{itemize}
+\item Some notations are not clear. For example, i is a parameter defined as discharge but only the discharge rate was assumed to be fixed and the duration is a variable.
+\end{itemize}
+
+Went through and added units and clarifying sentences to make things more clear.
+
+\begin{quote}
+\textcolor{blue}{[Droge] Thank you for pointing this out. We have performed a thorough review of the manuscript to ensure that variables
+and units are clear. Note that $i$ is an indexing variable. The variables associated with charge are
+- $\alpha$: Initial charge percentage
+- $\beta$: Final charge percentage
+- $\nu$: Minimum intermediate charge percentage allowed
+- $\kappa$: Battery capacity
+- $\zeta$: Discharge rate for BEB
+- $\Delta$: Discharge over route $i$}
+\end{quote}
+
+\begin{itemize}
+\item other units that are not clear include charge gain variable ‘g’, what units does it have?
+\end{itemize}
+
+\begin{quote}
+\textcolor{blue}
+{- [X] Add units to table
+- [X] Add units when variable is introduced}
+\end{quote}
+\end{document}
