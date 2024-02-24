@@ -6,22 +6,24 @@
 Applying the PAP to BEB charging requires four fundamental changes. The first is that the time that a BEB spends
 charging src_latex{\textcolor{blue}{must be}} allowed to vary. src_latex{\textcolor{blue}{That is, $u_i$, $d_i$, and
 $s_i$ become variables}} of optimization. src_latex{\textcolor{blue}{This is done primarily because chargers of various
-speeds are to be introduced, and allowing the charge time to be variable allows the MILP to decide what type of charger
-should be utilized.}} Second, in the PAP each visit is assumed to be a different vehicle. For the BEB charging problem,
-each bus may make multiple visits to the station throughout the day\textcolor{blue}{. Thus, the} resulting
-src_latex{\textcolor{blue}{SOC}} for a bus at a given src_latex{\textcolor{blue}{visit}} is dependent upon each of the
-prior visits. The third fundamental change is related to the first two. The src_latex{\textcolor{blue}{SOC}} of each bus
-must be tracked to ensure that charging across multiple visits is sufficient to allow each bus to execute its route
-throughout the day. Finally, src_latex{\textcolor{blue}{as previously stated}}, the PAP models the charger as one
-continuous bar. For the BEB, it will be assumed that a discrete number of chargers exist. Moreover, it is assumed that
-these chargers may have different charge rates.
+speeds are to be introduced. Allowing BEBs to have multiple visits that utilize an unknown charger, implies
+indeterminate charge times to maintain a minimum SOC threshold.}} Second, in the PAP each visit is assumed to be a
+different vehicle. For the BEB charging problem, each bus may make multiple visits to the station throughout the
+day\textcolor{blue}{. Thus, the} resulting src_latex{\textcolor{blue}{SOC}} for a bus at a given
+src_latex{\textcolor{blue}{visit}} is dependent upon each of the prior visits. The third fundamental change is related
+to the first two. The src_latex{\textcolor{blue}{SOC}} of each bus must be tracked to ensure that charging across
+multiple visits is sufficient to allow each bus to execute its route throughout the day. Finally,
+src_latex{\textcolor{blue}{as previously stated}}, the PAP models the charger as one continuous bar. For the BEB, it
+will be assumed that a discrete number of chargers exist. Moreover, it is assumed that these chargers may have different
+charge rates.
 
 #+begin_src latex
-  \textcolor{blue}{A few assumptions are made in the derivation of the algorithm. The primary focus of this work is not
-    estimating the discharge of a BEB during its route. Thus, for simplicity, the discharge for each route will be
-    pre-calculated by assuming a fixed discharge rate (Kw) multiplied by r know. Secondly, it is assumed that the initial
-    charge, $\alpha$, is of a higher percentage than the final charge, $\beta$. Therefore, it must be assumed that the
-    difference in the SOC can reach $\alpha$ by the beginning of the next working day.}
+  \textcolor{blue}{A few assumptions are made in the derivation of the algorithm. As this work is not focused on
+    estimating the discharge of a BEB during its route, the discharge for each route will be pre-calculated by assuming a
+    fixed discharge rate kW multiplied by the route duration in hours. Secondly, it is assumed that the initial charge,
+    $\alpha$, is of a higher percentage of the battery capacity, $\kappa_b$ kWh, than the final charge, $\beta$.
+    Therefore, it must be assumed that the difference in the SOC can reach $\alpha_b\kappa_b$ by the beginning of the next
+    working day.}
 #+end_src
 
 The discussion of the four changes is separated into two sections. \autoref{sec:queuing} discusses the changes in the
@@ -49,14 +51,15 @@ a queue with a specified duration, then departs for its next route.}} Two separa
 buses or visits by the same bus, src_latex{\textcolor{blue}{but for a different visit index}}.
 #+end_comment
 
-It is assumed that each BEB have the same physical dimensions; thus, the PAP spatial variable, \textcolor{blue}{$l_i$}, is removed
-and $v_i$ is made to be an integer corresponding to which queue visit $i$ will be using, src_latex{\textcolor{blue}{$v_i \in \mathbb{Q}$}}.
-src_latex{\textcolor{blue}{That is, the queue position is now discretized over $n_Q$ chargers. Thus, when $\psi_{ij} = 1$, vehicle $j$
-is placed in a charging queue with a larger index than vehicle $i$, $v_j > v_i$.}} The \textcolor{blue}{charger length $L$} is
+It is assumed that each BEB has the same physical dimensions. Because of this assumption, the PAP spatial variable,
+\textcolor{blue}{$l_i$}, may be removed and $v_i$ is made to be an integer corresponding to which queue visit $i$ will
+be using, src_latex{\textcolor{blue}{$v_i \in \mathbb{Q}$}}. src_latex{\textcolor{blue}{That is, the queue position is now
+discretized over $n_Q$ chargers where a BEB occupies single charge queue. Thus, when $\psi_{ij} = 1$, vehicle $j$ is placed
+in a charging queue with a larger index than vehicle $i$, $v_j > v_i$.}} The \textcolor{blue}{charger length $L$} is
 likewise replaced with $n_Q$. Note that $n_Q = n_B + n_C$, where $n_B$ is the number of buses and $n_C$ is the number of
-chargers. src_latex{\textcolor{blue}{The rationale for adding additional idle queues is to allow BEBs to be "set aside" if no
-additional charge is required. Adding one idle queue for each BEB ensures that the constraints will be satisfied if
-multiple buses sharing overlapping times at the station are placed in idle queues. This method will be applied when
+chargers. src_latex{\textcolor{blue}{The rationale for adding additional idle queues is to allow BEBs to be "set aside"
+if no additional charge is required. Adding one idle queue for each BEB ensures that the constraints will be satisfied
+if multiple buses sharing overlapping times at the station are placed in idle queues. This method will be applied when
 defining the parameters in {\autoref{sec:example}}}}. The modified queuing constraints can be written as shown in
 \autoref{eq:packconstrs}.
 
