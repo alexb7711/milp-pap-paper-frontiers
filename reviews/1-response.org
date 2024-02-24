@@ -46,7 +46,7 @@ addressed before the article is published.
 \textcolor{blue}{This is another migration of notation issue. The variable $S$ has been replaced with $L$ throughout the document. We appreciate attention detail taken to find this problem.}
 \end{quote}
 
-- Rationale for additional queues is not evident, further explanation would be useful for the readers. E.g., why the proposed methodology is chosen over having one additional charger with charge rate = -
+- Rationale for additional queues is not evident, further explanation would be useful for the readers. E.g., why the proposed methodology is chosen over having one additional charger with charge rate = 0
 
 
 \begin{quote}
