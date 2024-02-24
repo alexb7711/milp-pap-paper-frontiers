@@ -1,11 +1,9 @@
 #+TITLE: Response To Reviewers
-#+OPTIONS: toc:nil
+#+OPTIONS: toc:nilO
 
-Thank you for taking the time to thoroughly review our manuscript and provide us the chance to submit a revised version
-of the document. We appreciate the effort and dedication in providing feedback to our document and are grateful for the
-insightful comments on improving our paper. We have incorporated most of the suggestions made by the reviewer. Said
-changes are represented by the blue text in the manuscript. Below, a point-by-point response to the reviewers comments
-are presented.
+# Example: https://apastyle.apa.org/style-grammar-guidelines/research-publication/sample-response-reviewers.pdf
+
+Thank you for taking the time to thoroughly review our manuscript and provide us the chance to submit a revised version. The time and effort dedicated in providing this insightful feedback and has contributed greatly to the quality of this work. We have incorporated most of the suggestions made by the reviewer. Said changes are represented by the blue text embedded within the manuscript. Below is a point-by-point response to the reviewers comments are presented. Relevant sections are mentioned when applicable to assist in searching for the associated changes.
 
 * Reviewer's Comments to the Authors
 
@@ -21,68 +19,67 @@ addressed before the article is published.
 - Mathematical notations should be properly denoted and introduced coherently in the discussion for the ease of understanding. For example, authors could follow the standard definitions sets, parameters, and variables using mathematical notation to describe the formulation.
 
 \begin{quote}
-  \textcolor{blue}{[Droge - Here is a better response] Thank you very much for your thorough review. We have revisited the introduction of each variable. We have also clarified the discussions, provided examples, and stated units where applicable.}
+  \textcolor{blue}{Thank you very much for your thorough review. We have revisited the introduction of each variable. We have also clarified the discussions, provided examples, and stated units where applicable.}
 \end{quote}
 
 - Consider adding the reference model to the appendix. This will allow the authors to describe the proposed model is more detail by explaining the underlying notations and assumptions.
 
 \begin{quote}
-\textcolor{blue}{[Droge - Here is a better response. No need to come off sounding confrontational.] Thank you for this suggestion. In the end, we decided to keep the manuscript development as is. The rationale being that the formulations are similar between the BAP, PAP, and the newly derived work. We decided that the developments of this work are more clearly represented when they are posed as changes to the previous work. We have made a significant effort to clarify notation to make the underlying explanation and assumptions more clear.}
+\textcolor{blue}{Thank you for this suggestion. In the end, we decided to keep the manuscript development as is. The rationale being that the formulations are similar between the BAP, PAP, and the newly derived work. We decided that the developments of this work are more clearly represented when they are posed as changes to the previous work. We have made a significant effort to clarify notation to make the underlying explanation and assumptions more clear.}
 \end{quote}
 
-- TYPO: Section 2.2, list of parameters, both nV and nN are used to denote the same thing, which appears to be a typographical error.
+- TYPO: Section -2, list of parameters, both $n_V$ and $n_N$ are used to denote the same thing, which appears to be a typographical error.
 
 \begin{quote}
-\textcolor{blue}{[Droge - Better response:] Thank you for noticing this mistake. There was a migration of variable notation in the previous manuscript and we did not catch all of the changes prior to submission. We have now updated everything to use $n_V$.}
+\textcolor{blue}{Thank you for noticing this mistake. There was a migration of variable notation in the previous manuscript, and we did not catch all the changes prior to submission. We have now updated everything to use $n_V$.}
 \end{quote}
 
-- Section 3.1, nC is introduced as number of chargers without explaining the need for it and then it doesn’t appear anywhere else in the formulation.
+- Section -1, $n_C$ is introduced as number of chargers without explaining the need for it and then it doesn’t appear anywhere else in the formulation.
 
 \begin{quote}
-\textcolor{blue}{[Droge: You need an explanation here of what you have done to clarify nC]}
+\textcolor{blue}{Thank you for pointing this out. While $n_C$ was being utilized, it was not clearly stated when it was being applied. We have made efforts to clarify when this variable is applied.}
 \end{quote}
 
-- Section 3.1, “The variable S is likewise replaced with …” there is no variable S in the referred formulation.
+- Section -1, “The variable $S$ is likewise replaced with …” there is no variable $S$ in the referred formulation.
 
 \begin{quote}
-\textcolor{blue}{[Droge - You need to tell the reviewer thank you as well as tell them what you did with the variable "S" (i.e., did you remove it and replace all instances with something else)]}
+\textcolor{blue}{This is another migration of notation issue. The variable $S$ has been replaced with $L$ throughout the document. We appreciate attention detail taken to find this problem.}
 \end{quote}
 
-- Rationale for additional queues is not evident, further explanation would be useful for the readers. E.g., why the proposed methodology is chosen over having one additional charger with charge rate = 0.
+- Rationale for additional queues is not evident, further explanation would be useful for the readers. E.g., why the proposed methodology is chosen over having one additional charger with charge rate = -
 
 
 \begin{quote}
-\textcolor{blue}{[Droge - Updated response] - Thank you for pointing out that this concept is not clear. We have added more explanation to Section ??? about the rationale for multiple waiting queues. The reason for multiple waiting queues is that multiple buses could be waiting at the same exact time. The mathematical formulation does not allow them to be in a single queue with an overlapping time window. We have created a waiting queue for each bus as the extreme condition where all busses are in the station, but do not need to charge.}
+\textcolor{blue}{Thank you for pointing out that this concept is not clear. We have added more explanation to Section 3 about the rationale for multiple waiting queues. The reason for multiple waiting queues is that multiple buses could be waiting at the same exact time. The mathematical formulation does not allow them to be in a single queue with an overlapping time window. We have created a waiting queue for each bus as the extreme condition where all buses are in the station, but do not need to charge.}
 \end{quote}
 
-- Certain critical assumptions like fixed charge and discharge rates is only stated in the results (section 4.1). This is should be stated before the formulation itself.
-
-- [X] Fixed discharge calculations
-- [X] Difference in $\alpha$ and $\beta$ is able to be overcome overnight
+- Certain critical assumptions like fixed charge and discharge rates is only stated in the results (section -1). This should be stated before the formulation itself.
 
 \begin{quote}
-\textcolor{blue}{[Droge - You need to describe where it is that you changed things so that the assumptions are more clear]}
+\textcolor{blue}{We appreciate your feedback. An effort to explain these critical assumptions are presented in the introductory paragraphs of Section - The assumptions listed are: discharge calculation and that the difference of SOC at the end of the working day can reach the assumed inital SOC for the next day.}
 \end{quote}
 
-- Some notations are not clear. For example, i is a parameter defined as discharge but only the discharge rate was assumed to be fixed and the duration is a variable.
+- Some notations are not clear. For example, $i$ is a parameter defined as discharge, but only the discharge rate was assumed to be fixed, and the duration is a variable.
 
 Went through and added units and clarifying sentences to make things more clear.
 
+#+begin_src latex
 \begin{quote}
-\textcolor{blue}{[Droge] Thank you for pointing this out. We have performed a thorough review of the manuscript to ensure that variables
-and units are clear. Note that $i$ is an indexing variable. The variables associated with charge are
-- $\alpha$: Initial charge percentage
-- $\beta$: Final charge percentage
-- $\nu$: Minimum intermediate charge percentage allowed
-- $\kappa$: Battery capacity
-- $\zeta$: Discharge rate for BEB
-- $\Delta$: Discharge over route $i$}
+\textcolor{blue}{Thank you for pointing this out. We have performed a thorough review of the manuscript to ensure that variables and units are clear. Note that $i$ is an indexing variable. The variables associated with charge are:}
+
+\begin{itemize}
+\item \textcolor{blue}{$\alpha$ \%: Initial charge percentage}
+\item \textcolor{blue}{$\beta$ \%: Final charge percentage}
+\item \textcolor{blue}{$\nu$ \%: Minimum intermediate charge percentage allowed}
+\item \textcolor{blue}{$\kappa$ kWh: Battery capacity}
+\item \textcolor{blue}{$\zeta$ kW: Discharge rate for BEB}
+\item \textcolor{blue}{$\Delta$ kWh: Discharge over route $i$}
+\end{itemize}
 \end{quote}
+#+end_src
 
-- other units that are not clear include charge gain variable ‘g’, what units does it have?
+- Other units that are not clear include charge gain variable ‘g’, what units does it have?
 
 \begin{quote}
-\textcolor{blue}
-{- [X] Add units to table
-- [X] Add units when variable is introduced}
+\textcolor{blue}{Thank you pointing out this confusion for the reader. We have made significant efforts in clarifying the units of each variable that is introduced, as well as listed the units of each variable in Table 1 of the manuscript.}
 \end{quote}
