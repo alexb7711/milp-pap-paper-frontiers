@@ -1,4 +1,4 @@
-% Created 2024-02-24 Sat 18:26
+% Created 2024-02-24 Sat 18:30
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -516,17 +516,18 @@ strategy called Qin-Modified which is used as a comparison to the MILP PAP. Resu
 \label{beb-scenario}
 To display the capabilities of the model, an example scenario is presented. The scenario was run over a time horizon of
 \(T=24\) hours, utilizing \(n_B = \A\) buses with \(n_V = \N\) visits divided between the \(n_B\) buses. As stated before, the
-route times are sampled from a set of routes from the UTA. Each bus has \textcolor{blue}{a} \batsize kWh battery that is
-required to stay above \textcolor{blue}{an SOC of $\nu_b =$} \mincharge (\fpeval{\batsize * \minchargeD} kWh)
-\textcolor{blue}{$\forall b \in \mathbb{B}$} to \textcolor{blue}{ensure that each BEB can complete its next route in addition to maintaining} battery health. Each bus is assumed to begin the working day with \textcolor{blue}{an SOC of $\alpha_i = $}
-\fpeval{\acharge*100}\% \textcolor{blue}{$\forall i \in \mathbb{V}$} (\fpeval{\acharge * \batsize} kWh). Additionally, each bus is
-required to end the day with a minimum \textcolor{blue}{ SOC of $\beta_i = $}\fpeval{\bcharge * 100}\%
-(\fpeval{\bcharge * \batsize} kWh) \textcolor{blue}{$\forall i \in \mathbb{V}$}. This assumes that overnight charging
-can account for \textcolor{blue}{the deficient} 20\% \textcolor{blue}{SOC}. Each bus is assumed to discharge at a rate of
-\textcolor{blue}{$\zeta = $} 30 kW. Note that many factors play a role in the rate of discharge; however, for the sake of
-simplicity \textcolor{blue}{since the discharge calculation is out of the scope of this work}, an average rate is used.
-\textcolor{blue}{A total of} \(n_C = \fpeval{\fast + \slow}\) chargers are utilized where \slow of the chargers are slow
-charging (\slows kW) and \fast are fast charging (\fasts kW). \textcolor{blue}{The technique to minimize the total charger count will now be employed}.
+route times are sampled from a set of routes from the UTA. Each bus has \textcolor{blue}{a} \batsize kWh
+battery that is required to stay above \textcolor{blue}{an SOC of $\nu_b =$} \mincharge (\fpeval\{\batsize *
+\minchargeD\} kWh) \textcolor{blue}{$\forall b \in \mathbb{B}$} to \textcolor{blue}{ensure that each BEB can complete its next route in addition to maintaining} battery health. Each bus is assumed to begin the working day with
+\textcolor{blue}{an SOC of $\alpha_i = $} \fpeval{\acharge*100}\% \textcolor{blue}{$\forall i \in \mathbb{V}$}
+(\fpeval{\acharge * \batsize} kWh). Additionally, each bus is required to end the day with a minimum
+\textcolor{blue}{ SOC of $\beta_i = $}\fpeval{\bcharge * 100}\% (\fpeval{\bcharge * \batsize} kWh)
+\textcolor{blue}{$\forall i \in \mathbb{V}$}. This assumes that overnight charging can account for
+\textcolor{blue}{the deficient} 20\% \textcolor{blue}{SOC}. Each bus is assumed to discharge at a
+rate of \textcolor{blue}{$\zeta = $} 30 kW. Note that many factors play a role in the rate of discharge; however,
+for the sake of simplicity \textcolor{blue}{since the discharge calculation is out of the scope of this work}, an average rate is used. \textcolor{blue}{A total of} \(n_C = \fpeval{\fast + \slow}\) chargers are
+utilized where \slow of the chargers are slow charging (\slows kW) and \fast are fast charging (\fasts kW).
+\textcolor{blue}{The technique to minimize the total charger count will now be employed}.
 
 \textcolor{blue}{To encourage the MILP PAP problem to utilize the fewest number of chargers, the value of $m_q$ in the objective function, {\autoref{eq:objective}}, is $\forall q \in \{1,2,..., n_B \}; m_q = 0$ and $\forall q \in \{n_B + 1, n_B + 2,..., n_B + n_C \}; m_q = 1000q$.} The charge duration scalar, \(\epsilon_q\), is defined as \(\epsilon_q = r_q\) to create a
 consumption cost term, \(g_{iq}\epsilon_q\) \textcolor{blue}{kWh. By consumption cost, it is meant that the total energy consumed by the charge schedule will be accounted for in the objective function.} This
@@ -537,18 +538,20 @@ Another heuristic-based optimization strategy, referred to as Qin-Modified, is a
 with the results of the MILP PAP. The Qin-Modified strategy is based on the threshold strategy of
 \cite{qin-2016-numer-analy}. The strategy has been modified slightly to accommodate the case of multiple charger types
 without an exhaustive search for the best charger type. The heuristic is based on a set of rules that revolve around the
-initial \textcolor{blue}{SOC} of the bus visit \(i\). There are three different thresholds, low (85\%),
-medium (90\%), and high (95\%). Buses below the low threshold \textcolor{blue}{($\text{SOC} \le 85\%$)} are prioritized to
-fast chargers and then are allowed to utilize slow chargers if no fast chargers are available. Buses between the low and
-medium threshold \textcolor{blue}{($85\% < \text{SOC} \le 90\%$)} prioritize slow chargers first and utilizes fast chargers
-only if no slow chargers are available. Buses above the medium threshold and below the high \textcolor{blue}{($90\% < \text{SOC} \le 95\%$)} will only be assigned to slow chargers. Buses above the high threshold \textcolor{blue}{($\text{SOC} > 95\%$)} will not be \textcolor{blue}{placed in a charging queue}. Once a bus has been assigned to a charger, it remains
-on the charger for the duration of the time it is at the station, or it reaches \textcolor{blue}{an SOC of} 95\% charge,
-whichever comes first.
+initial \textcolor{blue}{SOC} of the bus visit \(i\). There are three different thresholds,
+low (85\%), medium (90\%), and high (95\%). Buses below the low threshold \textcolor{blue}{($\text{SOC} \le 85\%$)} are prioritized to fast chargers and then are allowed to utilize slow chargers if no fast chargers are
+available. Buses between the low and medium threshold \textcolor{blue}{($85\% < \text{SOC} \le 90\%$)}
+prioritize slow chargers first and utilizes fast chargers only if no slow chargers are available. Buses above the medium
+threshold and below the high \textcolor{blue}{($90\% < \text{SOC} \le 95\%$)} will only be assigned to slow
+chargers. Buses above the high threshold \textcolor{blue}{($\text{SOC} > 95\%$)} will not be
+\textcolor{blue}{placed in a charging queue}. Once a bus has been assigned to a charger, it remains on the
+charger for the duration of the time it is at the station, or it reaches \textcolor{blue}{an SOC of} 95\%
+charge, whichever comes first.
 
 The total number of constraints resulted in \contvars continuous and \intvars integer/binary constraints. The
 optimization was performed using the Gurobi MILP solver \cite{gurobi-2021-gurob-optim} on a machine
-\textcolor{blue}{equipped with} an AMD Ryzen 9 5900X 12 - Processor (24 core) at 4.95GHz. The solver was allowed to run
-for \timeran seconds.
+\textcolor{blue}{equipped with} an AMD Ryzen 9 5900X 12 - Processor (24 core) at 4.95GHz. The solver was
+allowed to run for \timeran seconds.
 
 \subsection{Results}
 \label{results}
@@ -589,7 +592,7 @@ MILP's constraints to keep the bus \textcolor{blue}{SOC} above \mincharge and to
 the accumulated energy consumed is shown in \autoref{fig:energy-usage}. The MILP schedule is more efficient up until
 about \textcolor{blue}{the eleventh hour}. Again, this can be accounted for by the fact the MILP is
 accommodating the extra constraints. \textcolor{blue}{Due to} these constraints
-\textcolor{blue}{the} MILP PAP consumes about \(1\cdot10^5\) kWh more than the Qin-Modified. The overlap of the
+\textcolor{blue}{the} MILP PAP consumes about \(1\cdot10^4\) kWh more than the Qin-Modified. The overlap of the
 MILP PAP can be accounted for by \textcolor{blue}{referencing} \autoref{subfig:fast-charger-usage} and
 \autoref{subfig:slow-charger-usage}. Between the fifth and tenth hour, the MILP schedule heavily uses slow chargers
 increasing the rate at which power is being consumed. Afterwards, the MILP schedule at a minimum continues to use the
@@ -597,18 +600,17 @@ same amount of chargers as the Qin Schedule. Again, due to the added constraints
 resources to keep within the specified bounds.
 \section{Conclusion}
 \label{sec:conclusion}
-This work developed a MILP scheduling framework that optimally assigns \textcolor{blue}{fast and slow} chargers to a BEB
-bus fleet assuming a constant schedule. \textcolor{blue}{The BAP was briefly introduced followed by a description and formulation of the PAP.} \textcolor{blue}{The PAP was modified to allow charge time to be variable}. Because the
-\textcolor{blue}{modified} PAP \textcolor{blue}{no longer} requires the charge time to be given, linear battery dynamics
-were introduced \textcolor{blue}{to propagate each BEBs' SOC.} Additional constraints were also introduced to provide
-\textcolor{blue}{upper and lower} limits for the battery dynamics.
+This work developed a MILP scheduling framework that optimally assigns \textcolor{blue}{fast and slow}
+chargers to a BEB bus fleet assuming a constant schedule. \textcolor{blue}{The BAP was briefly introduced followed by a description and formulation of the PAP.} \textcolor{blue}{The PAP was modified to allow charge time to be variable}. Because the \textcolor{blue}{modified} PAP \textcolor{blue}{no longer}
+requires the charge time to be given, linear battery dynamics were introduced \textcolor{blue}{to propagate each BEBs' SOC.} Additional constraints were also introduced to provide \textcolor{blue}{upper and lower}
+limits for the battery dynamics.
 
 An example for the MILP PAP formulation was then presented and compared to a heuristic-based schedule, referred to as
 Qin-Modified. The MILP PAP optimization was run for \timeran seconds to a non-optimal solution. The Qin-Modified and
 MILP schedule utilized a similar amount of fast chargers; however, the MILP schedule more
 \textcolor{blue}{readily} used the slow chargers to its advantage when the
 \textcolor{blue}{objective function saw fit}. More importantly, the MILP PAP schedule utilized approximately
-\(1\cdot10^5\) kWh more than the Qin-Modified\textcolor{blue}{; however,} the charges \textcolor{blue}{for the MILP schedule} remained above the constrained minimum \textcolor{blue}{SOC} of \mincharge, and charged all the
+\(1\cdot10^4\) kWh more than the Qin-Modified\textcolor{blue}{; however,} the charges \textcolor{blue}{for the MILP schedule} remained above the constrained minimum \textcolor{blue}{SOC} of \mincharge, and charged all the
 buses to \fpeval{\bcharge *100}\% at the end of the working day. The Qin-Modified schedule, on the other hand,
 \textcolor{blue}{allowed the SOC of certain BEBs to drop to 0\%}.
 
@@ -624,7 +626,7 @@ is of interest to allow flexibility in the arrival and departure times.
 \clearpage
 
 \section{Figure Captions}
-\label{sec:org167ecd1}
+\label{sec:orgaaed147}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
