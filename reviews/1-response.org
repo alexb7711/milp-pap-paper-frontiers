@@ -3,7 +3,11 @@
 
 # Example: https://apastyle.apa.org/style-grammar-guidelines/research-publication/sample-response-reviewers.pdf
 
-Thank you for taking the time to thoroughly review our manuscript and provide us the chance to submit a revised version. The time and effort dedicated in providing this insightful feedback and has contributed greatly to the quality of this work. We have incorporated most of the suggestions made by the reviewer. Said changes are represented by the blue text embedded within the manuscript. Below is a point-by-point response to the reviewers comments are presented. Relevant sections are mentioned when applicable to assist in searching for the associated changes.
+Thank you for taking the time to thoroughly review our manuscript and provide us the chance to submit a revised version.
+The time and effort dedicated in providing this insightful feedback and has contributed greatly to the quality of this
+work. We have incorporated all of the suggestions made by the reviewer. Said changes are represented by the blue text
+embedded within the manuscript. Below is a point-by-point response to the reviewers comments are presented. Relevant
+sections are mentioned when applicable to assist in searching for the associated changes.
 
 * Reviewer's Comments to the Authors
 
@@ -56,28 +60,28 @@ addressed before the article is published.
 - Certain critical assumptions like fixed charge and discharge rates is only stated in the results (section -1). This should be stated before the formulation itself.
 
 \begin{quote}
-\textcolor{blue}{We appreciate your feedback. An effort to explain these critical assumptions are presented in the introductory paragraphs of Section 3. The assumptions discussed are: BEB discharges are pre-calculated and are assumed fixed and the difference in SOC at the beginning of the day is assumed to be higher than that of the end of the working day. Thus, the difference in SOC is assumed to be recuperated overnight.}
+\textcolor{blue}{We appreciate your feedback. An effort to explain these critical assumptions is presented in the introductory paragraphs of Section 3. The assumptions discussed are: BEB discharges are pre-calculated and are assumed fixed and the difference in SOC at the beginning of the day is assumed to be higher than that of the end of the working day. Thus, the difference in SOC is assumed to be recuperated overnight.}
 \end{quote}
 
 - Some notations are not clear. For example, $i$ is a parameter defined as discharge, but only the discharge rate was assumed to be fixed, and the duration is a variable.
 
 #+begin_src latex
-\begin{quote}
-\textcolor{blue}{Thank you for pointing this out. We have performed a thorough review of the manuscript to ensure that variables and units are clear. Note that $i$ is an indexing variable. The variables associated with charge are:}
+  \begin{quote}
+  \textcolor{blue}{Thank you for pointing this out. We have performed a thorough review of the manuscript to ensure that variables and units are clear. Note that $i$ is an indexing variable. The variables associated with charge are:}
 
-\begin{itemize}
-\item \textcolor{blue}{$\alpha$ \%: Initial charge percentage}
-\item \textcolor{blue}{$\beta$ \%: Final charge percentage}
-\item \textcolor{blue}{$\nu$ \%: Minimum intermediate charge percentage allowed}
-\item \textcolor{blue}{$\kappa$ kWh: Battery capacity}
-\item \textcolor{blue}{$\zeta$ kW: Discharge rate for BEB}
-\item \textcolor{blue}{$\Delta$ kWh: Discharge over route $i$}
-\end{itemize}
-\end{quote}
+  \begin{itemize}
+  \item \textcolor{blue}{$\alpha_b$ \%: Initial charge percentage}
+  \item \textcolor{blue}{$\beta_b$ \%: Final charge percentage}
+  \item \textcolor{blue}{$\nu_b$ \%: Minimum intermediate charge percentage allowed}
+  \item \textcolor{blue}{$\kappa_b$ kWh: Battery capacity}
+  \item \textcolor{blue}{$\zeta_b$ kW: Discharge rate for BEB}
+  \item \textcolor{blue}{$\Delta_i$ kWh: Discharge over route}
+  \end{itemize}
+  \end{quote}
 #+end_src
 
 - Other units that are not clear include charge gain variable ‘g’, what units does it have?
 
 \begin{quote}
-\textcolor{blue}{Thank you pointing out this confusion for the reader. We have made significant efforts in clarifying the units of each variable that is introduced, as well as listed the units of each variable in Table 1 of the manuscript.}
+\textcolor{blue}{Thank you for pointing out this confusion for the reader. To address the question, $g$ has units of seconds. We have made significant efforts in clarifying the units of each variable that is introduced, as well as listed the units of each variable in Table 1 of the manuscript.}
 \end{quote}
