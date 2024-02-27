@@ -19,8 +19,8 @@
       $q$                      &                         & Index used to refer to a queue                                                                                    \\
       \hline \multicolumn{3}{l}{Problem definition parameters}                                                                                                               \\
       \hline $\Gamma$               &                         & \textcolor{blue}{$\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ with $\Gamma_i$ used as a shorthand to denote the bus $b$ for visit $i$} \\
-      textcolor{blue}{$\alpha_b$}   & \textcolor{blue}{$\%$}  & Initial charge percentage time for \textcolor{blue}{BEB $b$}                                                      \\
-      textcolor{blue}{$\beta_b$}   & \textcolor{blue}{$\%$}  & Final charge percentage for \textcolor{blue}{bus $b$} at the end of the time horizon                              \\
+      \textcolor{blue}{$\alpha_b$}  & \textcolor{blue}{$\%$}  & Initial charge percentage time for \textcolor{blue}{bus $b$}                                                      \\
+      \textcolor{blue}{$\beta_b$}  & \textcolor{blue}{$\%$}  & Final charge percentage for \textcolor{blue}{bus $b$} at the end of the time horizon                              \\
       $\epsilon_q$                    &                         & Cost of using charger $q$ per unit time                                                                           \\
       $\Upsilon$                      &                         & $\Upsilon: \mathbb{V} \rightarrow \mathbb{V}$ mapping a visit to the
       next visit by the same bus with $\Upsilon_i$ being the shorthand.                                                                                                             \\
@@ -28,13 +28,13 @@
       $\Delta_i$                    & \textcolor{blue}{kWh}   & Discharge of visit over route $i$                                                                                 \\
       $\nu_b$                    & \textcolor{blue}{$\%$}  & Minimum charge allowed for bus $b$                                                                                \\
       $\tau_i$                    & \textcolor{blue}{s}     & Time visit $i$ must depart the station                                                                            \\
-      $\zeta_b$                    & \textcolor{blue}{Kw}    & Discharge rate for bus $b$                                                                                        \\
+      $\zeta_b$                    & \textcolor{blue}{kW}    & Discharge rate for bus $b$                                                                                        \\
       $a_i$                    & \textcolor{blue}{s}     & Arrival time of visit $i$                                                                                         \\
       $i_0$                    &                         & Indices associated with the initial arrival
       for every bus in \textcolor{blue}{$\mathbb{B}$}                                                                                                                        \\
       $i_f$                    &                         & Indices associated with the final arrival for every bus in \textcolor{blue}{$\mathbb{B}$}                         \\
       $m_q$                    &                         & Cost of a visit being assigned to charger $q$                                                                     \\
-      $r_q$                    & \textcolor{blue}{Kw}    & Charge rate of charger $q$ per unit time                                                                          \\
+      $r_q$                    & \textcolor{blue}{kW}    & Charge rate of charger $q$ per unit time                                                                          \\
       \hline \multicolumn{3}{l}{Decision Variables}                                                                                                                          \\
       \hline $\psi_{ij}$          &                         & Binary variable determining spatial ordering of vehicles $i$ and $j$                                              \\
       $\eta_i$                    & \textcolor{blue}{kWh}   & Initial charge for visit $i$                                                                                      \\

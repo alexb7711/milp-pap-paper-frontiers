@@ -1,4 +1,4 @@
-% Created 2024-02-27 Tue 11:09
+% Created 2024-02-27 Tue 12:12
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -282,9 +282,9 @@ charge rates.
 \textcolor{blue}{A few assumptions are made in the derivation of the algorithm. As this work is not focused on
   estimating the discharge of a BEB during its route, the discharge for each route will be pre-calculated by assuming a
   fixed discharge rate kW multiplied by the route duration in hours. Secondly, it is assumed that the initial SOC of
-  each BEB at the beginning of the day, $\alpha_b\kappa_b$, is larger than the SOC than the minimum required SOC at the
-  end of the day, $\beta_b\kappa_b$. Therefore, it must be assumed that the difference in the SOC can reach
-  $\alpha_b\kappa_b$ by the beginning of the next working day.}
+  each BEB at the beginning of the day, $\alpha_b\kappa_b$, is larger than the minimum required SOC at the end of the
+  day, $\beta_b\kappa_b$. Therefore, it must be assumed that the difference in the SOC can reach $\alpha_b\kappa_b$ by
+  the beginning of the next working day.}
 
 The discussion of the four changes is separated into two sections. \autoref{sec:queuing} discusses the changes in the
 spatial-temporal constraint formulation to form a queuing constraint. \autoref{sec:batt_dynamics} then discusses the
@@ -516,18 +516,17 @@ strategy called Qin-Modified which is used as a comparison to the MILP PAP. Resu
 \label{beb-scenario}
 To display the capabilities of the model, an example scenario is presented. The scenario was run over a time horizon of
 \(T=24\) hours, utilizing \(n_B = \A\) buses with \(n_V = \N\) visits divided between the \(n_B\) buses. As stated before, the
-route times are sampled from a set of routes from the UTA. Each bus has \textcolor{blue}{a} \batsize kWh
-battery that is required to stay above \textcolor{blue}{an SOC of $\nu_b =$} \mincharge (\fpeval\{\batsize *
-\minchargeD\} kWh) \textcolor{blue}{$\forall b \in \mathbb{B}$} to \textcolor{blue}{ensure that each BEB can complete its next route in addition to maintaining} battery health. Each bus is assumed to begin the working day with
-\textcolor{blue}{an SOC of $\alpha_b = $} \fpeval{\acharge*100}\% \textcolor{blue}{$\forall i \in \mathbb{V}$}
-(\fpeval{\acharge * \batsize} kWh). Additionally, each bus is required to end the day with a minimum
-\textcolor{blue}{ SOC of $\beta_b = $}\fpeval{\bcharge * 100}\% (\fpeval{\bcharge * \batsize} kWh)
-\textcolor{blue}{$\forall i \in \mathbb{V}$}. This assumes that overnight charging can account for
-\textcolor{blue}{the deficient} 20\% \textcolor{blue}{SOC}. Each bus is assumed to discharge at a
-rate of \textcolor{blue}{$\zeta = $} 30 kW. Note that many factors play a role in the rate of discharge; however,
-for the sake of simplicity \textcolor{blue}{since the discharge calculation is out of the scope of this work}, an average rate is used. \textcolor{blue}{A total of} \(n_C = \fpeval{\fast + \slow}\) chargers are
-utilized where \slow of the chargers are slow charging (\slows kW) and \fast are fast charging (\fasts kW).
-\textcolor{blue}{The technique to minimize the total charger count will now be employed}.
+route times are sampled from a set of routes from the UTA. Each bus has \textcolor{blue}{a battery capacity of $\kappa_b =$} \batsize kWh that is required to stay above \textcolor{blue}{an SOC of $\nu_b =$}
+\mincharge (\fpeval{\batsize * \minchargeD} kWh) \textcolor{blue}{$\forall b \in \mathbb{B}$} to
+\textcolor{blue}{ensure that each BEB can complete its next route in addition to maintaining} battery health.
+Each bus is assumed to begin the working day with \textcolor{blue}{an SOC of $\alpha_b = $}
+\fpeval{\acharge*100}\% \textcolor{blue}{$\forall i \in \mathbb{V}$} (\fpeval{\acharge * \batsize} kWh).
+Additionally, each bus is required to end the day with a minimum \textcolor{blue}{ SOC of $\beta_b = $}\fpeval{\bcharge * 100}\% (\fpeval{\bcharge * \batsize} kWh) \textcolor{blue}{$\forall i \in \mathbb{V}$}. This assumes that overnight charging can account for \textcolor{blue}{the deficient} 20\%
+\textcolor{blue}{SOC}. Each bus is assumed to discharge at a rate of \textcolor{blue}{$\zeta_b = $} 30
+kW. Note that many factors play a role in the rate of discharge; however, for the sake of simplicity
+\textcolor{blue}{since the discharge calculation is out of the scope of this work}, an average rate is used.
+\textcolor{blue}{A total of} \(n_C = \fpeval{\fast + \slow}\) chargers are utilized where \slow of the chargers
+are slow charging (\slows kW) and \fast are fast charging (\fasts kW). \textcolor{blue}{The technique to minimize the total charger count will now be employed}.
 
 \textcolor{blue}{To encourage the MILP PAP problem to utilize the fewest number of chargers, the value of $m_q$ in the objective function, {\autoref{eq:objective}}, is $\forall q \in \{1,2,..., n_B \}; m_q = 0$ and $\forall q \in \{n_B + 1, n_B + 2,..., n_B + n_C \}; m_q = 1000q$.} The charge duration scalar, \(\epsilon_q\), is defined as \(\epsilon_q = r_q\) to create a
 consumption cost term, \(g_{iq}\epsilon_q\) \textcolor{blue}{kWh. By consumption cost, it is meant that the total energy consumed by the charge schedule will be accounted for in the objective function.} This
@@ -628,7 +627,7 @@ is of interest to allow flexibility in the arrival and departure times.
 \clearpage
 
 \section{Figure Captions}
-\label{sec:org58c66d6}
+\label{sec:orgb4d4f64}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -675,8 +674,8 @@ is of interest to allow flexibility in the arrival and departure times.
     $q$                      &                         & Index used to refer to a queue                                                                                    \\
     \hline \multicolumn{3}{l}{Problem definition parameters}                                                                                                               \\
     \hline $\Gamma$               &                         & \textcolor{blue}{$\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ with $\Gamma_i$ used as a shorthand to denote the bus $b$ for visit $i$} \\
-    textcolor{blue}{$\alpha_b$}   & \textcolor{blue}{$\%$}  & Initial charge percentage time for \textcolor{blue}{BEB $b$}                                                      \\
-    textcolor{blue}{$\beta_b$}   & \textcolor{blue}{$\%$}  & Final charge percentage for \textcolor{blue}{bus $b$} at the end of the time horizon                              \\
+    \textcolor{blue}{$\alpha_b$}  & \textcolor{blue}{$\%$}  & Initial charge percentage time for \textcolor{blue}{bus $b$}                                                      \\
+    \textcolor{blue}{$\beta_b$}  & \textcolor{blue}{$\%$}  & Final charge percentage for \textcolor{blue}{bus $b$} at the end of the time horizon                              \\
     $\epsilon_q$                    &                         & Cost of using charger $q$ per unit time                                                                           \\
     $\Upsilon$                      &                         & $\Upsilon: \mathbb{V} \rightarrow \mathbb{V}$ mapping a visit to the
     next visit by the same bus with $\Upsilon_i$ being the shorthand.                                                                                                             \\
@@ -684,13 +683,13 @@ is of interest to allow flexibility in the arrival and departure times.
     $\Delta_i$                    & \textcolor{blue}{kWh}   & Discharge of visit over route $i$                                                                                 \\
     $\nu_b$                    & \textcolor{blue}{$\%$}  & Minimum charge allowed for bus $b$                                                                                \\
     $\tau_i$                    & \textcolor{blue}{s}     & Time visit $i$ must depart the station                                                                            \\
-    $\zeta_b$                    & \textcolor{blue}{Kw}    & Discharge rate for bus $b$                                                                                        \\
+    $\zeta_b$                    & \textcolor{blue}{kW}    & Discharge rate for bus $b$                                                                                        \\
     $a_i$                    & \textcolor{blue}{s}     & Arrival time of visit $i$                                                                                         \\
     $i_0$                    &                         & Indices associated with the initial arrival
     for every bus in \textcolor{blue}{$\mathbb{B}$}                                                                                                                        \\
     $i_f$                    &                         & Indices associated with the final arrival for every bus in \textcolor{blue}{$\mathbb{B}$}                         \\
     $m_q$                    &                         & Cost of a visit being assigned to charger $q$                                                                     \\
-    $r_q$                    & \textcolor{blue}{Kw}    & Charge rate of charger $q$ per unit time                                                                          \\
+    $r_q$                    & \textcolor{blue}{kW}    & Charge rate of charger $q$ per unit time                                                                          \\
     \hline \multicolumn{3}{l}{Decision Variables}                                                                                                                          \\
     \hline $\psi_{ij}$          &                         & Binary variable determining spatial ordering of vehicles $i$ and $j$                                              \\
     $\eta_i$                    & \textcolor{blue}{kWh}   & Initial charge for visit $i$                                                                                      \\

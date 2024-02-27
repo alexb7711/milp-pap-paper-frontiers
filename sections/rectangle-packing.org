@@ -21,9 +21,9 @@ charge rates.
   \textcolor{blue}{A few assumptions are made in the derivation of the algorithm. As this work is not focused on
     estimating the discharge of a BEB during its route, the discharge for each route will be pre-calculated by assuming a
     fixed discharge rate kW multiplied by the route duration in hours. Secondly, it is assumed that the initial SOC of
-    each BEB at the beginning of the day, $\alpha_b\kappa_b$, is larger than the SOC than the minimum required SOC at the
-    end of the day, $\beta_b\kappa_b$. Therefore, it must be assumed that the difference in the SOC can reach
-    $\alpha_b\kappa_b$ by the beginning of the next working day.}
+    each BEB at the beginning of the day, $\alpha_b\kappa_b$, is larger than the minimum required SOC at the end of the
+    day, $\beta_b\kappa_b$. Therefore, it must be assumed that the difference in the SOC can reach $\alpha_b\kappa_b$ by
+    the beginning of the next working day.}
 #+end_src
 
 The discussion of the four changes is separated into two sections. \autoref{sec:queuing} discusses the changes in the

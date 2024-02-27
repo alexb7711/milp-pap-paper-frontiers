@@ -15,20 +15,21 @@ src_latex{\textcolor{blue}{analyzed and discussed}} for each of the planning str
 
 To display the capabilities of the model, an example scenario is presented. The scenario was run over a time horizon of
 $T=24$ hours, utilizing $n_B = \A$ buses with $n_V = \N$ visits divided between the $n_B$ buses. As stated before, the
-route times are sampled from a set of routes from the UTA. Each bus has src_latex{\textcolor{blue}{a}} \batsize kWh
-battery that is required to stay above src_latex{\textcolor{blue}{an SOC of $\nu_b =$}} \mincharge (\fpeval{\batsize *
-\minchargeD} kWh) src_latex{\textcolor{blue}{$\forall b \in \mathbb{B}$}} to src_latex{\textcolor{blue}{ensure that each BEB can
-complete its next route in addition to maintaining}} battery health. Each bus is assumed to begin the working day with
-src_latex{\textcolor{blue}{an SOC of $\alpha_b = $}} \fpeval{\acharge*100}% src_latex{\textcolor{blue}{$\forall i \in \mathbb{V}$}}
-(\fpeval{\acharge * \batsize} kWh). Additionally, each bus is required to end the day with a minimum
-src_latex{\textcolor{blue}{ SOC of $\beta_b = $}}\fpeval{\bcharge * 100}% (src_latex{\fpeval{\bcharge * \batsize}} kWh)
-src_latex{\textcolor{blue}{$\forall i \in \mathbb{V}$}}. This assumes that overnight charging can account for
-src_latex{\textcolor{blue}{the deficient}} 20% src_latex{\textcolor{blue}{SOC}}. Each bus is assumed to discharge at a
-rate of src_latex{\textcolor{blue}{$\zeta = $}} 30 kW. Note that many factors play a role in the rate of discharge; however,
-for the sake of simplicity src_latex{\textcolor{blue}{since the discharge calculation is out of the scope of this
-work}}, an average rate is used. src_latex{\textcolor{blue}{A total of}} $n_C = \fpeval{\fast + \slow}$ chargers are
-utilized where \slow of the chargers are slow charging (\slows kW) and \fast are fast charging (\fasts kW).
-src_latex{\textcolor{blue}{The technique to minimize the total charger count will now be employed}}.
+route times are sampled from a set of routes from the UTA. Each bus has src_latex{\textcolor{blue}{a battery capacity of
+$\kappa_b =$}} \batsize kWh that is required to stay above src_latex{\textcolor{blue}{an SOC of $\nu_b =$}}
+src_latex{\mincharge (\fpeval{\batsize * \minchargeD} kWh)} src_latex{\textcolor{blue}{$\forall b \in \mathbb{B}$}} to
+src_latex{\textcolor{blue}{ensure that each BEB can complete its next route in addition to maintaining}} battery health.
+Each bus is assumed to begin the working day with src_latex{\textcolor{blue}{an SOC of $\alpha_b = $}}
+src_latex{\fpeval{\acharge*100}\%} src_latex{\textcolor{blue}{$\forall i \in \mathbb{V}$}} (\fpeval{\acharge * \batsize} kWh).
+Additionally, each bus is required to end the day with a minimum src_latex{\textcolor{blue}{ SOC of $\beta_b =
+$}}\fpeval{\bcharge * 100}% (src_latex{\fpeval{\bcharge * \batsize}} kWh) src_latex{\textcolor{blue}{$\forall i \in
+\mathbb{V}$}}. This assumes that overnight charging can account for src_latex{\textcolor{blue}{the deficient}} 20%
+src_latex{\textcolor{blue}{SOC}}. Each bus is assumed to discharge at a rate of src_latex{\textcolor{blue}{$\zeta_b = $}} 30
+kW. Note that many factors play a role in the rate of discharge; however, for the sake of simplicity
+src_latex{\textcolor{blue}{since the discharge calculation is out of the scope of this work}}, an average rate is used.
+src_latex{\textcolor{blue}{A total of}} $n_C = \fpeval{\fast + \slow}$ chargers are utilized where \slow of the chargers
+are slow charging (\slows kW) and \fast are fast charging (\fasts kW). src_latex{\textcolor{blue}{The technique to
+minimize the total charger count will now be employed}}.
 
 src_latex{\textcolor{blue}{To encourage the MILP PAP problem to utilize the fewest number of chargers, the value of
 $m_q$ in the objective function, {\autoref{eq:objective}}, is $\forall q \in \{1,2,..., n_B \}; m_q = 0$ and $\forall q \in \{n_B + 1,
