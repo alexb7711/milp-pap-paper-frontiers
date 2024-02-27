@@ -6,10 +6,10 @@
 Applying the PAP to BEB charging requires four fundamental changes. The first is that the time that a BEB spends
 charging src_latex{\textcolor{blue}{must be}} allowed to vary. src_latex{\textcolor{blue}{That is, $u_i$, $d_i$, and
 $s_i$ become variables}} of optimization. src_latex{\textcolor{blue}{This is done primarily because chargers of various
-speeds are to be introduced. Allowing BEBs to have multiple visits that utilize an unknown charger, implies
-indeterminate charge times to maintain a minimum SOC threshold.}} Second, in the PAP each visit is assumed to be a
-different vehicle. For the BEB charging problem, each bus may make multiple visits to the station throughout the
-day\textcolor{blue}{. Thus, the} resulting src_latex{\textcolor{blue}{SOC}} for a bus at a given
+speeds are to be introduced. Allowing BEBs to have multiple visits that a charger decided upon during the optimization
+requires that the start and stop times must be changeable to respect the SOC constraints.}} Second, in the PAP each
+visit is assumed to be a different vehicle. For the BEB charging problem, each bus may make multiple visits to the
+station throughout the day\textcolor{blue}{. Thus, the} resulting src_latex{\textcolor{blue}{SOC}} for a bus at a given
 src_latex{\textcolor{blue}{visit}} is dependent upon each of the prior visits. The third fundamental change is related
 to the first two. The src_latex{\textcolor{blue}{SOC}} of each bus must be tracked to ensure that charging across
 multiple visits is sufficient to allow each bus to execute its route throughout the day. Finally,
@@ -20,10 +20,10 @@ charge rates.
 #+begin_src latex
   \textcolor{blue}{A few assumptions are made in the derivation of the algorithm. As this work is not focused on
     estimating the discharge of a BEB during its route, the discharge for each route will be pre-calculated by assuming a
-    fixed discharge rate kW multiplied by the route duration in hours. Secondly, it is assumed that the initial charge,
-    $\alpha$, is of a higher percentage of the battery capacity, $\kappa_b$ kWh, than the final charge, $\beta$.
-    Therefore, it must be assumed that the difference in the SOC can reach $\alpha_b\kappa_b$ by the beginning of the next
-    working day.}
+    fixed discharge rate kW multiplied by the route duration in hours. Secondly, it is assumed that the initial SOC of
+    each BEB at the beginning of the day, $\alpha_b\kappa_b$, is larger than the SOC than the minimum required SOC at the
+    end of the day, $\beta_b\kappa_b$. Therefore, it must be assumed that the difference in the SOC can reach
+    $\alpha_b\kappa_b$ by the beginning of the next working day.}
 #+end_src
 
 The discussion of the four changes is separated into two sections. \autoref{sec:queuing} discusses the changes in the
@@ -51,7 +51,8 @@ a queue with a specified duration, then departs for its next route.}} Two separa
 buses or visits by the same bus, src_latex{\textcolor{blue}{but for a different visit index}}.
 #+end_comment
 
-It is assumed that each BEB has the same physical dimensions. Because of this assumption, the PAP spatial variable,
+src_latex{\textcolor{blue}{The actual physical dimensions of the BEB are ignored and it is assumed that each BEB will be
+assigned to charge at a particular charger}}. Because of this assumption, the PAP spatial variable,
 \textcolor{blue}{$l_i$}, may be removed and $v_i$ is made to be an integer corresponding to which queue visit $i$ will
 be using, src_latex{\textcolor{blue}{$v_i \in \mathbb{Q}$}}. src_latex{\textcolor{blue}{That is, the queue position is now
 discretized over $n_Q$ chargers where a BEB occupies single charge queue. Thus, when $\psi_{ij} = 1$, vehicle $j$ is placed
@@ -107,8 +108,8 @@ have no future visits.}}
     $\Gamma^0$ represents the index for the first visit of bus $b$. Similarly, let $\Gamma^f : \mathbb{B} \rightarrow
     \mathbb{V}$ maps the indices for the final visits for each bus $b \in \mathbb{B}$. Let the storthand for each mapping
     be denoted as $\Gamma^0_b$ and $\Gamma^f_b$, respectively. The initial and final bus charge percentages, $\alpha$ and
-    $\beta$, can then be represented by the constraint equations $\eta_{\Gamma^0_b} = \alpha \kappa_{b}$ and
-    $\eta_{\Gamma^f_b} = \beta \kappa_{b}$, respectively. The intermediate charges must be determined during runtime.}
+    $\beta$, can then be represented by the constraint equations $\eta_{\Gamma^0_b} = \alpha_b \kappa_{b}$ and
+    $\eta_{\Gamma^f_b} = \beta_b \kappa_{b}$, respectively. The intermediate charges must be determined during runtime.}
 #+end_src
 
 It is assumed that the charge received is proportional to the time spent charging. The rate for charger $q$ is denoted
@@ -238,7 +239,7 @@ Subject to the constraints
     s_i + u_i = d_i                                  \label{subeq:m_detach}       \\
 \end{equation}
 \begin{equation}
-    \eta_{\Gamma^0_b} = \alpha \kappa_{b}                           \label{subeq:init_charge}    \\
+    \eta_{\Gamma^0_b} = \textcolor{blue}{\alpha_{\Gamma_i} \kappa_{\Gamma_i}}         \label{subeq:init_charge}    \\
 \end{equation}
 \begin{equation}
     a_i \leq u_i \leq (T - s_i)                            \label{subeq:m_valid_starts} \\
@@ -250,13 +251,13 @@ Subject to the constraints
     \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i = \eta_{\gamma_i}   \label{subeq:next_charge}    \\
 \end{equation}
 \begin{equation}
-    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i \geq \nu \kappa_{\Gamma_i} \label{subeq:min_charge}     \\
+    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i \geq \textcolor{blue}{\nu_{\Gamma_i}} \kappa_{\Gamma_i} \label{subeq:min_charge}     \\
 \end{equation}
 \begin{equation}
     \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q \leq \kappa_{\Gamma_i}         \label{subeq:max_charge}     \\
 \end{equation}
 \begin{equation}
-    \eta_{\Gamma^f_b} \geq \beta \kappa_{b}                          \label{subeq:final_charge}   \\
+    \eta_{\Gamma^f_b} \geq \textcolor{blue}{\beta_{\Gamma_i} \kappa_{\Gamma_i}}        \label{subeq:final_charge}   \\
 \end{equation}
 \begin{equation}
     s_i - (1 - w_{iq})M \leq g_{iq}                     \label{subeq:gpgret}         \\

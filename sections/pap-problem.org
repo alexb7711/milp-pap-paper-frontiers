@@ -65,22 +65,6 @@ charger is denoted as $v_i \in [0,L]$ meters. The temporal ordering of vehicles 
 determines the relative position of vehicles $i$ and $j$ on the charger: $\psi_{ij} = 1 \implies v_i < v_j$ for all $1 \le
 i,j \le n_V$.}}
 
-#+begin_comment
-- \textcolor{blue}{$L$   : Length of the charger} - $T$ \textcolor{blue}{[s]} : time horizon
-- \textcolor{blue}{$n_V$ : total number of incoming vehicles}
-- $s_i$ : charging time for vehicle $i;\; 1 \leq i \leq n_V$
-- $l_i$ : width of vehicle $i;\; 1 \leq i \leq n_V$
-- $a_i$ : arrival time of vehicle $i;\; 1 \leq i \leq n_V$
-
-- $u_i$ \textcolor{blue}{[s]} : starting charge time for vehicle $i;\; 1 \leq i \leq n_V$
-- src_latex{\textcolor{blue}{$v_i \in \mathbb{B}$}} : assigned charge queue for vehicle $i;\; 1 \leq i \leq n_V$
-- $d_i$ \textcolor{blue}{[s]} : departure time for vehicle $i;\; 1 \leq i \leq n_V$
-- src_latex{\textcolor{blue}{ $\sigma_{ij} \in \{0, 1\}$ }}: determines the ordering of vehicles $i$ and $j$ in time; i.e. $\sigma_{ij} = 1
-  \implies$ $i$ arrives before $j$, \textcolor{blue}{where $1 \le i,j \le n_V$ }
-- src_latex{\textcolor{blue}{ $\psi_{ij} \in \{0, 1\}$ }} : determines the relative position of vehicles $i$ and $j$ when charging
-  simultaneously; i.e. $\psi_{ij} = 1 \implies$ $i$ to the left of $j$, \textcolor{blue}{where $1 \le i,j \le n_V$ }
-#+end_comment
-
 To determine the values for each of these decision variables, a MILP \textcolor{blue}{was} formulated in
 [cite:@qarebagh-2019-optim-sched]. src_latex{\textcolor{blue}{The formulation is shown in its entirety for completeness.
 The problem to be solved is}}

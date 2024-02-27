@@ -19,8 +19,8 @@
       $q$                      &                         & Index used to refer to a queue                                                                                    \\
       \hline \multicolumn{3}{l}{Problem definition parameters}                                                                                                               \\
       \hline $\Gamma$               &                         & \textcolor{blue}{$\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ with $\Gamma_i$ used as a shorthand to denote the bus $b$ for visit $i$} \\
-      $\alpha_i$                    & \textcolor{blue}{$\%$}  & Initial charge percentage time for visit $i$                                                                      \\
-      $\beta_i$                    & \textcolor{blue}{$\%$}  & Final charge percentage for bus $i$ at the end of the time horizon                                                \\
+      textcolor{blue}{$\alpha_b$}   & \textcolor{blue}{$\%$}  & Initial charge percentage time for \textcolor{blue}{BEB $b$}                                                      \\
+      textcolor{blue}{$\beta_b$}   & \textcolor{blue}{$\%$}  & Final charge percentage for \textcolor{blue}{bus $b$} at the end of the time horizon                              \\
       $\epsilon_q$                    &                         & Cost of using charger $q$ per unit time                                                                           \\
       $\Upsilon$                      &                         & $\Upsilon: \mathbb{V} \rightarrow \mathbb{V}$ mapping a visit to the
       next visit by the same bus with $\Upsilon_i$ being the shorthand.                                                                                                             \\

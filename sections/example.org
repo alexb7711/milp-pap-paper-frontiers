@@ -19,9 +19,9 @@ route times are sampled from a set of routes from the UTA. Each bus has src_late
 battery that is required to stay above src_latex{\textcolor{blue}{an SOC of $\nu_b =$}} \mincharge (\fpeval{\batsize *
 \minchargeD} kWh) src_latex{\textcolor{blue}{$\forall b \in \mathbb{B}$}} to src_latex{\textcolor{blue}{ensure that each BEB can
 complete its next route in addition to maintaining}} battery health. Each bus is assumed to begin the working day with
-src_latex{\textcolor{blue}{an SOC of $\alpha_i = $}} \fpeval{\acharge*100}% src_latex{\textcolor{blue}{$\forall i \in \mathbb{V}$}}
+src_latex{\textcolor{blue}{an SOC of $\alpha_b = $}} \fpeval{\acharge*100}% src_latex{\textcolor{blue}{$\forall i \in \mathbb{V}$}}
 (\fpeval{\acharge * \batsize} kWh). Additionally, each bus is required to end the day with a minimum
-src_latex{\textcolor{blue}{ SOC of $\beta_i = $}}\fpeval{\bcharge * 100}% (src_latex{\fpeval{\bcharge * \batsize}} kWh)
+src_latex{\textcolor{blue}{ SOC of $\beta_b = $}}\fpeval{\bcharge * 100}% (src_latex{\fpeval{\bcharge * \batsize}} kWh)
 src_latex{\textcolor{blue}{$\forall i \in \mathbb{V}$}}. This assumes that overnight charging can account for
 src_latex{\textcolor{blue}{the deficient}} 20% src_latex{\textcolor{blue}{SOC}}. Each bus is assumed to discharge at a
 rate of src_latex{\textcolor{blue}{$\zeta = $}} 30 kW. Note that many factors play a role in the rate of discharge; however,
@@ -84,17 +84,19 @@ packed the first queue for the fast and slow chargers more effectively than the 
 generated are valid, no comparison of the quality of the schedule can be made directly from
 \autoref{subfig:milp-schedule} and \autoref{subfig:qin-schedule}.
 
-\autoref{subfig:qin-charge} and \autoref{subfig:milp-charge} depicts the src_latex{\textcolor{blue}{SOC}} for every bus over the time
-horizon src_latex{\textcolor{blue}{for the Qin and MILP schedules, respectively}}. Every vehicle begins src_latex{\textcolor{blue}{with an SOC of
-$\alpha_i = $}} 90%, finishes src_latex{\textcolor{blue}{with an SOC of $\beta_i =$}} \fpeval{\bcharge *100}% in the MILP PAP schedule, and
-never goes below \mincharge in the intermediate arrivals as stated in constraint \autoref{eq:dynconstrs}. There is no
-guarantee for this in the Qin-Modified strategy which can be seen by some src_latex{\textcolor{blue}{intermediate charges}} reaching
-src_latex{\textcolor{blue}{an SOC}} of 0% as well as the distribution of final charges, the minimum being 0% and the maximum
-src_latex{\fpeval{trunc(\fpeval{368 / \batsize * 100}, 3)}}%. The only sense of guarantee that the Qin-Modified supplies
-is its predictability within the intermediate visits src_latex{\textcolor{blue}{due to}} its heuristic nature (i.e. if the BEB charge
-is within the low threshold, a fast charger will be prioritized); whereas MILP places a bus in the queue that ``makes
-sense'' in respect to the larger picture. The MILP PAP does not have an obvious sense of decision-making due to weighted
-src_latex{\textcolor{blue}{objective function}} that src_latex{\textcolor{blue}{is}} affected by the accumulation of decisions made prior.
+\autoref{subfig:qin-charge} and \autoref{subfig:milp-charge} depicts the src_latex{\textcolor{blue}{SOC}} for every bus
+over the time horizon src_latex{\textcolor{blue}{for the Qin and MILP schedules, respectively}}. Every vehicle begins
+src_latex{\textcolor{blue}{with an SOC of $\alpha_b = $}} 90%, finishes src_latex{\textcolor{blue}{with an SOC of $\beta_b =$}}
+\fpeval{\bcharge *100}% in the MILP PAP schedule, and never goes below \mincharge in the intermediate arrivals as stated
+in constraint \autoref{eq:dynconstrs}. There is no guarantee for this in the Qin-Modified strategy which can be seen by
+some src_latex{\textcolor{blue}{intermediate charges}} reaching src_latex{\textcolor{blue}{an SOC}} of 0% as well as the
+distribution of final charges, the minimum being 0% and the maximum src_latex{\fpeval{trunc(\fpeval{368 / \batsize *
+100}, 3)}}%. The only sense of guarantee that the Qin-Modified supplies is its predictability within the intermediate
+visits src_latex{\textcolor{blue}{due to}} its heuristic nature (i.e. if the BEB charge is within the low threshold, a
+fast charger will be prioritized); whereas MILP places a bus in the queue that ``makes sense'' in respect to the larger
+picture. The MILP PAP does not have an obvious sense of decision-making due to weighted
+src_latex{\textcolor{blue}{objective function}} that src_latex{\textcolor{blue}{is}} affected by the accumulation of
+decisions made prior.
 
 Another important measure for the chargers is to compare the amount of power and energy consumed.
 \autoref{fig:power-usage} depicts the power consumption throughout the time horizon. It can be seen that the

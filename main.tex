@@ -1,4 +1,4 @@
-% Created 2024-02-24 Sat 18:30
+% Created 2024-02-27 Tue 11:09
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -98,7 +98,7 @@
  pdftitle={},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 29.2 (Org mode 9.6.15)}, 
+ pdfcreator={Emacs 29.1 (Org mode 9.6.6)}, 
  pdflang={English}}
 \begin{document}
 
@@ -269,9 +269,9 @@ the \textcolor{blue}{total charge time for}, \(s_i\), must equal the departure t
 \section{A Rectangle Packing Formulation for BEB Charging}
 \label{sec:problemformulation}
 Applying the PAP to BEB charging requires four fundamental changes. The first is that the time that a BEB spends
-charging \textcolor{blue}{must be} allowed to vary. \textcolor{blue}{That is, $u_i$, $d_i$, and $s_i$ become variables} of optimization. \textcolor{blue}{This is done primarily because chargers of various speeds are to be introduced. Allowing BEBs to have multiple visits that utilize an unknown charger, implies indeterminate charge times to maintain a minimum SOC threshold.} Second, in the PAP each visit is assumed to be a
-different vehicle. For the BEB charging problem, each bus may make multiple visits to the station throughout the
-day\textcolor{blue}{. Thus, the} resulting \textcolor{blue}{SOC} for a bus at a given
+charging \textcolor{blue}{must be} allowed to vary. \textcolor{blue}{That is, $u_i$, $d_i$, and $s_i$ become variables} of optimization. \textcolor{blue}{This is done primarily because chargers of various speeds are to be introduced. Allowing BEBs to have multiple visits that a charger decided upon during the optimization requires that the start and stop times must be changeable to respect the SOC constraints.} Second, in the PAP each
+visit is assumed to be a different vehicle. For the BEB charging problem, each bus may make multiple visits to the
+station throughout the day\textcolor{blue}{. Thus, the} resulting \textcolor{blue}{SOC} for a bus at a given
 \textcolor{blue}{visit} is dependent upon each of the prior visits. The third fundamental change is related
 to the first two. The \textcolor{blue}{SOC} of each bus must be tracked to ensure that charging across
 multiple visits is sufficient to allow each bus to execute its route throughout the day. Finally,
@@ -281,10 +281,10 @@ charge rates.
 
 \textcolor{blue}{A few assumptions are made in the derivation of the algorithm. As this work is not focused on
   estimating the discharge of a BEB during its route, the discharge for each route will be pre-calculated by assuming a
-  fixed discharge rate kW multiplied by the route duration in hours. Secondly, it is assumed that the initial charge,
-  $\alpha$, is of a higher percentage of the battery capacity, $\kappa_b$ kWh, than the final charge, $\beta$.
-  Therefore, it must be assumed that the difference in the SOC can reach $\alpha_b\kappa_b$ by the beginning of the next
-  working day.}
+  fixed discharge rate kW multiplied by the route duration in hours. Secondly, it is assumed that the initial SOC of
+  each BEB at the beginning of the day, $\alpha_b\kappa_b$, is larger than the SOC than the minimum required SOC at the
+  end of the day, $\beta_b\kappa_b$. Therefore, it must be assumed that the difference in the SOC can reach
+  $\alpha_b\kappa_b$ by the beginning of the next working day.}
 
 The discussion of the four changes is separated into two sections. \autoref{sec:queuing} discusses the changes in the
 spatial-temporal constraint formulation to form a queuing constraint. \autoref{sec:batt_dynamics} then discusses the
@@ -300,7 +300,7 @@ bus indices with index \(b\) used to denote an individual bus, \(\mathbb{Q} = \{
 used to denote an individual queue, and \(\mathbb{V} = \{1, ..., n_V\}\) is a set of visits to the station with \(i\) and
 \(j\) used to refer to individual visits. \textcolor{blue}{The mapping $\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ is used to map a visit index, $i$, to a bus index, $b$. The notation $\Gamma_i$ is used as a shorthand to refer to the bus index $b$ for visit $i$.}
 
-It is assumed that each BEB has the same physical dimensions. Because of this assumption, the PAP spatial variable,
+\textcolor{blue}{The actual physical dimensions of the BEB are ignored and it is assumed that each BEB will be assigned to charge at a particular charger}. Because of this assumption, the PAP spatial variable,
 \textcolor{blue}{$l_i$}, may be removed and \(v_i\) is made to be an integer corresponding to which queue visit \(i\) will
 be using, \textcolor{blue}{$v_i \in \mathbb{Q}$}. \textcolor{blue}{That is, the queue position is now discretized over $n_Q$ chargers where a BEB occupies single charge queue. Thus, when $\psi_{ij} = 1$, vehicle $j$ is placed in a charging queue with a larger index than vehicle $i$, $v_j > v_i$.} The \textcolor{blue}{charger length $L$} is
 likewise replaced with \(n_Q\). Note that \(n_Q = n_B + n_C\), where \(n_B\) is the number of buses and \(n_C\) is the number of
@@ -340,8 +340,8 @@ as \(\Upsilon_i\) is not the null element, \(\varnothing\). \textcolor{blue}{The
   $\Gamma^0$ represents the index for the first visit of bus $b$. Similarly, let $\Gamma^f : \mathbb{B} \rightarrow
   \mathbb{V}$ maps the indices for the final visits for each bus $b \in \mathbb{B}$. Let the storthand for each mapping
   be denoted as $\Gamma^0_b$ and $\Gamma^f_b$, respectively. The initial and final bus charge percentages, $\alpha$ and
-  $\beta$, can then be represented by the constraint equations $\eta_{\Gamma^0_b} = \alpha \kappa_{b}$ and
-  $\eta_{\Gamma^f_b} = \beta \kappa_{b}$, respectively. The intermediate charges must be determined during runtime.}
+  $\beta$, can then be represented by the constraint equations $\eta_{\Gamma^0_b} = \alpha_b \kappa_{b}$ and
+  $\eta_{\Gamma^f_b} = \beta_b \kappa_{b}$, respectively. The intermediate charges must be determined during runtime.}
 
 It is assumed that the charge received is proportional to the time spent charging. The rate for charger \(q\) is denoted
 as \(r_q\) \textcolor{blue}{kW}. Note that a value of \(r_q = 0\) corresponds to a queue where no charging
@@ -451,7 +451,7 @@ Subject to the constraints
     s_i + u_i = d_i                                  \label{subeq:m_detach}       \\
 \end{equation}
 \begin{equation}
-    \eta_{\Gamma^0_b} = \alpha \kappa_{b}                           \label{subeq:init_charge}    \\
+    \eta_{\Gamma^0_b} = \textcolor{blue}{\alpha_{\Gamma_i} \kappa_{\Gamma_i}}         \label{subeq:init_charge}    \\
 \end{equation}
 \begin{equation}
     a_i \leq u_i \leq (T - s_i)                            \label{subeq:m_valid_starts} \\
@@ -463,13 +463,13 @@ Subject to the constraints
     \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i = \eta_{\gamma_i}   \label{subeq:next_charge}    \\
 \end{equation}
 \begin{equation}
-    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i \geq \nu \kappa_{\Gamma_i} \label{subeq:min_charge}     \\
+    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i \geq \textcolor{blue}{\nu_{\Gamma_i}} \kappa_{\Gamma_i} \label{subeq:min_charge}     \\
 \end{equation}
 \begin{equation}
     \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q \leq \kappa_{\Gamma_i}         \label{subeq:max_charge}     \\
 \end{equation}
 \begin{equation}
-    \eta_{\Gamma^f_b} \geq \beta \kappa_{b}                          \label{subeq:final_charge}   \\
+    \eta_{\Gamma^f_b} \geq \textcolor{blue}{\beta_{\Gamma_i} \kappa_{\Gamma_i}}        \label{subeq:final_charge}   \\
 \end{equation}
 \begin{equation}
     s_i - (1 - w_{iq})M \leq g_{iq}                     \label{subeq:gpgret}         \\
@@ -519,9 +519,9 @@ To display the capabilities of the model, an example scenario is presented. The 
 route times are sampled from a set of routes from the UTA. Each bus has \textcolor{blue}{a} \batsize kWh
 battery that is required to stay above \textcolor{blue}{an SOC of $\nu_b =$} \mincharge (\fpeval\{\batsize *
 \minchargeD\} kWh) \textcolor{blue}{$\forall b \in \mathbb{B}$} to \textcolor{blue}{ensure that each BEB can complete its next route in addition to maintaining} battery health. Each bus is assumed to begin the working day with
-\textcolor{blue}{an SOC of $\alpha_i = $} \fpeval{\acharge*100}\% \textcolor{blue}{$\forall i \in \mathbb{V}$}
+\textcolor{blue}{an SOC of $\alpha_b = $} \fpeval{\acharge*100}\% \textcolor{blue}{$\forall i \in \mathbb{V}$}
 (\fpeval{\acharge * \batsize} kWh). Additionally, each bus is required to end the day with a minimum
-\textcolor{blue}{ SOC of $\beta_i = $}\fpeval{\bcharge * 100}\% (\fpeval{\bcharge * \batsize} kWh)
+\textcolor{blue}{ SOC of $\beta_b = $}\fpeval{\bcharge * 100}\% (\fpeval{\bcharge * \batsize} kWh)
 \textcolor{blue}{$\forall i \in \mathbb{V}$}. This assumes that overnight charging can account for
 \textcolor{blue}{the deficient} 20\% \textcolor{blue}{SOC}. Each bus is assumed to discharge at a
 rate of \textcolor{blue}{$\zeta = $} 30 kW. Note that many factors play a role in the rate of discharge; however,
@@ -573,16 +573,18 @@ packed the first queue for the fast and slow chargers more effectively than the 
 generated are valid, no comparison of the quality of the schedule can be made directly from
 \autoref{subfig:milp-schedule} and \autoref{subfig:qin-schedule}.
 
-\autoref{subfig:qin-charge} and \autoref{subfig:milp-charge} depicts the \textcolor{blue}{SOC} for every bus over the time
-horizon \textcolor{blue}{for the Qin and MILP schedules, respectively}. Every vehicle begins \textcolor{blue}{with an SOC of $\alpha_i = $} 90\%, finishes \textcolor{blue}{with an SOC of $\beta_i =$} \fpeval{\bcharge *100}\% in the MILP PAP schedule, and
-never goes below \mincharge in the intermediate arrivals as stated in constraint \autoref{eq:dynconstrs}. There is no
-guarantee for this in the Qin-Modified strategy which can be seen by some \textcolor{blue}{intermediate charges} reaching
-\textcolor{blue}{an SOC} of 0\% as well as the distribution of final charges, the minimum being 0\% and the maximum
-\fpeval{trunc(\fpeval{368 / \batsize * 100}, 3)}\%. The only sense of guarantee that the Qin-Modified supplies
-is its predictability within the intermediate visits \textcolor{blue}{due to} its heuristic nature (i.e. if the BEB charge
-is within the low threshold, a fast charger will be prioritized); whereas MILP places a bus in the queue that ``makes
-sense'' in respect to the larger picture. The MILP PAP does not have an obvious sense of decision-making due to weighted
-\textcolor{blue}{objective function} that \textcolor{blue}{is} affected by the accumulation of decisions made prior.
+\autoref{subfig:qin-charge} and \autoref{subfig:milp-charge} depicts the \textcolor{blue}{SOC} for every bus
+over the time horizon \textcolor{blue}{for the Qin and MILP schedules, respectively}. Every vehicle begins
+\textcolor{blue}{with an SOC of $\alpha_b = $} 90\%, finishes \textcolor{blue}{with an SOC of $\beta_b =$}
+\fpeval{\bcharge *100}\% in the MILP PAP schedule, and never goes below \mincharge in the intermediate arrivals as stated
+in constraint \autoref{eq:dynconstrs}. There is no guarantee for this in the Qin-Modified strategy which can be seen by
+some \textcolor{blue}{intermediate charges} reaching \textcolor{blue}{an SOC} of 0\% as well as the
+distribution of final charges, the minimum being 0\% and the maximum \fpeval{trunc(\fpeval{368 / \batsize * 100}, 3)}\%. The only sense of guarantee that the Qin-Modified supplies is its predictability within the intermediate
+visits \textcolor{blue}{due to} its heuristic nature (i.e. if the BEB charge is within the low threshold, a
+fast charger will be prioritized); whereas MILP places a bus in the queue that ``makes sense'' in respect to the larger
+picture. The MILP PAP does not have an obvious sense of decision-making due to weighted
+\textcolor{blue}{objective function} that \textcolor{blue}{is} affected by the accumulation of
+decisions made prior.
 
 Another important measure for the chargers is to compare the amount of power and energy consumed.
 \autoref{fig:power-usage} depicts the power consumption throughout the time horizon. It can be seen that the
@@ -620,13 +622,13 @@ and utilizing this formulation in a metaheuristic solver. Furthermore, ``fuzzify
 is of interest to allow flexibility in the arrival and departure times.
 
 \bibliographystyle{Frontiers-Harvard}
-\bibliography{/home/alex/Documents/citation-database/lit-ref,/home/alex/Documents/citation-database/lib-ref}
+\bibliography{c:/msys64/home/1556048963C/Documents/citation-database/lit-ref,c:/msys64/home/1556048963C/Documents/citation-database/lib-ref}
 
 \nolinenumbers
 \clearpage
 
 \section{Figure Captions}
-\label{sec:orgaaed147}
+\label{sec:org58c66d6}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -673,8 +675,8 @@ is of interest to allow flexibility in the arrival and departure times.
     $q$                      &                         & Index used to refer to a queue                                                                                    \\
     \hline \multicolumn{3}{l}{Problem definition parameters}                                                                                                               \\
     \hline $\Gamma$               &                         & \textcolor{blue}{$\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ with $\Gamma_i$ used as a shorthand to denote the bus $b$ for visit $i$} \\
-    $\alpha_i$                    & \textcolor{blue}{$\%$}  & Initial charge percentage time for visit $i$                                                                      \\
-    $\beta_i$                    & \textcolor{blue}{$\%$}  & Final charge percentage for bus $i$ at the end of the time horizon                                                \\
+    textcolor{blue}{$\alpha_b$}   & \textcolor{blue}{$\%$}  & Initial charge percentage time for \textcolor{blue}{BEB $b$}                                                      \\
+    textcolor{blue}{$\beta_b$}   & \textcolor{blue}{$\%$}  & Final charge percentage for \textcolor{blue}{bus $b$} at the end of the time horizon                              \\
     $\epsilon_q$                    &                         & Cost of using charger $q$ per unit time                                                                           \\
     $\Upsilon$                      &                         & $\Upsilon: \mathbb{V} \rightarrow \mathbb{V}$ mapping a visit to the
     next visit by the same bus with $\Upsilon_i$ being the shorthand.                                                                                                             \\
