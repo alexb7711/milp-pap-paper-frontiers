@@ -4,7 +4,7 @@
 # Example: https://apastyle.apa.org/style-grammar-guidelines/research-publication/sample-response-reviewers.pdf
 
 Thank you for taking the time to thoroughly review our manuscript and provide us the chance to submit a revised version.
-The time and effort dedicated in providing this insightful feedback and has contributed greatly to the quality of this
+The time and effort dedicated in providing this insightful feedback has contributed greatly to the quality of this
 work. We have incorporated all of the suggestions made by the reviewer. Said changes are represented by the blue text
 embedded within the manuscript. Below is a point-by-point response to the reviewers comments are presented. Relevant
 sections are mentioned when applicable to assist in searching for the associated changes.
