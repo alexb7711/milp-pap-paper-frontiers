@@ -1,4 +1,4 @@
-% Created 2024-03-02 Sat 19:24
+% Created 2024-03-03 Sun 16:15
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -55,8 +55,8 @@
 \newcommand{\N}{338 }                                                           % Number of visits
 \newcommand{\acharge}{0.9}                                                      % BOD charge percentage
 \newcommand{\bcharge}{0.7 }                                                     % EOD charge percentage
-\newcommand{\mincharge}{25\% }                                                  % Min visit charge percent
-\newcommand{\minchargeD}{0.25 }                                                 % Min visit charge decimal
+\newcommand{\mincharge}{20\% }                                                  % Min visit charge percent
+\newcommand{\minchargeD}{0.20 }                                                 % Min visit charge decimal
 \newcommand{\maxcharge}{100\% }                                                 % Max visit charge percent
 \newcommand{\batsize}{388 }                                                     % Battery capacity
 \newcommand{\fast}{15 }                                                         % Number of fast chargers
@@ -627,7 +627,7 @@ is of interest to allow flexibility in the arrival and departure times.
 \clearpage
 
 \section{Figure Captions}
-\label{sec:org5054b47}
+\label{sec:org09e1b25}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -728,7 +728,7 @@ is of interest to allow flexibility in the arrival and departure times.
 \begin{figure}[htpb]
 \centering
     \includegraphics{img/overlap}
-    \caption{Examples of different methods of overlapping. Space overlap: $v_{k_1} < v_{i} + s_i \therefore \psi_{k_{1}i} = 0$.
+    \caption{Examples of different methods of overlapping. Space overlap: $v_{k_1} < v_{i} + l_i \therefore \psi_{k_{1}i} = 0$.
              Time overlap $u_{k_1} < u_{j} + s_j \therefore \sigma_{k_{2}j} = 0$. Both space and time overlap $\sigma_{k_{3}i} = 0$ and
              $\psi_{k_{3}j} = 0$.}
     \label{fig:multipleassign}
