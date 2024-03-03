@@ -16,9 +16,9 @@ Qin-Modified. The MILP PAP optimization was run for \timeran seconds to a non-op
 MILP schedule utilized a similar amount of fast chargers; however, the MILP schedule more
 src_latex{\textcolor{blue}{readily}} used the slow chargers to its advantage when the
 src_latex{\textcolor{blue}{objective function saw fit}}. More importantly, the MILP PAP schedule utilized approximately
-$1\cdot10^4$ kWh more than the Qin-Modified\textcolor{blue}{; however,} the charges src_latex{\textcolor{blue}{for the MILP
-schedule}} remained above the constrained minimum src_latex{\textcolor{blue}{SOC}} of \mincharge, and charged all the
-buses to \fpeval{\bcharge *100}% at the end of the working day. The Qin-Modified schedule, on the other hand,
+$0.1\cdot10^4$ kWh more than the Qin-Modified\textcolor{blue}{; however,} the charges src_latex{\textcolor{blue}{for the
+MILP schedule}} remained above the constrained minimum src_latex{\textcolor{blue}{SOC}} of \mincharge, and charged all
+the buses to \fpeval{\bcharge *100}% at the end of the working day. The Qin-Modified schedule, on the other hand,
 src_latex{\textcolor{blue}{allowed the SOC of certain BEBs to drop to 0\%}}.
 
 Further fields of interest are to utilize the formulation (\autoref{eq:objective} and \autoref{eq:dynconstrs}) with
