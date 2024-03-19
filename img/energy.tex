@@ -15,12 +15,14 @@
 \pgfplotstableread[col sep = comma]{img/data/qm-acc-energy-usage.csv}\accenergydataquin
 \pgfplotstableread[col sep = comma]{img/data/milp-acc-energy-usage.csv}\accenergydatamilp
 
-\resizebox{\columnwidth}{4in}{%
 \begin{tikzpicture}
 \begin{axis}[title={Accumulated Energy Usage},
-             xlabel={Time [hr]}, ylabel={Energy Usage [\textcolor{blue}{kWh}]},
-             xmin=4, xmax=24, ymin=0,
-             legend pos = north west]
+    scale only axis,
+    height=0.3\paperheight, width=0.75\paperwidth,
+    grid=both,
+    xlabel={Time [hr]}, ylabel={Energy Usage [kWh]},
+    xmin=4, xmax=24, ymin=0,
+    legend pos = north west]
     % Quin ----------
     \addplot[blue!80!black, no markers]
              table[x=time, y=power] {\accenergydataquin};
@@ -31,7 +33,6 @@
              table[x=time, y=power] {\accenergydatamilp};
     \addlegendentry{MILP}
 \end{axis}
-\end{tikzpicture}%
-}
+\end{tikzpicture}
 
 \end{document}

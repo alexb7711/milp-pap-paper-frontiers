@@ -16,19 +16,21 @@
 \pgfplotstableread[col sep = comma]{img/data/qm-charge-cnt.csv}\usagedataquin
 \pgfplotstableread[col sep = comma]{img/data/milp-charge-cnt.csv}\usagedatamilp
 
-\resizebox{\columnwidth}{4in}{%
 \begin{tikzpicture}
 \begin{axis}[title={\textcolor{blue}{Slow Charger Count}},
-             xlabel={Time [hr]},ylabel={Count},
-             xmin=4, xmax=24,
-             ytick distance=1,
-             legend pos = north west]
+      scale only axis,
+      height=0.325\paperheight, width=0.8\paperwidth,
+      grid=both,
+      xlabel={Time [hr]},ylabel={Count},
+      xmin=4, xmax=24,
+      ytick distance=1,
+      legend style={nodes={scale=0.75, transform shape}},
+      legend pos = north west]
     \addplot[blue!80!black, fill=blue, fill opacity=0.25, no markers] table[x=visit, y=slow] {\usagedataquin};
     \addlegendentry{Quin}
     \addplot[red!80!black, fill=red, fill opacity=0.15, no markers] table[x=visit, y=slow] {\usagedatamilp};
     \addlegendentry{MILP}
 \end{axis}
-\end{tikzpicture}%\
-}
+\end{tikzpicture}
 
 \end{document}
