@@ -46,7 +46,7 @@ pipeline: precheck images ## Recipe to be ran when executed from a pipeline
 
 ##------------------------------------------------------------------------------
 #
-emacs: $(ALL)
+emacs: images $(ALL)
 	@emacs $(basename $(DOC_SRC)).org --script $(SCRIPTS)/emacs-build-doc.el
 
 ##------------------------------------------------------------------------------

@@ -12,6 +12,7 @@
 #+latex_header:\usepackage{pgfplots}                                 % Plot in LaTeX
 #+latex_header:\usepackage{subcaption}                               % Subfigures (Get rid of this)
 #+latex_header:\usepackage{subfloat}                                 % Subfigures
+#+latex_header:\usepackage{soul}                                     % Text highlighting
 #+latex_header:\usepackage{tabularx}                                 % Add more contol to tables
 #+latex_header:\usepackage{tikz}                                     % Generate figures in LaTeX
 #+latex_header:\usepackage{xcolor}                                   % Colors
@@ -45,8 +46,8 @@
 #+latex_header:\newcommand{\N}{338 }                                                           % Number of visits
 #+latex_header:\newcommand{\acharge}{0.9}                                                      % BOD charge percentage
 #+latex_header:\newcommand{\bcharge}{0.7 }                                                     % EOD charge percentage
-#+latex_header:\newcommand{\mincharge}{25\% }                                                  % Min visit charge percent
-#+latex_header:\newcommand{\minchargeD}{0.25 }                                                 % Min visit charge decimal
+#+latex_header:\newcommand{\mincharge}{20\% }                                                  % Min visit charge percent
+#+latex_header:\newcommand{\minchargeD}{0.20 }                                                 % Min visit charge decimal
 #+latex_header:\newcommand{\maxcharge}{100\% }                                                 % Max visit charge percent
 #+latex_header:\newcommand{\batsize}{388 }                                                     % Battery capacity
 #+latex_header:\newcommand{\fast}{15 }                                                         % Number of fast chargers
