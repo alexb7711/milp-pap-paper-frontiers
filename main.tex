@@ -1,5 +1,4 @@
-
-% Created 2024-03-20 Wed 19:30
+% Created 2024-03-20 Wed 19:34
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -100,7 +99,7 @@
  pdftitle={},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 29.1 (Org mode 9.6.6)},
+ pdfcreator={Emacs 29.2 (Org mode 9.6.15)}, 
  pdflang={English}}
 \begin{document}
 
@@ -203,36 +202,34 @@ vertical edge of each rectangle in \(\mathbb{O}\) to vary. As an example, suppos
 \cite{buhrkal-2011-model-discr}.
 
 The BAP solves the problem of optimally assigning incoming vessels to berth positions to be serviced as shown in
- \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of \(O\) represent the time
- horizon \(\T\) and the berth length \(L\), respectively. Similarly, the width and height for \(\mathbb{O}\) represent the time
- spent to service vessel \(i\) and the space taken by docking vessel \(i\), respectively. In the BAP, the vessel
- characteristics (length of the vessel, arrival time, handling time, desired departure time) are assumed to be known for
- all vessels to be serviced. A representation of a BAP solution is shown in \autoref{fig:bap}. The x and y-axis
- represent time and space, respectively. The gray squares, labeled A, B, C, and D, represent berthed vessels. The width
- of the boxes represents the time spent being serviced, and the height represents the amount of space the vessel
- requires on the berth. The vertical line adjacent to ``Arrival Time'' represents the actual time that the vessel
- arrives and is available to be berthed. ``Berthing Time'' is the time the vessel is berthed and begins being serviced.
- ``Completion time'' represents the time at which the berthing space becomes available again.
+\autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of \(O\) represent the time
+horizon \(\T\) seconds and the berth length \(L\) meters, respectively. Similarly, the widths and heights of each element in
+\(\mathbb{O}\) represent the time spent to service vessel \(i\) and the space taken by docking vessel \(i\), respectively. In
+the BAP, the vessel characteristics (length of the vessel, arrival time, handling time, desired departure time) are
+assumed to be known for all vessels. A representation of a BAP solution is shown in \autoref{fig:bap}. The x and y-axis
+represent time horizon and berthing space, respectively. The gray squares, labeled A, B, C, and D, represent berthed
+vessels. The width of the boxes represents the time spent being serviced, and the height represents the amount of space
+the vessel requires on the berth. The vertical line adjacent to ``Arrival Time'' represents the actual time that the
+vessel arrives and is available to be berthed. ``Berthing Time'' is the time the vessel is berthed and begins being
+serviced. ``Completion time'' represents the time at which the berthing space becomes available again.
 
 \subsection{The PAP Formulation}
 \label{sec:the-pap-formulation}
-The BAP forms the basis of the PAP; however, there are some differences in the way the variables are interpreted. For
-the \(i^{th}\) visit, starting service time, \(u_i\), is the starting charge time, the berth location, \(v_i\), is the charger
-queue for assignment, and the service time, \(s_i\), is the elapsed charge time. There are also a few clarifying concepts
-about how the system is modeled. The PAP models the set of chargers as one continuous line; that is, the natural
-behavior of the PAP model is to allow vehicles to be queued anywhere along \([0,L]\). Similarly, the charge times are
-continuous and can be placed anywhere on the time horizon, \([0,\T]\), as long as the allocated times do not interfere with
-other scheduled charge times. The PAP formulation's parameters can be divided into two categories: input parameters and
-decision variables. Each type will now be introduced. The following parameters are constant inputs into the MILP.
+The BAP forms the basis of the PAP; however, there are some differences in the way the variables are interpreted. The
+starting service time, \(u_i\) seconds, is viewed as the initial charge time, and the service time, total elapsed time
+spent on the charger. Similarly, for the spatial term, \(v_i \in [0,L]\), the berth location is instead interpreted as the
+initial position on the charger. There are also a few clarifying concepts about how the system is modeled. The PAP
+models the set of chargers as one continuous line; that is, the natural behavior of the PAP model is to allow vehicles
+to be queued anywhere along \([0,L]\). Similarly, the charge times are continuous and can be placed anywhere on the time
+horizon, \([0,\T]\), as long as the allocated times do not interfere with other scheduled charge times.
 
-\begin{itemize}
-\item \(L\) : Length of the charger
-\item \(\T\)  : time horizon
-\item \(n_N\) : total number of incoming vehicles
-\item \(s_i\) : charging time for vehicle \(i;\; 1 \leq i \leq n_N\)
-\item \(l_i\) : width of vehicle \(i;\; 1 \leq i \leq n_N\)
-\item \(a_i\) : arrival time of vehicle \(i;\; 1 \leq i \leq n_N\)
-\end{itemize}
+The PAP formulation's parameters can be divided into two categories: input parameters and decision variables. Each type
+will now be introduced in turn. The following parameters are assumed to be known inputs for the MILP. \(L\) defines the
+length of the charger in meters. As stated previously, it is modeled as a continuous bar meaninng that a vehicle can be
+placed anywhere in the range \([0,L]\). It is assumed that the time horizon, \(T\) seconds, is known so that vehicles may be
+placed temporarily in the range \([0,T]\). The total number of visits to the station over the time horizon is represented
+by \(n_V\). The arrival time for each visit is represented by \(a_i\) seconds, and the required charge time is represented
+by \(s_i\) seconds. The width of vehicle \(i\) is represented by \(l_i\) meters.
 
 The decision variables provide the means by which the solver may optimize the problem. The initial and final charge
 times for vehicle \(i\) are \(u_i\) and \(d_i\) seconds, respectively. The starting position on the charger is denoted as \(v_i
@@ -253,8 +250,8 @@ Subject to:
 \begin{subequations}
 \label{eq:bapconstrs}
 \begin{align}
-    u_j - u_i - s_i - (\sigma_{ij} - 1)\T \geq 0                  \label{subeq:baptime}          \\
-    v_j - v_i - l_i - (\psi_{ij} - 1)L \geq 0                \label{subeq:bapspace}           \\
+    u_j - u_i - s_i - (\sigma_{ij} - 1)\T \geq 0   \label{subeq:baptime}          \\
+    v_j - v_i - l_i - (\psi_{ij} - 1)L \geq 0   \label{subeq:bapspace}           \\
     \sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1 \label{subeq:bapvalid_pos}     \\
     \sigma_{ij} + \sigma_{ji} \leq 1                   \label{subeq:bapsigma}        \\
     \psi_{ij} + \psi_{ji} \leq 1                   \label{subeq:bapdelta}        \\
@@ -545,15 +542,18 @@ analyzed and discussed for each of the planning strategies.
 \subsection{BEB Scenario}
 \label{beb-scenario}
 To display the capabilities of the model, an example scenario is presented. The scenario was run over a time horizon of
-\(\T=24\) hours, utilizing \(n_B = \A\) buses with \(n_V = \N\) visits to the station divided between the \(n_B\) buses. As
-stated before, the route times are sampled from a set of routes from the UTA. Each bus has \batsize KWh battery that is
-required to stay above \mincharge charge (\fpeval{\batsize * \minchargeD} KWh) to maintain battery health. Each bus is
-assumed to begin the working day with a \fpeval{\acharge*100}\% charge (\fpeval{\acharge * \batsize} KWh). Additionally,
-each bus is required to end the day with a minimum charge of \fpeval{\bcharge * 100}\% (\fpeval{\bcharge * \batsize}
-KWh). This assumes that overnight charging can account for at least 20\% of the charge. Each bus is assumed to discharge
-at a rate of 30 KW. Note that many factors play a role in the rate of discharge; however, for the sake of simplicity, an
-average rate is used. \(n_C = \fpeval{\fast + \slow}\) chargers are utilized where \slow of the chargers are slow charging
-(\slows KW) and \fast are fast charging (\fasts KW). A technique to minimize chargers will be employed.
+\(\T=24\) hours, utilizing \(n_B = \A\) buses with \(n_V = \N\) visits divided between the \(n_B\) buses. As stated before, the
+route times are sampled from a set of routes from the UTA. Each bus has a battery capacity of \(\kappa_b =\) \batsize kWh that
+is required to stay above an SOC of \(\nu_b =\) \mincharge (\fpeval{\batsize * \minchargeD} kWh) \(\forall b \in
+\mathbb{B}\) to ensure that each BEB can complete its next route in addition to maintaining battery health. Each bus is
+assumed to begin the working day with an SOC of \$\(\alpha\)\textsubscript{b} = \$ \fpeval{\acharge*100}\% \(\forall i \in \mathbb{V}\)
+(\fpeval{\acharge * \batsize} kWh). Additionally, each bus is required to end the day with a minimum SOC of \(\beta_b =\)
+\fpeval{\bcharge * 100}\% (\fpeval{\bcharge * \batsize} kWh) \(\forall i \in \mathbb{V}\). This assumes that overnight
+charging can account for the deficient 20\% SOC. Each bus is assumed to discharge at a rate of \(\zeta_b =\) 30 kW. Note that
+many factors play a role in the rate of discharge; however, for the sake of simplicity since the discharge calculation
+is out of the scope of this work, an average rate is used. A total of \(n_C = \fpeval{\fast + \slow}\) chargers are
+utilized where \slow of the chargers are slow charging (\slows kW) and \fast are fast charging (\fasts kW). The
+technique to minimize the total charger count will now be employed.
 
 To encourage the MILP PAP problem to utilize the fewest number of chargers, the value of \(m_q\) in the objective
 function, \autoref{eq:objective}, is \(\forall q \in \{1,2,..., n_B \}; m_q = 0\) and \(\forall q \in \{n_B + 1, n_B + 2,..., n_B + n_C \};
@@ -647,13 +647,13 @@ and utilizing this formulation in a metaheuristic solver. Furthermore, ``fuzzify
 is of interest to allow flexibility in the arrival and departure times.
 
 \bibliographystyle{Frontiers-Harvard}
-\bibliography{c:/msys64/home/1556048963C/Documents/citation-database/lit-ref,c:/msys64/home/1556048963C/Documents/citation-database/lib-ref}
+\bibliography{/home/alex/Documents/citation-database/lit-ref,/home/alex/Documents/citation-database/lib-ref}
 
 \nolinenumbers
 \clearpage
 
 \section{Figure Captions}
-\label{sec:orgb1855e3}
+\label{sec:org72b34f1}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
