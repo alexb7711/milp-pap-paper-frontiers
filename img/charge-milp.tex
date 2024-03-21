@@ -6,6 +6,7 @@
     pgfplots,                                                                   % Plot in LaTeX
     pgfplotstable,
     xfp,
+    soul,
 }
 \pgfplotsset{compat=1.18}
 \usetikzlibrary{automata, positioning, arrows.meta}                             % Tikz macros
@@ -14,14 +15,16 @@
 
 \pgfplotstableread[col sep=comma]{img/data/milp-charge.csv}\chargedatamilp
 
-\resizebox{\columnwidth}{4in}{%
 \begin{tikzpicture}
 \pgfplotstablegetcolsof{\chargedatamilp}
 \pgfmathtruncatemacro\NumCols{\pgfplotsretval/2-1}
 \begin{axis}[title={MILP Charges},
-             xlabel={Time [hr]},
-             xmin=0, xmax=24,
-             ylabel={Charge [kwh]}]
+    scale only axis,
+    height=0.30\paperheight, width=0.75\paperwidth,
+    grid=both,
+    xlabel={Time [hr]},
+    xmin=0, xmax=24,
+    ylabel={Charge [kWh]}]
     \foreach \i in {0, ..., \NumCols}
     {
         \pgfmathsetmacro{\u}{\fpeval{2*\i} + 0}
@@ -29,7 +32,6 @@
         \addplot +[mark=none] table[x index=\u, y index =\etas, unbounded coords=jump]{\chargedatamilp};
     }
 \end{axis}
-\end{tikzpicture}%
-}
+\end{tikzpicture}
 
 \end{document}
