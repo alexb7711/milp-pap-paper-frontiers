@@ -203,7 +203,7 @@ Subject to the constraints
     \eta_{\Gamma^0} = \alpha \kappa_{\Gamma^0_b}                           \label{subeq:init_charge}    \\
 \end{equation}
 \begin{equation}
-    a_i \leq u_i \leq (T - s_i)                            \label{subeq:m_valid_starts} \\
+    a_i \leq u_i \leq (\T - s_i)                           \label{subeq:m_valid_starts} \\
 \end{equation}
 \begin{equation}
     d_i \leq \tau_i                                        \label{subeq:m_valid_depart} \\

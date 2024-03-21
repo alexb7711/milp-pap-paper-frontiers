@@ -1,4 +1,4 @@
-% Created 2024-02-14 Wed 20:35
+% Created 2024-03-20 Wed 19:30
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -50,6 +50,7 @@
 \newcommand{\TODO}[1]{{\color{green} To do: #1}}                                % For adding notes to paper
 %%-------------------------------------------------------------------------------
 % Experiment parameters
+\newcommand{\T}{\mathcal{T}}                % To make it clear the difference
 \newcommand{\A}{35 }                                                            % Number of buses
 \newcommand{\N}{338 }                                                           % Number of visits
 \newcommand{\acharge}{0.9}                                                      % BOD charge percentage
@@ -194,7 +195,7 @@ assigned position (e.g. the varying lengths of the vessels) \cite{buhrkal-2011-m
 
 The BAP solves the problem of optimally assigning incoming vessels to berth positions to be serviced as shown in
  \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of \(O\) represent the time
- horizon \(T\) and the berth length \(L\), respectively. Similarly, the width and height for \(\mathbb{O}\) represent the time
+ horizon \(\T\) and the berth length \(L\), respectively. Similarly, the width and height for \(\mathbb{O}\) represent the time
  spent to service vessel \(i\) and the space taken by docking vessel \(i\), respectively. In the BAP, the vessel
  characteristics (length of the vessel, arrival time, handling time, desired departure time) are assumed to be known for
  all vessels to be serviced. A representation of a BAP solution is shown in \autoref{fig:bap}. The x and y-axis
@@ -211,13 +212,13 @@ the \(i^{th}\) visit, starting service time, \(u_i\), is the starting charge tim
 queue for assignment, and the service time, \(s_i\), is the elapsed charge time. There are also a few clarifying concepts
 about how the system is modeled. The PAP models the set of chargers as one continuous line; that is, the natural
 behavior of the PAP model is to allow vehicles to be queued anywhere along \([0,L]\). Similarly, the charge times are
-continuous and can be placed anywhere on the time horizon, \([0,T]\), as long as the allocated times do not interfere with
+continuous and can be placed anywhere on the time horizon, \([0,\T]\), as long as the allocated times do not interfere with
 other scheduled charge times. The PAP formulation's parameters can be divided into two categories: input parameters and
 decision variables. Each type will now be introduced. The following parameters are constant inputs into the MILP.
 
 \begin{itemize}
 \item \(L\) : Length of the charger
-\item \(T\)   : time horizon
+\item \(\T\)  : time horizon
 \item \(n_N\) : total number of incoming vehicles
 \item \(s_i\) : charging time for vehicle \(i;\; 1 \leq i \leq n_N\)
 \item \(l_i\) : width of vehicle \(i;\; 1 \leq i \leq n_N\)
@@ -248,7 +249,7 @@ Subject to:
 \begin{subequations}
 \label{eq:bapconstrs}
 \begin{align}
-    u_j - u_i - s_i - (\sigma_{ij} - 1)T \geq 0                  \label{subeq:baptime}          \\
+    u_j - u_i - s_i - (\sigma_{ij} - 1)\T \geq 0                  \label{subeq:baptime}          \\
     v_j - v_i - l_i - (\psi_{ij} - 1)L \geq 0                \label{subeq:bapspace}           \\
     \sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1 \label{subeq:bapvalid_pos}     \\
     \sigma_{ij} + \sigma_{ji} \leq 1                              \label{subeq:bapsigma}        \\
@@ -460,7 +461,7 @@ Subject to the constraints
     \eta_{\Gamma^0} = \alpha \kappa_{\Gamma^0_b}                           \label{subeq:init_charge}    \\
 \end{equation}
 \begin{equation}
-    a_i \leq u_i \leq (T - s_i)                            \label{subeq:m_valid_starts} \\
+    a_i \leq u_i \leq (\T - s_i)                           \label{subeq:m_valid_starts} \\
 \end{equation}
 \begin{equation}
     d_i \leq \tau_i                                        \label{subeq:m_valid_depart} \\
@@ -522,7 +523,7 @@ planning strategies are presented, analyzed, and discussed.
 \subsection{BEB Scenario}
 \label{beb-scenario}
 To display the capabilities of the model, an example scenario is presented. The scenario was run over a time horizon of
-\(T=24\) hours, utilizing \(n_B = \A\) buses with \(n_V = \N\) visits to the station divided between the \(n_B\) buses. As
+\(\T=24\) hours, utilizing \(n_B = \A\) buses with \(n_V = \N\) visits to the station divided between the \(n_B\) buses. As
 stated before, the route times are sampled from a set of routes from the UTA. Each bus has \batsize KWh battery that is
 required to stay above \mincharge charge (\fpeval{\batsize * \minchargeD} KWh) to maintain battery health. Each bus is
 assumed to begin the working day with a \fpeval{\acharge*100}\% charge (\fpeval{\acharge * \batsize} KWh). Additionally,
@@ -630,7 +631,7 @@ is of interest to allow flexibility in the arrival and departure times.
 \clearpage
 
 \section{Figure Captions}
-\label{sec:orgdf94959}
+\label{sec:orgb1855e3}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

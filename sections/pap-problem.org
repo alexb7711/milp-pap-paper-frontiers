@@ -21,7 +21,7 @@ assigned position (e.g. the varying lengths of the vessels) [cite:@buhrkal-2011-
 
 The BAP solves the problem of optimally assigning incoming vessels to berth positions to be serviced as shown in
  \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of $O$ represent the time
- horizon $T$ and the berth length $L$, respectively. Similarly, the width and height for $\mathbb{O}$ represent the time
+ horizon $\T$ and the berth length $L$, respectively. Similarly, the width and height for $\mathbb{O}$ represent the time
  spent to service vessel $i$ and the space taken by docking vessel $i$, respectively. In the BAP, the vessel
  characteristics (length of the vessel, arrival time, handling time, desired departure time) are assumed to be known for
  all vessels to be serviced. A representation of a BAP solution is shown in \autoref{fig:bap}. The x and y-axis
@@ -41,12 +41,12 @@ the $i^{th}$ visit, starting service time, $u_i$, is the starting charge time, t
 queue for assignment, and the service time, $s_i$, is the elapsed charge time. There are also a few clarifying concepts
 about how the system is modeled. The PAP models the set of chargers as one continuous line; that is, the natural
 behavior of the PAP model is to allow vehicles to be queued anywhere along $[0,L]$. Similarly, the charge times are
-continuous and can be placed anywhere on the time horizon, $[0,T]$, as long as the allocated times do not interfere with
+continuous and can be placed anywhere on the time horizon, $[0,\T]$, as long as the allocated times do not interfere with
 other scheduled charge times. The PAP formulation's parameters can be divided into two categories: input parameters and
 decision variables. Each type will now be introduced. The following parameters are constant inputs into the MILP.
 
 - $L$ : Length of the charger
-- $T$   : time horizon
+- $\T$  : time horizon
 - $n_N$ : total number of incoming vehicles
 - $s_i$ : charging time for vehicle $i;\; 1 \leq i \leq n_N$
 - $l_i$ : width of vehicle $i;\; 1 \leq i \leq n_N$
@@ -76,7 +76,7 @@ Subject to:
 \begin{subequations}
 \label{eq:bapconstrs}
 \begin{align}
-    u_j - u_i - s_i - (\sigma_{ij} - 1)T \geq 0                  \label{subeq:baptime}          \\
+    u_j - u_i - s_i - (\sigma_{ij} - 1)\T \geq 0                  \label{subeq:baptime}          \\
     v_j - v_i - l_i - (\psi_{ij} - 1)L \geq 0                \label{subeq:bapspace}           \\
     \sigma_{ij} + \sigma_{ji} + \psi_{ij} + \psi_{ji} \geq 1 \label{subeq:bapvalid_pos}     \\
     \sigma_{ij} + \sigma_{ji} \leq 1                              \label{subeq:bapsigma}        \\

@@ -41,6 +41,7 @@
 
 #+latex_header:%%-------------------------------------------------------------------------------
 #+latex_header:% Experiment parameters
+#+latex_header: \newcommand{\T}{\mathcal{T}}                % To make it clear the difference
 #+latex_header:\newcommand{\A}{35 }                                                            % Number of buses
 #+latex_header:\newcommand{\N}{338 }                                                           % Number of visits
 #+latex_header:\newcommand{\acharge}{0.9}                                                      % BOD charge percentage

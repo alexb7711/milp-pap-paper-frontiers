@@ -14,7 +14,7 @@ planning strategies are presented, analyzed, and discussed.
 :END:
 
 To display the capabilities of the model, an example scenario is presented. The scenario was run over a time horizon of
-$T=24$ hours, utilizing $n_B = \A$ buses with $n_V = \N$ visits to the station divided between the $n_B$ buses. As
+$\T=24$ hours, utilizing $n_B = \A$ buses with $n_V = \N$ visits to the station divided between the $n_B$ buses. As
 stated before, the route times are sampled from a set of routes from the UTA. Each bus has \batsize KWh battery that is
 required to stay above \mincharge charge (\fpeval{\batsize * \minchargeD} KWh) to maintain battery health. Each bus is
 assumed to begin the working day with a \fpeval{\acharge*100}% charge (\fpeval{\acharge * \batsize} KWh). Additionally,
