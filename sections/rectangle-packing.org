@@ -52,7 +52,7 @@ $n_Q$. Note that $n_Q = n_B + n_C$, where $n_B$ is the number of buses and $n_C$
 rationale for adding additional idle queues is to allow BEBs to be "set aside" if no additional charge is required.
 Adding one idle queue for each BEB ensures that the constraints will be satisfied if multiple buses sharing overlapping
 times at the station are placed in idle queues. This method will be applied when defining the parameters in
-{\autoref{sec:example}}. The modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
+\autoref{sec:example}. The modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
 
 #+begin_src latex
   \begin{subequations}

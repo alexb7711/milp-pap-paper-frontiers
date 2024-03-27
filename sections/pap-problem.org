@@ -99,9 +99,9 @@ Similarly, \autoref{subeq:bapspace} establishes spatial ordering when active ($\
 \autoref{subeq:bapvalid_pos}-\autoref{subeq:bapdelta} enforce spatial and temporal ordering between each queue/vehicle
 pair. Constraints \autoref{subeq:bapsigma} and \autoref{subeq:bapdelta} enforce validity of the assignments. For
 example, if \autoref{subeq:bapsigma} resulted in a value of two, that would imply both vehicle $i$ and $j$ are scheduled
-before and after each other temporally, which is impossible. In the case of {\autoref{subeq:bapdelta}} being equal to
+before and after each other temporally, which is impossible. In the case of \autoref{subeq:bapdelta} being equal to
 two, that would mean that vehicles $i$ and $j$ are scheduled both before and after one another on the charging strip,
-which is again impossible.}}
+which is again impossible.
 
 The last constraints force relationships between arrival time, initial charge time, and departure time.
 \autoref{subeq:bapdetach} states that the initial charge time, $u_i$, plus the total charge time for, $s_i$, must equal
