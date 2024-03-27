@@ -1,0 +1,37 @@
+\documentclass[float=false, crop=true]{standalone}
+
+\usepackage
+{
+    pgfplots,                                                                   % Plot in LaTeX
+    pgfplotstable,
+    xfp,
+}
+\usetikzlibrary{automata, positioning, arrows.meta}                             % Tikz macros
+
+\begin{document}
+
+\pgfplotstableread[col sep= comma]{img/data/milp-schedule.csv}\scheduledatamilp
+
+\begin{tikzpicture}
+\pgfplotstablegetcolsof{\scheduledatamilp}
+\pgfmathtruncatemacro\NumCols{\pgfplotsretval/3 - 1}
+\begin{axis}[title={MILP Schedule},
+    scale only axis,
+    height=0.325\paperheight, width=0.75\paperwidth,
+    grid=both,
+    ytick distance=5,
+    minor y tick num= 4,
+    xlabel={Time [hr]}, ylabel={Active charge times},
+    xmin=4, xmax=24]
+    \foreach \i in {0, ..., \NumCols}
+    {
+        \pgfmathsetmacro{\v}{\fpeval{3*\i} + 0}
+        \pgfmathsetmacro{\u}{\fpeval{3*\i} + 1}
+        \pgfmathsetmacro{\p}{\fpeval{3*\i} + 2}
+        \addplot +[error bars/.cd, x dir=plus, x explicit]
+                  table[x index=\u, x error index=\p, y index =\v, unbounded coords=discard]{\scheduledatamilp};
+    }
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

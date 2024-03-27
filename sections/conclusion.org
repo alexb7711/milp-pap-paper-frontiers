@@ -15,7 +15,7 @@ MILP schedule utilized a similar amount of fast chargers; however, the MILP sche
 to its advantage when the objective function saw fit. More importantly, the MILP PAP schedule utilized approximately
 $0.1\cdot10^4$ kWh more than the Qin-Modified; however, the charges for the MILP schedule remained above the constrained
 minimum SOC of \mincharge, and charged all the buses to \fpeval{\bcharge *100}% at the end of the working day. The
-Qin-Modified schedule, on the other hand, allowed the SOC of certain BEBs to drop to 0\%.
+Qin-Modified schedule, on the other hand, allowed the SOC of certain BEBs to drop to 0%.
 
 Further fields of interest are to utilize the formulation (\autoref{eq:objective} and \autoref{eq:dynconstrs}) with
 nonlinear battery dynamics, calculation and utilization of the demand and consumption cost in the objective function,
