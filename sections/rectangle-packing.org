@@ -241,7 +241,7 @@ Subject to the constraints
     \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q \leq \kappa_{\Gamma_i}         \label{subeq:max_charge}     \\
 \end{equation}
 \begin{equation}
-    \eta_{\Gamma^f_b} \geq \beta_{\Gamma_i} \kappa_{\Gamma_i}                   \label{subeq:final_charge}   \\
+    \eta_{\Gamma^f_b} \geq \beta_{\Gamma_f} \kappa_{\Gamma_f}                   \label{subeq:final_charge}   \\
 \end{equation}
 \begin{equation}
     s_i - (1 - w_{iq})M \leq g_{iq}                     \label{subeq:gpgret}         \\
