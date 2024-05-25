@@ -1,4 +1,4 @@
-% Created 2024-05-24 Fri 19:01
+% Created 2024-05-24 Fri 19:13
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 \usepackage[utf8]{inputenc}
@@ -257,7 +257,8 @@ Subject to:
     s_i + u_i = d_i                       \label{subeq:bapdetach}       \\
     a_i \leq u_i \leq (T - s_i)                 \label{subeq:bapvalid_starts} \\
     \sigma_{ij} \in \{0,1\},\;\psi_{ij} \in \{0,1\}\; \label{subeq:bapsdspace}      \\
-    v_i \in [0, L ]                         \label{subeq:bapvspace}
+    v_i \in [0, L]                         \label{subeq:bapvspace} \\
+    i,j = 1..n_V;\; i \ne j                \label{subeq:ijspace}
 \end{align}
 \end{subequations}
 
@@ -652,7 +653,7 @@ is of interest to allow flexibility in the arrival and departure times.
 \clearpage
 
 \section{Figure Captions}
-\label{sec:org22952a9}
+\label{sec:orgadc6a11}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

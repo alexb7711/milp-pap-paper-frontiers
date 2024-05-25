@@ -83,7 +83,8 @@ Subject to:
       s_i + u_i = d_i                       \label{subeq:bapdetach}       \\
       a_i \leq u_i \leq (T - s_i)                 \label{subeq:bapvalid_starts} \\
       \sigma_{ij} \in \{0,1\},\;\psi_{ij} \in \{0,1\}\; \label{subeq:bapsdspace}      \\
-      v_i \in [0, L ]                         \label{subeq:bapvspace}
+      v_i \in [0, L]                         \label{subeq:bapvspace} \\
+      i,j = 1..n_V;\; i \ne j                \label{subeq:ijspace}
   \end{align}
   \end{subequations}
 #+end_src
