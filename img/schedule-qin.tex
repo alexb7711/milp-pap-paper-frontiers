@@ -11,12 +11,12 @@
 
 \begin{document}
 
-\pgfplotstableread[col sep= comma]{img/data/qm-schedule.csv}\scheduledataquin
+\pgfplotstableread[col sep= comma]{img/data/qm-schedule.csv}\scheduledataqin
 
 \begin{tikzpicture}
-\pgfplotstablegetcolsof{\scheduledataquin}
+\pgfplotstablegetcolsof{\scheduledataqin}
 \pgfmathtruncatemacro\NumCols{\pgfplotsretval/3 - 1}
-\begin{axis}[title={Quin Schedule},
+\begin{axis}[title={Qin Schedule},
     scale only axis,
     height=0.325\paperheight, width=0.75\paperwidth,
     grid=both,
@@ -30,7 +30,7 @@
         \pgfmathsetmacro{\u}{\fpeval{3*\i} + 1}
         \pgfmathsetmacro{\p}{\fpeval{3*\i} + 2}
         \addplot +[blue, only marks, mark=otimes, error bars/.cd, error bar style={solid}, x dir=plus, x explicit]
-                  table[x index=\u, x error index=\p, y index =\v, unbounded coords=discard]{\scheduledataquin};
+                  table[x index=\u, x error index=\p, y index =\v, unbounded coords=discard]{\scheduledataqin};
     }
 \end{axis}
 \end{tikzpicture}

@@ -1,17 +1,7 @@
-% Created 2024-03-27 Wed 10:17
+% Created 2024-05-24 Fri 19:25
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{graphicx}
-\usepackage{longtable}
-\usepackage{wrapfig}
-\usepackage{rotating}
-\usepackage[normalem]{ulem}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{capt-of}
-\usepackage{hyperref}
+
 %%==============================================================================
 % Package configuration
 \usepackage{amsmath}                                  % Miscellaneous enhancements for mathematics
@@ -93,13 +83,6 @@
 \extraAuth{}
 \date{}
 \title{}
-\hypersetup{
- pdfauthor={},
- pdftitle={},
- pdfkeywords={},
- pdfsubject={},
- pdfcreator={Emacs 29.3 (Org mode 9.6.15)}, 
- pdflang={English}}
 \begin{document}
 
 \title{A Position Allocation Approach to the Scheduling of Battery-Electric Bus Charging}
@@ -242,7 +225,7 @@ The problem to be solved is
 
 \begin{equation}
 	\label{eq:bapobjective}
-	\min\; \sum_{i=1}^N (d_i - a_i)
+	\min\; \sum_{i=1}^{n_v} (d_i - a_i)
 \end{equation}
 
 Subject to:
@@ -257,7 +240,8 @@ Subject to:
     s_i + u_i = d_i                       \label{subeq:bapdetach}       \\
     a_i \leq u_i \leq (T - s_i)                 \label{subeq:bapvalid_starts} \\
     \sigma_{ij} \in \{0,1\},\;\psi_{ij} \in \{0,1\}\; \label{subeq:bapsdspace}      \\
-    v_i \in [0, L ]                         \label{subeq:bapvspace}
+    v_i \in [0, L]                         \label{subeq:bapvspace} \\
+    i,j = 1..n_V;\; i \ne j                \label{subeq:ijspace}
 \end{align}
 \end{subequations}
 
@@ -319,10 +303,10 @@ used to denote an individual queue, and \(\mathbb{V} = \{1, ..., n_V\}\) is a se
 index, \(i\), to a bus index, \(b\). The notation \(\Gamma_i\) is used as a shorthand to refer to the bus index \(b\) for visit
 \(i\).
 
-The actual physical dimensions of the BEB are ignored and it is assumed that each BEB will be assigned to charge at a
+The actual physical dimensions of the BEB are ignored, and it is assumed that each BEB will be assigned to charge at a
 particular charger. Because of this assumption, the PAP spatial variable, \(l_i\), may be removed and \(v_i\) is made to be
 an integer corresponding to which queue visit \(i\) will be using, \(v_i \in \mathbb{Q}\). That is, the queue position is now
-discretized over \(n_Q\) chargers where a BEB occupies single charge queue. Thus, when \(\psi_{ij} = 1\), vehicle \(j\) is placed
+discretized over \(n_Q\) queues where a BEB occupies single charge queue. Thus, when \(\psi_{ij} = 1\), vehicle \(j\) is placed
 in a charging queue with a larger index than vehicle \(i\), \(v_j > v_i\). The charger length \(L\) is likewise replaced with
 \(n_Q\). Note that \(n_Q = n_B + n_C\), where \(n_B\) is the number of buses and \(n_C\) is the number of chargers. The
 rationale for adding additional idle queues is to allow BEBs to be ``set aside'' if no additional charge is required.
@@ -495,7 +479,7 @@ Subject to the constraints
     \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q \leq \kappa_{\Gamma_i}         \label{subeq:max_charge}     \\
 \end{equation}
 \begin{equation}
-    \eta_{\Gamma^f_b} \geq \beta_{\Gamma_i} \kappa_{\Gamma_i}                   \label{subeq:final_charge}   \\
+    \eta_{\Gamma^f_b} \geq \beta_{\Gamma_f} \kappa_{\Gamma_f}                   \label{subeq:final_charge}   \\
 \end{equation}
 \begin{equation}
     s_i - (1 - w_{iq})M \leq g_{iq}                     \label{subeq:gpgret}         \\
@@ -646,13 +630,13 @@ and utilizing this formulation in a metaheuristic solver. Furthermore, ``fuzzify
 is of interest to allow flexibility in the arrival and departure times.
 
 \bibliographystyle{Frontiers-Harvard}
-\bibliography{/home/alex/Documents/citation-database/lit-ref,/home/alex/Documents/citation-database/lib-ref}
+\bibliography{/home/alex/Documents/citation-database/lit-ref,/home/alex/Documents/citation-database/lib-ref,/home/alex/Documents/citation-database/misc}
 
 \nolinenumbers
 \clearpage
 
 \section{Figure Captions}
-\label{sec:orgbffd4db}
+\label{sec:org5f5caeb}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
