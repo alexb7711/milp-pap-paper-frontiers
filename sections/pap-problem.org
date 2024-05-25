@@ -67,7 +67,7 @@ The problem to be solved is
 #+begin_src latex
 \begin{equation}
 	\label{eq:bapobjective}
-	\min\; \sum_{i=1}^N (d_i - a_i)
+	\min\; \sum_{i=1}^n_V (d_i - a_i)
 \end{equation}
 #+end_src
 Subject to:
