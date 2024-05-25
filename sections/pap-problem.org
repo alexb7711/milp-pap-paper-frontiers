@@ -59,9 +59,11 @@ times for vehicle $i$ are $u_i$ and $d_i$ seconds, respectively. The starting po
 \in [0,L]$ meters. The temporal ordering of vehicles $i$ and $j$ is determined by $\sigma_{ij} \in \{0, 1\}$, where $\sigma_{ij} = 1
 \implies$ $i$ arrives before $j$ for all $1 \le i,j \le n_V$. Similarly, $\psi_{ij} \in \{0, 1\}$ determines the relative
 position of vehicles $i$ and $j$ on the charger: $\psi_{ij} = 1 \implies v_i < v_j$ for all $1 \le i,j \le n_V$. A value of
-zero conveys no information about the relative ordering. Suppose $\psi_{ij} = 1$ and $\sigma_{ij} = 0$, from this it is known
-that EV $i$ in a queue of a lesser index than $j$; however, $\sigma_{ij} = 0$ does not whether state that EV $i$ is scheduled
-before, during, or after EV $j$ temporally.
+zero conveys no information about the relative ordering. As an example, suppose $\psi_{ij} = 1$ and $\sigma_{ij} = 0$, from this
+it is known that EV $i$ in a queue of a lesser index than $j$; however, $\sigma_{ij} = 0$ does not state whether visit $i$ is
+scheduled before, during, or after visit $j$ temporally. Similarly, suppose $\psi_{ij} = 0$ and $\sigma_{ij} = 1$, then it is
+known that visit $i$ is scheduled before visit $j$, but it is unknown as to which queue visit $i$ is scheduled relative
+to visit $j$.
 
 To determine the values for each of these decision variables, a MILP was formulated in
 [cite:@qarebagh-2019-optim-sched]. The formulation is shown in its entirety for completeness. The problem to be solved
