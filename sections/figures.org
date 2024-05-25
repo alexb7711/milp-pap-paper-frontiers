@@ -178,6 +178,6 @@
   \centering
       \includegraphics{img/energy}
       \caption{Total accumulated energy consumed by the Qin-Modified and MILP schedule throughout the time horizon.}
-      \label{fig:energy-usage}
+      \label{fig:milp-energy-usage}
   \end{figure}
 #+end_src

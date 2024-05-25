@@ -1,7 +1,7 @@
 #+begin_src latex
   \begin{table}[!htpb]
     \caption{Notation used throughout the paper. Units are provided when available.}
-    \label{tab:variables}
+    \label{tab:milp-variables}
     \centering
     \begin{tabularx}{\textwidth}{l l l}
       \toprule \textbf{Variable} & \textbf{Units} & \textbf{Description}                                                                      \\

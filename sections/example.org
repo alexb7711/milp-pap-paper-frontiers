@@ -93,7 +93,7 @@ Another important measure for the chargers is to compare the amount of power and
 \autoref{fig:power-usage} depicts the power consumption throughout the time horizon. It can be seen that the
 Qin-Modified power consumption is steadily less or the same as the MILP schedule. This can be accounted for by the
 MILP's constraints to keep the bus SOC above \mincharge and to reach a final SOC of \fpeval{\bcharge *100}% at the end
-of the working day. Along a similar vein, the accumulated energy consumed is shown in \autoref{fig:energy-usage}. The
+of the working day. Along a similar vein, the accumulated energy consumed is shown in \autoref{fig:milp-energy-usage}. The
 MILP schedule is more efficient up until about the eleventh hour. Again, this can be accounted for by the fact the MILP
 is accommodating the extra constraints. Due to these constraints the MILP PAP consumes about $0.1\cdot10^4$ kWh more than
 the Qin-Modified. The overlap of the MILP PAP can be accounted for by referencing \autoref{subfig:fast-charger-usage}

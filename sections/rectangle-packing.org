@@ -28,7 +28,7 @@ The discussion of the four changes is separated into two sections. \autoref{sec:
 spatial-temporal constraint formulation to form a queuing constraint. \autoref{sec:batt_dynamics} then discusses the
 addition of bus charge management. This section ends with a brief discussion of a modified objective function and the
 statement of the full problem in \autoref{sec:BEB_MILP}. The notation is explained throughout and summarized in
-\autoref{tab:variables}.
+\autoref{tab:milp-variables}.
 
 ** Queuing Constraints
 :PROPERTIES:
