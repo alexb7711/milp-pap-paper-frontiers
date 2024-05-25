@@ -65,7 +65,7 @@ times at the station are placed in idle queues. This method will be applied when
 #+end_src
 
 The constraint in \autoref{subeq:space} is nearly identical to \autoref{subeq:bapspace}, but rather than viewing the
-charger as a continuous strip of length $S$, it is discretized into $n_Q$ queues each with a width of unit length one. A
+charger as a continuous strip of length $L$, it is discretized into $n_Q$ queues each with a width of unit length one. A
 BEB is also assigned a unit length of one which is reflected in \autoref{subeq:space} by $\cdot \geq 1$.
 \autoref{subeq:valid_depart} ensures that the time the BEB is detached from the charger, $d_i$, is before its departure
 time, $\tau_i$ seconds. Note the introduction of the new variable $\tau_i$ exists to allow the final charge time to be
