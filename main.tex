@@ -1,4 +1,4 @@
-% Created 2024-05-24 Fri 20:18
+% Created 2024-07-12 Fri 15:09
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 
@@ -39,6 +39,7 @@
 %%===============================================================================
 % Custom Commands
 \newcommand{\TODO}[1]{{\color{green} To do: #1}}                                % For adding notes to paper
+\newcommand{\EDIT}[1]{{\color{blue}#1}}                                         % For adding edits to paper
 %%-------------------------------------------------------------------------------
 % Experiment parameters
 \newcommand{\A}{35 }                                                            % Number of buses
@@ -92,19 +93,24 @@
 \maketitle
 
 \begin{abstract}
-  Robust charging schedules in a growing market of battery electric bus (BEB) fleets are a critical component to
+  Robust charging schedules in a growing market of \EDIT{Battery-Electric Bus} (BEB) fleets are a critical component to
   successful adoption. In this paper, a BEB charging scheduling framework that considers spatiotemporal schedule
-  constraints, route schedules, fast and slow charging, and battery dynamics is modeled as a mixed integer linear
-  program (MILP). The MILP is modeled after the Berth Allocation Problem (BAP) in a modified form known as the Position
-  Allocation Problem (PAP). Linear battery dynamics are included to model the charging of buses while at the station. To
-  model the BEB discharges over their respective routes, it is assumed each BEB has an average kWh charge loss while on
-  route. The optimization coordinates BEB charging to ensure that each vehicle remains above a specified state-of-charge
-  (SOC). The model also minimizes the total number of chargers utilized and prioritizes slow charging for battery
-  health. The model validity is demonstrated with a set of routes sampled from the Utah Transit Authority (UTA) for \A
-  buses and \N visits to the charging station. The model is also compared to a heuristic algorithm based on charge
-  thresholds referred to as the Qin-Modified method. The results presented show that the slow chargers are more readily
-  selected and the charging and spatiotemporal constraints are met while considering the battery dynamics and minimizing
-  both the charger count and consumption cost.
+  constraints, route schedules, fast and slow charging, and battery dynamics is modeled as a \EDIT{Mixed Integer Linear
+    Program} (MILP). The MILP is modeled after the Berth Allocation Problem (BAP)\EDIT{, a method of optimally assigning
+    vessels to be serviced,} in a modified form known as the Position Allocation Problem (PAP)\EDIT{, which assigns
+    Electric Vehicels (EVs) to be charged}. Linear battery dynamics are included to model the charging of buses while at
+  the station. To model the BEB discharges over their respective routes, it is assumed each BEB has an average kWh
+  charge loss while on route. The optimization coordinates BEB charging to ensure that each vehicle remains above a
+  specified \EDIT{State-Of-Charge} (SOC). The model also minimizes the total number of chargers utilized and prioritizes
+  slow charging for battery health. The model validity is demonstrated with a set of routes sampled from the Utah
+  Transit Authority (UTA) for \A buses and \N visits to the charging station. The model is also compared to a heuristic
+  algorithm based on charge thresholds referred to as the Qin-Modified method. The results presented show that \EDIT{the
+    MILP framework encourages battery health by assigning BEBs slow chargers more readily than the Qin-Modified. The
+    MILP utilizied one fast charger and six slow chargers whereas the Qin-Modified utilized four fast chargers and six
+    slow. Moreover, the MILP was able to maintain a specified minimum SOC of 25\% throughout the day while meeting a
+    reqired minimum SOC at the end of the working day of 70\% whereas the Qin-Modifed was unable to keep the SOC above
+    0\% without any constraints applied.} Furthermore, \EDIT{it is shown that the} spatiotemporal constraints
+  are met while considering the battery dynamics \EDIT{while} minimizing both the charger count and consumption cost.
 
   \tiny \keyFont{ \section{Keywords:} Berth Allocation Problem (BAP), Position Allocation Problem (PAP), Mixed Integer
     Linear Program (MILP), Battery Electric Bus (BEB), Scheduling}
@@ -121,10 +127,10 @@ emissions, such as lower driving costs, lower maintenance costs, and reduced veh
 introduce new challenges such as larger upfront costs, and potentially several hours long ``refueling'' periods
 \cite{xylia-2018-role-charg,li-2016-batter-elect}. Furthermore, the problem is exacerbated by the constraints of the
 transit schedule to which the fleet must adhere, the limited amount of chargers available, and the adverse effects on
-the health of the battery due to fast charging \cite{lutsey-2019-updat-elect}. This paper presents a
-framework for optimally assiging BEBs to charging queues assuming fixed routes while taking into consideration multiple
-charger types and utilizing linear charging dynamics. This method also enforces the SOC to stay above a specified
-percentage throughout the day, and ensures a minumum SOC at the end of the working day.
+the health of the battery due to fast charging \cite{lutsey-2019-updat-elect}. This paper \EDIT{aims to remedy these problems by presenting} a framework for optimally assiging BEBs to charging queues assuming fixed routes
+while taking into consideration multiple charger types and utilizing linear charging dynamics. This method also enforces
+the SOC to stay above a specified percentage throughout the day, and ensures a minumum SOC at the end of the working
+day.
 
 Many recent efforts have been made to simultaneously solve the problems of route scheduling, charging fleets, and
 determining the infrastructure upon which they rely, e.g., \cite{wei-2018-optim-spatio,sebastiani-2016-evaluat-elect,hoke-2014-accoun-lithium,wang-2017-elect-vehic}. Several simplifications are made to make these problems
@@ -147,9 +153,9 @@ shown in \autoref{subfig:bapexample}. As the vessels are serviced, they move fro
 queued vessels moving vertically downward into their respective berthing locations. The PAP utilizes this notion of
 queuing for scheduling vehicles to be charged, as shown in \autoref{subfig:papexample}. The vehicles are queued in
 several lines and move from left to right to recieve their charge and exit the system. The PAP is formulated as a
-rectangle packing problem and assumes that each vehicle has a predefined charge time, the amount of vehicles that can
-charge at any given moment is limited by the physical width of each vehicle and the length of the charging block. The
-PAP also makes the assumption that each vehicle that is placed in the system is unique
+rectangle packing problem and assumes that each vehicle has a predefined charge time \EDIT{and} the amount of
+vehicles that can charge at any given moment is limited by the physical width of each vehicle and the length of the
+charging block. The PAP also makes the assumption that each vehicle that is placed in the system is unique
 \cite{qarebagh-2019-optim-sched}.
 
 The main contribution of this work is the extension of the PAP's novel approach to BEB charger scheduling. This
@@ -180,20 +186,21 @@ problems, the dimensions of \(\mathbb{O}\) are held constant such as in the prob
 the widths and height of the rectangles represent the physical width and heights of the modules
 \cite{murata-1995-rectan}. Other problems, such as the one presented in this work, allow either the horizontal or
 vertical edge of each rectangle in \(\mathbb{O}\) to vary. As an example, suppose the vessel lengths are predefined
-(vertical edges are static), but the service time is allowed to vary (horizontal edges are dynamic).
+(vertical edges are static), but the service time is allowed to vary (horizontal edges are dynamic)
 \cite{buhrkal-2011-model-discr}.
 
-The BAP solves the problem of optimally assigning incoming vessels to berth positions to be serviced as shown in
-\autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of \(O\) represent the time
-horizon \(T\) seconds and the berth length \(L\) meters, respectively. Similarly, the widths and heights of each element in
-\(\mathbb{O}\) represent the time spent to service vessel \(i\) and the space taken by docking vessel \(i\), respectively. In
-the BAP, the vessel characteristics (length of the vessel, arrival time, handling time, desired departure time) are
-assumed to be known for all vessels. A representation of a BAP solution is shown in \autoref{fig:bap}. The x and y-axis
-represent time horizon and berthing space, respectively. The gray squares, labeled A, B, C, and D, represent berthed
-vessels. The width of the boxes represents the time spent being serviced, and the height represents the amount of space
-the vessel requires on the berth. The vertical line adjacent to ``Arrival Time'' represents the actual time that the
-vessel arrives and is available to be berthed. ``Berthing Time'' is the time the vessel is berthed and begins being
-serviced. ``Completion time'' represents the time at which the berthing space becomes available again.
+The BAP solves the problem of optimally assigning incoming vessels to \EDIT{berthing} positions \EDIT{in order} to be
+serviced as shown in \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of
+\(O\) represent the time horizon \(T\) seconds and the berth length \(L\) meters, respectively. Similarly, the widths and
+heights of each element in \(\mathbb{O}\) represent the time spent to service vessel \(i\) and the space taken by docking
+vessel \(i\), respectively. In the BAP, the vessel characteristics (length of the vessel, arrival time, handling time,
+desired departure time) are assumed to be known for all vessels. A representation of a BAP solution is shown in
+\autoref{fig:bap}. The x and y-axis represent time horizon and berthing space, respectively. The gray squares, labeled
+A, B, C, and D, represent scheduled vessels. The width of the boxes represent the time spent being serviced, and the
+height \EDIT{of the boxes} represent the amount of space the vessel requires on the berth. The vertical line adjacent to
+``Arrival Time'' represents the time that the vessel arrives and is available to be berthed. ``Berthing Time'' is the
+time the vessel is berthed and begins being serviced. ``Completion time'' represents the time at which the berthing
+space becomes available again.
 
 \subsection{The PAP Formulation}
 \label{sec:the-pap-formulation}
@@ -270,15 +277,13 @@ binary terms. \autoref{subeq:bapvspace} ensures that the assigned value of \(v_i
 \label{sec:problemformulation}
 Applying the PAP to BEB charging requires four fundamental changes. The first is that the time that a BEB spends
 charging must be allowed to vary. That is, \(u_i\), \(d_i\), and \(s_i\) become variables of optimization. This is done
-primarily because chargers of various speeds are to be introduced. Allowing BEBs to have multiple visits that a charger
-decided upon during the optimization requires that the start and stop times must be changeable to respect the SOC
-constraints. Second, in the PAP each visit is assumed to be a different vehicle. For the BEB charging problem, each bus
-may make multiple visits to the station throughout the day. Thus, the resulting SOC for a bus at a given visit is
-dependent upon each of the prior visits. The third fundamental change is related to the first two. The SOC of each bus
-must be tracked to ensure that charging across multiple visits is sufficient to allow each bus to execute its route
-throughout the day. Finally, as previously stated, the PAP models the charger as one continuous bar. For the BEB, it
-will be assumed that a discrete number of chargers exist. Moreover, it is assumed that these chargers may have different
-charge rates.
+primarily because chargers of various speeds are to be introduced. Second, in the PAP each visit is assumed to be a
+different vehicle. For the BEB charging problem, each bus may make multiple visits to the station throughout the day.
+Thus, the resulting SOC for a bus at a given visit is dependent upon each of the prior visits. The third fundamental
+change is related to the first two. The SOC of each bus must be tracked to ensure that charging across multiple visits
+is sufficient to allow each bus to execute its route throughout the day. Finally, as previously stated, the PAP models
+the charger as one continuous bar. For the BEB, it will be assumed that a discrete number of chargers exist. Moreover,
+it is assumed that these chargers may have different charge rates.
 
 A few assumptions are made in the derivation of the algorithm. As this work is not focused on estimating the discharge
 of a BEB during its route, the discharge for each route will be pre-calculated by assuming a fixed discharge rate kW
@@ -630,13 +635,13 @@ and utilizing this formulation in a metaheuristic solver. Furthermore, ``fuzzify
 is of interest to allow flexibility in the arrival and departure times.
 
 \bibliographystyle{Frontiers-Harvard}
-\bibliography{/home/alex/Documents/citation-database/lit-ref,/home/alex/Documents/citation-database/lib-ref,/home/alex/Documents/citation-database/misc}
+\bibliography{c:/msys64/home/1556048963C/Documents/citation-database/lit-ref,c:/msys64/home/1556048963C/Documents/citation-database/lib-ref,c:/msys64/home/1556048963C/Documents/citation-database/misc}
 
 \nolinenumbers
 \clearpage
 
 \section{Figure Captions}
-\label{sec:orgb5e2923}
+\label{sec:orgd42a4e7}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
