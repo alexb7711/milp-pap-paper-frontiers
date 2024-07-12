@@ -5,15 +5,13 @@
 
 Applying the PAP to BEB charging requires four fundamental changes. The first is that the time that a BEB spends
 charging must be allowed to vary. That is, $u_i$, $d_i$, and $s_i$ become variables of optimization. This is done
-primarily because chargers of various speeds are to be introduced. Allowing BEBs to have multiple visits that a charger
-decided upon during the optimization requires that the start and stop times must be changeable to respect the SOC
-constraints. Second, in the PAP each visit is assumed to be a different vehicle. For the BEB charging problem, each bus
-may make multiple visits to the station throughout the day. Thus, the resulting SOC for a bus at a given visit is
-dependent upon each of the prior visits. The third fundamental change is related to the first two. The SOC of each bus
-must be tracked to ensure that charging across multiple visits is sufficient to allow each bus to execute its route
-throughout the day. Finally, as previously stated, the PAP models the charger as one continuous bar. For the BEB, it
-will be assumed that a discrete number of chargers exist. Moreover, it is assumed that these chargers may have different
-charge rates.
+primarily because chargers of various speeds are to be introduced. Second, in the PAP each visit is assumed to be a
+different vehicle. For the BEB charging problem, each bus may make multiple visits to the station throughout the day.
+Thus, the resulting SOC for a bus at a given visit is dependent upon each of the prior visits. The third fundamental
+change is related to the first two. The SOC of each bus must be tracked to ensure that charging across multiple visits
+is sufficient to allow each bus to execute its route throughout the day. Finally, as previously stated, the PAP models
+the charger as one continuous bar. For the BEB, it will be assumed that a discrete number of chargers exist. Moreover,
+it is assumed that these chargers may have different charge rates.
 
 #+begin_src latex
   A few assumptions are made in the derivation of the algorithm. As this work is not focused on estimating the discharge
