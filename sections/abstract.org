@@ -1,18 +1,23 @@
 #+begin_src latex
   \begin{abstract}
-    Robust charging schedules in a growing market of battery electric bus (BEB) fleets are a critical component to
+    Robust charging schedules in a growing market of \EDIT{Battery-Electric Bus} (BEB) fleets are a critical component to
     successful adoption. In this paper, a BEB charging scheduling framework that considers spatiotemporal schedule
-    constraints, route schedules, fast and slow charging, and battery dynamics is modeled as a mixed integer linear
-    program (MILP). The MILP is modeled after the Berth Allocation Problem (BAP) in a modified form known as the Position
-    Allocation Problem (PAP). Linear battery dynamics are included to model the charging of buses while at the station. To
-    model the BEB discharges over their respective routes, it is assumed each BEB has an average kWh charge loss while on
-    route. The optimization coordinates BEB charging to ensure that each vehicle remains above a specified state-of-charge
-    (SOC). The model also minimizes the total number of chargers utilized and prioritizes slow charging for battery
-    health. The model validity is demonstrated with a set of routes sampled from the Utah Transit Authority (UTA) for \A
-    buses and \N visits to the charging station. The model is also compared to a heuristic algorithm based on charge
-    thresholds referred to as the Qin-Modified method. The results presented show that the slow chargers are more readily
-    selected and the charging and spatiotemporal constraints are met while considering the battery dynamics and minimizing
-    both the charger count and consumption cost.
+    constraints, route schedules, fast and slow charging, and battery dynamics is modeled as a \EDIT{Mixed Integer Linear
+      Program} (MILP). The MILP is modeled after the Berth Allocation Problem (BAP)\EDIT{, a method of optimally assigning
+      vessels to be serviced,} in a modified form known as the Position Allocation Problem (PAP)\EDIT{, which assigns
+      Electric Vehicels (EVs) to be charged}. Linear battery dynamics are included to model the charging of buses while at
+    the station. To model the BEB discharges over their respective routes, it is assumed each BEB has an average kWh
+    charge loss while on route. The optimization coordinates BEB charging to ensure that each vehicle remains above a
+    specified \EDIT{State-Of-Charge} (SOC). The model also minimizes the total number of chargers utilized and prioritizes
+    slow charging for battery health. The model validity is demonstrated with a set of routes sampled from the Utah
+    Transit Authority (UTA) for \A buses and \N visits to the charging station. The model is also compared to a heuristic
+    algorithm based on charge thresholds referred to as the Qin-Modified method. The results presented show that \EDIT{the
+      MILP framework encourages battery health by assigning BEBs slow chargers more readily than the Qin-Modified. The
+      MILP utilizied one fast charger and six slow chargers whereas the Qin-Modified utilized four fast chargers and six
+      slow. Moreover, the MILP was able to maintain a specified minimum SOC of 25\% throughout the day while meeting a
+      reqired minimum SOC at the end of the working day of 70\% whereas the Qin-Modifed was unable to keep the SOC above
+      0\% without any constraints applied.} Furthermore, \EDIT{it is shown that the} spatiotemporal constraints
+    are met while considering the battery dynamics \EDIT{while} minimizing both the charger count and consumption cost.
 
     \tiny \keyFont{ \section{Keywords:} Berth Allocation Problem (BAP), Position Allocation Problem (PAP), Mixed Integer
       Linear Program (MILP), Battery Electric Bus (BEB), Scheduling}

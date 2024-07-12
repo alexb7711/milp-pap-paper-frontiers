@@ -39,6 +39,7 @@
 #+latex_header:%%===============================================================================
 #+latex_header:% Custom Commands
 #+latex_header:\newcommand{\TODO}[1]{{\color{green} To do: #1}}                                % For adding notes to paper
+#+latex_header:\newcommand{\EDIT}[1]{{\color{blue}#1}}                                         % For adding edits to paper
 
 #+latex_header:%%-------------------------------------------------------------------------------
 #+latex_header:% Experiment parameters
