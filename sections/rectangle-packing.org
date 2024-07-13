@@ -65,7 +65,7 @@ BEB is also assigned a unit length of one which is reflected in \autoref{subeq:s
 \autoref{subeq:valid_depart} ensures that the time the BEB is detached from the charger, $d_i$, is before its departure
 time, $\tau_i$ seconds. Note the introduction of the new variable $\tau_i$ exists to allow the final charge time to be
 independent, src_latex{\EDIT{similar in manner to the initial charge time being independent of the arrival time}}, $a_i
-\le u_i \le d_i \le \tau_i$. \autoref{subeq:vspace} defines the of integers that $v_i$ that represent the $n_Q$ chargers.
+\le u_i \le d_i \le \tau_i$. \autoref{subeq:vspace} defines $v_i$ \EDIT{to be an element from set of queues}.
 
 ** Battery Charge Dynamic Constraints
 :PROPERTIES:
