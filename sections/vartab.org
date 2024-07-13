@@ -1,6 +1,6 @@
 #+begin_src latex
   \begin{table}[!htpb]
-    \caption{Notation used throughout the paper. Units \EDIT{values} are provided when available.}
+    \caption{Notation used throughout the paper. \EDIT{Values and units} are provided when available.}
     \label{tab:variables}
     \centering
     \begin{tabularx}{\textwidth}{l r l p{0.7\linewidth}}

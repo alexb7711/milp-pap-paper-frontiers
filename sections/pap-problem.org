@@ -39,13 +39,14 @@ space becomes available again.
 :custom_id: sec:the-pap-formulation
 :END:
 
-The BAP forms the basis of the PAP; however, there are some differences in the way the variables are interpreted. The
-starting service time, $u_i$ seconds, is viewed as the initial charge time, and the service time, total elapsed time
-spent on the charger. Similarly, for the spatial term, $v_i \in [0,L]$, the berth location is instead interpreted as the
-initial position on the charger. There are also a few clarifying concepts about how the system is modeled. The PAP
-models the set of chargers as one continuous line; that is, the natural behavior of the PAP model is to allow vehicles
-to be queued anywhere along $[0,L]$. Similarly, the charge times are continuous and can be placed anywhere on the time
-horizon, $[0,T]$, as long as the allocated times do not interfere with other scheduled charge times.
+The BAP forms the basis of the PAP; however, there are some differences in the way the variables are interpreted.
+src_latex{\EDIT{The relevant variables can be found in \autoref{tab:variables}}}. The starting service time, $u_i$
+seconds, is viewed as the initial charge time, and the service time, total elapsed time spent on the charger. Similarly,
+for the spatial term, $v_i \in [0,L]$, the berth location is instead interpreted as the initial position on the charger.
+There are also a few clarifying concepts about how the system is modeled. The PAP models the set of chargers as one
+continuous line; that is, the natural behavior of the PAP model is to allow vehicles to be queued anywhere along
+$[0,L]$. Similarly, the charge times are continuous and can be placed anywhere on the time horizon, $[0,T]$, as long as
+the allocated times do not interfere with other scheduled charge times.
 
 The PAP formulation's parameters can be divided into two categories: input parameters and decision variables. Each type
 will now be introduced in turn. The following parameters are assumed to be known inputs for the MILP. $L$ defines the

@@ -32,9 +32,9 @@ that the charge received is proportional to the time spent on the charger
 
 This work builds upon the Position Allocation Problem (PAP) [cite:@qarebagh-2019-optim-sched], a modification of the
 well-studied Berth Allocation Problem (BAP), as a means to schedule the charging of electric vehicles
-[cite:@buhrkal-2011-model-discr;@frojan-2015-contin-berth;@imai-2001-dynam-berth]. The BAP is a continuous time model
-that solves the problem of allocating space for incoming vessels to be berthed and serviced. Each arriving vessel
-requires both time and space to be serviced and thus must be carefully assigned to avoid delay
+[cite:@buhrkal-2011-model-discr;@frojan-2015-contin-berth;@imai-2001-dynam-berth;@rodrigues-2022-berth]. The BAP is a
+continuous time model that solves the problem of allocating space for incoming vessels to be berthed and serviced. Each
+arriving vessel requires both time and space to be serviced and thus must be carefully assigned to avoid delay
 [cite:@imai-2001-dynam-berth]. Vessels are lined up parallel to the berth to be serviced and are horizontally queued as
 shown in \autoref{subfig:bapexample}. As the vessels are serviced, they move from left to right to make space for the
 queued vessels moving vertically downward into their respective berthing locations. The PAP utilizes this notion of
