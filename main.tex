@@ -1,4 +1,4 @@
-% Created 2024-07-13 Sat 14:35
+% Created 2024-07-13 Sat 15:13
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 
@@ -625,11 +625,11 @@ to provide upper and lower limits for the battery dynamics.
 An example for the MILP PAP formulation was then presented and compared to a heuristic-based schedule, referred to as
 Qin-Modified. The MILP PAP optimization was run for \timeran seconds to a non-optimal solution. The Qin-Modified and
 MILP schedule utilized \EDIT{four and one fast charger(s), respectively. Furthermore, the MILP and Qin-Modified utilized the fast chargers for similar durations ranging from about 0.2-0.5 hours}; however, the MILP
-schedule \EDIT{demonstrated battery health considerations by recognizing visits that may be charged for longer durations while meeting the constraints.} The MILP PAP schedule utilized approximately \(0.1\cdot10^4\) kWh more than the
-Qin-Modified \EDIT{but}, the \EDIT{SOC} for the MILP schedule remained above the constrained minimum SOC of \mincharge,
-and charged all the buses to \fpeval{\bcharge *100}\% at the end of the working day. \EDITI\{That is, the constraints
-applied to the MILP model drove larger energy consumption in order to meet the SOC threshold requirements.\} The
-Qin-Modified schedule, on the other hand, allowed the SOC of certain BEBs to drop to 0\%. \EDIT{The SOC at the end of the day for the Qin-Modifed varied from 0\% to 94.85\% whereas the results of the MILP showed that the BEBs converged to the minimum SOC of \fpeval{\bcharge * 100}\% that was specified.}
+schedule \EDIT{demonstrated battery health considerations by recognizing visits that could utilize slow chargers for longer durations while satisfying the constraints.} The MILP PAP schedule utilized approximately
+\(0.1\cdot10^4\) kWh more than the Qin-Modified \EDIT{but}, the \EDIT{SOC} for the MILP schedule remained above the
+constrained minimum SOC of \mincharge, and charged all the buses to \fpeval{\bcharge *100}\% at the end of the working
+day. \EDIT{That is, the constraints applied to the MILP model consumed more energy to satisfy the SOC threshold requirements.} The Qin-Modified schedule, on the other hand, allowed the SOC of certain BEBs to drop to 0\%.
+\EDIT{The SOC at the end of the day for the Qin-Modifed varied from 0\% to 94.85\% whereas the results of the MILP showed that the BEBs converged to the minimum SOC of \fpeval{\bcharge * 100}\% that was specified.}
 
 Further fields of interest are to utilize the formulation (\autoref{eq:objective} and \autoref{eq:dynconstrs}) with
 nonlinear battery dynamics, calculation and utilization of the demand and consumption cost in the objective function,
@@ -637,13 +637,13 @@ and utilizing this formulation in a metaheuristic solver. Furthermore, ``fuzzify
 is of interest to allow flexibility in the arrival and departure times.
 
 \bibliographystyle{Frontiers-Harvard}
-\bibliography{/home/alex/Documents/citation-database/lit-ref,/home/alex/Documents/citation-database/lib-ref,/home/alex/Documents/citation-database/misc}
+\bibliography{ citation-database/misc,citation-database/lib-ref,citation-database/lit-ref }
 
 \nolinenumbers
 \clearpage
 
 \section{Figure Captions}
-\label{sec:org9f61921}
+\label{sec:orgd2dd9bf}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
