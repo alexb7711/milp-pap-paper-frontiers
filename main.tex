@@ -1,4 +1,4 @@
-% Created 2024-07-13 Sat 13:56
+% Created 2024-07-13 Sat 14:35
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 
@@ -596,11 +596,11 @@ horizon for the Qin and MILP schedules, respectively. Every vehicle begins with 
 SOC of \(\beta_b =\) \fpeval{\bcharge *100}\% in the MILP PAP schedule, and never goes below \mincharge in the intermediate
 arrivals as stated in constraint \autoref{eq:dynconstrs}. There is no guarantee for this in the Qin-Modified strategy
 which can be seen by some intermediate charges reaching an SOC of 0\% as well as the distribution of final charges, the
-minimum being 0\% and the maximum \fpeval{trunc(\fpeval{368 / \batsize * 100}, 3)}\%. The only sense of
-guarantee that the Qin-Modified supplies is its predictability within the intermediate visits due to its heuristic
-nature (i.e. if the BEB charge is within the low threshold, a fast charger will be prioritized); whereas MILP places a
-bus in the queue that ``makes sense'' in respect to the larger picture. The MILP PAP does not have an obvious sense of
-decision-making due to weighted objective function that is affected by the accumulation of decisions made prior.
+minimum being 0\% and the maximum \fpeval{trunc(\fpeval{368 / \batsize * 100}, 3)}\%. \EDIT{It is of note that the SOC plummeting to 0\% is due to the reactive nature of the Qin-Modified. Specifically, the schedule utilized in this example contains some BEBs that begin with routes that deplete the SOC by small amounts that do not bypass the threshold. These routes are followed by small charge windows which are then proceeded by large routes depleting the SOC by a significant amount resulting in the SOC reaching 0\%.} The only sense of guarantee that the
+Qin-Modified supplies is its predictability within the intermediate visits due to its heuristic nature (i.e. if the BEB
+charge is within the low threshold, a fast charger will be prioritized); whereas MILP places a bus in the queue that
+``makes sense'' in respect to the larger picture. The MILP PAP does not have an obvious sense of decision-making due to
+weighted objective function that is affected by the accumulation of decisions made prior.
 
 Another important measure for the chargers is to compare the amount of power and energy consumed.
 \autoref{fig:power-usage} depicts the power consumption throughout the time horizon. It can be seen that the
@@ -643,7 +643,7 @@ is of interest to allow flexibility in the arrival and departure times.
 \clearpage
 
 \section{Figure Captions}
-\label{sec:org3fc8933}
+\label{sec:org9f61921}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
