@@ -1,4 +1,4 @@
-% Created 2024-07-13 Sat 15:13
+% Created 2024-07-14 Sun 10:16
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 
@@ -108,7 +108,7 @@
   algorithm based on charge thresholds referred to as the Qin-Modified method. The results presented show that \EDIT{the
     MILP framework encourages battery health by assigning BEBs slow chargers more readily than the Qin-Modified. The
     MILP utilizied one fast charger and six slow chargers whereas the Qin-Modified utilized four fast chargers and six
-    slow. Moreover, the MILP was able to maintain a specified minimum SOC of 25\% throughout the day while meeting a
+    slow. Moreover, the MILP was able to maintain a specified minimum SOC of 25\% throughout the day and meeting a
     reqired minimum SOC at the end of the working day of 70\% whereas the Qin-Modifed was unable to keep the SOC above
     0\% without any constraints applied.} Furthermore, \EDIT{it is shown that the} spatiotemporal constraints
   are met while considering the battery dynamics \EDIT{while} minimizing both the charger count and consumption cost.
@@ -516,11 +516,10 @@ Subject to the constraints
 \end{subequations}
 \end{multicols}
 
-\autoref{subeq:m_time}-\autoref{subeq:m_valid_depart} are reiterations of the queuing constraints in
-\EDIT{\autoref{eq:bapconstrs}} and \autoref{eq:packconstrs}.
-\autoref{subeq:init_charge}-\autoref{subeq:final_charge} provide the battery charge constraints.
-\autoref{subeq:gpgret}-\autoref{subeq:gwles} define the charge \EDIT{duration} of every visit/queue pairing. The last
-constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace} define the sets of valid values for each variable.
+\autoref{subeq:m_time}-\autoref{subeq:m_valid_depart} are reiterations of the queuing constraints \EDIT{from \autoref{eq:bapconstrs}} and \autoref{eq:packconstrs}. \autoref{subeq:init_charge}-\autoref{subeq:final_charge} provide
+the battery charge constraints. \autoref{subeq:gpgret}-\autoref{subeq:gwles} define the charge \EDIT{duration} of every
+visit/queue pairing. The last constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace} define the sets of valid
+values for each variable.
 \section{Example}
 \label{sec:example}
 An example will now be presented to demonstrate the utility of the developed MILP charge scheduling technique. A
@@ -643,7 +642,7 @@ is of interest to allow flexibility in the arrival and departure times.
 \clearpage
 
 \section{Figure Captions}
-\label{sec:orgd2dd9bf}
+\label{sec:orgd4e89f7}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

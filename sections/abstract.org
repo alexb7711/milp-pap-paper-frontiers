@@ -14,7 +14,7 @@
     algorithm based on charge thresholds referred to as the Qin-Modified method. The results presented show that \EDIT{the
       MILP framework encourages battery health by assigning BEBs slow chargers more readily than the Qin-Modified. The
       MILP utilizied one fast charger and six slow chargers whereas the Qin-Modified utilized four fast chargers and six
-      slow. Moreover, the MILP was able to maintain a specified minimum SOC of 25\% throughout the day while meeting a
+      slow. Moreover, the MILP was able to maintain a specified minimum SOC of 25\% throughout the day and meeting a
       reqired minimum SOC at the end of the working day of 70\% whereas the Qin-Modifed was unable to keep the SOC above
       0\% without any constraints applied.} Furthermore, \EDIT{it is shown that the} spatiotemporal constraints
     are met while considering the battery dynamics \EDIT{while} minimizing both the charger count and consumption cost.

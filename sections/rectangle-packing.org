@@ -266,8 +266,8 @@ Subject to the constraints
 \end{multicols}
 #+end_src
 
-\autoref{subeq:m_time}-\autoref{subeq:m_valid_depart} are reiterations of the queuing constraints in
-src_latex{\EDIT{\autoref{eq:bapconstrs}}} and \autoref{eq:packconstrs}.
-\autoref{subeq:init_charge}-\autoref{subeq:final_charge} provide the battery charge constraints.
-\autoref{subeq:gpgret}-\autoref{subeq:gwles} define the charge \EDIT{duration} of every visit/queue pairing. The last
-constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace} define the sets of valid values for each variable.
+\autoref{subeq:m_time}-\autoref{subeq:m_valid_depart} are reiterations of the queuing constraints src_latex{\EDIT{from
+\autoref{eq:bapconstrs}}} and \autoref{eq:packconstrs}. \autoref{subeq:init_charge}-\autoref{subeq:final_charge} provide
+the battery charge constraints. \autoref{subeq:gpgret}-\autoref{subeq:gwles} define the charge \EDIT{duration} of every
+visit/queue pairing. The last constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace} define the sets of valid
+values for each variable.
