@@ -1,0 +1,135 @@
+% Created 2024-02-27 Tue 11:51
+% Intended LaTeX compiler: Playtex
+\documentclass[11pt,a4paper,final]{article}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+\usepackage{algorithm2e}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Alexander Brown}
+\date{\today}
+\title{Response To Reviewers}
+\hypersetup{
+ pdfauthor={Alexander Brown},
+ pdftitle={Response To Reviewers},
+ pdfkeywords={},
+ pdfsubject={},
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+
+Thank you for thoroughly reviewing our manuscript and providing us the opportunity to revise and resubmit another
+version. The comments provided a perspective that was essential to the improvement of the work's
+quality. We have addressed all the suggestions made by the reviewer. The changes are represented by blue text
+embedded within the manuscript. Below is a point-by-point response to the reviewers comments are presented. Relevant
+sections are mentioned when applicable to assist in searching for the associated changes.
+
+\section{Reviewer's Comments to the Authors}
+The work proposes a novel approach to BEB charger scheduling, investigating different methodologies to evaluate charger utilization and energy consumption. The topic covered is very interesting and deeply analyzed by the authors.
+Before final publication, I suggest that the authors consider addressing the following points identified during the review process:
+
+\begin{quote}
+  \textcolor{blue}{Thank you! The points given were of great help in improving our document.}
+\end{quote}
+
+\begin{itemize}
+  \item Provide a brief description of MILP, BAP, and PAP in the abstract.
+\end{itemize}
+
+\begin{quote}
+  \textcolor{blue}{We appreciate the suggestion. We went back and added a short description of the BAP and PAP to the abstract. However, we did not feel it necessary to add a description for mixed integer linear programming as that is common study for optimization.}
+\end{quote}
+
+\begin{itemize}
+\item Include results, even in percentage terms, in the abstract, comparing the Qin-modified method with the proposed one.
+\end{itemize}
+
+\begin{quote}
+  \textcolor{blue}{Thank you for this suggestion. More quantitative information has been added to the abstract.}
+\end{quote}
+
+\begin{itemize}
+\item From lines 31 to 34: move the introduction to the activity to the end of the section, after the background.
+\end{itemize}
+
+\begin{quote}
+  \textcolor{blue}{We appreciate the thought taken for this comment. After careful consideration, we believe the sentence is best served in its current location as a method of providing a high level introduction to the purpose of the work. We revised the wording in an attempt to make that intention clear.}
+\end{quote}
+
+\begin{itemize}
+\item As in line 48, please update the references throughout the document to include more recent works.
+\end{itemize}
+
+\begin{quote}
+  \textcolor{blue}{Thank you for taking the care to review the paper at such a fine level. These references were intended to demonstrate the problem has been of interest for a long period of time. To better achieve this objective another modern reference, as suggested, was included. The reference survey of the berth allocation problem that was published in 2022.}
+\end{quote}
+
+\begin{itemize}
+\item From lines 110 to 114: to improve comprehension of the problem, add a table to summarize the data introduced.
+\end{itemize}
+
+\begin{quote}
+  \textcolor{blue}{Thank you for this comment. While we agree that a table would be useful, we do not deem it necessary to create another table to introduce the position allocation problem when Table 1 exists. As such, we have added text to refer the reader to Table 1 which includes descriptions of the relevant variables.}
+\end{quote}
+
+\begin{itemize}
+\item Revise the sentence at lines 187-188 for clarity.
+\end{itemize}
+
+\begin{quote}
+  \textcolor{blue}{Thank you for your thorough review and for finding this particular problem. We went back and carefully revised the sentences for clarity. As an additional measure, we went through the entire work to ensure the clarity of each sentence.}
+\end{quote}
+
+\begin{itemize}
+\item In section 4.1, provide a table for all the data used for the case study.
+\end{itemize}
+
+\begin{quote}
+  \textcolor{blue}{Thank you for the thought. If we were to introduce the table of data used for the case study, the table would too large to be of any use. For that reason, we provided that data as a supplementary material. We did, however, update Table 1 to include relevant parameters used.}
+\end{quote}
+
+\begin{itemize}
+\item Justify the choice of a minimum SOC at the end of the day being equal to 70\%. Is there any reference for this? Would it be more realistic to use a different value?
+\end{itemize}
+
+\begin{quote}
+  \textcolor{blue}{We appreciate the critical thought applied while completing this review. While the selection of the 70\% is not an unrealistic value, it was not selected due to a known practice or from other scholarly work. It was chosen to demonstrate that the desired final SOC may be selected by the user. We have revised the paragraph to make that clear.}
+\end{quote}
+
+\begin{itemize}
+\item Line 322: figures 7a and 7b do not depict SOC
+\end{itemize}
+
+\begin{quote}
+  \textcolor{blue}{Thank you for this observation. We updated the phrasing to indicate that the charge of each BEB is being plotted over the time horizon.}
+\end{quote}
+
+\begin{itemize}
+\item Extend the conclusions to provide a broader description, including the percentage variation between the two cases in terms of results.
+\end{itemize}
+
+\begin{quote}
+  \textcolor{blue}{We appreciate your thought the conclusion. We carefully revised and included more quantitative information provided from the results section to broaden the description.}
+\end{quote}
+
+\begin{itemize}
+\item Referring to line 356: is it possible to avoid the SOC drop to 0\% in the Qin-Modified methodology?
+\end{itemize}
+
+\begin{quote}
+  \textcolor{blue}{We appreciate the thought provided by this comment. We have attempted repeatedly to generate a schedule with a non-zero SOC minimum that utilizes both fast and slow chargers with no success. The core issue is due to the structure of the schedule. There are a few routes that deplete the SOC of the BEBs by smaller increments which don't bypass the threshold. After these last small routes there are short charge periods followed by large routes which deplete the SOC by significant amounts. Because the Qin-Modified strategy is reactive, it is unable to prepare for these large routes resulting in the 0\% SOC. These comments have been added to the work for clarity.}
+\end{quote}
+\end{document}

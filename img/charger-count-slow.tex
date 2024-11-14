@@ -13,7 +13,7 @@
 
 \begin{document}
 
-\pgfplotstableread[col sep = comma]{img/data/qm-charge-cnt.csv}\usagedataquin
+\pgfplotstableread[col sep = comma]{img/data/qm-charge-cnt.csv}\usagedataqin
 \pgfplotstableread[col sep = comma]{img/data/milp-charge-cnt.csv}\usagedatamilp
 
 \begin{tikzpicture}
@@ -26,8 +26,8 @@
       ytick distance=1,
       legend style={nodes={scale=0.75, transform shape}},
       legend pos = north west]
-    \addplot[blue!80!black, fill=blue, fill opacity=0.25, no markers] table[x=visit, y=slow] {\usagedataquin};
-    \addlegendentry{Quin}
+    \addplot[blue!80!black, fill=blue, fill opacity=0.25, no markers] table[x=visit, y=slow] {\usagedataqin};
+    \addlegendentry{Qin}
     \addplot[red!80!black, fill=red, fill opacity=0.15, no markers] table[x=visit, y=slow] {\usagedatamilp};
     \addlegendentry{MILP}
 \end{axis}

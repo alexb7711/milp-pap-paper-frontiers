@@ -20,12 +20,14 @@ is required to stay above an SOC of $\nu_b =$ src_latex{\mincharge (\fpeval{\bat
 \mathbb{B}$ to ensure that each BEB can complete its next route in addition to maintaining battery health. Each bus is
 assumed to begin the working day with an SOC of $\alpha_b =$ src_latex{\fpeval{\acharge*100}\%} $\forall i \in \mathbb{V}$
 (\fpeval{\acharge * \batsize} kWh). Additionally, each bus is required to end the day with a minimum SOC of $\beta_b =$
-\fpeval{\bcharge * 100}% (src_latex{\fpeval{\bcharge * \batsize}} kWh) $\forall i \in \mathbb{V}$. This assumes that overnight
-charging can account for the deficient 20% SOC. Each bus is assumed to discharge at a rate of $\zeta_b =$ 30 kW. Note that
-many factors play a role in the rate of discharge; however, for the sake of simplicity since the discharge calculation
-is out of the scope of this work, an average rate is used. A total of $n_C = \fpeval{\fast + \slow}$ chargers are
-utilized where \slow of the chargers are slow charging (\slows kW) and \fast are fast charging (\fasts kW). The
-technique to minimize the total charger count will now be employed.
+\fpeval{\bcharge * 100}% (src_latex{\fpeval{\bcharge * \batsize}} kWh) src_latex{\EDIT{$\forall b \in \mathbb{B}$}}. This
+assumes that overnight charging can account for the deficient 20% SOC. src_latex{\EDIT{Furthermore, the value selected
+for $\beta_b\; \forall b \in \mathbb{B}$ is primarily of illustrative purposes and has no particular significance other than to
+demonstrate the user's ability to specify desired end of day SOCs.}} Each bus is assumed to discharge at a rate of $\zeta_b
+=$ 30 kW. Note that many factors play a role in the rate of discharge; however, for the sake of simplicity since the
+discharge calculation is out of the scope of this work, an average rate is used. A total of $n_C = \fpeval{\fast +
+\slow}$ chargers are utilized where \slow of the chargers are slow charging (\slows kW) and \fast are fast charging
+(\fasts kW). The technique to minimize the total charger count will now be employed.
 
 To encourage the MILP PAP problem to utilize the fewest number of chargers, the value of $m_q$ in the objective
 function, \autoref{eq:objective}, is $\forall q \in \{1,2,..., n_B \}; m_q = 0$ and $\forall q \in \{n_B + 1, n_B + 2,..., n_B + n_C \};
@@ -49,7 +51,7 @@ charge, whichever comes first.
 
 The total number of constraints resulted in \contvars continuous and \intvars integer/binary constraints. The
 optimization was performed using the Gurobi MILP solver [cite:@gurobi-2021-gurob-optim] on a machine equipped with an
-AMD Ryzen 9 5900X 12 - Processor (24 core) at 4.95GHz. The solver was allowed to run for \timeran seconds.
+AMD Ryzen 9 5900X 12 - Processor (24 core) at 4.95GHz. The solver was allowed to run for \num{\timeran} seconds.
 
 ** Results
 :PROPERTIES:
@@ -66,7 +68,7 @@ time the charger is active. The lines connecting points represents the charge se
 The first observation is in the choice of preferred chargers between the Qin-Modified and MILP scheduler. Looking at
 \autoref{subfig:slow-charger-usage} and \autoref{subfig:fast-charger-usage}, the Qin-Modified schedule uses at most four
 fast chargers and three slow at the same time, whereas the MILP schedule uses at most one fast charger and six slow at
-the same time. Both the Qin-Modified and MILP schedule used the fast chargers in short bursts (~0.2-0.5 hours). The main
+the same time. Both the Qin-Modified and MILP schedule used the fast chargers in short bursts (\textasciitilde 0.2-0.5 hours). The main
 difference lies in the utilization strategy of the slow chargers. The Qin-Modified, for the most part, opted for shorter
 bursts for the slow chargers (~0.3-0.7 hours), most heavily placed on the first slow charger. The MILP
 utilized the slow chargers in short bursts; however, the solver was able to recognize moments where a BEB being placed
@@ -77,12 +79,16 @@ packed the first queue for the fast and slow chargers more effectively than the 
 generated are valid, no comparison of the quality of the schedule can be made directly from
 \autoref{subfig:milp-schedule} and \autoref{subfig:qin-schedule}.
 
-\autoref{subfig:qin-charge} and \autoref{subfig:milp-charge} depicts the SOC for every bus over the time horizon for the
-Qin and MILP schedules, respectively. Every vehicle begins with an SOC of $\alpha_b =$ 90%, finishes with an SOC of $\beta_b =$
-\fpeval{\bcharge *100}% in the MILP PAP schedule, and never goes below \mincharge in the intermediate arrivals as stated
-in constraint \autoref{eq:dynconstrs}. There is no guarantee for this in the Qin-Modified strategy which can be seen by
-some intermediate charges reaching an SOC of 0% as well as the distribution of final charges, the minimum being 0% and
-the maximum src_latex{\fpeval{trunc(\fpeval{368 / \batsize * 100}, 3)}}%. The only sense of guarantee that the
+\autoref{subfig:qin-charge} and \autoref{subfig:milp-charge} depicts the \EDIT{charge} for every bus over the time
+horizon for the Qin and MILP schedules, respectively. Every vehicle begins with an SOC of $\alpha_b =$ 90%, finishes with an
+SOC of $\beta_b =$ \fpeval{\bcharge *100}% in the MILP PAP schedule, and never goes below \mincharge in the intermediate
+arrivals as stated in constraint \autoref{eq:dynconstrs}. There is no guarantee for this in the Qin-Modified strategy
+which can be seen by some intermediate charges reaching an SOC of 0% as well as the distribution of final charges, the
+minimum being 0% and the maximum src_latex{\fpeval{trunc(\fpeval{368 / \batsize * 100}, 3)}}%. src_latex{\EDIT{It is of
+note that the SOC plummeting to 0\% is due to the reactive nature of the Qin-Modified. Specifically, the schedule
+utilized in this example contains some BEBs that begin with routes that deplete the SOC by small amounts that do not
+bypass the threshold. These routes are followed by small charge windows which are then proceeded by large routes
+depleting the SOC by a significant amount resulting in the SOC reaching 0\%.}} The only sense of guarantee that the
 Qin-Modified supplies is its predictability within the intermediate visits due to its heuristic nature (i.e. if the BEB
 charge is within the low threshold, a fast charger will be prioritized); whereas MILP places a bus in the queue that
 ``makes sense'' in respect to the larger picture. The MILP PAP does not have an obvious sense of decision-making due to

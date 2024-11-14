@@ -11,10 +11,11 @@ emissions, such as lower driving costs, lower maintenance costs, and reduced veh
 introduce new challenges such as larger upfront costs, and potentially several hours long ``refueling'' periods
 [cite:@xylia-2018-role-charg;@li-2016-batter-elect]. Furthermore, the problem is exacerbated by the constraints of the
 transit schedule to which the fleet must adhere, the limited amount of chargers available, and the adverse effects on
-the health of the battery due to fast charging [cite:@lutsey-2019-updat-elect]. This paper presents a
-framework for optimally assiging BEBs to charging queues assuming fixed routes while taking into consideration multiple
-charger types and utilizing linear charging dynamics. This method also enforces the SOC to stay above a specified
-percentage throughout the day, and ensures a minumum SOC at the end of the working day.
+the health of the battery due to fast charging [cite:@lutsey-2019-updat-elect]. This paper src_latex{\EDIT{aims to
+remedy these problems by presenting}} a framework for optimally assiging BEBs to charging queues assuming fixed routes
+while taking into consideration multiple charger types and utilizing linear charging dynamics. This method also enforces
+the SOC to stay above a specified percentage throughout the day, and ensures a minumum SOC at the end of the working
+day.
 
 Many recent efforts have been made to simultaneously solve the problems of route scheduling, charging fleets, and
 determining the infrastructure upon which they rely, e.g., [cite:@wei-2018-optim-spatio;@sebastiani-2016-evaluat-elect;
@@ -31,17 +32,17 @@ that the charge received is proportional to the time spent on the charger
 
 This work builds upon the Position Allocation Problem (PAP) [cite:@qarebagh-2019-optim-sched], a modification of the
 well-studied Berth Allocation Problem (BAP), as a means to schedule the charging of electric vehicles
-[cite:@buhrkal-2011-model-discr;@frojan-2015-contin-berth;@imai-2001-dynam-berth]. The BAP is a continuous time model
-that solves the problem of allocating space for incoming vessels to be berthed and serviced. Each arriving vessel
-requires both time and space to be serviced and thus must be carefully assigned to avoid delay
+[cite:@buhrkal-2011-model-discr;@frojan-2015-contin-berth;@imai-2001-dynam-berth;@rodrigues-2022-berth]. The BAP is a
+continuous time model that solves the problem of allocating space for incoming vessels to be berthed and serviced. Each
+arriving vessel requires both time and space to be serviced and thus must be carefully assigned to avoid delay
 [cite:@imai-2001-dynam-berth]. Vessels are lined up parallel to the berth to be serviced and are horizontally queued as
 shown in \autoref{subfig:bapexample}. As the vessels are serviced, they move from left to right to make space for the
 queued vessels moving vertically downward into their respective berthing locations. The PAP utilizes this notion of
 queuing for scheduling vehicles to be charged, as shown in \autoref{subfig:papexample}. The vehicles are queued in
 several lines and move from left to right to recieve their charge and exit the system. The PAP is formulated as a
-rectangle packing problem and assumes that each vehicle has a predefined charge time, the amount of vehicles that can
-charge at any given moment is limited by the physical width of each vehicle and the length of the charging block. The
-PAP also makes the assumption that each vehicle that is placed in the system is unique
+rectangle packing problem and assumes that each vehicle has a predefined charge time src_latex{\EDIT{and}} the amount of
+vehicles that can charge at any given moment is limited by the physical width of each vehicle and the length of the
+charging block. The PAP also makes the assumption that each vehicle that is placed in the system is unique
 [cite:@qarebagh-2019-optim-sched].
 
 The main contribution of this work is the extension of the PAP's novel approach to BEB charger scheduling. This

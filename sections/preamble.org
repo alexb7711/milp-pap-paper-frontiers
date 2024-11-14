@@ -17,6 +17,7 @@
 #+latex_header:\usepackage{tikz}                                     % Generate figures in LaTeX
 #+latex_header:\usepackage{xcolor}                                   % Colors
 #+latex_header:\usepackage{xfp}                                      % No trailing zeros
+#+latex_header: \usepackage[group-separator={,}, group-minimum-digits=3]{siunitx}   % Format numbers
 #+latex_header:\usepackage{standalone}                               % Include standalone documents
 #+latex_header:\usepackage{hyperref}                                 % Better references (keep last)
 
@@ -39,6 +40,7 @@
 #+latex_header:%%===============================================================================
 #+latex_header:% Custom Commands
 #+latex_header:\newcommand{\TODO}[1]{{\color{green} To do: #1}}                                % For adding notes to paper
+#+latex_header:\newcommand{\EDIT}[1]{{\color{blue}#1}}                                         % For adding edits to paper
 
 #+latex_header:%%-------------------------------------------------------------------------------
 #+latex_header:% Experiment parameters
@@ -59,7 +61,7 @@
 
 #+latex_header:%%-------------------------------------------------------------------------------
 #+latex_header:%% Solve output
-#+latex_header:\newcommand{\timeran}{7200 }                                                    % Time ran for MILP [s]
+#+latex_header:\newcommand{\timeran}{7,200 }                                                    % Time ran for MILP [s]
 #+latex_header:\newcommand{\gappercent}{65.1058\% }                                            % Gap percent after runtime
 #+latex_header:\newcommand{\processor}{Ryzen 9 }                                               % Processor type
 

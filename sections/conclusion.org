@@ -11,11 +11,16 @@ to provide upper and lower limits for the battery dynamics.
 
 An example for the MILP PAP formulation was then presented and compared to a heuristic-based schedule, referred to as
 Qin-Modified. The MILP PAP optimization was run for \timeran seconds to a non-optimal solution. The Qin-Modified and
-MILP schedule utilized a similar amount of fast chargers; however, the MILP schedule more readily used the slow chargers
-to its advantage when the objective function saw fit. More importantly, the MILP PAP schedule utilized approximately
-$0.1\cdot10^4$ kWh more than the Qin-Modified; however, the charges for the MILP schedule remained above the constrained
-minimum SOC of \mincharge, and charged all the buses to \fpeval{\bcharge *100}% at the end of the working day. The
-Qin-Modified schedule, on the other hand, allowed the SOC of certain BEBs to drop to 0%.
+MILP schedule utilized src_latex{\EDIT{four and one fast charger(s), respectively. Furthermore, the MILP and
+Qin-Modified utilized the fast chargers for similar durations ranging from about 0.2-0.5 hours}}; however, the MILP
+schedule src_latex{\EDIT{demonstrated battery health considerations by recognizing visits that could utilize slow
+chargers for longer durations while satisfying the constraints.}} The MILP PAP schedule utilized approximately
+$0.1\cdot10^4$ kWh more than the Qin-Modified \EDIT{but}, the \EDIT{SOC} for the MILP schedule remained above the
+constrained minimum SOC of \mincharge, and charged all the buses to \fpeval{\bcharge *100}% at the end of the working
+day. src_latex{\EDIT{That is, the constraints applied to the MILP model consumed more energy to satisfy the SOC
+threshold requirements.}} The Qin-Modified schedule, on the other hand, allowed the SOC of certain BEBs to drop to 0%.
+src_latex{\EDIT{The SOC at the end of the day for the Qin-Modifed varied from 0\% to 94.85\% whereas the results of the
+MILP showed that the BEBs converged to the minimum SOC of \fpeval{\bcharge * 100}\% that was specified.}}
 
 Further fields of interest are to utilize the formulation (\autoref{eq:objective} and \autoref{eq:dynconstrs}) with
 nonlinear battery dynamics, calculation and utilization of the demand and consumption cost in the objective function,
