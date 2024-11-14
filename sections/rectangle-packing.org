@@ -4,27 +4,21 @@
 :END:
 
 Applying the PAP to BEB charging requires four fundamental changes. The first is that the time that a BEB spends
-charging src_latex{\textcolor{blue}{must be}} allowed to vary. src_latex{\textcolor{blue}{That is, $u_i$, $d_i$, and
-$s_i$ become variables}} of optimization. src_latex{\textcolor{blue}{This is done primarily because chargers of various
-speeds are to be introduced. Allowing BEBs to have multiple visits that a charger decided upon during the optimization
-requires that the start and stop times must be changeable to respect the SOC constraints.}} Second, in the PAP each
-visit is assumed to be a different vehicle. For the BEB charging problem, each bus may make multiple visits to the
-station throughout the day\textcolor{blue}{. Thus, the} resulting src_latex{\textcolor{blue}{SOC}} for a bus at a given
-src_latex{\textcolor{blue}{visit}} is dependent upon each of the prior visits. The third fundamental change is related
-to the first two. The src_latex{\textcolor{blue}{SOC}} of each bus must be tracked to ensure that charging across
-multiple visits is sufficient to allow each bus to execute its route throughout the day. Finally,
-src_latex{\textcolor{blue}{as previously stated}}, the PAP models the charger as one continuous bar. For the BEB, it
-will be assumed that a discrete number of chargers exist. Moreover, it is assumed that these chargers may have different
-charge rates.
+charging must be allowed to vary. That is, $u_i$, $d_i$, and $s_i$ become variables of optimization. This is done
+primarily because chargers of various speeds are to be introduced. Second, in the PAP each visit is assumed to be a
+different vehicle. For the BEB charging problem, each bus may make multiple visits to the station throughout the day.
+Thus, the resulting SOC for a bus at a given visit is dependent upon each of the prior visits. The third fundamental
+change is related to the first two. The SOC of each bus must be tracked to ensure that charging across multiple visits
+is sufficient to allow each bus to execute its route throughout the day. Finally, as previously stated, the PAP models
+the charger as one continuous bar. For the BEB, it will be assumed that a discrete number of chargers exist. Moreover,
+it is assumed that these chargers may have different charge rates.
 
-#+begin_src latex
-  \textcolor{blue}{A few assumptions are made in the derivation of the algorithm. As this work is not focused on
-    estimating the discharge of a BEB during its route, the discharge for each route will be pre-calculated by assuming a
-    fixed discharge rate kW multiplied by the route duration in hours. Secondly, it is assumed that the initial SOC of
-    each BEB at the beginning of the day, $\alpha_b\kappa_b$, is larger than the minimum required SOC at the end of the
-    day, $\beta_b\kappa_b$. Therefore, it must be assumed that the difference in the SOC can reach $\alpha_b\kappa_b$ by
-    the beginning of the next working day.}
-#+end_src
+A few assumptions are made in the derivation of the algorithm. As this work is not focused on estimating the discharge
+of a BEB during its route, the discharge for each route will be pre-calculated by assuming a fixed discharge rate kW
+multiplied by the route duration in hours. Secondly, it is assumed that the initial SOC of each BEB at the beginning of
+the day, $\alpha_b\kappa_b$, is larger than the minimum required SOC at the end of the day, $\beta_b\kappa_b$.
+Therefore, it must be assumed that the difference in the SOC can reach $\alpha_b\kappa_b$ by the beginning of the next
+working day.
 
 The discussion of the four changes is separated into two sections. \autoref{sec:queuing} discusses the changes in the
 spatial-temporal constraint formulation to form a queuing constraint. \autoref{sec:batt_dynamics} then discusses the
@@ -37,32 +31,23 @@ statement of the full problem in \autoref{sec:BEB_MILP}. The notation is explain
 :custom_id: sec:queuing
 :END:
 
-\noindent The queuing constraints ensure that the buses entering the src_latex{\textcolor{blue}{charging queues}} are assigned
-feasibly. There are three sets to differentiate between different entities. $\mathbb{B} = \{1, ..., n_B\}$ is the set of
-bus indices with index $b$ used to denote an individual bus, $\mathbb{Q} = \{1, ..., n_Q\}$ is the set of queues with index $q$
-used to denote an individual queue, and $\mathbb{V} = \{1, ..., n_V\}$ is a set of visits to the station with $i$ and
-$j$ used to refer to individual visits. src_latex{\textcolor{blue}{The mapping $\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ is used to map a visit
-index, $i$, to a bus index, $b$. The notation $\Gamma_i$ is used as a shorthand to refer to the bus index $b$ for visit
-$i$.}}
+The queuing constraints ensure that the buses entering the charging queues are assigned feasibly. There are three sets
+to differentiate between different entities. $\mathbb{B} = \{1, ..., n_B\}$ is the set of bus indices with index $b$
+used to denote an individual bus, $\mathbb{Q} = \{1, ..., n_Q\}$ is the set of queues with index $q$ used to denote an individual
+queue, and $\mathbb{V} = \{1, ..., n_V\}$ is a set of visits to the station with $i$ and $j$ used to refer to individual
+visits. The mapping $\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ is used to map a visit index, $i$, to a bus index, $b$. The notation
+$\Gamma_i$ is used as a shorthand to refer to the bus index $b$ for visit $i$.
 
-#+begin_comment
-src_latex{\textcolor{blue}{A singular visit for a BEB is defined by the following steps: the BEB arrives at the station, is assigned
-a queue with a specified duration, then departs for its next route.}} Two separate visits could correspond to different
-buses or visits by the same bus, src_latex{\textcolor{blue}{but for a different visit index}}.
-#+end_comment
-
-src_latex{\textcolor{blue}{The actual physical dimensions of the BEB are ignored and it is assumed that each BEB will be
-assigned to charge at a particular charger}}. Because of this assumption, the PAP spatial variable,
-\textcolor{blue}{$l_i$}, may be removed and $v_i$ is made to be an integer corresponding to which queue visit $i$ will
-be using, src_latex{\textcolor{blue}{$v_i \in \mathbb{Q}$}}. src_latex{\textcolor{blue}{That is, the queue position is now
-discretized over $n_Q$ chargers where a BEB occupies single charge queue. Thus, when $\psi_{ij} = 1$, vehicle $j$ is placed
-in a charging queue with a larger index than vehicle $i$, $v_j > v_i$.}} The \textcolor{blue}{charger length $L$} is
-likewise replaced with $n_Q$. Note that $n_Q = n_B + n_C$, where $n_B$ is the number of buses and $n_C$ is the number of
-chargers. src_latex{\textcolor{blue}{The rationale for adding additional idle queues is to allow BEBs to be "set aside"
-if no additional charge is required. Adding one idle queue for each BEB ensures that the constraints will be satisfied
-if multiple buses sharing overlapping times at the station are placed in idle queues. This method will be applied when
-defining the parameters in {\autoref{sec:example}}}}. The modified queuing constraints can be written as shown in
-\autoref{eq:packconstrs}.
+The actual physical dimensions of the BEB are ignored, and it is assumed that each BEB will be assigned to charge at a
+particular charger. Because of this assumption, the PAP spatial variable, $l_i$, may be removed and $v_i$ is made to be
+an integer corresponding to which queue visit $i$ will be using, $v_i \in \mathbb{Q}$. That is, the queue position is now
+discretized over $n_Q$ queues where a BEB occupies single charge queue. Thus, when $\psi_{ij} = 1$, vehicle $j$ is placed
+in a charging queue with a larger index than vehicle $i$, $v_j > v_i$. The charger length $L$ is likewise replaced with
+$n_Q$. Note that $n_Q = n_B + n_C$, where $n_B$ is the number of buses and $n_C$ is the number of chargers. The
+rationale for adding additional idle queues is to allow BEBs to be "set aside" if no additional charge is required.
+Adding one idle queue for each BEB ensures that the constraints will be satisfied if multiple buses sharing overlapping
+times at the station are placed in idle queues. This method will be applied when defining the parameters in
+\autoref{sec:example}. The modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
 
 #+begin_src latex
   \begin{subequations}
@@ -75,54 +60,46 @@ defining the parameters in {\autoref{sec:example}}}}. The modified queuing const
 #+end_src
 
 The constraint in \autoref{subeq:space} is nearly identical to \autoref{subeq:bapspace}, but rather than viewing the
-charger as a continuous strip of length $S$, it is discretized into $n_Q$ queues each with a width of unit length one. A
+charger as a continuous strip of length $L$, it is discretized into $n_Q$ queues each with a width of unit length one. A
 BEB is also assigned a unit length of one which is reflected in \autoref{subeq:space} by $\cdot \geq 1$.
 \autoref{subeq:valid_depart} ensures that the time the BEB is detached from the charger, $d_i$, is before its departure
-time, $\tau_i$ src_latex{\textcolor{blue}{seconds. Note the introduction of the new variable $\tau_i$ exists to allow the
-final charge time to be independent a similar manner that the inital charge time need not coincide with the arrival
-time, $a_i \le u_i \le d_i \le \tau_i$.}} \autoref{subeq:vspace} defines the src_latex{\textcolor{blue}{of integers that $v_i$
-that represent the $n_Q$ chargers}}.
+time, $\tau_i$ seconds. Note the introduction of the new variable $\tau_i$ exists to allow the final charge time to be
+independent, src_latex{\EDIT{similar in manner to the initial charge time being independent of the arrival time}}, $a_i
+\le u_i \le d_i \le \tau_i$. \autoref{subeq:vspace} defines $v_i$ \EDIT{to be an element from set of queues}.
 
 ** Battery Charge Dynamic Constraints
 :PROPERTIES:
 :custom_id: sec:batt_dynamics
 :END:
 
-src_latex{\textcolor{blue}{Battery dynamic constraints are now to be introduced.}} Two constraints are enforced
-src_latex{\textcolor{blue}{on}} the SOC src_latex{\textcolor{blue}{for each BEB}}: src_latex{\textcolor{blue}{the SOC
-must}} always src_latex{\textcolor{blue}{remain above a specified percentage to guarantee}} sufficient charge to execute
-their respective routes and each bus must end the day src_latex{\textcolor{blue}{with an SOC above a specified}}
-threshold, preparatory for the next day.
+Battery dynamic constraints are now to be introduced. Two constraints are enforced on the SOC for each BEB: the SOC must
+always remain above a specified percentage to guarantee sufficient charge to execute their respective routes and each
+bus must end the day with an SOC above a specified threshold, preparatory for the next day.
 
-The SOC src_latex{\textcolor{blue}{upon arrival for}} visit $i$ is denoted as $\eta_i$ src_latex{\textcolor{blue}{kWh}}.
-src_latex{\textcolor{blue}{Because the SOC for a visit $i$ is dependent on its previous visits}}, the mapping $\Upsilon:
-\mathbb{V} \rightarrow \mathbb{V} \bigcup \{\varnothing\}$ is used to determine the next visit that corresponds to the same bus, with
-$\Upsilon_i$ being shorthand notation. Thus, $\Gamma_j$ and $\Gamma_{\Upsilon_i}$, for $\Upsilon_i = j$, would both map to the same bus index as long
-as $\Upsilon_i$ is not the null element, $\varnothing$. src_latex{\textcolor{blue}{The null element is reserved for BEBs that
-have no future visits.}}
+The SOC upon arrival for visit $i$ is denoted as $\eta_i$ kWh. Because the SOC for a visit $i$ is dependent on its previous
+visits, the mapping $\Upsilon: \mathbb{V} \rightarrow \mathbb{V} \bigcup \{\varnothing\}$ is used to determine the next visit that corresponds
+to the same bus, with $\Upsilon_i$ being shorthand notation. Thus, $\Gamma_j$ and $\Gamma_{\Upsilon_i}$, for $\Upsilon_i = j$, would both map to the
+same bus index as long as $\Upsilon_i$ is not the null element, $\varnothing$. The null element is reserved for BEBs that have
+no future visits.
 
-#+begin_src latex
-  \textcolor{blue}{To drive time spent on the charger, $s_i$, as well as define initial, final, and intermediate bus
-    charges for each visit $i$, the sets for initial and final visits must be defined. Let the mapping of the first visit
-    by each bus be denoted as $\Gamma^0 : \mathbb{B} \rightarrow \mathbb{V}$. The resulting value of the mapping
-    $\Gamma^0$ represents the index for the first visit of bus $b$. Similarly, let $\Gamma^f : \mathbb{B} \rightarrow
-    \mathbb{V}$ maps the indices for the final visits for each bus $b \in \mathbb{B}$. Let the storthand for each mapping
-    be denoted as $\Gamma^0_b$ and $\Gamma^f_b$, respectively. The initial and final bus charge percentages, $\alpha$ and
-    $\beta$, can then be represented by the constraint equations $\eta_{\Gamma^0_b} = \alpha_b \kappa_{b}$ and
-    $\eta_{\Gamma^f_b} = \beta_b \kappa_{b}$, respectively. The intermediate charges must be determined during runtime.}
-#+end_src
+To drive time spent on the charger, $s_i$, as well as define initial, final, and intermediate bus charges for each visit
+$i$, the sets for initial and final visits must be defined. Let the mapping of the first visit by each bus be denoted as
+$\Gamma^0 : \mathbb{B} \rightarrow \mathbb{V}$. The resulting value of the mapping $\Gamma^0$ represents the index for the first visit of
+bus $b$. Similarly, let $\Gamma^f : \mathbb{B} \rightarrow \mathbb{V}$ map the indices for the final visits for each bus $b \in
+\mathbb{B}$. Let the storthand for each mapping be denoted as $\Gamma^0_b$ and $\Gamma^f_b$, respectively. The initial and final
+bus charge percentages, $\alpha$ and $\beta$, can then be represented by the constraint equations $\eta_{\Gamma^0_b} = \alpha_b \kappa_{b}$ and
+$\eta_{\Gamma^f_b} = \beta_b \kappa_{b}$, respectively. The intermediate charges must be determined during runtime.
 
 It is assumed that the charge received is proportional to the time spent charging. The rate for charger $q$ is denoted
-as $r_q$ src_latex{\textcolor{blue}{kW}}. Note that a value of $r_q = 0$ corresponds to a queue where no charging
-occurs. A bus in such a queue is simply waiting at the station for the departure time. The queue indices are ordered
-such that the first $n_B$ queues have $r_q = 0$ to allow an arbitrary number of buses to sit idle at any given moment in
-time. src_latex{\textcolor{blue}{The next $n_C$ queues are reserved for the slow and fast chargers.}} The amount of
-discharge between visits $i$ and $\Upsilon_i$, the next visit of the same bus, is denoted as $\Delta_i$
-src_latex{\textcolor{blue}{kWh}}. If visit $i$ occurred at charger $q$, the src_latex{\textcolor{blue}{SOC}} of the
-src_latex{\textcolor{blue}{BEB's next arrival}}, $\Upsilon_i$, would be $\eta_{\Upsilon_i} = \eta_i + s_i r_q - \Delta_i$.
+as $r_q$ kW. Note that a value of $r_q = 0$ corresponds to a queue where no charging occurs. A bus in such a queue is
+simply waiting at the station for the departure time. The queue indices are ordered such that the first $n_B$ queues
+have $r_q = 0$ to allow an arbitrary number of buses to sit idle at any given moment in time. The next $n_C$ queues are
+reserved for the slow and fast chargers. The amount of discharge between visits $i$ and $\Upsilon_i$, the next visit of the
+same bus, is denoted as $\Delta_i$ kWh. If visit $i$ occurred at charger $q$, the SOC of the BEB's next arrival, $\Upsilon_i$, would
+be $\eta_{\Upsilon_i} = \eta_i + s_i r_q - \Delta_i$.
 
-The binary decision variable $w_{iq} \in \{0,1\}$ is introduced to src_latex{\textcolor{blue}{indicate the active charger for visit $i$
-in vector form. The form of the SOC for the next visit, $\Upsilon_i$, can be written using the following constraints.}}
+The binary decision variable $w_{iq} \in \{0,1\}$ is introduced to indicate the active charger for visit $i$ in vector
+form. The form of the SOC for the next visit, $\Upsilon_i$, can be written using the following constraints.
 
 #+begin_src latex
 \begin{subequations}
@@ -145,8 +122,8 @@ The choice of queue for visit $i$, becomes a slack variable and is defined in te
 
 Maximum and minimum values for the charges are included to ensure that the battery is not overcharged and to guarantee
 sufficient charge for subsequent visits. The upper and lower battery charge bounds for bus $b$ are $\kappa_b$ and $\nu_b \kappa_b$,
-respectively src_latex{\textcolor{blue}{, where}} $\kappa_b$ is the battery capacity and $\nu_b$ is a percent value. src_latex{\textcolor{blue}{The upper
-and lower bounds for the current SOC are written as follows.}}
+respectively , where $\kappa_b$ is the battery capacity and $\nu_b$ is a percent value. The upper and lower bounds for the
+current SOC are written as follows.
 
 #+begin_src latex
   \begin{subequations}
@@ -158,12 +135,11 @@ and lower bounds for the current SOC are written as follows.}}
   \end{subequations}
 #+end_src
 
-src_latex{\textcolor{blue}{{\autoref{eq:maxcharge}} ensures that the BEB SOC does not exceed the battery capacity, and
-{\autoref{eq:mincharge}} enforces that the inital SOC for each visit is above the threshold of $\nu_{\Gamma_i}\kappa_{\Gamma_i}$}}. Note
-that the term $s_i w_{iq}$ is a bilinear term. A standard way of linearizing a bilinear term that contains an integer
-variable is by introducing a slack variable with an either/or constraint
-[cite:@chen-2010-applied;@rodriguez-2013-compar-asses]. Allowing the slack variable $g_{iq}$
-src_latex{\textcolor{blue}{seconds}} to be equal to $s_i w_{iq}$, $g_{iq}$ can be defined as
+\autoref{eq:maxcharge} ensures that the BEB SOC does not exceed the battery capacity, and \autoref{eq:mincharge}
+enforces that the inital SOC for each visit is above the threshold of $\nu_{\Gamma_i}\kappa_{\Gamma_i}$. Note that the term $s_i w_{iq}$
+is a bilinear term. A standard way of linearizing a bilinear term that contains an integer variable is by introducing a
+slack variable with an either/or constraint [cite:@chen-2010-applied;@rodriguez-2013-compar-asses]. Allowing the slack
+variable $g_{iq}$ seconds to be equal to $s_i w_{iq}$, $g_{iq}$ can be defined as
 
 #+begin_src latex
 \begin{equation}
@@ -201,9 +177,9 @@ being inactive. If $w_{iq} = 0$, \autoref{subeq:repgpgret} is inactive and \auto
 :custom_id: sec:BEB_MILP
 :END:
 The goal of the MILP is to utilize chargers as little as possible to reduce energy costs with fast charging being
-penalized more src_latex{\textcolor{blue}{to avoid the adverse effects of fast charging on battery health as well as the
-larger usage cost }}. Thus, an assignment cost $m_q$ and usage cost $\epsilon_q$ are associated with each charger, $q$.
-These src_latex{\textcolor{blue}{unitless}} weights can be adjusted based on charger type or time of day that the visit
+penalized more to avoid the adverse effects of fast charging on battery health as well as the
+larger usage cost. Thus, an assignment cost $m_q$ and usage cost $\epsilon_q$ are associated with each charger, $q$.
+These unitless weights can be adjusted based on charger type or time of day that the visit
 occurs. The assignment term takes the form $w_{iq}m_q$, and the usage term takes the form $g_{iq} \epsilon_q$. The
 resulting BEB charging problem is defined in \autoref{eq:objective}.
 
@@ -239,7 +215,7 @@ Subject to the constraints
     s_i + u_i = d_i                                  \label{subeq:m_detach}       \\
 \end{equation}
 \begin{equation}
-    \eta_{\Gamma^0_b} = \textcolor{blue}{\alpha_{\Gamma_i} \kappa_{\Gamma_i}}         \label{subeq:init_charge}    \\
+    \eta_{\Gamma^0_b} = \alpha_{\Gamma_i} \kappa_{\Gamma_i}                         \label{subeq:init_charge}    \\
 \end{equation}
 \begin{equation}
     a_i \leq u_i \leq (T - s_i)                            \label{subeq:m_valid_starts} \\
@@ -251,13 +227,13 @@ Subject to the constraints
     \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i = \eta_{\gamma_i}   \label{subeq:next_charge}    \\
 \end{equation}
 \begin{equation}
-    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i \geq \textcolor{blue}{\nu_{\Gamma_i}} \kappa_{\Gamma_i} \label{subeq:min_charge}     \\
+    \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q - \Delta_i \geq \nu_{\Gamma_i} \kappa_{\Gamma_i} \label{subeq:min_charge}     \\
 \end{equation}
 \begin{equation}
     \eta_i + \sum_{q=1}^{n_Q} g_{iq} r_q \leq \kappa_{\Gamma_i}         \label{subeq:max_charge}     \\
 \end{equation}
 \begin{equation}
-    \eta_{\Gamma^f_b} \geq \textcolor{blue}{\beta_{\Gamma_i} \kappa_{\Gamma_i}}        \label{subeq:final_charge}   \\
+    \eta_{\Gamma^f_b} \geq \beta_{\Gamma_f} \kappa_{\Gamma_f}                   \label{subeq:final_charge}   \\
 \end{equation}
 \begin{equation}
     s_i - (1 - w_{iq})M \leq g_{iq}                     \label{subeq:gpgret}         \\
@@ -290,7 +266,8 @@ Subject to the constraints
 \end{multicols}
 #+end_src
 
-\autoref{subeq:m_time}-\autoref{subeq:m_valid_depart} are reiterations of the queuing constraints in
-\autoref{eq:packconstrs}. \autoref{subeq:init_charge}-\autoref{subeq:final_charge} provide the battery charge
-constraints. \autoref{subeq:gpgret}-\autoref{subeq:gwles} define the charge gain of every visit/queue pairing. The last
-constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace} define the sets of valid values for each variable.
+\autoref{subeq:m_time}-\autoref{subeq:m_valid_depart} are reiterations of the queuing constraints src_latex{\EDIT{from
+\autoref{eq:bapconstrs}}} and \autoref{eq:packconstrs}. \autoref{subeq:init_charge}-\autoref{subeq:final_charge} provide
+the battery charge constraints. \autoref{subeq:gpgret}-\autoref{subeq:gwles} define the charge \EDIT{duration} of every
+visit/queue pairing. The last constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace} define the sets of valid
+values for each variable.

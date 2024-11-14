@@ -11,25 +11,28 @@
 
 \begin{document}
 
-\pgfplotstableread[col sep = comma]{img/data/qm-power-usage.csv}\powerdataquin
+\pgfplotstableread[col sep = comma]{img/data/qm-power-usage.csv}\powerdataqin
 \pgfplotstableread[col sep = comma]{img/data/milp-power-usage.csv}\powerdatamilp
 
-\resizebox{\columnwidth}{4in}{%
 \begin{tikzpicture}
 \begin{axis}[title={Power Usage},
-             xlabel={Time [hr]}, ylabel={Power Usage [\textcolor{blue}{kW}]},
-             xmin=4, xmax=24, ymin=0]
-    % Quin ----------
+    scale only axis,
+    height=0.3\paperheight, width=0.75\paperwidth,
+    grid=both,
+    xlabel={Time [hr]}, ylabel={Power Usage [kW]},
+    xmin=4, xmax=24, ymin=0,
+    legend style={nodes={scale=0.75, transform shape}},
+    legend pos = north east]
+    % Qin ----------
     \addplot[blue!80!black, fill=blue, fill opacity=0.25, no markers]
-             table[x=time, y=power] {\powerdataquin};
-    \addlegendentry{Quin}
+             table[x=time, y=power] {\powerdataqin};
+    \addlegendentry{Qin}
 
     % MILP ----------
     \addplot[red!80!black, fill=red, fill opacity=0.25, no markers]
              table[x=time, y=power] {\powerdatamilp};
     \addlegendentry{MILP}
 \end{axis}
-\end{tikzpicture}%
-}
+\end{tikzpicture}
 
 \end{document}

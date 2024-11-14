@@ -21,14 +21,14 @@
     grid=both,
     ytick distance=5,
     minor y tick num= 4,
-    xlabel={Time [hr]}, ylabel={Charging Queue},
+    xlabel={Time [hr]}, ylabel={Active charge times},
     xmin=4, xmax=24]
     \foreach \i in {0, ..., \NumCols}
     {
         \pgfmathsetmacro{\v}{\fpeval{3*\i} + 0}
         \pgfmathsetmacro{\u}{\fpeval{3*\i} + 1}
         \pgfmathsetmacro{\p}{\fpeval{3*\i} + 2}
-        \addplot +[red, only marks, mark=otimes, error bars/.cd, error bar style={solid}, x dir=plus, x explicit]
+        \addplot +[error bars/.cd, x dir=plus, x explicit]
                   table[x index=\u, x error index=\p, y index =\v, unbounded coords=discard]{\scheduledatamilp};
     }
 \end{axis}
