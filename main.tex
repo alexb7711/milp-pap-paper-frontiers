@@ -1,4 +1,4 @@
-% Created 2024-11-14 Thu 16:37
+% Created 2024-11-14 Thu 20:13
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 
@@ -94,27 +94,27 @@
 \maketitle
 
 \begin{abstract}
-  Robust charging schedules in a growing market of \EDIT{Battery-Electric Bus} (BEB) fleets are a critical component to
+  Robust charging schedules in a growing market of {Battery-Electric Bus} (BEB) fleets are a critical component to
   successful adoption. In this paper, a BEB charging scheduling framework that considers spatiotemporal schedule
-  constraints, route schedules, fast and slow charging, and battery dynamics is modeled as a \EDIT{Mixed Integer Linear
-    Program} (MILP). The MILP is modeled after the Berth Allocation Problem (BAP)\EDIT{, a method of optimally assigning
-    vessels to be serviced,} in a modified form known as the Position Allocation Problem (PAP)\EDIT{, which assigns
+  constraints, route schedules, fast and slow charging, and battery dynamics is modeled as a {Mixed Integer Linear
+    Program} (MILP). The MILP is modeled after the Berth Allocation Problem (BAP){, a method of optimally assigning
+    vessels to be serviced,} in a modified form known as the Position Allocation Problem (PAP){, which assigns
     Electric Vehicels (EVs) to be charged}. Linear battery dynamics are included to model the charging of buses while at
   the station. To model the BEB discharges over their respective routes, it is assumed each BEB has an average kWh
   charge loss while on route. The optimization coordinates BEB charging to ensure that each vehicle remains above a
-  specified \EDIT{State-Of-Charge} (SOC). The model also minimizes the total number of chargers utilized and prioritizes
+  specified {State-Of-Charge} (SOC). The model also minimizes the total number of chargers utilized and prioritizes
   slow charging for battery health. The model validity is demonstrated with a set of routes sampled from the Utah
   Transit Authority (UTA) for \A buses and \N visits to the charging station. The model is also compared to a heuristic
-  algorithm based on charge thresholds referred to as the Qin-Modified method. The results presented show that \EDIT{the
+  algorithm based on charge thresholds referred to as the Qin-Modified method. The results presented show that {the
     MILP framework encourages battery health by assigning BEBs slow chargers more readily than the Qin-Modified. The
     MILP utilizied one fast charger and six slow chargers whereas the Qin-Modified utilized four fast chargers and six
     slow. Moreover, the MILP was able to maintain a specified minimum SOC of 25\% throughout the day and meeting a
     reqired minimum SOC at the end of the working day of 70\% whereas the Qin-Modifed was unable to keep the SOC above
-    0\% without any constraints applied.} Furthermore, \EDIT{it is shown that the} spatiotemporal constraints
-  are met while considering the battery dynamics \EDIT{while} minimizing both the charger count and consumption cost.
+    0\% without any constraints applied.} Furthermore, {it is shown that the} spatiotemporal constraints
+  are met while considering the battery dynamics {while} minimizing both the charger count and consumption cost.
 
   \tiny \keyFont{ \section{Keywords:} Berth Allocation Problem (BAP), Position Allocation Problem (PAP), Mixed Integer
-    Linear Program (MILP), Battery Electric Bus (BEB), Scheduling}
+    Linear Program (MILP), Battery-Electric Bus (BEB), Scheduling}
   % All article types: you may provide up to 8 keywords; at least 5 are mandatory.
 \end{abstract}
 \section{Introduction}
@@ -128,7 +128,7 @@ emissions, such as lower driving costs, lower maintenance costs, and reduced veh
 introduce new challenges such as larger upfront costs, and potentially several hours long ``refueling'' periods
 \cite{xylia-2018-role-charg,li-2016-batter-elect}. Furthermore, the problem is exacerbated by the constraints of the
 transit schedule to which the fleet must adhere, the limited amount of chargers available, and the adverse effects on
-the health of the battery due to fast charging \cite{lutsey-2019-updat-elect}. This paper \EDIT{aims to remedy these problems by presenting} a framework for optimally assiging BEBs to charging queues assuming fixed routes
+the health of the battery due to fast charging \cite{lutsey-2019-updat-elect}. This paper {aims to remedy these problems by presenting} a framework for optimally assiging BEBs to charging queues assuming fixed routes
 while taking into consideration multiple charger types and utilizing linear charging dynamics. This method also enforces
 the SOC to stay above a specified percentage throughout the day, and ensures a minumum SOC at the end of the working
 day.
@@ -154,7 +154,7 @@ shown in \autoref{subfig:bapexample}. As the vessels are serviced, they move fro
 queued vessels moving vertically downward into their respective berthing locations. The PAP utilizes this notion of
 queuing for scheduling vehicles to be charged, as shown in \autoref{subfig:papexample}. The vehicles are queued in
 several lines and move from left to right to recieve their charge and exit the system. The PAP is formulated as a
-rectangle packing problem and assumes that each vehicle has a predefined charge time \EDIT{and} the amount of
+rectangle packing problem and assumes that each vehicle has a predefined charge time {and} the amount of
 vehicles that can charge at any given moment is limited by the physical width of each vehicle and the length of the
 charging block. The PAP also makes the assumption that each vehicle that is placed in the system is unique
 \cite{qarebagh-2019-optim-sched}.
@@ -190,7 +190,7 @@ vertical edge of each rectangle in \(\mathbb{O}\) to vary. As an example, suppos
 (vertical edges are static), but the service time is allowed to vary (horizontal edges are dynamic)
 \cite{buhrkal-2011-model-discr}.
 
-The BAP solves the problem of optimally assigning incoming vessels to \EDIT{berthing} positions \EDIT{in order} to be
+The BAP solves the problem of optimally assigning incoming vessels to \{berthing\} positions \{in order\} to be
 serviced as shown in \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of
 \(O\) represent the time horizon \(T\) seconds and the berth length \(L\) meters, respectively. Similarly, the widths and
 heights of each element in \(\mathbb{O}\) represent the time spent to service vessel \(i\) and the space taken by docking
@@ -198,7 +198,7 @@ vessel \(i\), respectively. In the BAP, the vessel characteristics (length of th
 desired departure time) are assumed to be known for all vessels. A representation of a BAP solution is shown in
 \autoref{fig:bap}. The x and y-axis represent time horizon and berthing space, respectively. The gray squares, labeled
 A, B, C, and D, represent scheduled vessels. The width of the boxes represent the time spent being serviced, and the
-height \EDIT{of the boxes} represent the amount of space the vessel requires on the berth. The vertical line adjacent to
+height \{of the boxes\} represent the amount of space the vessel requires on the berth. The vertical line adjacent to
 ``Arrival Time'' represents the time that the vessel arrives and is available to be berthed. ``Berthing Time'' is the
 time the vessel is berthed and begins being serviced. ``Completion time'' represents the time at which the berthing
 space becomes available again.
@@ -206,7 +206,7 @@ space becomes available again.
 \subsection{The PAP Formulation}
 \label{sec:the-pap-formulation}
 The BAP forms the basis of the PAP; however, there are some differences in the way the variables are interpreted.
-\EDIT{The relevant variables can be found in \autoref{tab:variables}}. The starting service time, \(u_i\)
+{The relevant variables can be found in \autoref{tab:variables}}. The starting service time, \(u_i\)
 seconds, is viewed as the initial charge time, and the service time, total elapsed time spent on the charger. Similarly,
 for the spatial term, \(v_i \in [0,L]\), the berth location is instead interpreted as the initial position on the charger.
 There are also a few clarifying concepts about how the system is modeled. The PAP models the set of chargers as one
@@ -216,7 +216,7 @@ the allocated times do not interfere with other scheduled charge times.
 
 The PAP formulation's parameters can be divided into two categories: input parameters and decision variables. Each type
 will now be introduced in turn. The following parameters are assumed to be known inputs for the MILP. \(L\) defines the
-length of the charger in meters. As stated previously, it is modeled as a continuous bar meaninng that a vehicle can be
+length of the charger in meters. As stated previously, it is modeled as a continuous bar meaning that a vehicle can be
 placed anywhere in the range \([0,L]\). It is assumed that the time horizon, \(T\) seconds, is known so that vehicles may be
 placed temporarily in the range \([0,T]\). The total number of visits to the station over the time horizon is represented
 by \(n_V\). The arrival time for each visit is represented by \(a_i\) seconds, and the required charge time is represented
@@ -275,6 +275,7 @@ the departure time, \(d_i\). \autoref{subeq:bapvalid_starts} enforces the arriva
 the service start time, \(u_i\), which in turn must be less than or equal to the latest time the vehicle may begin
 charging and stay within the time horizon. \autoref{subeq:bapsdspace} simply states that \(\sigma_{ij}\) and \(\psi_{ij}\) are
 binary terms. \autoref{subeq:bapvspace} ensures that the assigned value of \(v_i\) is within the range, \([0,L]\).
+\autoref{subeq:ijspace} represents the values that \(i\) and \(j\) are constrained to.
 \section{A Rectangle Packing Formulation for BEB Charging}
 \label{sec:problemformulation}
 Applying the PAP to BEB charging requires four fundamental changes. The first is that the time that a BEB spends
@@ -333,8 +334,8 @@ charger as a continuous strip of length \(L\), it is discretized into \(n_Q\) qu
 BEB is also assigned a unit length of one which is reflected in \autoref{subeq:space} by \(\cdot \geq 1\).
 \autoref{subeq:valid_depart} ensures that the time the BEB is detached from the charger, \(d_i\), is before its departure
 time, \(\tau_i\) seconds. Note the introduction of the new variable \(\tau_i\) exists to allow the final charge time to be
-independent, \EDIT{similar in manner to the initial charge time being independent of the arrival time}, \(a_i
-\le u_i \le d_i \le \tau_i\). \autoref{subeq:vspace} defines \(v_i\) \EDIT{to be an element from set of queues}.
+independent, {similar in manner to the initial charge time being independent of the arrival time}, \(a_i
+\le u_i \le d_i \le \tau_i\). \autoref{subeq:vspace} defines \(v_i\) \{to be an element from set of queues\}.
 
 \subsection{Battery Charge Dynamic Constraints}
 \label{sec:batt_dynamics}
@@ -516,8 +517,8 @@ Subject to the constraints
 \end{subequations}
 \end{multicols}
 
-\autoref{subeq:m_time}-\autoref{subeq:m_valid_depart} are reiterations of the queuing constraints \EDIT{from \autoref{eq:bapconstrs}} and \autoref{eq:packconstrs}. \autoref{subeq:init_charge}-\autoref{subeq:final_charge} provide
-the battery charge constraints. \autoref{subeq:gpgret}-\autoref{subeq:gwles} define the charge \EDIT{duration} of every
+\autoref{subeq:m_time}-\autoref{subeq:m_valid_depart} are reiterations of the queuing constraints {from \autoref{eq:bapconstrs}} and \autoref{eq:packconstrs}. \autoref{subeq:init_charge}-\autoref{subeq:final_charge} provide
+the battery charge constraints. \autoref{subeq:gpgret}-\autoref{subeq:gwles} define the charge \{duration\} of every
 visit/queue pairing. The last constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace} define the sets of valid
 values for each variable.
 \section{Example}
@@ -536,8 +537,8 @@ is required to stay above an SOC of \(\nu_b =\) \mincharge (\fpeval{\batsize * \
 \mathbb{B}\) to ensure that each BEB can complete its next route in addition to maintaining battery health. Each bus is
 assumed to begin the working day with an SOC of \(\alpha_b =\) \fpeval{\acharge*100}\% \(\forall i \in \mathbb{V}\)
 (\fpeval{\acharge * \batsize} kWh). Additionally, each bus is required to end the day with a minimum SOC of \(\beta_b =\)
-\fpeval{\bcharge * 100}\% (\fpeval{\bcharge * \batsize} kWh) \EDIT{$\forall b \in \mathbb{B}$}. This
-assumes that overnight charging can account for the deficient 20\% SOC. \EDIT{Furthermore, the value selected for $\beta_b\; \forall b \in \mathbb{B}$ is primarily of illustrative purposes and has no particular significance other than to demonstrate the user's ability to specify desired end of day SOCs.} Each bus is assumed to discharge at a rate of \(\zeta_b
+\fpeval{\bcharge * 100}\% (\fpeval{\bcharge * \batsize} kWh) {$\forall b \in \mathbb{B}$}. This
+assumes that overnight charging can account for the deficient 20\% SOC. {Furthermore, the value selected for $\beta_b\; \forall b \in \mathbb{B}$ is primarily of illustrative purposes and has no particular significance other than to demonstrate the user's ability to specify desired end of day SOCs.} Each bus is assumed to discharge at a rate of \(\zeta_b
 =\) 30 kW. Note that many factors play a role in the rate of discharge; however, for the sake of simplicity since the
 discharge calculation is out of the scope of this work, an average rate is used. A total of \(n_C = \fpeval{\fast +
 \slow}\) chargers are utilized where \slow of the chargers are slow charging (\slows kW) and \fast are fast charging
@@ -590,12 +591,12 @@ packed the first queue for the fast and slow chargers more effectively than the 
 generated are valid, no comparison of the quality of the schedule can be made directly from
 \autoref{subfig:milp-schedule} and \autoref{subfig:qin-schedule}.
 
-\autoref{subfig:qin-charge} and \autoref{subfig:milp-charge} depicts the \EDIT{charge} for every bus over the time
+\autoref{subfig:qin-charge} and \autoref{subfig:milp-charge} depicts the \{charge\} for every bus over the time
 horizon for the Qin and MILP schedules, respectively. Every vehicle begins with an SOC of \(\alpha_b =\) 90\%, finishes with an
 SOC of \(\beta_b =\) \fpeval{\bcharge *100}\% in the MILP PAP schedule, and never goes below \mincharge in the intermediate
 arrivals as stated in constraint \autoref{eq:dynconstrs}. There is no guarantee for this in the Qin-Modified strategy
 which can be seen by some intermediate charges reaching an SOC of 0\% as well as the distribution of final charges, the
-minimum being 0\% and the maximum \fpeval{trunc(\fpeval{368 / \batsize * 100}, 3)}\%. \EDIT{It is of note that the SOC plummeting to 0\% is due to the reactive nature of the Qin-Modified. Specifically, the schedule utilized in this example contains some BEBs that begin with routes that deplete the SOC by small amounts that do not bypass the threshold. These routes are followed by small charge windows which are then proceeded by large routes depleting the SOC by a significant amount resulting in the SOC reaching 0\%.} The only sense of guarantee that the
+minimum being 0\% and the maximum \fpeval{trunc(\fpeval{368 / \batsize * 100}, 3)}\%. {It is of note that the SOC plummeting to 0\% is due to the reactive nature of the Qin-Modified. Specifically, the schedule utilized in this example contains some BEBs that begin with routes that deplete the SOC by small amounts that do not bypass the threshold. These routes are followed by small charge windows which are then proceeded by large routes depleting the SOC by a significant amount resulting in the SOC reaching 0\%.} The only sense of guarantee that the
 Qin-Modified supplies is its predictability within the intermediate visits due to its heuristic nature (i.e. if the BEB
 charge is within the low threshold, a fast charger will be prioritized); whereas MILP places a bus in the queue that
 ``makes sense'' in respect to the larger picture. The MILP PAP does not have an obvious sense of decision-making due to
@@ -623,26 +624,58 @@ to provide upper and lower limits for the battery dynamics.
 
 An example for the MILP PAP formulation was then presented and compared to a heuristic-based schedule, referred to as
 Qin-Modified. The MILP PAP optimization was run for \timeran seconds to a non-optimal solution. The Qin-Modified and
-MILP schedule utilized \EDIT{four and one fast charger(s), respectively. Furthermore, the MILP and Qin-Modified utilized the fast chargers for similar durations ranging from about 0.2-0.5 hours}; however, the MILP
-schedule \EDIT{demonstrated battery health considerations by recognizing visits that could utilize slow chargers for longer durations while satisfying the constraints.} The MILP PAP schedule utilized approximately
-\(0.1\cdot10^4\) kWh more than the Qin-Modified \EDIT{but}, the \EDIT{SOC} for the MILP schedule remained above the
+MILP schedule utilized {four and one fast charger(s), respectively. Furthermore, the MILP and Qin-Modified utilized the fast chargers for similar durations ranging from about 0.2-0.5 hours}; however, the MILP
+schedule {demonstrated battery health considerations by recognizing visits that could utilize slow chargers for longer durations while satisfying the constraints.} The MILP PAP schedule utilized approximately
+\(0.1\cdot10^4\) kWh more than the Qin-Modified \{but\}, the \{SOC\} for the MILP schedule remained above the
 constrained minimum SOC of \mincharge, and charged all the buses to \fpeval{\bcharge *100}\% at the end of the working
-day. \EDIT{That is, the constraints applied to the MILP model consumed more energy to satisfy the SOC threshold requirements.} The Qin-Modified schedule, on the other hand, allowed the SOC of certain BEBs to drop to 0\%.
-\EDIT{The SOC at the end of the day for the Qin-Modifed varied from 0\% to 94.85\% whereas the results of the MILP showed that the BEBs converged to the minimum SOC of \fpeval{\bcharge * 100}\% that was specified.}
+day. {That is, the constraints applied to the MILP model consumed more energy to satisfy the SOC threshold requirements.} The Qin-Modified schedule, on the other hand, allowed the SOC of certain BEBs to drop to 0\%.
+{The SOC at the end of the day for the Qin-Modifed varied from 0\% to 94.85\% whereas the results of the MILP showed that the BEBs converged to the minimum SOC of \fpeval{\bcharge * 100}\% that was specified.}
 
 Further fields of interest are to utilize the formulation (\autoref{eq:objective} and \autoref{eq:dynconstrs}) with
 nonlinear battery dynamics, calculation and utilization of the demand and consumption cost in the objective function,
 and utilizing this formulation in a metaheuristic solver. Furthermore, ``fuzzifying'' the initial and final charge times
 is of interest to allow flexibility in the arrival and departure times.
 
+\section*{Data Availability Statement}
+
+The original contributions presented in the study are included in the article \hyperref[sec:pub-note]{Supplementary Material}; further inquiries can
+be directed to the corresponding author.
+
+\section*{Author Contributions}
+
+AB: conceptualization, software, and writing–original draft. GD: supervision and writing–review and editing. JG:
+supervision and writing–review and editing.
+
+\section*{Funding}
+
+This work was supported in part by the Department of Energy through a Prime Award with ABB Ltd., under Grand
+DE-EE0009194, and in part by PacifiCopr Under Contract 3590.
+
+\section*{Conflict of Interest}
+
+The authors declare that the research was conducted in the absence of any commercial or financial relationships that
+could be construed as a potential conflict of interest.
+
+\section*{Publisher's Note}
+\label{sec:pub-note}
+
+All claims expressed in this article are solely those of the authors and do not necessarily represent those of their
+affiliated organizations, or those of the publisher, the editors, and the reviewers. Any product that may be evaluated
+in this article, or claim that may be made by its manufacturer, is not guaranteed or endorsed by the publisher.
+
+\section*{Supplementary Material}
+
+The Supplementary Material for this article can be found online at:
+\url{https://www.frontiersin.org/articles/10.3389/fenrg.2024.1347442/full#supplementary-material}
+
 \bibliographystyle{Frontiers-Harvard}
-\bibliography{ citation-database/lit-ref,citation-database/lib-ref,citation-database/misc }
+\bibliography{ citation-database/misc,citation-database/lib-ref,citation-database/lit-ref }
 
 \nolinenumbers
 \clearpage
 
 \section{Figure Captions}
-\label{sec:orgec25f84}
+\label{sec:org00b5107}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -670,17 +703,17 @@ is of interest to allow flexibility in the arrival and departure times.
 
 
 \begin{table}[!htpb]
-  \caption{Notation used throughout the paper. \EDIT{Values and units} are provided when available.}
+  \caption{Notation used throughout the paper. {Values and units} are provided when available.}
   \label{tab:variables}
   \centering
   \begin{tabularx}{\textwidth}{l r l p{0.7\linewidth}}
     \toprule \textbf{Variable} & \textbf{Value} & \textbf{Units} & \textbf{Description}                                                          \\
     \toprule \multicolumn{4}{l}{Input values}                                                                                                    \\
-    \hline $n_B$     &\EDIT{35} &       & Number of buses                                                                                        \\
+    \hline $n_B$     &{35} &       & Number of buses                                                                                        \\
     $M$              & &       & An arbitrarily large number                                                                                     \\
-    $n_V$            & \EDIT{338} &       & Number of total visits                                                                               \\
-    $n_Q$            & \EDIT{65} &       & Number of queues                                                                                      \\
-    $n_C$            & \EDIT{30} &       & Number of chargers                                                                                    \\
+    $n_V$            & {338} &       & Number of total visits                                                                               \\
+    $n_Q$            & {65} &       & Number of queues                                                                                      \\
+    $n_C$            & {30} &       & Number of chargers                                                                                    \\
     $\mathbb{V}$     & &       & Set of visit indices, $\mathbb{V} = \{1, ..., n_V\}$                                                            \\
     $\mathbb{B}$     & &       & Set of bus indices, $\mathbb{B} = \{1, ..., n_B\}$                                                              \\
     $\mathbb{Q}$              & &       & Set of queue indices, $\mathbb{Q} = \{1, ..., n_Q\}$                                                                     \\
@@ -689,15 +722,15 @@ is of interest to allow flexibility in the arrival and departure times.
     $q$              & &       & Index used to refer to a queue                                                                                  \\
     \hline \multicolumn{4}{l}{Problem definition parameters}                                                                                     \\
     \hline $\Gamma$       & &       & $\Gamma: \mathbb{V} \rightarrow \mathbb{B}$ with $\Gamma_i$ used as a shorthand to denote the bus $b$ for visit $i$                 \\
-    $\alpha_b$            & \EDIT{90} & $\%$  & Initial charge percentage time for bus $b$                                                            \\
-    $\beta_b$            & \EDIT{70} & $\%$  & Final charge percentage for bus $b$ at the end of the time horizon                                    \\
+    $\alpha_b$            & {90} & $\%$  & Initial charge percentage time for bus $b$                                                            \\
+    $\beta_b$            & {70} & $\%$  & Final charge percentage for bus $b$ at the end of the time horizon                                    \\
     $\epsilon_q$            & &       & Cost of using charger $q$ per unit time                                                                         \\
     $\Upsilon$              & &       & $\Upsilon: \mathbb{V} \rightarrow \mathbb{V}$ mapping a visit to the next visit by the same bus with $\Upsilon_i$ being the shorthand.  \\
-    $\kappa_b$            & \EDIT{388} & kWh   & Battery capacity for bus $b$                                                                         \\
+    $\kappa_b$            & {388} & kWh   & Battery capacity for bus $b$                                                                         \\
     $\Delta_i$            & & kWh   & Discharge of visit over route $i$                                                                               \\
     $\nu_b$            & & $\%$  & Minimum charge allowed for bus $b$                                                                              \\
     $\tau_i$            & & s     & Time visit $i$ must depart the station                                                                          \\
-    $\zeta_b$            & \EDIT{38} & kW    & Discharge rate for bus $b$                                                                            \\
+    $\zeta_b$            & {38} & kW    & Discharge rate for bus $b$                                                                            \\
     $a_i$            & & s     & Arrival time of visit $i$                                                                                       \\
     $i_0$            & &       & Indices associated with the initial arrival
     for every bus in $\mathbb{B}$                                                                                                                \\

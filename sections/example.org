@@ -20,8 +20,8 @@ is required to stay above an SOC of $\nu_b =$ src_latex{\mincharge (\fpeval{\bat
 \mathbb{B}$ to ensure that each BEB can complete its next route in addition to maintaining battery health. Each bus is
 assumed to begin the working day with an SOC of $\alpha_b =$ src_latex{\fpeval{\acharge*100}\%} $\forall i \in \mathbb{V}$
 (\fpeval{\acharge * \batsize} kWh). Additionally, each bus is required to end the day with a minimum SOC of $\beta_b =$
-\fpeval{\bcharge * 100}% (src_latex{\fpeval{\bcharge * \batsize}} kWh) src_latex{\EDIT{$\forall b \in \mathbb{B}$}}. This
-assumes that overnight charging can account for the deficient 20% SOC. src_latex{\EDIT{Furthermore, the value selected
+\fpeval{\bcharge * 100}% (src_latex{\fpeval{\bcharge * \batsize}} kWh) src_latex{{$\forall b \in \mathbb{B}$}}. This
+assumes that overnight charging can account for the deficient 20% SOC. src_latex{{Furthermore, the value selected
 for $\beta_b\; \forall b \in \mathbb{B}$ is primarily of illustrative purposes and has no particular significance other than to
 demonstrate the user's ability to specify desired end of day SOCs.}} Each bus is assumed to discharge at a rate of $\zeta_b
 =$ 30 kW. Note that many factors play a role in the rate of discharge; however, for the sake of simplicity since the
@@ -79,12 +79,12 @@ packed the first queue for the fast and slow chargers more effectively than the 
 generated are valid, no comparison of the quality of the schedule can be made directly from
 \autoref{subfig:milp-schedule} and \autoref{subfig:qin-schedule}.
 
-\autoref{subfig:qin-charge} and \autoref{subfig:milp-charge} depicts the \EDIT{charge} for every bus over the time
+\autoref{subfig:qin-charge} and \autoref{subfig:milp-charge} depicts the {charge} for every bus over the time
 horizon for the Qin and MILP schedules, respectively. Every vehicle begins with an SOC of $\alpha_b =$ 90%, finishes with an
 SOC of $\beta_b =$ \fpeval{\bcharge *100}% in the MILP PAP schedule, and never goes below \mincharge in the intermediate
 arrivals as stated in constraint \autoref{eq:dynconstrs}. There is no guarantee for this in the Qin-Modified strategy
 which can be seen by some intermediate charges reaching an SOC of 0% as well as the distribution of final charges, the
-minimum being 0% and the maximum src_latex{\fpeval{trunc(\fpeval{368 / \batsize * 100}, 3)}}%. src_latex{\EDIT{It is of
+minimum being 0% and the maximum src_latex{\fpeval{trunc(\fpeval{368 / \batsize * 100}, 3)}}%. src_latex{{It is of
 note that the SOC plummeting to 0\% is due to the reactive nature of the Qin-Modified. Specifically, the schedule
 utilized in this example contains some BEBs that begin with routes that deplete the SOC by small amounts that do not
 bypass the threshold. These routes are followed by small charge windows which are then proceeded by large routes
