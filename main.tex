@@ -1,4 +1,4 @@
-% Created 2024-11-14 Thu 20:25
+% Created 2024-11-14 Thu 20:31
 % Intended LaTeX compiler: pdflatex
 \documentclass[utf8]{FrontiersinHarvard}
 
@@ -94,24 +94,24 @@
 \maketitle
 
 \begin{abstract}
-  Robust charging schedules in a growing market of {Battery-Electric Bus} (BEB) fleets are a critical component to
+  Robust charging schedules in a growing market of Battery-Electric Bus (BEB) fleets are a critical component to
   successful adoption. In this paper, a BEB charging scheduling framework that considers spatiotemporal schedule
-  constraints, route schedules, fast and slow charging, and battery dynamics is modeled as a {Mixed Integer Linear
-    Program} (MILP). The MILP is modeled after the Berth Allocation Problem (BAP){, a method of optimally assigning
-    vessels to be serviced,} in a modified form known as the Position Allocation Problem (PAP){, which assigns
-    Electric Vehicels (EVs) to be charged}. Linear battery dynamics are included to model the charging of buses while at
+  constraints, route schedules, fast and slow charging, and battery dynamics is modeled as a Mixed Integer Linear
+    Program (MILP). The MILP is modeled after the Berth Allocation Problem (BAP), a method of optimally assigning
+    vessels to be serviced, in a modified form known as the Position Allocation Problem (PAP), which assigns
+    Electric Vehicels (EVs) to be charged. Linear battery dynamics are included to model the charging of buses while at
   the station. To model the BEB discharges over their respective routes, it is assumed each BEB has an average kWh
   charge loss while on route. The optimization coordinates BEB charging to ensure that each vehicle remains above a
-  specified {State-Of-Charge} (SOC). The model also minimizes the total number of chargers utilized and prioritizes
+  specified State-Of-Charge (SOC). The model also minimizes the total number of chargers utilized and prioritizes
   slow charging for battery health. The model validity is demonstrated with a set of routes sampled from the Utah
   Transit Authority (UTA) for \A buses and \N visits to the charging station. The model is also compared to a heuristic
-  algorithm based on charge thresholds referred to as the Qin-Modified method. The results presented show that {the
+  algorithm based on charge thresholds referred to as the Qin-Modified method. The results presented show that the
     MILP framework encourages battery health by assigning BEBs slow chargers more readily than the Qin-Modified. The
     MILP utilizied one fast charger and six slow chargers whereas the Qin-Modified utilized four fast chargers and six
     slow. Moreover, the MILP was able to maintain a specified minimum SOC of 25\% throughout the day and meeting a
     reqired minimum SOC at the end of the working day of 70\% whereas the Qin-Modifed was unable to keep the SOC above
-    0\% without any constraints applied.} Furthermore, {it is shown that the} spatiotemporal constraints
-  are met while considering the battery dynamics {while} minimizing both the charger count and consumption cost.
+    0\% without any constraints applied. Furthermore, it is shown that the spatiotemporal constraints
+  are met while considering the battery dynamics while minimizing both the charger count and consumption cost.
 
   \tiny \keyFont{ \section{Keywords:} Berth Allocation Problem (BAP), Position Allocation Problem (PAP), Mixed Integer
     Linear Program (MILP), Battery-Electric Bus (BEB), Scheduling}
@@ -190,15 +190,15 @@ vertical edge of each rectangle in \(\mathbb{O}\) to vary. As an example, suppos
 (vertical edges are static), but the service time is allowed to vary (horizontal edges are dynamic)
 \cite{buhrkal-2011-model-discr}.
 
-The BAP solves the problem of optimally assigning incoming vessels to \{berthing\} positions \{in order\} to be
-serviced as shown in \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of
-\(O\) represent the time horizon \(T\) seconds and the berth length \(L\) meters, respectively. Similarly, the widths and
-heights of each element in \(\mathbb{O}\) represent the time spent to service vessel \(i\) and the space taken by docking
-vessel \(i\), respectively. In the BAP, the vessel characteristics (length of the vessel, arrival time, handling time,
-desired departure time) are assumed to be known for all vessels. A representation of a BAP solution is shown in
+The BAP solves the problem of optimally assigning incoming vessels to berthing positions in order to be serviced as
+shown in \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of \(O\) represent
+the time horizon \(T\) seconds and the berth length \(L\) meters, respectively. Similarly, the widths and heights of each
+element in \(\mathbb{O}\) represent the time spent to service vessel \(i\) and the space taken by docking vessel \(i\),
+respectively. In the BAP, the vessel characteristics (length of the vessel, arrival time, handling time, desired
+departure time) are assumed to be known for all vessels. A representation of a BAP solution is shown in
 \autoref{fig:bap}. The x and y-axis represent time horizon and berthing space, respectively. The gray squares, labeled
 A, B, C, and D, represent scheduled vessels. The width of the boxes represent the time spent being serviced, and the
-height \{of the boxes\} represent the amount of space the vessel requires on the berth. The vertical line adjacent to
+height of the boxes represent the amount of space the vessel requires on the berth. The vertical line adjacent to
 ``Arrival Time'' represents the time that the vessel arrives and is available to be berthed. ``Berthing Time'' is the
 time the vessel is berthed and begins being serviced. ``Completion time'' represents the time at which the berthing
 space becomes available again.
@@ -403,7 +403,7 @@ current SOC are written as follows.
 \end{subequations}
 
 \autoref{eq:maxcharge} ensures that the BEB SOC does not exceed the battery capacity, and \autoref{eq:mincharge}
-enforces that the inital SOC for each visit is above the threshold of \(\nu_{\Gamma_i}\kappa_{\Gamma_i}\). Note that the term \(s_i w_{iq}\)
+enforces that the initial SOC for each visit is above the threshold of \(\nu_{\Gamma_i}\kappa_{\Gamma_i}\). Note that the term \(s_i w_{iq}\)
 is a bilinear term. A standard way of linearizing a bilinear term that contains an integer variable is by introducing a
 slack variable with an either/or constraint \cite{chen-2010-applied,rodriguez-2013-compar-asses}. Allowing the slack
 variable \(g_{iq}\) seconds to be equal to \(s_i w_{iq}\), \(g_{iq}\) can be defined as
@@ -631,12 +631,11 @@ to provide upper and lower limits for the battery dynamics.
 
 An example for the MILP PAP formulation was then presented and compared to a heuristic-based schedule, referred to as
 Qin-Modified. The MILP PAP optimization was run for \timeran seconds to a non-optimal solution. The Qin-Modified and
-MILP schedule utilized {four and one fast charger(s), respectively. Furthermore, the MILP and Qin-Modified utilized the fast chargers for similar durations ranging from about 0.2-0.5 hours}; however, the MILP
-schedule {demonstrated battery health considerations by recognizing visits that could utilize slow chargers for longer durations while satisfying the constraints.} The MILP PAP schedule utilized approximately
-\(0.1\cdot10^4\) kWh more than the Qin-Modified \{but\}, the \{SOC\} for the MILP schedule remained above the
-constrained minimum SOC of \mincharge, and charged all the buses to \fpeval{\bcharge *100}\% at the end of the working
-day. {That is, the constraints applied to the MILP model consumed more energy to satisfy the SOC threshold requirements.} The Qin-Modified schedule, on the other hand, allowed the SOC of certain BEBs to drop to 0\%.
-{The SOC at the end of the day for the Qin-Modifed varied from 0\% to 94.85\% whereas the results of the MILP showed that the BEBs converged to the minimum SOC of \fpeval{\bcharge * 100}\% that was specified.}
+MILP schedule utilized {four and one fast charger(s), respectively. Furthermore, the MILP and Qin-Modified utilized the fast chargers for similar durations ranging from about 0.2-0.5 hours}; however, the MILP schedule
+{demonstrated battery health considerations by recognizing visits that could utilize slow chargers for longer durations while satisfying the constraints.} The MILP PAP schedule utilized approximately \(0.1\cdot10^4\) kWh more than the
+Qin-Modified but, the SOC for the MILP schedule remained above the constrained minimum SOC of \mincharge, and charged
+all the buses to \fpeval{\bcharge *100}\% at the end of the working day. {That is, the constraints applied to the MILP model consumed more energy to satisfy the SOC threshold requirements.} The Qin-Modified schedule, on the other
+hand, allowed the SOC of certain BEBs to drop to 0\%. {The SOC at the end of the day for the Qin-Modifed varied from 0\% to 94.85\% whereas the results of the MILP showed that the BEBs converged to the minimum SOC of \fpeval{\bcharge * 100}\% that was specified.}
 
 Further fields of interest are to utilize the formulation (\autoref{eq:objective} and \autoref{eq:dynconstrs}) with
 nonlinear battery dynamics, calculation and utilization of the demand and consumption cost in the objective function,
@@ -676,13 +675,13 @@ The Supplementary Material for this article can be found online at:
 \url{https://www.frontiersin.org/articles/10.3389/fenrg.2024.1347442/full#supplementary-material}
 
 \bibliographystyle{Frontiers-Harvard}
-\bibliography{ citation-database/misc,citation-database/lib-ref,citation-database/lit-ref }
+\bibliography{/home/alexander/Documents/citation-database/lit-ref,/home/alexander/Documents/citation-database/lib-ref,/home/alexander/Documents/citation-database/misc}
 
 \nolinenumbers
 \clearpage
 
 \section{Figure Captions}
-\label{sec:org520da3d}
+\label{sec:org6e065aa}
 
 \begin{subfigures}
     %%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

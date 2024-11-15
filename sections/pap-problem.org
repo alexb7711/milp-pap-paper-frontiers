@@ -21,15 +21,15 @@ vertical edge of each rectangle in $\mathbb{O}$ to vary. As an example, suppose 
 (vertical edges are static), but the service time is allowed to vary (horizontal edges are dynamic)
 [cite:@buhrkal-2011-model-discr].
 
-The BAP solves the problem of optimally assigning incoming vessels to {berthing} positions {in order} to be
-serviced as shown in \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of
-$O$ represent the time horizon $T$ seconds and the berth length $L$ meters, respectively. Similarly, the widths and
-heights of each element in $\mathbb{O}$ represent the time spent to service vessel $i$ and the space taken by docking
-vessel $i$, respectively. In the BAP, the vessel characteristics (length of the vessel, arrival time, handling time,
-desired departure time) are assumed to be known for all vessels. A representation of a BAP solution is shown in
+The BAP solves the problem of optimally assigning incoming vessels to berthing positions in order to be serviced as
+shown in \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of $O$ represent
+the time horizon $T$ seconds and the berth length $L$ meters, respectively. Similarly, the widths and heights of each
+element in $\mathbb{O}$ represent the time spent to service vessel $i$ and the space taken by docking vessel $i$,
+respectively. In the BAP, the vessel characteristics (length of the vessel, arrival time, handling time, desired
+departure time) are assumed to be known for all vessels. A representation of a BAP solution is shown in
 \autoref{fig:bap}. The x and y-axis represent time horizon and berthing space, respectively. The gray squares, labeled
 A, B, C, and D, represent scheduled vessels. The width of the boxes represent the time spent being serviced, and the
-height {of the boxes} represent the amount of space the vessel requires on the berth. The vertical line adjacent to
+height of the boxes represent the amount of space the vessel requires on the berth. The vertical line adjacent to
 ``Arrival Time'' represents the time that the vessel arrives and is available to be berthed. ``Berthing Time'' is the
 time the vessel is berthed and begins being serviced. ``Completion time'' represents the time at which the berthing
 space becomes available again.
