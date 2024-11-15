@@ -34,39 +34,37 @@
 # ==============================================================================
 # Statements
 
-#+begin_export latex
 \section*{Data Availability Statement}
-The original contributions presented in the study are included
-in the article/\href[sec:pub-note]{Supplementary Material}; further inquiries can be
-directed to the corresponding author.
+
+The original contributions presented in the study are included in the article \hyperref[sec:pub-note]{Supplementary Material}; further inquiries can
+be directed to the corresponding author.
 
 \section*{Author Contributions}
-AB: conceptualization, software, andwriting–original draft. GD:
-supervision and writing–review and editing. JG: supervision and
-writing–review and editing.
+
+AB: conceptualization, software, and writing–original draft. GD: supervision and writing–review and editing. JG:
+supervision and writing–review and editing.
 
 \section*{Funding}
-This work was supported in part by the Department of Energy through a Prime Award with ABB Ltd., under Grand DE-EE0009194, and in part by PacifiCopr Under Contract 3590.
+
+This work was supported in part by the Department of Energy through a Prime Award with ABB Ltd., under Grand
+DE-EE0009194, and in part by PacifiCopr Under Contract 3590.
 
 \section*{Conflict of Interest}
-The authors declare that the research was conducted in the
-absence of any commercial or financial relationships that could be
-construed as a potential conflict of interest.
+
+The authors declare that the research was conducted in the absence of any commercial or financial relationships that
+could be construed as a potential conflict of interest.
 
 \section*{Publisher's Note}
 \label{sec:pub-note}
-All claims expressed in this article are solely those of the
-authors and do not necessarily represent those of their affiliated
-organizations, or those of the publisher, the editors, and the
-reviewers. Any product that may be evaluated in this article, or claim
-that may be made by its manufacturer, is not guaranteed or endorsed
-by the publisher.
+
+All claims expressed in this article are solely those of the authors and do not necessarily represent those of their
+affiliated organizations, or those of the publisher, the editors, and the reviewers. Any product that may be evaluated
+in this article, or claim that may be made by its manufacturer, is not guaranteed or endorsed by the publisher.
 
 \section*{Supplementary Material}
-The Supplementary Material for this article can be found Q20
-online at: https://www.frontiersin.org/articles/10.3389/fenrg.2024.
-1347442/full#supplementary-material
-#+end_export latex
+
+The Supplementary Material for this article can be found online at:
+\url{https://www.frontiersin.org/articles/10.3389/fenrg.2024.1347442/full#supplementary-material}
 
 # ==============================================================================
 # Bibliography

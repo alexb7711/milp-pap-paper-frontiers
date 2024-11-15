@@ -21,15 +21,15 @@ vertical edge of each rectangle in $\mathbb{O}$ to vary. As an example, suppose 
 (vertical edges are static), but the service time is allowed to vary (horizontal edges are dynamic)
 [cite:@buhrkal-2011-model-discr].
 
-The BAP solves the problem of optimally assigning incoming vessels to \EDIT{berthing} positions \EDIT{in order} to be
-serviced as shown in \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of
-$O$ represent the time horizon $T$ seconds and the berth length $L$ meters, respectively. Similarly, the widths and
-heights of each element in $\mathbb{O}$ represent the time spent to service vessel $i$ and the space taken by docking
-vessel $i$, respectively. In the BAP, the vessel characteristics (length of the vessel, arrival time, handling time,
-desired departure time) are assumed to be known for all vessels. A representation of a BAP solution is shown in
+The BAP solves the problem of optimally assigning incoming vessels to berthing positions in order to be serviced as
+shown in \autoref{subfig:bapexample}. To relate to the rectangle packing problem, the width and height of $O$ represent
+the time horizon $T$ seconds and the berth length $L$ meters, respectively. Similarly, the widths and heights of each
+element in $\mathbb{O}$ represent the time spent to service vessel $i$ and the space taken by docking vessel $i$,
+respectively. In the BAP, the vessel characteristics (length of the vessel, arrival time, handling time, desired
+departure time) are assumed to be known for all vessels. A representation of a BAP solution is shown in
 \autoref{fig:bap}. The x and y-axis represent time horizon and berthing space, respectively. The gray squares, labeled
 A, B, C, and D, represent scheduled vessels. The width of the boxes represent the time spent being serviced, and the
-height \EDIT{of the boxes} represent the amount of space the vessel requires on the berth. The vertical line adjacent to
+height of the boxes represent the amount of space the vessel requires on the berth. The vertical line adjacent to
 ``Arrival Time'' represents the time that the vessel arrives and is available to be berthed. ``Berthing Time'' is the
 time the vessel is berthed and begins being serviced. ``Completion time'' represents the time at which the berthing
 space becomes available again.
@@ -40,7 +40,7 @@ space becomes available again.
 :END:
 
 The BAP forms the basis of the PAP; however, there are some differences in the way the variables are interpreted.
-src_latex{\EDIT{The relevant variables can be found in \autoref{tab:variables}}}. The starting service time, $u_i$
+src_latex{{The relevant variables can be found in \autoref{tab:variables}}}. The starting service time, $u_i$
 seconds, is viewed as the initial charge time, and the service time, total elapsed time spent on the charger. Similarly,
 for the spatial term, $v_i \in [0,L]$, the berth location is instead interpreted as the initial position on the charger.
 There are also a few clarifying concepts about how the system is modeled. The PAP models the set of chargers as one
@@ -50,7 +50,7 @@ the allocated times do not interfere with other scheduled charge times.
 
 The PAP formulation's parameters can be divided into two categories: input parameters and decision variables. Each type
 will now be introduced in turn. The following parameters are assumed to be known inputs for the MILP. $L$ defines the
-length of the charger in meters. As stated previously, it is modeled as a continuous bar meaninng that a vehicle can be
+length of the charger in meters. As stated previously, it is modeled as a continuous bar meaning that a vehicle can be
 placed anywhere in the range $[0,L]$. It is assumed that the time horizon, $T$ seconds, is known so that vehicles may be
 placed temporarily in the range $[0,T]$. The total number of visits to the station over the time horizon is represented
 by $n_V$. The arrival time for each visit is represented by $a_i$ seconds, and the required charge time is represented
@@ -112,5 +112,6 @@ the departure time, $d_i$. \autoref{subeq:bapvalid_starts} enforces the arrival 
 the service start time, $u_i$, which in turn must be less than or equal to the latest time the vehicle may begin
 charging and stay within the time horizon. \autoref{subeq:bapsdspace} simply states that $\sigma_{ij}$ and $\psi_{ij}$ are
 binary terms. \autoref{subeq:bapvspace} ensures that the assigned value of $v_i$ is within the range, $[0,L]$.
+\autoref{subeq:ijspace} represents the values that $i$ and $j$ are constrained to.
 
 #  LocalWords: MILP

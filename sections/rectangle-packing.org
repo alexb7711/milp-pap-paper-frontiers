@@ -50,13 +50,15 @@ times at the station are placed in idle queues. This method will be applied when
 \autoref{sec:example}. The modified queuing constraints can be written as shown in \autoref{eq:packconstrs}.
 
 #+begin_src latex
-  \begin{subequations}
-  \label{eq:packconstrs}
-  \begin{align}
-      v_i - v_j - (\psi_{ij} - 1)n_Q \geq 1 \label{subeq:space} \\ d_i \leq \tau_i \label{subeq:valid_depart} \\ s_i \geq
-      0 \label{subeq:pos_charge} \\ v_i \in \mathbb{Q} \label{subeq:vspace}
-  \end{align}
-  \end{subequations}
+    \begin{subequations}
+    \label{eq:packconstrs}
+    \begin{align}
+      v_i - v_j - (\psi_{ij} - 1)n_Q \geq 1 \label{subeq:space} \\
+      d_i \leq \tau_i \label{subeq:valid_depart} \\
+      s_i \geq 0 \label{subeq:pos_charge} \\
+      v_i \in \mathbb{Q} \label{subeq:vspace}
+    \end{align}
+    \end{subequations}
 #+end_src
 
 The constraint in \autoref{subeq:space} is nearly identical to \autoref{subeq:bapspace}, but rather than viewing the
@@ -64,8 +66,9 @@ charger as a continuous strip of length $L$, it is discretized into $n_Q$ queues
 BEB is also assigned a unit length of one which is reflected in \autoref{subeq:space} by $\cdot \geq 1$.
 \autoref{subeq:valid_depart} ensures that the time the BEB is detached from the charger, $d_i$, is before its departure
 time, $\tau_i$ seconds. Note the introduction of the new variable $\tau_i$ exists to allow the final charge time to be
-independent, src_latex{\EDIT{similar in manner to the initial charge time being independent of the arrival time}}, $a_i
-\le u_i \le d_i \le \tau_i$. \autoref{subeq:vspace} defines $v_i$ \EDIT{to be an element from set of queues}.
+independent, src_latex{{similar in manner to the initial charge time being independent of the arrival time}}, $a_i \le u_i
+\le d_i \le \tau_i$. \autoref{subeq:pos_charge} ensures that the charge time is non-negative. \autoref{subeq:vspace} defines
+$v_i$ {to be an element from set of queues}.
 
 ** Battery Charge Dynamic Constraints
 :PROPERTIES:
@@ -105,19 +108,22 @@ form. The form of the SOC for the next visit, $\Upsilon_i$, can be written using
 \begin{subequations}
     \label{subeq:pre_next_charge}
 \begin{align}
-    \eta_{\Upsilon_i} = \eta_i + \sum_{q=1}^{n_Q} s_i w_{iq} r_q - \Delta_i \\
-    \sum_{q=1}^{n_Q} w_{iq} = 1                           \\
-    w_{iq} \in \{0,1\}.
+    \eta_{\Upsilon_i} = \eta_i + \sum_{q=1}^{n_Q} s_i w_{iq} r_q - \Delta_i \label{subeq:charge-next}\\
+    \sum_{q=1}^{n_Q} w_{iq} = 1                          \label{subeq:subwiq} \\
+    w_{iq} \in \{0,1\}.                               \label{subeq:wiqspace}
 \end{align}
 \end{subequations}
 #+end_src
 
-The choice of queue for visit $i$, becomes a slack variable and is defined in terms of $w_{iq}$ as
+Where \autoref{subeq:charge-next} represents the SOC for the next visit of BEB $b$, \autoref{subeq:subwiq} ensures that
+the BEB for visit $i$ is assigned to a single queue, and \autoref{subeq:wiqspace} specifies that $w_{iq}$ is a binary
+value. The choice of queue for visit $i$, becomes a slack variable and is defined in terms of $w_{iq}$ as
 
 #+begin_src latex
-\begin{equation}
-    v_i = \sum_{q=1}^{n_Q} qw_{iq}.
-\end{equation}
+  \begin{equation}
+    \label{eq:visum}
+      v_i = \sum_{q=1}^{n_Q} qw_{iq}.
+  \end{equation}
 #+end_src
 
 Maximum and minimum values for the charges are included to ensure that the battery is not overcharged and to guarantee
@@ -136,7 +142,7 @@ current SOC are written as follows.
 #+end_src
 
 \autoref{eq:maxcharge} ensures that the BEB SOC does not exceed the battery capacity, and \autoref{eq:mincharge}
-enforces that the inital SOC for each visit is above the threshold of $\nu_{\Gamma_i}\kappa_{\Gamma_i}$. Note that the term $s_i w_{iq}$
+enforces that the initial SOC for each visit is above the threshold of $\nu_{\Gamma_i}\kappa_{\Gamma_i}$. Note that the term $s_i w_{iq}$
 is a bilinear term. A standard way of linearizing a bilinear term that contains an integer variable is by introducing a
 slack variable with an either/or constraint [cite:@chen-2010-applied;@rodriguez-2013-compar-asses]. Allowing the slack
 variable $g_{iq}$ seconds to be equal to $s_i w_{iq}$, $g_{iq}$ can be defined as
@@ -266,8 +272,9 @@ Subject to the constraints
 \end{multicols}
 #+end_src
 
-\autoref{subeq:m_time}-\autoref{subeq:m_valid_depart} are reiterations of the queuing constraints src_latex{\EDIT{from
+\autoref{subeq:m_time}-\autoref{subeq:m_valid_depart} are reiterations of the queuing constraints src_latex{{from
 \autoref{eq:bapconstrs}}} and \autoref{eq:packconstrs}. \autoref{subeq:init_charge}-\autoref{subeq:final_charge} provide
-the battery charge constraints. \autoref{subeq:gpgret}-\autoref{subeq:gwles} define the charge \EDIT{duration} of every
-visit/queue pairing. The last constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace} define the sets of valid
-values for each variable.
+the battery charge constraints. \autoref{subeq:gpgret}-\autoref{subeq:gwles} define the charge {duration} of every
+visit/queue pairing. \autoref{subeq:wmax} and \autoref{subeq:wone} are reiterations of \autoref{subeq:pre_next_charge}
+and \autoref{eq:visum}, respectively. The last constraints \autoref{subeq:binaryspace}-\autoref{subeq:Ispace} define the
+sets of valid values for each variable.
