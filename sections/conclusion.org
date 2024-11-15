@@ -27,4 +27,4 @@ nonlinear battery dynamics, calculation and utilization of the demand and consum
 and utilizing this formulation in a metaheuristic solver. Furthermore, ``fuzzifying'' the initial and final charge times
 is of interest to allow flexibility in the arrival and departure times.
 
-#  LocalWords:  MILP metaheuristic fuzzifying BEB
+#  localwords:  MILP metaheuristic fuzzifying BEB
